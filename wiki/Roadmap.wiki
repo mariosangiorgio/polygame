@@ -1,5 +1,5 @@
+#summary Components that have to be developed
 #labels Phase-Design,Phase-Requirements
-#Components that have to be developed
 
 == PolyGame ==
 At the beginning we have to provide:
