@@ -1,13 +1,14 @@
 #labels Phase-Design,Phase-Requirements
 #Components that have to be developed
 
-= PolyGame =
- 
+== PolyGame ==
+At the beginning we have to provide:
+*a login page
 
-= Players =
+== Players ==
 
-= Game organizer =
+== Game organizer ==
 
-= Voters =
+== Voters ==
 
-= Administrators =
+== Administrators ==
