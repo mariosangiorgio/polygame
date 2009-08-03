@@ -22,5 +22,7 @@ At the beginning we have to provide:
   *They should have an overview of the state of the game, in order to know whats going on
 
 == Voters ==
+  *They have to look at the different solution in order to find the winner of the game
+  *In this perspective other parameters should be introduced, to make the decision based on something more than the mere CO2 reduction data. Pareto analysis may come in hand at this point
 
 == Administrators ==
