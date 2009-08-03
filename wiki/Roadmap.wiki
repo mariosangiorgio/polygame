@@ -20,9 +20,13 @@ At the beginning we have to provide:
   *Should create a new game, selecting the users and the wedges. They eventually may have to locally edit or create a new wedge
   *They may give some extra time to the players
   *They should have an overview of the state of the game, in order to know whats going on
+  *They should create the voters
 
 == Voters ==
   *They have to look at the different solution in order to find the winner of the game
   *In this perspective other parameters should be introduced, to make the decision based on something more than the mere CO2 reduction data. Pareto analysis may come in hand at this point
 
 == Administrators ==
+  *He has to setup the system
+  *He can edit the global data and add new wedges available in all the games
+  *He can create the game organizers
