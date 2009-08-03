@@ -17,6 +17,9 @@ At the beginning we have to provide:
   *Users should be able to view the documents produced in the previous page to make their choices
 
 == Game organizer ==
+  *Should create a new game, selecting the users and the wedges. They eventually may have to locally edit or create a new wedge
+  *They may give some extra time to the players
+  *They should have an overview of the state of the game, in order to know whats going on
 
 == Voters ==
 
