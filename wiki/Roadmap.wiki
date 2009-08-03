@@ -3,9 +3,18 @@
 
 == PolyGame ==
 At the beginning we have to provide:
-*a login page
+  *a login page
+  *a common visual element with the indication of the game phase and the time left
 
 == Players ==
+=== Wedge-Study Phase ===
+  *The page should display the information, adding more documents and links as the time goes on
+  *When the time is over the right values should be shown to the players
+  *At the end of this phase the player should produce a poster with the pros and the cons of their wedge
+
+=== Plan-Selection Phase ===
+  *We have to provide an interactive table to each team, in order to make them able to create their own mix. The table should show what is going on when a wedge is selected.
+  *Users should be able to view the documents produced in the previous page to make their choices
 
 == Game organizer ==
 
