@@ -1,0 +1,13 @@
+#labels Phase-Design,Phase-Requirements
+#Components that have to be developed
+
+= PolyGame =
+ 
+
+= Players =
+
+= Game organizer =
+
+= Voters =
+
+= Administrators =
