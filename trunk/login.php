@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if( $_SESSION['loggedIn'] == "yes"){
+	print "Already logged in!<BR>";
+	print "<A HREF=logout.php>Logout</A>";
+	}
+else{
 ?>
 
 <FORM METHOD="POST" ACTION="./authentication.php">
@@ -13,3 +19,7 @@ session_start();
 
 <INPUT TYPE="submit" VALUE="Login">
 </FORM>
+
+<?php
+}
+?>
