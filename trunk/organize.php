@@ -1,5 +1,5 @@
 <b>Organizer</b><BR>
-Organize a new PolyGame:
+Organize a new PolyGame:<BR>
 <A HREF=newPlayers.php>Add players</A><BR>
 <A HREF=newVoters.php>Add voters</A><BR><BR>
 <A HREF=showWedges.php>View the available wedges</A><BR>
