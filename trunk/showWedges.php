@@ -9,7 +9,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$data		= mysql_query($query,$connection);
 	
 	while( $row	= mysql_fetch_array($data)){
-		print "A HREF=editWedge.php?wedge=".$row['Title'].">".$row['Title']."</A><BR>";
+		print "<A HREF=editWedge.php?wedge=".$row['Title'].">".$row['Title']."</A><BR>";
 	}
 	
 }
