@@ -1,1 +1,3 @@
-We love democracy!<BR>
+<b>Voter</b>
+
+We love democracy...!<BR>
