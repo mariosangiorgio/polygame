@@ -1,3 +1,4 @@
+<b>Admin<b><BR>
 Here the admin should do some cool stuffs!!!<BR>
 <A HREF=newOrganizer.php>Add a new organizer</A><BR><BR>
 <A HREF=showWedges.php>View the available wedges</A><BR>
