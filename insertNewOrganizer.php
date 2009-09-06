@@ -12,6 +12,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	//Query
 	$query		= "INSERT INTO `Users` (`username`,`role`,`password`)
 				   VALUES ('$username', 'organizer', '$password');";
+	$data		= mysql_query($query,$connection);
 	//Redirect to the main page
 	header("Location: index.php");
 }
