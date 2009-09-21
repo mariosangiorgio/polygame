@@ -1,0 +1,161 @@
+-- phpMyAdmin SQL Dump
+-- version 3.0.1.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 10.0.1.1
+-- Generation Time: Sep 21, 2009 at 07:47 AM
+-- Server version: 5.1.37
+-- PHP Version: 5.2.9
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `polygame_polygame`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Game`
+--
+
+CREATE TABLE IF NOT EXISTS `Game` (
+  `Game ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Starting time` date NOT NULL,
+  `Extra minutes` int(11) NOT NULL DEFAULT '0',
+  `Owner` varchar(40) NOT NULL,
+  `Length 1a` int(11) NOT NULL,
+  `Length 1b` int(11) NOT NULL,
+  `Length 1c` int(11) NOT NULL,
+  `Length 1d` int(11) NOT NULL,
+  `Length 2` int(11) NOT NULL,
+  PRIMARY KEY (`Game ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `Game`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Game Players`
+--
+
+CREATE TABLE IF NOT EXISTS `Game Players` (
+  `Game ID` int(11) NOT NULL,
+  `Player ID` varchar(40) NOT NULL,
+  PRIMARY KEY (`Game ID`,`Player ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Game Players`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Game Wedges`
+--
+
+CREATE TABLE IF NOT EXISTS `Game Wedges` (
+  `Game ID` int(11) NOT NULL,
+  `Wedge ID` int(11) NOT NULL,
+  PRIMARY KEY (`Game ID`,`Wedge ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Game Wedges`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Groups`
+--
+
+CREATE TABLE IF NOT EXISTS `Groups` (
+  `User ID` int(11) NOT NULL,
+  `Group ID` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Groups`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Users`
+--
+
+CREATE TABLE IF NOT EXISTS `Users` (
+  `username` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `role` enum('administrator','player','voter','organizer') CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+  `password` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Users`
+--
+
+INSERT INTO `Users` (`username`, `role`, `password`) VALUES
+('mario', 'administrator', 'd6b861f58c7d4902ac3a5a15f85f3db50cc81b9e'),
+('trive', 'organizer', 'd41aad011620b4804f1f2082f0741d4b4e03ac37'),
+('organizer', 'organizer', 'b65951665f9a70dde41141a57721d88b19c1236e'),
+('voter', 'voter', 'e1814e232a5b98b9b07523aee47512d5d435d035');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Wedge Players`
+--
+
+CREATE TABLE IF NOT EXISTS `Wedge Players` (
+  `User ID` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Wedge ID` int(11) NOT NULL,
+  `Game ID` int(11) NOT NULL,
+  PRIMARY KEY (`User ID`,`Wedge ID`,`Game ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Wedge Players`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Wedges`
+--
+
+CREATE TABLE IF NOT EXISTS `Wedges` (
+  `Wedge ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(80) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Owner` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'admin',
+  `Introduction` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `History` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Present use` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `National situation` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Emission reduction` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Pros` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Cons` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `References` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`Wedge ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+--
+-- Dumping data for table `Wedges`
+--
+
