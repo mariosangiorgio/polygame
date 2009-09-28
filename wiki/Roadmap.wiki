@@ -3,7 +3,7 @@
 
 == PolyGame ==
 At the beginning we have to provide:
-  *a login page
+  * ~~a login page~~
   *a common visual element with the indication of the game phase and the time left
 
 == Players ==
@@ -29,4 +29,4 @@ At the beginning we have to provide:
 == Administrators ==
   *He has to setup the system
   *He can edit the global data and add new wedges available in all the games
-  *He can create the game organizers
+  * ~~He can create the game organizers~~
