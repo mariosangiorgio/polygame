@@ -4,29 +4,29 @@
 == PolyGame ==
 At the beginning we have to provide:
   * ~~a login page~~
-  *a common visual element with the indication of the game phase and the time left
+  * a common visual element with the indication of the game phase and the time left
 
 == Players ==
 === Wedge-Study Phase ===
-  *The page should display the information, adding more documents and links as the time goes on
-  *When the time is over the right values should be shown to the players
-  *At the end of this phase the player should produce a poster with the pros and the cons of their wedge
+  * The page should display the information, adding more documents and links as the time goes on
+  * When the time is over the right values should be shown to the players
+  * At the end of this phase the player should produce a poster with the pros and the cons of their wedge
 
 === Plan-Selection Phase ===
-  *We have to provide an interactive table to each team, in order to make them able to create their own mix. The table should show what is going on when a wedge is selected.
-  *Users should be able to view the documents produced in the previous page to make their choices
+  * We have to provide an interactive table to each team, in order to make them able to create their own mix. The table should show what is going on when a wedge is selected.
+  * Users should be able to view the documents produced in the previous page to make their choices
 
 == Game organizer ==
-  *Should create a new game, selecting the users and the wedges. They eventually may have to locally edit or create a new wedge
-  *They may give some extra time to the players
-  *They should have an overview of the state of the game, in order to know whats going on
-  *They should create the voters
+  * Should create a new game, selecting the users and the wedges. They eventually may have to locally edit or create a new wedge
+  * They may give some extra time to the players
+  * They should have an overview of the state of the game, in order to know whats going on
+  * They should create the voters
 
 == Voters ==
-  *They have to look at the different solution in order to find the winner of the game
-  *In this perspective other parameters should be introduced, to make the decision based on something more than the mere CO2 reduction data. Pareto analysis may come in hand at this point
+  * They have to look at the different solution in order to find the winner of the game
+  * In this perspective other parameters should be introduced, to make the decision based on something more than the mere CO2 reduction data. Pareto analysis may come in hand at this point
 
 == Administrators ==
-  *He has to setup the system
-  *He can edit the global data and add new wedges available in all the games
+  * He has to setup the system
+  * He can edit the global data and add new wedges available in all the games
   * ~~He can create the game organizers~~
