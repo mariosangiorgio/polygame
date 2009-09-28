@@ -26,7 +26,7 @@ At the beginning we have to provide:
   * They have to look at the different solution in order to find the winner of the game
   * In this perspective other parameters should be introduced, to make the decision based on something more than the mere CO2 reduction data. Pareto analysis may come in hand at this point
 
-== Administrators ==
+== Administrator ==
   * He has to setup the system
   * He can edit the global data and add new wedges available in all the games
   * ~~He can create the game organizers~~
