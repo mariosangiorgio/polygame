@@ -49,11 +49,11 @@ if( $_SESSION['loggedIn'] == "yes" and
 		print $wedge['References']."<BR>";
 		
 		if($now > $checkSolutionTime){
-			print "<A HREF="checkSolution.php">Check solution</A>";
+			print "<A HREF=\"checkSolution.php\">Check solution</A>";
 		}
 		if($now > $checkSolutionTime and
 		   $now < $phaseEnd){
-			print "<A HREF="submitPoster.php">Submit your poster</A>";
+			print "<A HREF=\"submitPoster.php\">Submit your poster</A>";
 		}
 	}
 }
