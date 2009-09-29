@@ -4,6 +4,9 @@ session_start();
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 ?>
+
+Please enter username and password for the new player: <BR>
+
 <FORM METHOD="POST" ACTION="./insertNewPlayer.php">
 <TABLE>
 <TR><TD>Name</TD><TD>Password</TD></TR>
