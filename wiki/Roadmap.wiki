@@ -8,7 +8,7 @@ At the beginning we have to provide:
 
 == Players ==
 === Wedge-Study Phase ===
-  * The page should display the information, adding more documents and links as the time goes on
+  * ~~The page should display the information, adding more documents and links as the time goes on~~
   * When the time is over the right values should be shown to the players
   * At the end of this phase the player should produce a poster with the pros and the cons of their wedge
 
