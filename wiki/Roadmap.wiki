@@ -18,7 +18,8 @@ At the beginning we have to provide:
 
 == Game organizer ==
   * ~~Add/remove players with supercool table~~
-  * TODO: don't remove players involved in a game!
+  * ~~TODO: don't remove players involved in a game!~~
+  * FIX: to which game should players be correlated?
   * Create a new game
   * Select the users and the wedges that are part of the game
   * They eventually may have to locally edit or create a new wedge
