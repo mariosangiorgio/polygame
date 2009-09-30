@@ -13,7 +13,8 @@ TODO: create the main page for the player
   * ~~When the time is over the right values should be shown to the players~~
   * At the end of this phase the player should produce a poster with the pros and the cons of their wedge
   * ~~Decide what is the format of a poster~~
-  * TODO: Make the form to input the data (~~And decide where it is better to store it~~)
+  * ~~Make the form to input the data (~~And decide where it is better to store it~~)~~
+  * TODO: Allow users to insert just one poster.
 
 === Plan-Selection Phase ===
   * We have to provide an interactive table to each team, in order to make them able to create their own mix. The table should show what is going on when a wedge is selected.
