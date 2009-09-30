@@ -7,6 +7,7 @@ At the beginning we have to provide:
   * a common visual element with the indication of the game phase and the time left
 
 == Players ==
+TODO: create the main page for the player
 === Wedge-Study Phase ===
   * ~~The page should display the information, adding more documents and links as the time goes on~~
   * ~~When the time is over the right values should be shown to the players~~
