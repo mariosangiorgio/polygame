@@ -35,6 +35,10 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$checkSolutionTime = $showAllInformationTime + $game['Length 1b'] * 60;
 	$endPhase = $checkSolutionTime + $game['Length 1c'] * 60;
 	
+	$_SESSION['checkSolutionTime']	= $checkSolutionTime;
+	$_SESSION['endPhase'] 			= $endPhase;
+	$_SESSION['gameID']				= $wedge['Game ID'];
+	$_SESSION['wedgeID']			= $wedge['Wedge ID'];
 	
 	//Information always displayed
 	print $wedge['Title']."<BR>";
@@ -52,7 +56,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 			print "<A HREF=\"checkSolution.php\">Check solution</A>";
 		}
 		if($now > $checkSolutionTime and
-		   $now < $phaseEnd){
+		   $now < $endPhase){
 			print "<A HREF=\"submitPoster.php\">Submit your poster</A>";
 		}
 	}
