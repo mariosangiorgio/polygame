@@ -18,9 +18,15 @@ if(
 }
 ?>
 <FORM action="insertPoster.php" method="post">
-	Pros
+	Pros<BR>
 	<TEXTAREA name="Pros" rows="20" cols="80"></TEXTAREA>
+	<BR>
+	Cons<BR>
 	<TEXTAREA name="Cons" rows="20" cols="80"></TEXTAREA>
+	<BR>
+	Notes<BR>
 	<TEXTAREA name="Notes" rows="20" cols="80"></TEXTAREA>
-	<INPUT type="Submit" value="Submit"><INPUT type="reset">
+	<BR>
+	<INPUT type="Submit" value="Submit">
+	<INPUT type="reset">
 </FORM>
