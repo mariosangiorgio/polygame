@@ -1,4 +1,6 @@
+#summary A plan to organize the work in order to meet the deadline.
 #labels Phase-Implementation
+
 =October 2009=
   * 5th: the first phase of the game and the organizer section should be concluded from the functionalities point of view.
   * 10th: the second phase of the game and the voters section should be concluded from the functionalities point of view.
