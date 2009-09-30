@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 10.0.1.1
--- Generation Time: Sep 21, 2009 at 07:47 AM
+-- Generation Time: Sep 30, 2009 at 07:43 AM
 -- Server version: 5.1.37
 -- PHP Version: 5.2.9
 
@@ -27,21 +27,15 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `Game` (
   `Game ID` int(11) NOT NULL AUTO_INCREMENT,
-  `Starting time` date NOT NULL,
+  `Starting time` datetime NOT NULL,
   `Extra minutes` int(11) NOT NULL DEFAULT '0',
   `Owner` varchar(40) NOT NULL,
   `Length 1a` int(11) NOT NULL,
   `Length 1b` int(11) NOT NULL,
   `Length 1c` int(11) NOT NULL,
-  `Length 1d` int(11) NOT NULL,
   `Length 2` int(11) NOT NULL,
   PRIMARY KEY (`Game ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `Game`
---
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -55,11 +49,6 @@ CREATE TABLE IF NOT EXISTS `Game Players` (
   PRIMARY KEY (`Game ID`,`Player ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Game Players`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -72,11 +61,6 @@ CREATE TABLE IF NOT EXISTS `Game Wedges` (
   PRIMARY KEY (`Game ID`,`Wedge ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Game Wedges`
---
-
-
 -- --------------------------------------------------------
 
 --
@@ -88,10 +72,21 @@ CREATE TABLE IF NOT EXISTS `Groups` (
   `Group ID` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `Groups`
+-- Table structure for table `Posters`
 --
 
+CREATE TABLE IF NOT EXISTS `Posters` (
+  `Player` varchar(40) NOT NULL,
+  `Game ID` int(11) NOT NULL,
+  `Wedge ID` int(11) NOT NULL,
+  `Pros` text NOT NULL,
+  `Cons` text NOT NULL,
+  `Notes` text NOT NULL,
+  PRIMARY KEY (`Player`,`Game ID`,`Wedge ID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -106,16 +101,6 @@ CREATE TABLE IF NOT EXISTS `Users` (
   PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Users`
---
-
-INSERT INTO `Users` (`username`, `role`, `password`) VALUES
-('mario', 'administrator', 'd6b861f58c7d4902ac3a5a15f85f3db50cc81b9e'),
-('trive', 'organizer', 'd41aad011620b4804f1f2082f0741d4b4e03ac37'),
-('organizer', 'organizer', 'b65951665f9a70dde41141a57721d88b19c1236e'),
-('voter', 'voter', 'e1814e232a5b98b9b07523aee47512d5d435d035');
-
 -- --------------------------------------------------------
 
 --
@@ -128,11 +113,6 @@ CREATE TABLE IF NOT EXISTS `Wedge Players` (
   `Game ID` int(11) NOT NULL,
   PRIMARY KEY (`User ID`,`Wedge ID`,`Game ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `Wedge Players`
---
-
 
 -- --------------------------------------------------------
 
@@ -153,9 +133,4 @@ CREATE TABLE IF NOT EXISTS `Wedges` (
   `Cons` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `References` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`Wedge ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `Wedges`
---
-
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
