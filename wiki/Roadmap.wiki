@@ -11,7 +11,7 @@ TODO: create the main page for the player
 === Wedge-Study Phase ===
   * ~~The page should display the information, adding more documents and links as the time goes on~~
   * ~~When the time is over the right values should be shown to the players~~
-  * At the end of this phase the player should produce a poster with the pros and the cons of their wedge
+  * ~~At the end of this phase the player should produce a poster with the pros and the cons of their wedge~~
   * ~~Decide what is the format of a poster~~
   * ~~Make the form to input the data (~~And decide where it is better to store it~~)~~
   * TODO: Allow users to insert just one poster.
