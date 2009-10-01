@@ -16,6 +16,7 @@ if(sha1("polygame".$password) == $row['password']){
 	$_SESSION['loggedIn']	= "yes";
 	$_SESSION['username']	= $username;
 	$_SESSION['role']		= $row['role'];
+	
 	header("Location: index.php");
 	}
 else{

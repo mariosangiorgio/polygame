@@ -24,3 +24,5 @@ else {
 	print "You must log in as an organizer to access this page!";
 }
 ?>
+
+<BR><A HREF=organize.php>Back to organize page</A><BR>
