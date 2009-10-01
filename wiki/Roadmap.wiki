@@ -40,3 +40,5 @@ At the beginning we have to provide:
   * He has to setup the system
   * He can edit the global data and add new wedges available in all the games
   * ~~He can create the game organizers~~
+
+TODO: Check that all the inputs are validated (For example in newGame)
