@@ -54,10 +54,20 @@ if( $_SESSION['loggedIn'] == "yes" and
 		
 		if($now > $checkSolutionTime){
 			print "<A HREF=\"checkSolution.php\">Check solution</A>";
+			print "<BR>";
 		}
 		if($now > $checkSolutionTime and
 		   $now < $endPhase){
-			print "<A HREF=\"submitPoster.php\">Submit your poster</A>";
+		   /*
+		    * If there isn't any poster players can submit it,
+		    * otherwise they are able to modify it.
+		    */
+		   if(!$_SESSION['posterSubmitted']){
+		   	print "<A HREF=\"submitPoster.php\">Submit your poster</A>";
+		   }
+		   else{
+		    print "<A HREF=\"editPoster.php\">Edit your poster</A>";
+		   }
 		}
 	}
 }
