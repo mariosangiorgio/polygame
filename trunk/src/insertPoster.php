@@ -15,6 +15,7 @@ $query 	=
 	 		  '".$_POST['Cons']."',
 	 		  '".$_POST['Notes']."');";
 $data	= mysql_query($query,$connection);
+$_SESSION['posterSubmitted'] = true;
 
 //Redirect to the main page
 header("Location: showWedgeInformation.php");
