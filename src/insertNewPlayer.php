@@ -5,7 +5,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	require("./database/databaseLogin.php");
 	//Redirect to the main page
-	header("Location: organize.php");
+	header("Location: newPlayer.php");
 	
 	//Sanitizing inputs
 	$username	= mysql_real_escape_string($_POST['username']);

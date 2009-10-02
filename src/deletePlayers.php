@@ -10,6 +10,13 @@ require("./database/databaseLogin.php");
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
+	?>
+	<A HREF="./chooseGamePlayers.php">Choose game players</A> |
+	<A HREF="./showGamePlayers.php">View players list</A> |
+	<A HREF="./newPlayer.php">Add new players</A> |
+	Delete players from the database<BR><BR>
+	<?php
+	
 	print "Choose players you want to delete.<BR>";
 	print "Please note that you can't delete players that are associated to a game.<BR>";
 	

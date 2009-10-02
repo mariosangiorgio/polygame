@@ -4,7 +4,7 @@ session_start();
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	require("./database/databaseLogin.php");
-	header("Location: organize.php");
+	header("Location: chooseGamePlayers.php");
 	
 	foreach($_POST['selectedUsers'] as $value)  {
 		$query		= "INSERT INTO `Game Players` (`Game ID`,`Player ID`)
