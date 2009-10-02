@@ -4,6 +4,11 @@ require("./database/databaseLogin.php");
 
 ?>
 
+Choose game players |
+<A HREF="./showGamePlayers.php">View players list</A> |
+<A HREF="./newPlayer.php">Add new players</A> |
+<A HREF="./deletePlayers.php">Delete players from the database</A><BR><BR>
+
 <FORM METHOD="POST" ACTION="./chooseGamePlayer.php">
 <?php
 

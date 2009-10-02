@@ -10,9 +10,13 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$length1c	= mysql_real_escape_string($_POST['length1c']);
 	$length2	= mysql_real_escape_string($_POST['length2']);
 	
+	$query = "DELETE FROM `Game` WHERE `Organizer ID` = '".$_SESSION['username']."';" ;
+	$data		= mysql_query($query,$connection);
+	
+	//Automatic start: NOW() + 10800
 	$query		= "INSERT INTO `Game` (`Organizer ID`,`Starting time`, 
 				  `Length 1a`,`Length 1b`,`Length 1c`,`Length 2`)
-				   VALUES ('".$_SESSION['username']."', NOW(),".$length1a.
+				   VALUES ('".$_SESSION['username']."', '2999-12-12 11:11:11' ,".$length1a.
 				   ", ".$length1b.", 
 				   ".$length1c.", 
 				   ".$length2." );";

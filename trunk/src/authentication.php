@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 require("./database/databaseLogin.php");
 
 //Sanitizing inputs
