@@ -21,11 +21,19 @@ At the beginning we have to provide:
   * Users should be able to view the documents produced in the previous page to make their choices
 
 == Game organizer ==
-  * ~~Add/remove players with supercool table~~
   * ~~TODO: don't remove players involved in a game!~~
-  * FIX: to which game should players be correlated?
-  * TODO: it would be nice to be able to see players associated to a game
-  * Create a new game
+  * ~~only one game per organizer (yes, this is not a feature)~~
+  * ~~cooooool, now organizers can organize from different computer on different browsers... their session is recreated everytime the organizer.php is loaded up~~
+  * ~~see all players in the database~~
+  * ~~remove selected players from database~~
+  * ~~add players to database~~
+  * ~~see players associated to current game~~
+  * ~~delete selected players associated to current game~~
+  * ~~add incrementally players to current game~~
+  * ~~new game created everytime organizer click on "create game"~~
+  * ~~organizer page changes depending on the current phase of game~~
+  * ~~organizer can make the game start hitting a button~~
+  * ~~deleting current game actually deletes all possible games and wedges and game players associated to an organizer: database will be cleaner!!~~
   * Select the users and the wedges that are part of the game
   * They eventually may have to locally edit or create a new wedge
   * They may give some extra time to the players
