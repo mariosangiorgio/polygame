@@ -23,7 +23,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$data		= mysql_query($query,$connection);
 
 	if ($data == 1) {
-		header("Location: organize.php");
+		header("Location: ../organize.php");
 		$_SESSION['gamePhase'] = 1;
 	}
 	else {
