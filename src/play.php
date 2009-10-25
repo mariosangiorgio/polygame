@@ -25,6 +25,10 @@ $pahseTwoBeginning = $phaseOneBeginning +
 $phaseTwoEnd	   = $phaseTwoBeginning +
 					 $gmae['Length 2'] * 60;
 
+if($game['Started'] == false){
+	header("Location waitPage.php");
+}
+
 if($now >= $pahseOneBeginning and 
    $now <= $pahseTwoBeginning){
    header("Location: showWedgeInformation.php");
