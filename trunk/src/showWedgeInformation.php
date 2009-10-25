@@ -8,7 +8,7 @@ session_start();
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role']     == "player"){
-	require("./database/databaseLogin.php");
+	require("./businessLogic/databaseLogin.php");
 	
 	//Loading wedge information
 	$query		=

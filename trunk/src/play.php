@@ -2,7 +2,7 @@
 
 session_start();
 
-require("./database/databaseLogin.php");
+require("./businessLogic/databaseLogin.php");
 
 /*
  * Getting the time informations in order to
