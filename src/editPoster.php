@@ -28,7 +28,7 @@ $query 	=
 $data	= mysql_query($query,$connection);
 $poster = mysql_fetch_array($data);
 ?>
-<FORM action="updatePoster.php" method="post">
+<FORM action="./businessLogic/updatePoster.php" method="post">
 	Pros<BR>
 	<TEXTAREA name="Pros" rows="20" cols="80"><?php print $poster['Pros']; ?></TEXTAREA>
 	<BR>

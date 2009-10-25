@@ -4,7 +4,7 @@ require("./database/databaseLogin.php");
 
 ?>
 
-<FORM METHOD="POST" ACTION="./deletePlayer.php">
+<FORM METHOD="POST" ACTION="./businessLogic/deletePlayer.php">
 <?php
 
 if( $_SESSION['loggedIn'] == "yes" and
