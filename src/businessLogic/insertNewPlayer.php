@@ -3,7 +3,7 @@ session_start();
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
-	require("./database/databaseLogin.php");
+	require("./databaseLogin.php");
 	//Redirect to the main page
 	header("Location: newPlayer.php");
 	

@@ -3,7 +3,7 @@ session_start();
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "administrator"){
-	require("./database/databaseLogin.php");
+	require("./databaseLogin.php");
 	//Sanitizing inputs
 	$username	= mysql_real_escape_string($_POST['username']);
 	$password	= mysql_real_escape_string($_POST['password']);

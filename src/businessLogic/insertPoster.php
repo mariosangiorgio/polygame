@@ -2,7 +2,7 @@
 
 session_start();
 
-require("./database/databaseLogin.php");
+require("./databaseLogin.php");
 
 $query 	= 
 	"INSERT INTO `polygame_polygame`.`Posters` (

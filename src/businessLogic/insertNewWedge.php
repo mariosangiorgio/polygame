@@ -2,7 +2,7 @@
 session_start();
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "administrator"){
-	require("./database/databaseLogin.php");
+	require("./databaseLogin.php");
 	//Sanitizing inputs
 	$title				= mysql_real_escape_string($_POST['title']);
 	$introduction		= mysql_real_escape_string($_POST['introduction']);
