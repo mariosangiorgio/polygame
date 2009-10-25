@@ -4,7 +4,7 @@ header("Location: showGamePlayers.php");
 
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
-	require("./database/databaseLogin.php");
+	require("./businessLogic/databaseLogin.php");
 
 	foreach($_POST['selectedUsers'] as $value)  {
 		//print $value;

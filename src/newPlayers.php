@@ -2,7 +2,7 @@
 session_start();
 //TODO remove this file?????????????????????
 
-require("./database/databaseLogin.php");
+require("./businessLogic/databaseLogin.php");
 
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){

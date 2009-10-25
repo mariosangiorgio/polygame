@@ -5,7 +5,7 @@ header("Location: organize.php");
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
-	require("./database/databaseLogin.php");
+	require("./businessLogic/databaseLogin.php");
 	
 	$_SESSION['gamePhase'] = 0;
 

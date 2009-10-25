@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("./database/databaseLogin.php");
+require("./businessLogic/databaseLogin.php");
 
 $query = "SELECT `Game ID` FROM `Game`
 		  WHERE `Organizer ID` = '".$_SESSION['username']."';";

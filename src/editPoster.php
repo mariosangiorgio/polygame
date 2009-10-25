@@ -17,7 +17,7 @@ if(
 	print "Poster:<BR>";
 }
 //Retreiving the existing poster from the database
-require("./database/databaseLogin.php");
+require("./businessLogic/databaseLogin.php");
 
 $query 	= 
 	"SELECT *
