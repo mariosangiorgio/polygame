@@ -16,7 +16,7 @@ if(sha1("polygame".$password) == $row['password']){
 	$_SESSION['username']	= $username;
 	$_SESSION['role']		= $row['role'];
 	
-	header("Location: index.php");
+	header("Location: ../index.php");
 	}
 else{
 	print "Login error. Please, double check your username and password.";
