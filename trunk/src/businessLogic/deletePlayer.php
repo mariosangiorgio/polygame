@@ -12,7 +12,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 		mysql_query($query,$connection);		
 	} 
 	
-	header("Location: deletePlayers.php");
+	header("Location: ../deletePlayers.php");
 }
 else{
 	print "To perform this operation you must be logged in as an organizer!";

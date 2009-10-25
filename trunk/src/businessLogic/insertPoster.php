@@ -18,5 +18,5 @@ $data	= mysql_query($query,$connection);
 $_SESSION['posterSubmitted'] = true;
 
 //Redirect to the main page
-header("Location: showWedgeInformation.php");
+header("Location: ../showWedgeInformation.php");
 ?>
