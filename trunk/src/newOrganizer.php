@@ -4,7 +4,7 @@ session_start();
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "administrator"){
 ?>
-<FORM METHOD="POST" ACTION="./insertNewOrganizer.php">
+<FORM METHOD="POST" ACTION="./businessLogic/insertNewOrganizer.php">
 <TABLE>
 <TR><TD>Name</TD><TD>Password</TD></TR>
 <TR>

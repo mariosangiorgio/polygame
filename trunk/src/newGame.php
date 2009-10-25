@@ -4,7 +4,7 @@ session_start();
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 ?>
-<FORM METHOD="POST" ACTION="./insertNewGame.php">
+<FORM METHOD="POST" ACTION="./businessLogic/insertNewGame.php">
 <TABLE>
 <TR><TD>Delay (minutes) before complete information </TD><TD><INPUT TYPE="text" NAME="length1a" VALUE="20"></TD></TR>
 <TR><TD>Delay (minutes) before submit solution </TD><TD><INPUT TYPE="text" NAME="length1b" VALUE="20"></TD></TR>

@@ -8,7 +8,7 @@ if( $_SESSION['loggedIn'] == "yes"){
 else{
 ?>
 
-<FORM METHOD="POST" ACTION="./authentication.php">
+<FORM METHOD="POST" ACTION="./businessLogic/authentication.php">
 <TABLE>
 <TR><TD>Username</TD><TD>Password</TD></TR>
 <TR>

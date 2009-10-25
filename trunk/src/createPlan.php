@@ -38,7 +38,7 @@ session_start();
 
 <form name="Plan"
 	  method="POST"
-	  action="submitPlan.php">
+	  action="./businessLogic/submitPlan.php">
 <TABLE id="WedgeTable">
 <TR><TD>Wedge</TD><TD id=wedgesQuantity>Quantity</TD></TR>
 
