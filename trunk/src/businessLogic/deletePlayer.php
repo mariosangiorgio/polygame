@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("./database/databaseLogin.php");
+require("./databaseLogin.php");
 
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and

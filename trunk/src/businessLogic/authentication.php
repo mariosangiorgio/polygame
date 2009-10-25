@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("./database/databaseLogin.php");
+require("./databaseLogin.php");
 
 //Sanitizing inputs
 $username	= mysql_real_escape_string($_POST['username']);

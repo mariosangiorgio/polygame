@@ -1,6 +1,6 @@
 <?php
 session_start();
-require("./database/databaseLogin.php");
+require("./databaseLogin.php");
 
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
