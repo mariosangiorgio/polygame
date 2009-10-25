@@ -17,7 +17,7 @@ if(
 	print "Poster:<BR>";
 }
 ?>
-<FORM action="insertPoster.php" method="post">
+<FORM action="./businessLogic/insertPoster.php" method="post">
 	Pros<BR>
 	<TEXTAREA name="Pros" rows="20" cols="80"></TEXTAREA>
 	<BR>

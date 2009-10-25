@@ -13,7 +13,7 @@ Add new players |
 
 Please enter username and password for the new player: <BR>
 
-<FORM METHOD="POST" ACTION="./insertNewPlayer.php">
+<FORM METHOD="POST" ACTION="./businessLogic/insertNewPlayer.php">
 <TABLE>
 <TR><TD>Name</TD><TD>Password</TD></TR>
 <TR>

@@ -4,7 +4,7 @@ session_start();
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 ?>
-<FORM METHOD="POST" ACTION="./insertNewVoter.php">
+<FORM METHOD="POST" ACTION="./businessLogic/insertNewVoter.php">
 <TABLE>
 <TR><TD>Name</TD><TD>Password</TD></TR>
 <TR>

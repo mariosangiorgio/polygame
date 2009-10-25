@@ -4,7 +4,7 @@ session_start();
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "administrator"){
 ?>
-<FORM METHOD="POST" ACTION="./insertNewWedge.php">
+<FORM METHOD="POST" ACTION="./businessLogic/insertNewWedge.php">
 <TABLE>
 <TR><TD>Wedge title</TD><TD><INPUT TYPE="text" NAME="title"></TD></TR>
 <TR><TD>Introduction</TD><TD><INPUT TYPE="text" NAME="introduction"></TD></TR>
