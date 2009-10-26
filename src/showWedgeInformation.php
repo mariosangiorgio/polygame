@@ -21,19 +21,28 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$wedge		= mysql_fetch_array($data);
 	
 	//Loading game information
-	$query		=
+	$query 	=
 		"SELECT *
-		 FROM  `Game`
-		 WHERE `Game ID` = '".$wedge['Game ID']."'";
+		 FROM  `Game`, `Game Players`
+		 WHERE `Game`.`Game ID` = `Game Players`.`Game ID` and
+			   `Game Players`.`Player ID` = '" .
+				$_SESSION['username'] . "'";
 	$data		= mysql_query($query,$connection);
 	$game		= mysql_fetch_array($data);
 	
 	$now = time();
+	
 	$showAllInformationTime =
 		strtotime($game['Starting time']) +
 		$game['Length 1a'] * 60;
-	$checkSolutionTime = $showAllInformationTime + $game['Length 1b'] * 60;
-	$endPhase = $checkSolutionTime + $game['Length 1c'] * 60;
+	
+	$checkSolutionTime =
+		$showAllInformationTime +
+		$game['Length 1b'] * 60;
+	
+	$endPhase 		   =
+		$checkSolutionTime +
+		$game['Length 1c'] * 60;
 	
 	$_SESSION['checkSolutionTime']	= $checkSolutionTime;
 	$_SESSION['endPhase'] 			= $endPhase;
