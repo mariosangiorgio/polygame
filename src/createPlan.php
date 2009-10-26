@@ -12,8 +12,8 @@ session_start();
     	var i;
     	var rows = document.getElementById('WedgeTable').rows.length - 1;
     	var value;
-    	//document.getElementById(currentWedge).value
-    	//	= document.getElementById(currentWedge).value.replace (/\D/, '');
+    	document.getElementById(currentWedge).value
+    		= document.getElementById(currentWedge).value.replace (/\D/, '');
     	
     	for($i=0; $i<rows; $i = $i+1){
     		value = document.getElementById('wedge'+$i).value;
@@ -23,10 +23,13 @@ session_start();
     		}
     	}
     	if(wedgesUsed > 20){
-    		document.getElementById('wedgesQuantity').innerHTML = "<span style='color:red'>Quantity</span>";
+    		document.getElementById('wedgesQuantity').innerHTML =
+    			"<span style='color:red'>Quantity "
+    			+ wedgesUsed + " of 20</span>";
     	}
     	else{
-    		document.getElementById('wedgesQuantity').innerHTML = "Quantity";
+    		document.getElementById('wedgesQuantity').innerHTML =
+    			"Quantity "+ wedgesUsed + " of 20";
     	}
 
     }
@@ -51,7 +54,8 @@ for ($i=0; $i<10;$i++){
 	print $i;
 	print " onkeyup=\"this.value = this.value.replace (/\D/, ''); validate('wedge";
 	print $i;
-	print "');\">";
+	print "');\" ";
+	print " onkeypress=\"this.value = this.value.replace (/\D/, '');\">";
 	print "</TD></TR>\n";
 }
 ?>
