@@ -8,35 +8,54 @@ require("./businessLogic/databaseLogin.php");
  * Getting the time informations in order to
  * redirect users to the right page
  */
+
 $query 	=
 	"SELECT *
-	 FROM  `Game`
-	 WHERE `Game ID` = '".$wedge['Game ID']."'";
+	 FROM  `Game`, `Game Players`
+	 WHERE `Game`.`Game ID` = `Game Players`.`Game ID` and
+	 	   `Game Players`.`Player ID` = '" .
+	 	    $_SESSION['username'] . "'";
 $data	= mysql_query($query,$connection);
 $game	= mysql_fetch_array($data);
 
 $now	= time();
 
-$pahseOneBeginning = strtotime($game['Starting time']);
-$pahseTwoBeginning = $phaseOneBeginning +
+$phaseOneBeginning = strtotime($game['Starting time']);
+$phaseTwoBeginning = $phaseOneBeginning +
 					 $game['Length 1a'] * 60 +
-					 $game['Length 1a'] * 60 +
-					 $game['Length 1a'] * 60;
+					 $game['Length 1b'] * 60 +
+					 $game['Length 1c'] * 60;
 $phaseTwoEnd	   = $phaseTwoBeginning +
-					 $gmae['Length 2'] * 60;
+					 $game['Length 2'] * 60;
+/*
+print $now;
+print "<BR>";
+print $phaseOneBeginning;
+print"<BR>";
+print $phaseTwoBeginning;
+print"<BR>";
+print $phaseTwoEnd;
+print"<BR>";
+*/
 
-if($game['Started'] == false){
-	header("Location waitPage.php");
+if($game['Started']){
+	if($now >= $phaseOneBeginning and 
+	   $now <  $phaseTwoBeginning){
+	   header("Location: showWedgeInformation.php");
+	   return;
+	}
+	if($now >= $phaseTwoBeginning and
+	   $now <= $phaseTwoEnd){
+	   header("Location: createPlan.php");
+	   return;
+	}
+	header("Location: results.php");
+	return;
+}
+else{
+	header("Location: waitPage.php");
+	return;
 }
 
-if($now >= $pahseOneBeginning and 
-   $now <= $pahseTwoBeginning){
-   header("Location: showWedgeInformation.php");
-}
-if($now >= $pahseTwoBeginning and 
-   $now <= $pahseTwoEnd){
-   header("Location: createPlan.php");
-}
-header("Location: results.php");
-
+print "ERROR";
 ?>
