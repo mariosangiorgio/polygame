@@ -25,15 +25,15 @@ Please enter username and password for the new player: <BR>
 <INPUT TYPE="submit" VALUE="Insert">
 </FORM>
 
-<BR><BR>These are the players currently in the database:<BR>
+<BR><BR>Those are the players currently in the database:<BR>
 <?php	
 	$query		= "SELECT `username`, `role` FROM `Users`
 					WHERE `role` = 'player';";
-	//print $query;
 	$data		= mysql_query($query,$connection);
 
 	while( $row	= mysql_fetch_array($data)){
-		print $row['username']."\n";
+		print $row['username'];
+		print "<BR>";
 	}
 
 }
