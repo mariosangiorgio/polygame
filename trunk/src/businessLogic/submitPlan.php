@@ -18,13 +18,47 @@ if( $_SESSION['loggedIn'] == "yes" and
 				$_SESSION['username'] . "'";
 	$data	= mysql_query($query,$connection);
 	
-	$i = 0;
+	$total = 0;
 	while($wedge = mysql_fetch_array($data)){
-		print "Wedge:";
-		print $wedge['Wedge ID'];
-		print " ".intval($_POST['wedge'.$wedge['Wedge ID']])."<BR>";	
+		$count = intval($_POST[$wedge['Wedge ID']]);
+		if($count > 0){
+			$wedgesSelected[$wedge['Wedge ID']] = $count;
+			$total = $total + $count;
+		}
+	}
+	if($total != 20){
+		print "ERROR. You must select 20 wedges!";
+		return;
 	}
 	
+	//Getting game ID
+	$query 	=
+		"SELECT
+			   `Game ID`
+		 FROM
+			   `Game Players`
+		 WHERE
+			   `Game Players`.`Player ID` = '".
+				$_SESSION['username'] . "'";
+	$data	= mysql_query($query,$connection);
+	$result = mysql_fetch_array($data);
+	$gameID = $result['Game ID'];
+	
+	//Storing informations in the database
+	foreach(array_keys($wedgesSelected) as $wedge){
+			$query =
+				"INSERT
+					INTO `polygame_polygame`.`Plans`
+						 (`Game ID`,`Player ID`,`Wedge ID`,`Wedge Count`)
+					VALUES
+						 (".$gameID.",
+						   '".$_SESSION['username']."',
+						   ".$wedge.",
+						   ".$wedgesSelected[$wedge].")";
+			$total = $total + $count;
+			$data	= mysql_query($query,$connection);
+	}
+	Header("Location: ../createPlan.php");
 }
 else{
 	print "To perform this operation you must be logged in as a player!";
