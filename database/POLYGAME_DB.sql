@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 10.0.1.1
--- Generation Time: Sep 30, 2009 at 07:43 AM
+-- Generation Time: Oct 27, 2009 at 07:27 AM
 -- Server version: 5.1.37
 -- PHP Version: 5.2.9
 
@@ -27,15 +27,16 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 CREATE TABLE IF NOT EXISTS `Game` (
   `Game ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Organizer ID` varchar(40) NOT NULL,
   `Starting time` datetime NOT NULL,
+  `Started` tinyint(1) NOT NULL DEFAULT '0',
   `Extra minutes` int(11) NOT NULL DEFAULT '0',
-  `Owner` varchar(40) NOT NULL,
   `Length 1a` int(11) NOT NULL,
   `Length 1b` int(11) NOT NULL,
   `Length 1c` int(11) NOT NULL,
   `Length 2` int(11) NOT NULL,
   PRIMARY KEY (`Game ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
 
 -- --------------------------------------------------------
 
@@ -70,6 +71,20 @@ CREATE TABLE IF NOT EXISTS `Game Wedges` (
 CREATE TABLE IF NOT EXISTS `Groups` (
   `User ID` int(11) NOT NULL,
   `Group ID` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Plans`
+--
+
+CREATE TABLE IF NOT EXISTS `Plans` (
+  `Game ID` int(11) NOT NULL,
+  `Player ID` varchar(40) NOT NULL,
+  `Wedge ID` int(11) NOT NULL,
+  `Wedge Count` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`Game ID`,`Player ID`,`Wedge ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
