@@ -34,9 +34,11 @@ At the beginning we have to provide:
   * ~~organizer page changes depending on the current phase of game~~
   * ~~organizer can make the game start hitting a button~~
   * ~~deleting current game actually deletes all possible games and wedges and game players associated to an organizer: database will be cleaner!!~~
+  * ~~organizer.php calculates correctly phase of the game~~
+  * ~~organizer.php refreshes in order to show a rudimentary timer~~
   * Select the users and the wedges that are part of the game
   * They eventually may have to locally edit or create a new wedge
-  * They may give some extra time to the players
+  * ~~They may give some extra time to the players~~
   * They should have an overview of the state of the game, in order to know whats going on
   * They should create the voters
 
