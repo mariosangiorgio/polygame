@@ -11,12 +11,21 @@ if( $_SESSION['loggedIn'] == "yes" and
 	require("./businessLogic/databaseLogin.php");
 	
 	//Loading wedge information
-	$query		=
+	if($_GET['wedgeID']){
+		$wedgeID	= intval($_GET['wedgeID']);
+		$query		=
+		"SELECT *
+		 FROM  `Wedges`
+		 WHERE `Wedges`.`Wedge ID` = ".$wedgeID;
+	}
+	else{
+		$query		=
 		"SELECT *
 		 FROM  `Wedges`, `Wedge Players`
 		 WHERE `Wedges`.`Wedge ID` = `Wedge Players`.`Wedge ID`
 		 	   and
 		 	   `User ID` = '".$_SESSION['username']."'";
+	}
 	$data		= mysql_query($query,$connection);
 	$wedge		= mysql_fetch_array($data);
 	
