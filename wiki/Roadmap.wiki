@@ -14,7 +14,8 @@ At the beginning we have to provide:
   * ~~At the end of this phase the player should produce a poster with the pros and the cons of their wedge~~
   * ~~Decide what is the format of a poster~~
   * ~~Make the form to input the data (And decide where it is better to store it)~~
-  * ~~Allow users to insert just one poster.~~ If there is already a poster the player is asked to edit it and not to insert a new one.
+  * ~~Allow users to insert just one poster.~~ ~~If there is already a poster the player is asked to edit it and not to insert a new one.~~
+  * Users can check their solution with the values provided by the instructors.
 
 === Plan-Selection Phase ===
   * ~~We have to provide an interactive table to each team, in order to make them able to create their own mix. The table should show what is going on when a wedge is selected.~~
