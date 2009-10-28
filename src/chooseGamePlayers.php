@@ -17,7 +17,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	
 	print "Choose players you want in the game.<BR>";
 	print "Please note that you won't be able to choose players already involved in a game.<BR>";
-	print "Users will automatically be added to the last game created.<BR>";
+	print "Players will be added to the current game.<BR>";
 	
 	$query		= "SELECT `username`, `role` FROM `Users` WHERE `role` = 'player'
 					   AND username NOT IN ( SELECT `Player ID` from `Game Players`  );";

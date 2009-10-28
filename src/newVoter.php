@@ -1,9 +1,21 @@
 <?php
 session_start();
+require("./businessLogic/databaseLogin.php");
 
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 ?>
+
+
+
+<A HREF="./chooseGameVoters.php">Choose game voters</A> |
+<A HREF="./showGameVoters.php">View voters list</A> |
+Add new voters |
+<A HREF="./deleteGameVoters.php">Delete voters from the database</A><BR><BR>
+
+Please enter username and password for the new voter: <BR>
+
+
 <FORM METHOD="POST" ACTION="./businessLogic/insertNewVoter.php">
 <TABLE>
 <TR><TD>Name</TD><TD>Password</TD></TR>
@@ -16,8 +28,20 @@ if( $_SESSION['loggedIn'] == "yes" and
 <INPUT TYPE="submit" VALUE="Insert">
 </FORM>
 <?php
+
+	$query		= "SELECT `username`, `role` FROM `Users`
+					WHERE `role` = 'voter';";
+	$data		= mysql_query($query,$connection);
+
+	while( $row	= mysql_fetch_array($data)){
+		print $row['username'];
+		print "<BR>";
+	}
+
 }
 else {
 	print "You must log in as an administrator to access this page!";
 }
 ?>
+
+<BR><A HREF=organize.php>Back to organize page</A><BR>
