@@ -23,7 +23,10 @@ $query 	=
 	"SELECT *
 	 FROM `Posters`
 	 WHERE `Player`='".$_SESSION['username']."' and 
-	 	   `Game ID`='".$_SESSION['gameID']."' and 
+	 	   `Game ID` = (SELECT `Game ID`
+	 	   				FROM `Game Players`
+	 	   				WHERE `Player ID` ='".$_SESSION['username']."')
+	 	   			and
 	 	   `Wedge ID`='".$_SESSION['wedgeID']."';";
 $data	= mysql_query($query,$connection);
 $poster = mysql_fetch_array($data);

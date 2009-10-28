@@ -55,7 +55,6 @@ if( $_SESSION['loggedIn'] == "yes" and
 	
 	$_SESSION['checkSolutionTime']	= $checkSolutionTime;
 	$_SESSION['endPhase'] 			= $endPhase;
-	$_SESSION['gameID']				= $wedge['Game ID'];
 	$_SESSION['wedgeID']			= $wedge['Wedge ID'];
 	
 	//Information always displayed
