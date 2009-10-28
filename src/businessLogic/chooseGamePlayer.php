@@ -11,7 +11,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 				   VALUES (
 				   ( SELECT `Game ID` FROM `Game`
 					WHERE `Organizer ID` = '".$_SESSION['username']."' )
-				   , '$value');";
+				   , '".mysql_real_escape_string($value)."');";
 		$data		= mysql_query($query,$connection);
 	} 
 
