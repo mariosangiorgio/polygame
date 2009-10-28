@@ -1,11 +1,10 @@
 <?php
 session_start();
-require("./databaseLogin.php");
 
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
-	require("./database/databaseLogin.php");
+	require("./databaseLogin.php");
 
 	foreach($_POST['selectedUsers'] as $value)  {
 		$query = "DELETE FROM `Users` WHERE `username` = '$value';" ;

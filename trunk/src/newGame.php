@@ -6,10 +6,12 @@ if( $_SESSION['loggedIn'] == "yes" and
 ?>
 <FORM METHOD="POST" ACTION="./businessLogic/insertNewGame.php">
 <TABLE>
+<TR><TD><b>First phase</b></TD></TR>
 <TR><TD>Delay (minutes) before complete information </TD><TD><INPUT TYPE="text" NAME="length1a" VALUE="20"></TD></TR>
 <TR><TD>Delay (minutes) before submit solution </TD><TD><INPUT TYPE="text" NAME="length1b" VALUE="20"></TD></TR>
 <TR><TD>Delay (minutes) before poster </TD><TD><INPUT TYPE="text" NAME="length1c" VALUE="60"></TD></TR>
-<TR><TD>Length (minutes) final phase </TD><TD><INPUT TYPE="text" NAME="length2" VALUE="120"></TD></TR>
+<TR><TD><b>Second phase</b></TD></TR>
+<TR><TD>Length (minutes) of second phase </TD><TD><INPUT TYPE="text" NAME="length2" VALUE="120"></TD></TR>
 </TABLE>
 
 <INPUT TYPE="submit" VALUE="Insert">
