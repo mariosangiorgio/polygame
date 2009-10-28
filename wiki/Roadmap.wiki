@@ -43,6 +43,8 @@ At the beginning we have to provide:
   * ~~They may give some extra time to the players~~
   * They should have an overview of the state of the game, in order to know whats going on
   * They should create the voters
+  * ~~They should create, list, delete, choose the voters~~
+  * Button "Start phase 1" and "Start phase 2"
 
 == Voters ==
   * They have to look at the different solution in order to find the winner of the game
