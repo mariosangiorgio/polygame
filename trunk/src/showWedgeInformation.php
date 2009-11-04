@@ -58,15 +58,18 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['wedgeID']			= $wedge['Wedge ID'];
 	
 	//Information always displayed
-	print $wedge['Title']."<BR>";
+	print "<B>".$wedge['Title']."</B><BR>";
 	print $wedge['Introduction']."<BR>";
 	if( $now > $showAllInformationTime){
-		print $wedge['History']."<BR>";
+	    print "<B>HISTORY</B><BR>";
+	    print $wedge['History']."<BR>";
+	    print "<B>PRESENT USE</B><BR>";
 		print $wedge['Present use']."<BR>";
+		print "<B>NATIONAL SITUATION</B><BR>";
 		print $wedge['National situation']."<BR>";	
+		print "<B>EMISSION REDUCTION</B><BR>";
 		print $wedge['Emission reduction']."<BR>";
-		print $wedge['Pros']."<BR>";
-		print $wedge['Cons']."<BR>";
+		print "<B>REFERENCES</B><BR>";
 		print $wedge['References']."<BR>";
 		
 		if($now > $checkSolutionTime){
