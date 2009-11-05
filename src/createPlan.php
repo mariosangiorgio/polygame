@@ -114,7 +114,7 @@ else{
 		print $wedge['Wedge ID'].">";
 		print $wedge['Title'];
 		print "</A>";
-		print " (<A HREF=showPoster.php?=";
+		print " (<A HREF=showPoster.php?wedgeID=";
 		print $wedge['Wedge ID'].">";
 		print "poster</A>)";
 		print "</TD><TD>";
