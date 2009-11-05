@@ -99,7 +99,7 @@ else if ($_SESSION['gamePhase'] == 1) {
 ?>
 <A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A><BR>
 <A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR><BR>
-<A HREF=chooseWedges.php>Choose and view wedges</A><BR>
+<A HREF=chooseWedges.php>Choose and view <b>wedges</br></A><BR>
 <A HREF=assignWedges.php>Assign wedges to users</A><BR>
 
 <A HREF=startGame.php>Start NOW phase one of this game!</A><BR><BR><BR>
