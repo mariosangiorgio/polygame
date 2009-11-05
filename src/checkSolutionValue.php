@@ -21,4 +21,5 @@ if(abs($solution - $values['Solution'])/$values['Solution']
 else{
    print "There is something wrong";
 }
+print "<BR><A HREF=\"./\">BACK</A>";
 ?>
