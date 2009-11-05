@@ -10,7 +10,8 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$password	= mysql_real_escape_string($_POST['password']);
 	//Hashing and salting the password
 	$password	= sha1("polygame".$password);
-	//Query
+	
+	//Insert new player in USERS table
 	$query		= "INSERT INTO `Users` (`username`,`role`,`password`)
 				   VALUES ('$username', 'player', '$password');";
 	$data		= mysql_query($query,$connection);
