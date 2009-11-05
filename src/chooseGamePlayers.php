@@ -25,8 +25,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 	?>
 	<table border=".1.">
 	<?php
+	print "<TR><TD></TD><TD>Name</TD><TD>Role</TD><TD>Phase 1, Phase 2 or both</TD></TR>";
 	while( $row	= mysql_fetch_array($data)){
-		print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['username']."\"></TD><TD>".$row['username']."</TD><TD>".$row['role']."</TD></TR>\n";
+		print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['username']."\"></TD><TD>".$row['username']."</TD><TD>".$row['role']."</TD><TD><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\" checked><br></td></TR>\n";
 	}
 	?>
 	</table><BR>
