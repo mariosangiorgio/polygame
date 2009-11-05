@@ -9,6 +9,13 @@ require("./businessLogic/databaseLogin.php");
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
+	?>
+	Choose wedges |
+<A HREF="./assignWedges.php">Assign wedges to users</A>
+<BR><BR>
+
+<?php
+	
 	print "Choose wedges you want to be part of this game.<BR>";
 	
 	$query		= "SELECT `Wedge ID`, `Title`

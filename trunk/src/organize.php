@@ -106,9 +106,8 @@ if ($_SESSION['gamePhase'] == 0) {
 else if ($_SESSION['gamePhase'] == 1) {
 ?>
 <A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A><BR>
-<A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR>
 <A HREF=chooseWedges.php>Choose and view <b>wedges</b></A><BR>
-<A HREF=assignWedges.php>Assign wedges to users</A><BR>
+<A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR>
 
 <A HREF=businessLogic/startGame.php>Start phase one NOW!</A><BR><BR><BR>
 
