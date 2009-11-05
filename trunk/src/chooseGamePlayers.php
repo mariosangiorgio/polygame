@@ -26,9 +26,25 @@ if( $_SESSION['loggedIn'] == "yes" and
 	?>
 	<table border=".1.">
 	<?php
+	
+	// Generates the options
+	$options = "<OPTION VALUE=\"0\"> takes part in both phases</option>";
+	$options = $options."<OPTION VALUE=\"1\"> takes part in phase 1 only</option>";
+	$options = $options."<OPTION VALUE=\"2\"> takes part in phase 2 only</option>";
+
+	
+	// Generate table and menus
 	print "<TR><TD></TD><TD>Name</TD><TD>Role</TD><TD>Phase 1, Phase 2 or both</TD></TR>";
 	while( $row	= mysql_fetch_array($data)){
-		print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['username']."\"></TD><TD>".$row['username']."</TD><TD>".$row['role']."</TD><TD><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\" checked><br></td></TR>\n";
+		print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['username']."\"></TD><TD>".$row['username']."</TD>";
+		
+		print "<TD>".$row['role']."</TD><TD>";
+		print "<SELECT NAME=_____type".$row['username'].">";
+		print $options;
+		print "</SELECT>";
+		print "</TD></TR>";
+		
+		//print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['username']."\"></TD><TD>".$row['username']."</TD><TD>".$row['role']."</TD><TD><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\" checked><br></td></TR>\n";
 	}
 	?>
 	</table><BR>

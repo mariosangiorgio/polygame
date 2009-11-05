@@ -13,7 +13,7 @@ View players list |
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
-	$query		= "SELECT `Player ID` FROM `Game Players`
+	$query		= "SELECT `Player ID`, `Associated Phases` FROM `Game Players`
 	              WHERE `Game ID` IN (SELECT `Game ID`
 	                                 FROM `Game`
 	                                 WHERE `Organizer ID` = '".
@@ -28,7 +28,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	<table border=".1.">
 	<?php
 	while( $row	= mysql_fetch_array($data)){
-		print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['Player ID']."\"></TD><TD>".$row['Player ID']."</TD></TR>\n";
+		print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['Player ID']."\"></TD><TD>".$row['Player ID']."</TD><TD>".$row['Associated Phases']."</TD></TR>\n";
 	}
 	?>
 	</table><BR>
