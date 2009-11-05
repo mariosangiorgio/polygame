@@ -52,7 +52,7 @@ $starting1b			= $startingTime +
 $starting1c			= $startingTime +
 					 $game['Length 1a'] * 60 +
 					 $game['Length 1b'] * 60;
-$starting2			= $startingTimePhase2
+$starting2			= $startingTimePhase2;
 $endingPhase1		= $startingTime +
 					 $game['Length 1a'] * 60 +
 					 $game['Length 1b'] * 60 +
@@ -99,9 +99,8 @@ else if ($_SESSION['gamePhase'] == 1) {
 ?>
 <A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A><BR>
 <A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR><BR>
-<A HREF=showWedges.php>View the available wedges</A><BR>
-<A HREF=chooseWedges.php>Choose and edit wedges</A><BR>
-<A HREF=newWedge.php>Add a new wedge</A><BR><BR>
+<A HREF=chooseWedges.php>Choose and view wedges</A><BR>
+<A HREF=assignWedges.php>Assign wedges to users</A><BR>
 
 <A HREF=startGame.php>Start NOW phase one of this game!</A><BR><BR><BR>
 
