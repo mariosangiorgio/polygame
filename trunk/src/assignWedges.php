@@ -46,6 +46,31 @@ require("./businessLogic/databaseLogin.php");
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
+	//Checking if there are the right number of players and wedges
+	$query = "SELECT
+	          (SELECT count(*)
+	           FROM `Game Players`
+	           WHERE `Game ID`= (SELECT `Game ID`
+	                             FROM   `Game`
+	                             WHERE	`Organizer ID` =
+	                                    '".$_SESSION['username']."')
+	           ) as numberOfPlayers,
+	          (SELECT count(*)
+	           FROM `Game Wedges`
+	           WHERE `Game ID`= (SELECT `Game ID`
+	                             FROM   `Game`
+	                             WHERE	`Organizer ID` =
+	                                    '".$_SESSION['username']."')
+	           ) as numberOfWedges";
+	
+	$data	 = mysql_query($query,$connection);
+	$count	 = mysql_fetch_array($data);
+	
+	if($count['numberOfPlayers'] != $count['numberOfWedges']){
+		print "The number of players and the number of wedges should be the same";
+		return;
+	}
+	
 	//Getting the available wedges
 	$query		= "SELECT `Wedge ID`, `Title`
 				   FROM   `Wedges`
