@@ -8,8 +8,9 @@ require("./businessLogic/databaseLogin.php");
 // 2. Game started and not yet finished: phase 1a
 // 3. Game started and not yet finished: phase 1b
 // 4. Game started and not yet finished: phase 1c
-// 5. Game started and not yet finished: phase 2
-// 6. Game finished
+// 5. Game is paused between phase 1 and 2
+// 6. Game started and not yet finished: phase 2
+// 7. Game finished
 
 // Sets default value
 $_SESSION['gamePhase'] = 0;
@@ -25,7 +26,7 @@ if($val != 0) $_SESSION['gamePhase'] = 1;
 else $_SESSION['gamePhase'] = 0;
 
 // Finds out if game has started (doesn't check if it's finished)
-// Phase 2 to 6 are possible in this state
+// Phase 2 to 7 are possible in this state
 $query = "SELECT `Starting time` FROM `Game`
 		  WHERE `Organizer ID` = '".$_SESSION['username']."'
 		  AND `Starting time` < NOW() ;";
@@ -33,49 +34,56 @@ $data	= mysql_query($query,$connection);
 $val	= mysql_fetch_array($data);
 if($val != 0) $_SESSION['gamePhase']=2;
 
-// Finds out if game is finished (phase = 6)
+// Finds out if game is finished (phase = 7)
 $query 	=
 	"SELECT *
 	 FROM  `Game`
 	 WHERE `Organizer ID` = '" .
 	 	    $_SESSION['username'] . "'";
-	 	    //print $query;
 $data	= mysql_query($query,$connection);
 $game	= mysql_fetch_array($data);
 if($game != 0) {
 $now	= time();
 $gameIsStarted		= $game['Started'];
+$phaseTwoIsStarted	= $game['Started Phase 2'];
 $startingTime		= strtotime($game['Starting time']);
 $startingTimePhase2	= strtotime($game['Starting time Phase 2']);
+$starting2			= $startingTimePhase2; //for compatibility
 $starting1b			= $startingTime +
 					 $game['Length 1a'] * 60;
 $starting1c			= $startingTime +
 					 $game['Length 1a'] * 60 +
 					 $game['Length 1b'] * 60;
-$starting2			= $startingTimePhase2;
 $endingPhase1		= $startingTime +
 					 $game['Length 1a'] * 60 +
 					 $game['Length 1b'] * 60 +
 					 $game['Length 1c'] * 60;
 $endingTime		   	= $starting2 +
 					 $game['Length 2'] * 60;
-//if($now < $endingTime) $_SESSION['gamePhase'] = 3;
 
 if($gameIsStarted) {
-	if($now < $endingTime)		$_SESSION['gamePhase'] = 5;
-	if($now < $starting2)		$_SESSION['gamePhase'] = 4;
-	if($now < $starting1c)		$_SESSION['gamePhase'] = 3;
-	if($now < $starting1b)		$_SESSION['gamePhase'] = 2;
-	if($now < $startingTime)	$_SESSION['gamePhase'] = 1;
-	if($now > $endingTime) 		$_SESSION['gamePhase'] = 6;
+	if($phaseTwoIsStarted) {
+		if($now > $endingTime) 		$_SESSION['gamePhase'] = 7; //end
+		else						$_SESSION['gamePhase'] = 6; //phase 2
+	}
+	else {
+		if($now < $starting2)		$_SESSION['gamePhase'] = 5; //break
+		if($now < $endingPhase1)	$_SESSION['gamePhase'] = 4; //1c
+		if($now < $starting1c)		$_SESSION['gamePhase'] = 3; //1b
+		if($now < $starting1b)		$_SESSION['gamePhase'] = 2; //1a
+	}
+}
+else{
+	if($now < $startingTime)	$_SESSION['gamePhase'] = 1; //created
 }
 
-//DEBUG
-//print $gameIsStarted." ";
-//print $now." ";
+ //DEBUG
+//print $gameIsStarted." ".$phaseTwoIsStarted." ";
+//print "Now: ".$now." ";
 //print $startingTime." ";
 //print $starting1b." ";
 //print $starting1c." ";
+//print $endingPhase1." ";
 //print $starting2." ";
 //print $endingTime."      ";
 //print $_SESSION['gamePhase']." ";
@@ -98,17 +106,19 @@ if ($_SESSION['gamePhase'] == 0) {
 else if ($_SESSION['gamePhase'] == 1) {
 ?>
 <A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A><BR>
-<A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR><BR>
+<A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR>
 <A HREF=chooseWedges.php>Choose and view <b>wedges</b></A><BR>
 <A HREF=assignWedges.php>Assign wedges to users</A><BR>
 
-<A HREF=startGame.php>Start NOW phase one of this game!</A><BR><BR><BR>
+<A HREF=businessLogic/startGame.php>Start phase one NOW!</A><BR><BR><BR>
 
 <A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>
 <?php }
 
 // Phase 2
-else if ($_SESSION['gamePhase'] > 1 and $_SESSION['gamePhase'] < 6) {
+else if ($_SESSION['gamePhase'] > 1
+         and $_SESSION['gamePhase'] < 7
+         and $_SESSION['gamePhase'] != 5 ) {
 
 // Auto refresh code (every 30 seconds)
 // <php tag>
@@ -134,9 +144,9 @@ else if($_SESSION['gamePhase'] == 3)
 else if($_SESSION['gamePhase'] == 4)
 {
 	print "We are currently in phase 1c<BR>";
-	$countdown	= $starting2 - $now;
+	$countdown	= $endingPhase1 - $now;
 }
-else if($_SESSION['gamePhase'] == 5)
+else if($_SESSION['gamePhase'] == 6)
 {
 	print "We are currently in phase 2<BR>";
 	$countdown	= $endingTime - $now;
@@ -210,12 +220,20 @@ more minutes
 
 <?php }
 
-else if ($_SESSION['gamePhase'] == 6) {
+else if ($_SESSION['gamePhase'] == 7) {
 ?>
 The game is over! Hope everyone had fun...<BR>
 <A HREF=deleteGame.php>Delete all data linked to this game and possibly start a new game</A><BR>
 <?php
 }
+
+if($_SESSION['gamePhase'] == 5)
+{
+	print "Phase 1 is over, press the button to start phase 2<BR>";
+	print "<A HREF=businessLogic/startPhaseTwo.php>Start phase 2 NOW</A><BR><BR><BR>";
+	print "<A HREF=deleteGame.php>Delete all data linked to this game and possibly start a new game</A><BR>";
+}
+
 ?>
 
 
