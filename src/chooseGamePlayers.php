@@ -4,6 +4,7 @@ require("./businessLogic/databaseLogin.php");
 
 ?>
 
+
 Choose game players |
 <A HREF="./showGamePlayers.php">View players list</A> |
 <A HREF="./newPlayer.php">Add new players</A> |
