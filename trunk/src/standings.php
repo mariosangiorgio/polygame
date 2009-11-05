@@ -8,8 +8,8 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$query = "SELECT `Player`, count(*) as `Votes`
 			  FROM `Votes`
 			  WHERE `Game ID`=(SELECT `Game ID`
-	                 		   FROM   `Game Voters`
-	                 		   WHERE  `Voter ID`=
+	                 		   FROM   `Game`
+	                 		   WHERE  `Organizer ID`=
 	                 		   		  '".$_SESSION['username']."')
 			  GROUP BY `Player`
 			  ORDER BY `Votes` DESC";
