@@ -13,13 +13,13 @@ if( $_SESSION['loggedIn'] == "yes" and
 		 FROM  `Posters`,`Game Players`
 		 WHERE `Posters`.`Wedge ID` = ".$wedgeID." AND 
 		 	   `Posters`.`Game ID`=`Game Players`.`Game ID` AND
-		 	   `Game Players`.`Player`=".$_SESSION['username'];
+		 	   `Game Players`.`Player ID`='".$_SESSION['username']."'";
 		$data	= mysql_query($query,$connection);
 		$poster	= mysql_fetch_array($data);
 		print "<B>PROS</B><BR>";
-		print $poster['PROS']."<BR>";
+		print $poster['Pros']."<BR>";
 		print "<B>CONS</B><BR>";
-		print $poster['CONS']."<BR>";
+		print $poster['Cons']."<BR>";
 		print "<B>NOTES</B><BR>";
 		print $poster['Notes']."<BR>";
 		print "<A HREF=\"./\">BACK</A>";
