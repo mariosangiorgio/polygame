@@ -48,5 +48,6 @@ if( $_SESSION['loggedIn'] == "yes" and
 		mysql_query($query,$connection);
 		$index = $index - 1;
 	}
+	header("Location: ../organize.php");
 }
 ?>

@@ -46,6 +46,12 @@ require("./businessLogic/databaseLogin.php");
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
+	?>
+<A HREF="./chooseWedges.php">Choose wedges</A> | Assign wedges to users
+<BR><BR>
+
+<?php
+	
 	//Checking if there are the right number of players and wedges
 	$query = "SELECT
 	          (SELECT count(*)
