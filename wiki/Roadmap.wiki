@@ -58,3 +58,24 @@ At the beginning we have to provide:
   * ~~He can create the game organizers~~
 
 TODO: Check that all the inputs are validated (For example in newGame)
+ *link per tornare indietro dalla pagina delle soluzioni
+ *aggiungere i dati (section 3) assieme all'introduzione
+ *pro e cons dai poster
+ *20 e' il limite minimo. 20 Deve essere modificabile
+ *Fix char encoding
+ *Pulire bene tutto il database
+ *tornare al menú dopo avere assegnato i wedges agli utenti
+ *eliminare results.php
+ *aggiungere bottone per uscire dalla showWedgeInfromations
+
+ *inserimento dati da file
+ *tempo in meno
+ *mostrare conti se la soluzione e' corretta
+ *Aggiungere tabellina con stato dei wedges per dare all'organizzatore un overview del gioco
+ *Presentazione dei poster
+ *Regole del gioco
+ *presentazione dei wedges
+ *Motivazione del voto
+ *Link alla tabella condivisa dei dati
+ *Sistemare tempo aggiuntivo in fase 2
+ *Tornare alla fase precedente
