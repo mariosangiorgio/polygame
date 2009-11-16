@@ -77,5 +77,6 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * Motivazione del voto
  * Link alla tabella condivisa dei dati
  * ~~Sistemare tempo aggiuntivo in fase 2~~
+ * ~~togliere i millisecondi dal timer~~
  * Tornare alla fase precedente
  * tempo in meno
