@@ -78,7 +78,7 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * Link alla tabella condivisa dei dati
  * ~~Sistemare tempo aggiuntivo in fase 2~~
  * ~~togliere i millisecondi dal timer~~
- * Tornare alla fase precedente
- * tempo in meno
+ * ~~Tornare alla fase precedente~~
+ * ~~tempo in meno >>> andare a fase successiva~~
  * controlli prima di start phase 1: no giocatori, giocatori senza wedge, gruppi senza wedge
  * impedire inserimento lettere in creazione gioco
