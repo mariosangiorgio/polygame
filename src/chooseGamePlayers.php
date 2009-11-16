@@ -28,9 +28,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 	<?php
 	
 	// Generates the options
-	$options = "<OPTION VALUE=\"0\"> takes part in both phases</option>";
-	$options = $options."<OPTION VALUE=\"1\"> takes part in phase 1 only</option>";
-	$options = $options."<OPTION VALUE=\"2\"> takes part in phase 2 only</option>";
+	$options = "<OPTION VALUE=\"0\"> is a single user who takes part in both phases</option>";
+	$options = $options."<OPTION VALUE=\"1\"> is a group who takes part in phase 1 only</option>";
+	$options = $options."<OPTION VALUE=\"2\"> is a group who takes part in phase 2 only</option>";
 
 	
 	// Generate table and menus

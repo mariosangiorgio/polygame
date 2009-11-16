@@ -5,7 +5,7 @@ session_start();
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer" and
 	$_SESSION['gamePhase'] > 1 and 
-	$_SESSION['gamePhase'] < 6 )
+	$_SESSION['gamePhase'] < 7 )
 {
 	require("./databaseLogin.php");
 	
