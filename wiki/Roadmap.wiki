@@ -80,3 +80,5 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * ~~togliere i millisecondi dal timer~~
  * Tornare alla fase precedente
  * tempo in meno
+ * controlli prima di start phase 1: no giocatori, giocatori senza wedge, gruppi senza wedge
+ * impedire inserimento "-" e lettere in creazione gioco
