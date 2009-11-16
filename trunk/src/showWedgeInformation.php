@@ -43,15 +43,15 @@ if( $_SESSION['loggedIn'] == "yes" and
 	
 	$showAllInformationTime =
 		strtotime($game['Starting time']) +
-		$game['Length 1a'] * 60;
+		$game['Length 1a'];
 	
 	$checkSolutionTime =
 		$showAllInformationTime +
-		$game['Length 1b'] * 60;
+		$game['Length 1b'];
 	
 	$endPhase 		   =
 		$checkSolutionTime +
-		$game['Length 1c'] * 60;
+		$game['Length 1c'];
 	
 	$_SESSION['checkSolutionTime']	= $checkSolutionTime;
 	$_SESSION['endPhase'] 			= $endPhase;

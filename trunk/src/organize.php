@@ -27,12 +27,12 @@ else $_SESSION['gamePhase'] = 0;
 
 // Finds out if game has started (doesn't check if it's finished)
 // Phase 2 to 7 are possible in this state
-$query = "SELECT `Starting time` FROM `Game`
+/*$query = "SELECT `Starting time` FROM `Game`
 		  WHERE `Organizer ID` = '".$_SESSION['username']."'
 		  AND `Starting time` < NOW() ;";
 $data	= mysql_query($query,$connection);
 $val	= mysql_fetch_array($data);
-if($val != 0) $_SESSION['gamePhase']=2;
+if($val != 0) $_SESSION['gamePhase']=2;*/
 
 // Finds out if game is finished (phase = 7)
 $query 	=
@@ -50,16 +50,16 @@ $startingTime		= strtotime($game['Starting time']);
 $startingTimePhase2	= strtotime($game['Starting time Phase 2']);
 $starting2			= $startingTimePhase2; //for compatibility
 $starting1b			= $startingTime +
-					 $game['Length 1a'] * 60;
+					 $game['Length 1a'];
 $starting1c			= $startingTime +
-					 $game['Length 1a'] * 60 +
-					 $game['Length 1b'] * 60;
+					 $game['Length 1a'] +
+					 $game['Length 1b'];
 $endingPhase1		= $startingTime +
-					 $game['Length 1a'] * 60 +
-					 $game['Length 1b'] * 60 +
-					 $game['Length 1c'] * 60;
+					 $game['Length 1a'] +
+					 $game['Length 1b'] +
+					 $game['Length 1c'];
 $endingTime		   	= $starting2 +
-					 $game['Length 2'] * 60;
+					 $game['Length 2'];
 
 if($gameIsStarted) {
 	if($phaseTwoIsStarted) {
@@ -109,9 +109,8 @@ else if ($_SESSION['gamePhase'] == 1) {
 <A HREF=chooseWedges.php>Choose and view <b>wedges</b></A><BR>
 <A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR>
 
-<A HREF=businessLogic/startGame.php>Start phase one NOW!</A><BR><BR><BR>
+<A HREF=businessLogic/startGame.php>Start phase one NOW!</A><BR>
 
-<A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>
 <?php }
 
 // Phase 2
@@ -171,32 +170,33 @@ name="d2"></form>
 <!-- 
 
 <?php 
- print "var milisec = 0\n" ;
+ //print "var millisec = 0\n" ;
  print "var seconds = ".$remainingSeconds."\n";
  print "var minutes = ".$remainingMinutes."\n";
  
  ?>
- document.counter.d2.value = minutes+":"+seconds+"."+milisec 
+ document.counter.d2.value = minutes+":"+seconds//+"."+millisec 
 
 function display(){ 
- milisec-=1 
- if (milisec<=-1){ 
-    milisec=9 
+ /*millisec-=1 
+ if (millisec<=-1){ 
+    millisec=9 
     seconds-=1 
- } 
+ } */
+ seconds-=1
  if (seconds <= 0 && minutes > 0) {
  	seconds = 59
  	minutes -= 1
  }  
-    document.counter.d2.value=minutes+":"+seconds+"."+milisec 
-    if (seconds <= 0 && minutes <= 0 && milisec <=0){ 
-    milisec = 0 
+    document.counter.d2.value=minutes+":"+seconds //+"."+millisec 
+    if (seconds <= 0 && minutes <= 0) {    // && millisec <=0){ 
+    //millisec = 0 
     seconds = 0
     minutes = 0
 	location.reload(true)
 	return
  	}
-    setTimeout("display()",100) 
+    setTimeout("display()",1000) 
 } 
 display() 
 --> 
@@ -214,24 +214,51 @@ Give
 </select>
 more minutes
 <INPUT TYPE="submit" VALUE="Set extra time">
-</FORM> 
-<A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>
+</FORM>
 
 <?php }
 
-else if ($_SESSION['gamePhase'] == 7) {
-?>
-The game is over! Hope everyone had fun...<BR>
-<A HREF=deleteGame.php>Delete all data linked to this game and possibly start a new game</A><BR>
-<?php
-}
 
-if($_SESSION['gamePhase'] == 5)
+if($_SESSION['gamePhase'] == 1) //game created
+{
+	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+}
+else if($_SESSION['gamePhase'] == 2) //1a
+{
+	print "<a href=./businessLogic/goToNextPhase.php>Go to next phase (1b)</a><BR>";
+	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+}
+else if($_SESSION['gamePhase'] == 3) //1b
+{
+	print "<a href=./businessLogic/goToPreviousPhase.php>Go to previous phase (1a)</a><BR>";
+	print "<a href=./businessLogic/goToNextPhase.php>Go to next phase (1c)</a><BR>";
+	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+}
+else if($_SESSION['gamePhase'] == 4) //1c
+{
+	print "<a href=./businessLogic/goToPreviousPhase.php>Go to previous phase (1b)</a><BR>";
+	print "<a href=./businessLogic/goToNextPhase.php>Go to break between phase 1 and 2</a><BR>";
+	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+}
+else if($_SESSION['gamePhase'] == 5)
 {
 	print "Phase 1 is over, press the button to start phase 2<BR>";
-	print "<A HREF=businessLogic/startPhaseTwo.php>Start phase 2 NOW</A><BR><BR><BR>";
-	print "<A HREF=deleteGame.php>Delete all data linked to this game and possibly start a new game</A><BR>";
+	print "<A HREF=businessLogic/startPhaseTwo.php>Start phase 2 NOW</A><BR>";
+	print "<a href=./businessLogic/goToPreviousPhase.php>Go back to phase 1c</a><BR>";
+	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
+else if($_SESSION['gamePhase'] == 6)
+{
+	print "<a href=./businessLogic/goToNextPhase.php>End game and view results</a><BR>";	
+	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+}
+else if ($_SESSION['gamePhase'] == 7) {
+	print "The game is over! Hope everyone had fun...<BR>";
+	print "<a href=./businessLogic/goToPreviousPhase.php>Go back to phase 2</a><BR>";
+	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+}
+
+
 
 ?>
 

@@ -28,7 +28,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	{
 		$row = "Length 1c";		
 	}
-	else if ($_SESSION['gamePhase'] == 5)
+	else if ($_SESSION['gamePhase'] == 6)
 	{
 		$row = "Length 2";		
 	}
@@ -46,7 +46,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 }
 
 else{
-	print "To perform this operation you must be logged in as an organizer and have started a game!";
+	print "To perform this operation you must be logged in as an organizer and be in an active game!";
 }
 
 ?>
