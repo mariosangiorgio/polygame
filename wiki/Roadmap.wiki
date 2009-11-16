@@ -69,7 +69,6 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * aggiungere bottone per uscire dalla showWedgeInfromations
 
  * inserimento dati da file
- * tempo in meno
  * mostrare conti se la soluzione e' corretta
  * Aggiungere tabellina con stato dei wedges per dare all'organizzatore un overview del gioco
  * Presentazione dei poster
@@ -77,5 +76,6 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * presentazione dei wedges
  * Motivazione del voto
  * Link alla tabella condivisa dei dati
- * Sistemare tempo aggiuntivo in fase 2
+ * ~~Sistemare tempo aggiuntivo in fase 2~~
  * Tornare alla fase precedente
+ * tempo in meno
