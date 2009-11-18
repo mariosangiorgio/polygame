@@ -82,3 +82,4 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * ~~tempo in meno >>> andare a fase successiva~~
  * controlli prima di start phase 1: no giocatori, giocatori senza wedge, gruppi senza wedge
  * impedire inserimento lettere in creazione gioco
+ * localizzazione wedge
