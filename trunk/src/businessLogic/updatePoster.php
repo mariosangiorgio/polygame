@@ -10,7 +10,7 @@ $query 	=
 	 	`Pros`	= '".mysql_real_escape_string($_POST['Pros'])."',
 	 	`Cons`	= '".mysql_real_escape_string($_POST['Cons'])."', 
 	 	`Notes`	= '".mysql_real_escape_string($_POST['Notes'])."'
-	 WHERE `Player`='".$_SESSION['username']."' and 
+	 WHERE `Player`='".$_SESSION['usernamePhaseOne']."' and 
 	 	   `Game ID`= (SELECT `Game ID`
 	 	   			   FROM `Game Players`
 	 		   		   WHERE `Player ID` = '".$_SESSION['username']."')

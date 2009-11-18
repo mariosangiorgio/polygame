@@ -24,7 +24,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 		 FROM  `Wedges`, `Wedge Players`
 		 WHERE `Wedges`.`Wedge ID` = `Wedge Players`.`Wedge ID`
 		 	   and
-		 	   `User ID` = '".$_SESSION['username']."'";
+		 	   `User ID` = '".$_SESSION['usernamePhaseOne']."'";
 	}
 	$data		= mysql_query($query,$connection);
 	$wedge		= mysql_fetch_array($data);

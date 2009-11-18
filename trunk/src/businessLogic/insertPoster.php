@@ -8,7 +8,7 @@ $query 	=
 	"INSERT INTO `polygame_polygame`.`Posters` (
 	 `Player`, `Game ID`, `Wedge ID`, `Pros`,
 	 `Cons`, `Notes`)
-	 VALUES ( '".$_SESSION['username']."',
+	 VALUES ( '".$_SESSION['usernamePhaseOne']."',
 	 		  (SELECT `Game ID`
 	 		   FROM `Game Players`
 	 		   WHERE `Player ID` =

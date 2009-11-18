@@ -52,7 +52,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 						 (`Game ID`,`Player ID`,`Wedge ID`,`Wedge Count`)
 					VALUES
 						 (".$gameID.",
-						   '".$_SESSION['username']."',
+						   '".$_SESSION['usernamePhaseTwo']."',
 						   ".$wedge.",
 						   ".$wedgesSelected[$wedge].")";
 			$total = $total + $count;
