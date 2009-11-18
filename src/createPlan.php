@@ -55,7 +55,7 @@ require("./businessLogic/databaseLogin.php");
 $query 	=
 	"SELECT *
 	 FROM `Plans`
-	 WHERE `Player ID` = '".$_SESSION['username'] . "'";
+	 WHERE `Player ID` = '".$_SESSION['usernamePhaseTwo'] . "'";
 $data	= mysql_query($query,$connection);
 
 if(mysql_fetch_array($data)){
@@ -70,7 +70,7 @@ if(mysql_fetch_array($data)){
 		 WHERE
 		 	   `Wedges`.`Wedge ID` = `Plans`.`Wedge ID` AND
 			   `Plans`.`Player ID` = '".
-				$_SESSION['username'] . "'";
+				$_SESSION['usernamePhaseTwo'] . "'";
 	$data	= mysql_query($query,$connection);
 	
 	while($wedge = mysql_fetch_array($data)){

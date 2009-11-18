@@ -89,7 +89,7 @@ else{
 //print $_SESSION['gamePhase']." ";
 
 }
-
+c
 // Code that prints links on the page
 ?>
 <b>Organizer</b><BR>

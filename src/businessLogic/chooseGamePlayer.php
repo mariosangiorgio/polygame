@@ -32,30 +32,11 @@ if( $_SESSION['loggedIn'] == "yes" and
 	
 	
 	foreach($_POST['selectedUsers'] as $value)  {
-		$query		= "INSERT INTO `Game Players` (`Game ID`,`Player ID`, `Associated Phases`)
+		$query		= "INSERT INTO `Game Players` (`Game ID`,`Player ID`)
 				   VALUES (
 				   ( SELECT `Game ID` FROM `Game`
 					WHERE `Organizer ID` = '".$_SESSION['username']."' )
-				   , '".mysql_real_escape_string($value)."', ";
-		
-		if($_POST["_____type".$value]=="0")
-		{
-			$query = $query."'allPhases'";
-		}
-		else if($_POST["_____type".$value]=="1")
-		{
-			$query = $query."'phaseOne'";
-		}
-		else if($_POST["_____type".$value]=="2")
-		{
-			$query = $query."'phaseTwo'";
-		}
-		else
-		{
-			//print("Error in user type");
-		}
-		
-		$query = $query.");";
+				   , '".mysql_real_escape_string($value)."');";
 		//print($query);
 		$data		= mysql_query($query,$connection);
 	} 

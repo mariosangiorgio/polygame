@@ -27,18 +27,23 @@ $phaseTwoBeginning = $phaseOneBeginning +
 					 $game['Length 1c'] * 60;
 $phaseTwoEnd	   = $phaseTwoBeginning +
 					 $game['Length 2'] * 60;
-/*
-print $now;
-print "<BR>";
-print $phaseOneBeginning;
-print"<BR>";
-print $phaseTwoBeginning;
-print"<BR>";
-print $phaseTwoEnd;
-print"<BR>";
-*/
 
 if($game['Started']){
+	//Getting the userID for the two phases
+	$query 	= "SELECT `GroupFirstPhase`, `GroupSecondPhase`
+			   FROM   `Groups`
+			   WHERE  `Player` = '".$_SESSION['username']."'";
+	$data	= mysql_query($query,$connection);
+	
+	if( $game	= mysql_fetch_array($data) ){
+		$_SESSION['usernamePhaseOne'] = $_SESSION['GroupFirstPhase'];
+		$_SESSION['usernamePhaseTwo'] = $_SESSION['GroupSecondPhase'];
+	}
+	else{
+		$_SESSION['usernamePhaseOne'] = $_SESSION['username'];
+		$_SESSION['usernamePhaseTwo'] = $_SESSION['username'];
+	}
+
 	if($now >= $phaseOneBeginning and 
 	   $now <  $phaseTwoBeginning){
 	   header("Location: showWedgeInformation.php");
