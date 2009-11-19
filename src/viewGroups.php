@@ -21,7 +21,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 		print "<TR><TD>".$row['GroupName']."</TD><TD>".$row['Phase']."</TD></TR>";
 	}
 	print "</TABLE><BR>";
-	print "<A href=newGroup.php>Add new group</A>";
+	print "<A href=newGroup.php>Add new group</A> <A href=organize.php>Back</A>";
 	}
 
 ?>
