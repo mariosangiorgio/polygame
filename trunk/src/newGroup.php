@@ -1,6 +1,7 @@
 <?php
 session_start();
 ?>
+<A href=viewGroups.php>View existing groups</A> <A href=organize.php>Back</A>
 <FORM METHOD="POST"
 	  ACTION='./businessLogic/insertGroup.php'>
 <TABLE>

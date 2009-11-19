@@ -2,7 +2,8 @@
 session_start();
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
-	$_SESSION['role']     == "player"){
+	( $_SESSION['role']     == "player" or
+	  $_SESSION['role']     == "organizer" )){
 	require("./businessLogic/databaseLogin.php");
 	
 	//Loading wedge information
