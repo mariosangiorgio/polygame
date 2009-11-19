@@ -83,3 +83,4 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * controlli prima di start phase 1: no giocatori, giocatori senza wedge, gruppi senza wedge
  * impedire inserimento lettere in creazione gioco
  * localizzazione wedge
+ * gestire underscore: non accettarlo in input e metterlo nel db
