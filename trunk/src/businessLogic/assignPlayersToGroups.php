@@ -34,7 +34,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	//Inserting data
 	$index = $index - 1;
 	while($index >= 0){
-		if($assignment["ONE".$players[$index]] !='0' &&
+		if($assignment["ONE".$players[$index]] !='0' OR
 		   $assignment["TWO".$players[$index]] !='0'){
 		$query = "INSERT INTO `Groups`
 				  	(`Player`,
