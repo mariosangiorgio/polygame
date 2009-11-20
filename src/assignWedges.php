@@ -59,7 +59,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 			   WHERE	`Organizer ID` =
 			   '".$_SESSION['username']."'
 			 ) as currentGameID,
-			 ( SELECT count(*)
+			 ( SELECT count(DISTINCT `GroupFirstPhase`)
 			 FROM `Groups`
 			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0'
 			 ) as numberOfGroups,
@@ -76,10 +76,11 @@ if( $_SESSION['loggedIn'] == "yes" and
 	
 	$data	 = mysql_query($query,$connection);
 	$count	 = mysql_fetch_array($data);
-	//print $query."<BR>";
-	//print $count['numberOfPlayers']."<BR>";
-	//print $count['numberOfGroups']."<BR>";
-	//print $count['numberOfWedges'];
+	/*print $query."<BR>";
+	print $count['numberOfPlayers']."<BR>";
+	print $count['numberOfGroups']."<BR>";
+	print $count['numberOfWedges'];*/
+	
 	
 	if( ($count['numberOfPlayers'] + $count['numberOfGroups'])!= $count['numberOfWedges']){
 		print "The number of players and the number of wedges should be the same";

@@ -36,9 +36,10 @@ if( $_SESSION['loggedIn'] == "yes" and
 	
 	//Query
 	$query		= 	"UPDATE `Game`
-					SET `".$row."` = `".$row."` + ".$minutes."
+					SET `".$row."` = `".$row."` + 60*".$minutes."
 					WHERE `Organizer ID` = '".$_SESSION['username']."'";
 	$data		= 	mysql_query($query,$connection);
+	//print $query;
 	
 	//Redirect to the main page
 	header("Location: ../organize.php");
