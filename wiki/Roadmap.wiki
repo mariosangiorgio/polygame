@@ -4,7 +4,7 @@
 == PolyGame ==
 At the beginning we have to provide:
   * ~~a login page~~
-  * a common visual element with the indication of the game phase and the time left
+  * ~~a common visual element with the indication of the game phase and the time left~~
 
 == Players ==
 ~~Create the main page for the player~~
