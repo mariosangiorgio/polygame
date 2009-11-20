@@ -10,9 +10,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$presentUse			= mysql_real_escape_string($_POST['presentUse']);
 	$nationalSituation	= mysql_real_escape_string($_POST['nationalSituation']);
 	$emissionReduction	= mysql_real_escape_string($_POST['emissionReduction']);
-	$pro				= mysql_real_escape_string($_POST['pro']);
-	$cons				= mysql_real_escape_string($_POST['cons']);
 	$references			= mysql_real_escape_string($_POST['references']);
+	$solution			= (float) mysql_real_escape_string($_POST['solution']);
+	$tolerance			= (float) mysql_real_escape_string($_POST['tolerance']);
 
 	$query		= "INSERT INTO `Wedges` (
 					`Title`,
@@ -21,9 +21,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 					`Present use`,
 					`National situation`,
 					`Emission reduction`,
-					`Pros`,
-					`Cons`,
-					`References`)
+					`References`,
+					`Solution`,
+					`Error Tolerance`)
 				   VALUES (
 				    '$title',
 				    '$introduction',
@@ -31,9 +31,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 				    '$presentUse',
 				    '$nationalSituation',
 				    '$emissionReduction',
-				    '$pro',
-				    '$cons',
-				    '$references');";
+				    '$references',
+				    $solution,
+				    $tolerance);";
 	mysql_query($query,$connection);
 	//Redirect to the main page
 	header("Location: ../index.php");
