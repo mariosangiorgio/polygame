@@ -10,6 +10,10 @@ if( $_SESSION['loggedIn'] == "yes" and
 		//print $value;
 		$query = "DELETE FROM `Game Players` WHERE `Player ID` = '$value';" ;
 		//print $query;
+		mysql_query($query,$connection);	
+		
+		$query = "DELETE FROM `Groups` WHERE `Player` = '$value';" ;
+		//print $query;
 		mysql_query($query,$connection);		
 	} 
 	

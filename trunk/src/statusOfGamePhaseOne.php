@@ -1,12 +1,19 @@
 <?php
 
-$query1		= "SELECT `Player ID` FROM `Game Players`
-              WHERE `Game ID` IN (SELECT `Game ID`
-                                 FROM `Game`
-                                 WHERE `Organizer ID` = '".
-                                 $_SESSION['username']."' ) ;";
-$players	= mysql_query($query1,$connection);
-//print $query1;
+$query = "SELECT
+			 ( SELECT `Game ID`
+			   FROM   `Game`
+			   WHERE	`Organizer ID` =
+			   '".$_SESSION['username']."'
+			 ) as currentGameID,
+			 SELECT DISTINCT `GroupFirstPhase` as `Player ID`
+			 FROM `Groups`
+			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0'
+			 UNION
+			 SELECT `Player ID`				FROM `Game Players`				WHERE `Game ID` = currentGameID AND `Player ID` NOT IN
+				(SELECT `Player`				 FROM `Groups`				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0')";
+
+
 
 if( mysql_num_rows($players) == 0 ) {
 	print "No players in this game<BR>";

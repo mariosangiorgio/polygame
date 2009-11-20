@@ -2,22 +2,51 @@
 session_start();
 
 if( $_SESSION['loggedIn'] == "yes" and
-	$_SESSION['role'] == "administrator"){
+        $_SESSION['role'] == "administrator"){
 ?>
-<FORM METHOD="POST" ACTION="./businessLogic/insertNewOrganizer.php">
-<TABLE>
-<TR><TD>Name</TD><TD>Password</TD></TR>
-<TR>
-<TD><INPUT TYPE="text" NAME="username"></TD>
-<TD><INPUT TYPE="password" NAME="password"></TD>
-</TR>
-</TABLE>
+<link href="Design.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.style1 {font-size: 9pt}
+body,td,th {
+	font-family: Arial, Helvetica, sans-serif;
+}
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+-->
+</style>
 
-<INPUT TYPE="submit" VALUE="Insert">
+<FORM METHOD="POST" ACTION="./businessLogic/insertNewOrganizer.php">
+  <div align="center" class="Design">
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p><br>
+    </p>
+    <p><img src="poly.png" alt="Poly" width="446" height="146"></p>
+    <TABLE>
+    <TR><TD class="Design">Name</TD>
+    <TD class="Design"><div align="left" class="Design">Password</div></TD>
+    </TR>
+    <TR>
+      <TD class="Design"><INPUT TYPE="text" NAME="username"></TD>
+    <TD class="Design"><INPUT TYPE="password" NAME="password"></TD>
+    </TR>
+  </TABLE>
+    <br>
+    <INPUT TYPE="submit" VALUE="Insert">
+  </div>
 </FORM>
-<?php
+<div align="left">
+  <?php
 }
 else {
-	print "You must log in as an administrator to access this page!";
+        print "You must log in as an administrator to access this page!";
 }
 ?>
+</div>

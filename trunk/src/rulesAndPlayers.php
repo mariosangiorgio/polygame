@@ -10,22 +10,36 @@ if($_SESSION['loggedIn']) {
 print "<b>Players</b>";
 
 
-	$query		= "SELECT `GroupFirstPhase`, `Player` FROM `Groups`
-	              WHERE `GameID` IN (SELECT `Game ID`
-	                                 FROM `Game`
-	                                 WHERE `Organizer ID` = '".
-	                                 $_SESSION['username']
-	                                 ."' ) order by `GroupFirstPhase`;";
-	$data		= mysql_query($query,$connection);
-	//print $query;
-	
-	$query2		= "SELECT `GroupSecondPhase`, `Player` FROM `Groups`
-	              WHERE `GameID` IN (SELECT `Game ID`
-	                                 FROM `Game`
-	                                 WHERE `Organizer ID` = '".
-	                                 $_SESSION['username']
-	                                 ."' ) order by `GroupSecondPhase`;";
-	$data2		= mysql_query($query2,$connection);
+//TODO: fix!!!!!!!!!!!!
+$query = "SELECT
+			 ( SELECT `Game ID`
+			   FROM   `Game`
+			   WHERE	`Organizer ID` =
+			   '".$_SESSION['username']."'
+			 ) as currentGameID,
+			 SELECT DISTINCT `GroupFirstPhase` as `Player ID`
+			 FROM `Groups`
+			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0'
+			 UNION
+			 SELECT `Player ID`				FROM `Game Players`				WHERE `Game ID` = currentGameID AND `Player ID` NOT IN
+				(SELECT `Player`				 FROM `Groups`				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0')";
+
+//	$query		= "SELECT `GroupFirstPhase`, `Player` FROM `Groups`
+//	              WHERE `GameID` IN (SELECT `Game ID`
+//	                                 FROM `Game`
+//	                                 WHERE `Organizer ID` = '".
+//	                                 $_SESSION['username']
+//	                                 ."' ) order by `GroupFirstPhase`;";
+//	$data		= mysql_query($query,$connection);
+//	//print $query;
+//	
+//	$query2		= "SELECT `GroupSecondPhase`, `Player` FROM `Groups`
+//	              WHERE `GameID` IN (SELECT `Game ID`
+//	                                 FROM `Game`
+//	                                 WHERE `Organizer ID` = '".
+//	                                 $_SESSION['username']
+//	                                 ."' ) order by `GroupSecondPhase`;";
+//	$data2		= mysql_query($query2,$connection);
 	//print $query2;
 	
 ?>
@@ -34,7 +48,7 @@ print "<b>Players</b>";
 	<?php
 	if( mysql_num_rows($data)==0 ) print "No players selected";
 	while( $row	= mysql_fetch_array($data)){
-		print "<TR><TD>".$row['GroupFirstPhase']."</TD><TD>".$row['Player']."</TD></TR>\n";
+		print "<TR><TD>".$row['Player ID']."</TD><TD>".$row['Player']."</TD></TR>\n";
 	}
 	?>
 	</table><BR>
