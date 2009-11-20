@@ -58,6 +58,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	
 	//Information always displayed
 	print "<B>".$wedge['Title']."</B><BR>";
+	print "<A HREF=\"./data.pdf\">Show all data</A><BR>";
 	print $wedge['Introduction']."<BR>";
 	if( $now > $showAllInformationTime){
 	    print "<B>HISTORY</B><BR>";

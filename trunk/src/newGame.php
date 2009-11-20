@@ -12,6 +12,8 @@ if( $_SESSION['loggedIn'] == "yes" and
 <TR><TD>Delay (minutes) before poster </TD><TD><INPUT TYPE="text" NAME="length1c" VALUE="60"></TD></TR>
 <TR><TD><b>Second phase</b></TD></TR>
 <TR><TD>Length (minutes) of second phase </TD><TD><INPUT TYPE="text" NAME="length2" VALUE="120"></TD></TR>
+<TR><TD><b>Other values</b></TD></TR>
+<TR><TD>Time (minutes) given for one poster presentation</TD><TD><INPUT TYPE="text" NAME="presentation" VALUE="3"></TD></TR>
 </TABLE>
 
 <INPUT TYPE="submit" VALUE="Insert">

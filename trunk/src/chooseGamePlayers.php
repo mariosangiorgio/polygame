@@ -34,14 +34,14 @@ if( $_SESSION['loggedIn'] == "yes" and
 
 	
 	// Generate table and menus
-	print "<TR><TD></TD><TD>Name</TD><TD>Role</TD><TD>Phase 1, Phase 2 or both</TD></TR>";
+	print "<TR><TD></TD><TD>Name</TD><TD>Role</TD></TR>";
 	while( $row	= mysql_fetch_array($data)){
 		print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['username']."\"></TD><TD>".$row['username']."</TD>";
 		
-		print "<TD>".$row['role']."</TD><TD>";
-		print "<SELECT NAME=_____type".$row['username'].">";
-		print $options;
-		print "</SELECT>";
+		print "<TD>".$row['role'];
+		//print "<SELECT NAME=_____type".$row['username'].">";
+		//print $options;
+		//print "</SELECT>";
 		print "</TD></TR>";
 		
 		//print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['username']."\"></TD><TD>".$row['username']."</TD><TD>".$row['role']."</TD><TD><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\" checked><br></td></TR>\n";
