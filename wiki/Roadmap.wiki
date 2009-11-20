@@ -40,16 +40,16 @@ At the beginning we have to provide:
   * ~~deleting current game actually deletes all possible games and wedges and game players associated to an organizer: database will be cleaner!!~~
   * ~~organizer.php calculates correctly phase of the game~~
   * ~~organizer.php refreshes in order to show a rudimentary timer~~
-  * Select the users and the wedges that are part of the game
+  * ~~Select the users and the wedges that are part of the game~~
   * They eventually may have to locally edit or create a new wedge
   * ~~They may give some extra time to the players~~
-  * They should have an overview of the state of the game, in order to know whats going on
+  * ~~They should have an overview of the state of the game, in order to know whats going on~~
   * ~~They should create, list, delete, choose the voters~~
   * ~~Button "Start phase 1" and "Start phase 2"~~
-  * Handle players associated to different phases
+  * ~~Handle players associated to different phases~~
 
 == Voters ==
-  * They have to look at the different solution in order to find the winner of the game
+  * ~~They have to look at the different solution in order to find the winner of the game~~
   * In this perspective other parameters should be introduced, to make the decision based on something more than the mere CO2 reduction data. Pareto analysis may come in hand at this point
 
 == Administrator ==
@@ -61,20 +61,19 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * link per tornare indietro dalla pagina delle soluzioni
  * aggiungere i dati (section 3) assieme all'introduzione
  * pro e cons dai poster
- * 20 e' il limite minimo. 20 Deve essere modificabile
- * Fix char encoding
- * Pulire bene tutto il database
- * tornare al menú dopo avere assegnato i wedges agli utenti
- * eliminare results.php
- * aggiungere bottone per uscire dalla showWedgeInfromations
-
  * inserimento dati da file
  * mostrare conti se la soluzione e' corretta
+ * ~~20 e' il limite minimo. 20 Deve essere modificabile~~
+ * Fix char encoding
+ * ~~Pulire bene tutto il database~~
+ * tornare al menú dopo avere assegnato i wedges agli utenti
+ * ~~eliminare results.php~~
+ * ~~aggiungere bottone per uscire dalla showWedgeInfromations~~
  * ~~Aggiungere tabellina con stato dei wedges per dare all'organizzatore un overview del gioco~~
- * Presentazione dei poster
+ * ~~Presentazione dei poster~~
  * Regole del gioco
  * presentazione dei wedges
- * Motivazione del voto
+ * ~~Motivazione del voto~~
  * Link alla tabella condivisa dei dati
  * ~~Sistemare tempo aggiuntivo in fase 2~~
  * ~~togliere i millisecondi dal timer~~
