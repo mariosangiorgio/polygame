@@ -56,6 +56,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	}
 	?>
 	</TABLE>
+	<input type="text" name="comment">
 	<input type="submit" id="submitButton">
 	</form>
 <?php

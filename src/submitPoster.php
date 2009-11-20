@@ -1,6 +1,15 @@
 <?php
-
 session_start();
+?>
+<head>
+<style type="text/css" media="all">
+	@import "css/info.css";
+	@import "css/main.css";
+	@import "css/widgEditor.css";
+</style>
+<script type="text/javascript" src="scripts/widgEditor.js"></script>
+</head>
+<?php
 
 $now = time();
 $checkSolutionTime = $_SESSION['checkSolutionTime'];
@@ -19,13 +28,13 @@ if(
 ?>
 <FORM action="./businessLogic/insertPoster.php" method="post">
 	Pros<BR>
-	<TEXTAREA name="Pros" rows="20" cols="80"></TEXTAREA>
+	<TEXTAREA class="widgEditor" name="Pros" rows="20" cols="80"></TEXTAREA>
 	<BR>
 	Cons<BR>
-	<TEXTAREA name="Cons" rows="20" cols="80"></TEXTAREA>
+	<TEXTAREA class="widgEditor" name="Cons" rows="20" cols="80"></TEXTAREA>
 	<BR>
 	Notes<BR>
-	<TEXTAREA name="Notes" rows="20" cols="80"></TEXTAREA>
+	<TEXTAREA class="widgEditor" name="Notes" rows="20" cols="80"></TEXTAREA>
 	<BR>
 	<INPUT type="Submit" value="Submit">
 </FORM>

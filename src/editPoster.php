@@ -1,6 +1,15 @@
 <?php
-
 session_start();
+?>
+<head>
+<style type="text/css" media="all">
+	@import "css/info.css";
+	@import "css/main.css";
+	@import "css/widgEditor.css";
+</style>
+<script type="text/javascript" src="scripts/widgEditor.js"></script>
+</head>
+<?php
 
 $now = time();
 $checkSolutionTime = $_SESSION['checkSolutionTime'];
@@ -33,13 +42,13 @@ $poster = mysql_fetch_array($data);
 ?>
 <FORM action="./businessLogic/updatePoster.php" method="post">
 	Pros<BR>
-	<TEXTAREA name="Pros" rows="20" cols="80"><?php print $poster['Pros']; ?></TEXTAREA>
+	<TEXTAREA class="widgEditor" name="Pros" rows="20" cols="80"><?php print $poster['Pros']; ?></TEXTAREA>
 	<BR>
 	Cons<BR>
-	<TEXTAREA name="Cons" rows="20" cols="80"><?php print $poster['Cons']; ?></TEXTAREA>
+	<TEXTAREA class="widgEditor" name="Cons" rows="20" cols="80"><?php print $poster['Cons']; ?></TEXTAREA>
 	<BR>
 	Notes<BR>
-	<TEXTAREA name="Notes" rows="20" cols="80"><?php print $poster['Notes']; ?></TEXTAREA>
+	<TEXTAREA class="widgEditor" name="Notes" rows="20" cols="80"><?php print $poster['Notes']; ?></TEXTAREA>
 	<BR>
 	<INPUT type="Submit" value="Submit">
 </FORM>

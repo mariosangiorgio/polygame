@@ -14,10 +14,29 @@ if( $_SESSION['loggedIn'] == "yes" and
 			  GROUP BY `Player`
 			  ORDER BY `Votes` DESC";
 	$data = mysql_query($query,$connection);
-	print "<TABLE><TR><TD>Player</TD><TD>Votes</TD></TR>";
+	print "<TABLE><TR><TD>#</TD><TD>Player</TD><TD>Votes</TD></TR>";
+	$count = 1;
 	while($row = mysql_fetch_array($data)){
-		print "<TR><TD>".$row['Player']."</TD><TD>".$row['Votes']."</TD></TR>";
+		if($count==1){
+			$winner = $row['Player'];
+		}
+		print "<TR><TD>".$count."</TD><TD>".$row['Player']."</TD><TD>".$row['Votes']."</TD></TR>";
+		$count = $count + 1;
 	}
 	print "</TABLE>";
+	
+	print "Comments<BR>";
+	$query = "
+		      SELECT `Comment`
+			  FROM `Votes`
+			  WHERE `Game ID`=(SELECT `Game ID`
+	                 		   FROM   `Game`
+	                 		   WHERE  `Organizer ID`=
+	                 		   		  '".$_SESSION['username']."')
+	                 AND `Player` ='".$winner."'";
+	$data = mysql_query($query,$connection);
+	while($row = mysql_fetch_array($data)){
+		print $row['Comment']."<BR>";
+	}
 }
 ?>
