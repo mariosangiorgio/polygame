@@ -27,7 +27,7 @@ if( mysql_num_rows($wedges) == 0 ) {
 		// Extract wedge name
 		$query2		= "SELECT `Title` FROM `Wedges`
               WHERE `Wedge ID` = ".$row['Wedge ID']." ;";
-        print $query2;
+        //print $query2;
 		$qtitle	= mysql_query($query2,$connection);
 		$title	= mysql_fetch_array($qtitle);
 		

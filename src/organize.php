@@ -112,7 +112,9 @@ else if ($_SESSION['gamePhase'] == 1) {
 <A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR>
 
 <A HREF=businessLogic/startGame.php>Start phase one NOW!</A><BR>
-
+<BR><BR><?php
+include("rulesAndPlayers.php");?>
+<BR><BR>
 <?php }
 
 // Phase 2
@@ -183,7 +185,7 @@ function display(){
  	minutes -= 1
  }  
     document.counter.d2.value=minutes+":"+seconds //+"."+millisec 
-    if (seconds <= 0 && minutes <= 0) {    // && millisec <=0){ 
+    if (seconds <= 0 && minutes <= 0) {    // && millisec <=0)
     //millisec = 0 
     seconds = 0
     minutes = 0
@@ -279,6 +281,10 @@ else if($_SESSION['gamePhase'] == 6)
 else if ($_SESSION['gamePhase'] == 7) {
 	print "The game is over! Hope everyone had fun...<BR>";
 	print "<a href=./businessLogic/goToPreviousPhase.php>Go back to phase 2</a><BR>";
+	
+	print "<BR>";
+	include("standings.php");
+	
 	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 
