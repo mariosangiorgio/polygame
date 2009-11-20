@@ -70,7 +70,7 @@ TODO: Check that all the inputs are validated (For example in newGame)
 
  * inserimento dati da file
  * mostrare conti se la soluzione e' corretta
- * Aggiungere tabellina con stato dei wedges per dare all'organizzatore un overview del gioco
+ * ~~Aggiungere tabellina con stato dei wedges per dare all'organizzatore un overview del gioco~~
  * Presentazione dei poster
  * Regole del gioco
  * presentazione dei wedges
