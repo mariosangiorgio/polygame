@@ -22,18 +22,16 @@ session_start();
     			wedgesUsed = wedgesUsed + value;
     		}
     	}
-    	if(wedgesUsed > 20){
+    	if(wedgesUsed < 20){
     		document.getElementById('wedgesQuantity').innerHTML =
     			"<span style='color:red'>Quantity "
-    			+ wedgesUsed + " of 20</span>";
+    			+ wedgesUsed + "</span>";
     	}
     	else{
     		document.getElementById('wedgesQuantity').innerHTML =
-    			"Quantity "+ wedgesUsed + " of 20";
-    		if(wedgesUsed == 20){
-    			document.getElementById('submitButton').disabled=false;
-    			return;
-    		}
+    			"Quantity "+ wedgesUsed;
+    		document.getElementById('submitButton').disabled=false;
+    		return;
     	}
     	document.getElementById('submitButton').disabled=true;
 

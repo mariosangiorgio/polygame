@@ -28,5 +28,7 @@ if(
 	<TEXTAREA name="Notes" rows="20" cols="80"></TEXTAREA>
 	<BR>
 	<INPUT type="Submit" value="Submit">
-	<INPUT type="reset">
 </FORM>
+
+<br><br><a href="showWedgeInformation.php">Back to wedge</a>
+

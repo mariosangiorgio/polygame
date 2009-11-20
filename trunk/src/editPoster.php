@@ -22,7 +22,7 @@ require("./businessLogic/databaseLogin.php");
 $query 	= 
 	"SELECT *
 	 FROM `Posters`
-	 WHERE `Player`='".$_SESSION['usernamePhaseOne']."' and 
+	 WHERE `Player`='".$_SESSION['username']."' and 
 	 	   `Game ID` = (SELECT `Game ID`
 	 	   				FROM `Game Players`
 	 	   				WHERE `Player ID` ='".$_SESSION['username']."')
@@ -42,5 +42,7 @@ $poster = mysql_fetch_array($data);
 	<TEXTAREA name="Notes" rows="20" cols="80"><?php print $poster['Notes']; ?></TEXTAREA>
 	<BR>
 	<INPUT type="Submit" value="Submit">
-	<INPUT type="reset">
 </FORM>
+
+<br><br><a href="showWedgeInformation.php">Back to wedge</a>
+

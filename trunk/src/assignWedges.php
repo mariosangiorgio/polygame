@@ -54,25 +54,34 @@ if( $_SESSION['loggedIn'] == "yes" and
 	
 	//Checking if there are the right number of players and wedges
 	$query = "SELECT
-	          (SELECT count(*)
-	           FROM `Game Players`
-	           WHERE `Game ID`= (SELECT `Game ID`
-	                             FROM   `Game`
-	                             WHERE	`Organizer ID` =
-	                                    '".$_SESSION['username']."')
-	           ) as numberOfPlayers,
+			 ( SELECT `Game ID`
+			   FROM   `Game`
+			   WHERE	`Organizer ID` =
+			   '".$_SESSION['username']."'
+			 ) as currentGameID,
+			 ( SELECT count(*)
+			 FROM `Groups`
+			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0'
+			 ) as numberOfGroups,
+			(SELECT count(*)				FROM `Game Players`				WHERE `Game ID` = currentGameID AND `Player ID` NOT IN
+				(SELECT `Player`				 FROM `Groups`				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0')			
+			) as numberOfPlayers,
 	          (SELECT count(*)
 	           FROM `Game Wedges`
-	           WHERE `Game ID`= (SELECT `Game ID`
-	                             FROM   `Game`
-	                             WHERE	`Organizer ID` =
-	                                    '".$_SESSION['username']."')
+	           WHERE `Game ID` = (SELECT `Game ID`
+	                             FROM    `Game`
+	                             WHERE   `Organizer ID` =
+	                             '".$_SESSION['username']."')
 	           ) as numberOfWedges";
 	
 	$data	 = mysql_query($query,$connection);
 	$count	 = mysql_fetch_array($data);
+	//print $query."<BR>";
+	//print $count['numberOfPlayers']."<BR>";
+	//print $count['numberOfGroups']."<BR>";
+	//print $count['numberOfWedges'];
 	
-	if($count['numberOfPlayers'] != $count['numberOfWedges']){
+	if( ($count['numberOfPlayers'] + $count['numberOfGroups'])!= $count['numberOfWedges']){
 		print "The number of players and the number of wedges should be the same";
 		return;
 	}
@@ -87,6 +96,8 @@ if( $_SESSION['loggedIn'] == "yes" and
 				   							  	 FROM   `Game`
 				   							  	 WHERE	`Organizer ID` = '".$_SESSION['username']."')
 				   							  );";
+				   							  	
+	//print "<BR><BR>".$query;
 	$data	 = mysql_query($query,$connection);
 	$options = "<OPTION VALUE=\"0\">Please choose a wedge";
 	while($wedge = mysql_fetch_array($data)){
@@ -95,13 +106,31 @@ if( $_SESSION['loggedIn'] == "yes" and
 	}
 	
 	//Printing out user and their choice
-	$query		= "SELECT `Player ID`
-				   FROM	  `Game Players`
-				   WHERE  `Game ID` =
-				   			(SELECT `Game ID`
-				   			 FROM   `Game`
-				   			 WHERE	`Organizer ID`
-				   			 			= '".$_SESSION['username']."')";
+	$query		= "SELECT `GroupFirstPhase` as `Player`
+					FROM `Groups`
+					WHERE `GameID` =  ( SELECT `Game ID`
+						   FROM   `Game`
+						   WHERE	`Organizer ID` =
+						   '".$_SESSION['username']."'
+						 )
+					AND `GroupFirstPhase`<>'0'
+					UNION
+					SELECT `Player ID`
+					FROM `Game Players`
+					WHERE `Game ID` =  ( SELECT `Game ID`
+						   FROM   `Game`
+						   WHERE	`Organizer ID` =
+						   '".$_SESSION['username']."' )
+					AND `Player ID` NOT IN
+					(SELECT `Player`
+					 FROM `Groups`
+					 WHERE `GameID` =  ( SELECT `Game ID`
+						   FROM   `Game`
+						   WHERE  `Organizer ID` =
+						   '".$_SESSION['username']."'
+						 )
+					 AND `GroupFirstPhase`<>'0')";
+					 
 	$data	 = mysql_query($query,$connection);
 	?>
 	<FORM METHOD="POST" ACTION='./businessLogic/insertPlayerWedgeAssignment.php'>
@@ -109,9 +138,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 	<?php
 		$counter =0;
 		while($player = mysql_fetch_array($data)){
-			print "<TR><TD>".$player['Player ID']."</TD><TD>";
+			print "<TR><TD>".$player['Player']."</TD><TD>";
 			print "<SELECT onChange=validate(); ID=player".$counter.
-			      " NAME=".$player['Player ID'].">";
+			      " NAME=\"".$player['Player']."\">";
 			print $options;
 			print "</SELECT>";
 			print "</TD></TR>";
@@ -122,6 +151,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	<input type="submit" id="submitButton" disabled="true">
 	<LABEL ID="status">Please select a wedge for every player</LABEL>
 	</form>
+	<BR><A HREF=organize.php>Back to organize page</A><BR>
 	<?php
 }
 

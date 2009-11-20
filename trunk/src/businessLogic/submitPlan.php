@@ -26,8 +26,8 @@ if( $_SESSION['loggedIn'] == "yes" and
 			$total = $total + $count;
 		}
 	}
-	if($total != 20){
-		print "ERROR. You must select 20 wedges!";
+	if($total < 20){
+		print "ERROR. You must select at least 20 wedges!";
 		return;
 	}
 	

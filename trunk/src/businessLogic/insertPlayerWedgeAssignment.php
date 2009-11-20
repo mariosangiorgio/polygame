@@ -7,20 +7,39 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
 	//Getting users
-	$query		= "SELECT `Player ID`
-				   FROM	  `Game Players`
-				   WHERE  `Game ID` =
-				   			(SELECT `Game ID`
-				   			 FROM   `Game`
-				   			 WHERE	`Organizer ID`
-				   			 			= '".$_SESSION['username']."')";
+	$query		= "SELECT `GroupFirstPhase` as `Player`
+					FROM `Groups`
+					WHERE `GameID` =  ( SELECT `Game ID`
+						   FROM   `Game`
+						   WHERE	`Organizer ID` =
+						   '".$_SESSION['username']."'
+						 )
+					AND `GroupFirstPhase`<>'0'
+					UNION
+					SELECT `Player ID`
+					FROM `Game Players`
+					WHERE `Game ID` =  ( SELECT `Game ID`
+						   FROM   `Game`
+						   WHERE	`Organizer ID` =
+						   '".$_SESSION['username']."' )
+					AND `Player ID` NOT IN
+					(SELECT `Player`
+					 FROM `Groups`
+					 WHERE `GameID` =  ( SELECT `Game ID`
+						   FROM   `Game`
+						   WHERE  `Organizer ID` =
+						   '".$_SESSION['username']."'
+						 )
+					 AND `GroupFirstPhase`<>'0')";
+					 
 	$data	 = mysql_query($query,$connection);
 	$index = 0;
 	while($player = mysql_fetch_array($data)){
-		if($_POST[$player['Player ID']]){
-			$assignment[$player['Player ID']] =
-					$_POST[$player['Player ID']];
-			$players[$index] = $player['Player ID'];
+		$underMnk = str_replace(' ', '_', $player['Player']);
+		if($_POST[$underMnk]){
+			$assignment[$underMnk] =
+					$_POST[$underMnk];
+			$players[$index] = $underMnk;
 			$index = $index + 1;
 		}
 		else{
