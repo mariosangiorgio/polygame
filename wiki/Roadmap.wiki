@@ -63,8 +63,9 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * pro e cons dai poster
  * inserimento dati da file
  * mostrare conti se la soluzione e' corretta
+ * localizzazione wedge
  * ~~20 e' il limite minimo. 20 Deve essere modificabile~~
- * Fix char encoding
+ * ~~Fix char encoding~~
  * ~~Pulire bene tutto il database~~
  * tornare al menú dopo avere assegnato i wedges agli utenti
  * ~~eliminare results.php~~
@@ -81,6 +82,5 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * ~~tempo in meno >>> andare a fase successiva~~
  * controlli prima di start phase 1: no giocatori, giocatori senza wedge, gruppi senza wedge
  * impedire inserimento lettere in creazione gioco
- * localizzazione wedge
  * gestire underscore: non accettarlo in input e metterlo nel db
- * formattazione testo nel poster
+ * ~~formattazione testo nel poster~~
