@@ -81,6 +81,6 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * ~~Tornare alla fase precedente~~
  * ~~tempo in meno >>> andare a fase successiva~~
  * ~~controlli prima di start phase 1: no giocatori, giocatori senza wedge, gruppi senza wedge~~ >>> viene mostrato un resoconto dello stato delle selezioni
- * impedire inserimento lettere in creazione gioco
+ * ~~impedire inserimento lettere in creazione gioco~~
  * gestire underscore: non accettarlo in input e metterlo nel db
  * ~~formattazione testo nel poster~~
