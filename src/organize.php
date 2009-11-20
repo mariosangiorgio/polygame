@@ -89,7 +89,7 @@ else{
 //print $_SESSION['gamePhase']." ";
 
 }
-c
+
 // Code that prints links on the page
 ?>
 <b>Organizer</b><BR>
@@ -106,6 +106,8 @@ if ($_SESSION['gamePhase'] == 0) {
 else if ($_SESSION['gamePhase'] == 1) {
 ?>
 <A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A><BR>
+<A HREF=newGroup.php>Create <b>groups</b></A><BR>
+<A HREF=assignPlayers.php>Assign <b>players to groups</b></A><BR>
 <A HREF=chooseWedges.php>Choose and view <b>wedges</b></A><BR>
 <A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR>
 
@@ -118,14 +120,6 @@ else if ($_SESSION['gamePhase'] > 1
          and $_SESSION['gamePhase'] < 7
          and $_SESSION['gamePhase'] != 5 ) {
 
-// Auto refresh code (every 30 seconds)
-// <php tag>
-//<script type="text/javascript">
-//function reFresh() {
-//	location.reload(true)
-//}
-//window.setInterval("reFresh()", 10000);
-//</script>
 
 $now	= time();
 $countdown = 0;
@@ -218,7 +212,37 @@ more minutes
 
 <?php }
 
+// Reload script: used to update game status
+if($_SESSION['gamePhase'] >= 2 &&
+   $_SESSION['gamePhase'] <= 6 )
+   {
+   	
+   if($_SESSION['gamePhase'] != 5 ) {	
+// Auto refresh code (every 30 seconds)
+?>
+<script type="text/javascript">
+function reFresh() {
+	location.reload(true)
+}
+window.setInterval("reFresh()", 45000);
+</script>
+<?php }
 
+	// Game status
+	if( $_SESSION['gamePhase'] == 6 ) {
+		include("statusOfGamePhaseTwo.php");
+	}
+	else if( $_SESSION['gamePhase'] == 5 )
+	{
+		include("posterPresentation.php");
+	}
+	else {
+		include("statusOfGamePhaseOne.php");
+	}
+
+  }
+
+// Menu entries
 if($_SESSION['gamePhase'] == 1) //game created
 {
 	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";

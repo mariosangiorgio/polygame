@@ -8,18 +8,40 @@ $query 	=
 	 FROM	`Wedges`, `Wedge Players`
 	 WHERE	`Wedges`.`Wedge ID` = `Wedge Players`.`Wedge ID` and
 	 		`Wedge Players`.`User ID`
-	 			= '".$_SESSION['username']."'";
+	 			= '".$_SESSION['usernamePhaseOne']."'";
 $data	= mysql_query($query,$connection);
 $values = mysql_fetch_array($data);
 
 $solution = (float) $_POST['solution'];
+//print $values['Solution'];
 if(abs($solution - $values['Solution'])/$values['Solution']
 		<
    $values['Error Tolerance']/100){
-   print "Your solution is correct";
+   print "Your solution is correct and it has successfully been submitted!";
+   $correctness = "1";	
 }
 else{
    print "There is something wrong";
+   $correctness = "0";
 }
-print "<BR><A HREF=\"./\">BACK</A>";
+
+	// Put this in database
+	$queryDel = "DELETE FROM `Results`
+				WHERE `Player ID` ='".$_SESSION['username']."' 
+				AND `Game ID` IN
+			    ( SELECT `Game ID` FROM `Game Players` WHERE `Player ID` =
+			    '". $_SESSION['username']."' );" ;
+	$data	= mysql_query($queryDel,$connection);
+	//print $queryDel;
+	
+	mysql_query($query,$connection);	
+	
+	$queryIns = "INSERT INTO `Results` (`Player ID`, `Result`, `Is correct`, `Game ID`)
+				VALUES ('".$_SESSION['username']."', '".$solution."', '".$correctness."', 
+			    ( SELECT `Game ID` FROM `Game Players` WHERE `Player ID` =
+			    '". $_SESSION['username']."' ));" ;
+	$data	= mysql_query($queryIns,$connection);
+	//print $queryIns;
+
+print "<BR><A HREF=\"./\">Back to Wedge</A>";
 ?>

@@ -2,14 +2,13 @@
 session_start();
 ?>
 <HEAD>
-<meta http-equiv="Refresh" content="60; url=showWedgeInformation.php">
+<meta http-equiv="Refresh" content="60; url=play.php">
 </HEAD>
 <?php
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role']     == "player"){
 	require("./businessLogic/databaseLogin.php");
-	
 	//Loading wedge information
 	if($_GET['wedgeID']){
 		$wedgeID	= intval($_GET['wedgeID']);

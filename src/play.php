@@ -18,7 +18,10 @@ $query 	=
 $data	= mysql_query($query,$connection);
 $game	= mysql_fetch_array($data);
 
-$now	= time();
+$now = time();
+
+$phaseOneStarted = $game['Started'];
+$phaseTwoStarted = $game['Started Phase 2'];
 
 $phaseOneBeginning = strtotime($game['Starting time']);
 $phaseTwoBeginning = $phaseOneBeginning +
@@ -36,26 +39,34 @@ if($game['Started']){
 	$data	= mysql_query($query,$connection);
 	
 	if( $game	= mysql_fetch_array($data) ){
-		$_SESSION['usernamePhaseOne'] = $_SESSION['GroupFirstPhase'];
-		$_SESSION['usernamePhaseTwo'] = $_SESSION['GroupSecondPhase'];
+		if($game['GroupFirstPhase'] != '0'){
+			$_SESSION['usernamePhaseOne'] = $game['GroupFirstPhase'];
+		}
+		else{
+			$_SESSION['usernamePhaseOne'] = $_SESSION['username'];			
+		}
+		if($game['GroupSecondPhase'] != '0'){
+			$_SESSION['usernamePhaseTwo'] = $game['GroupSecondPhase'];
+		}
+		else{
+			$_SESSION['usernamePhaseTwo'] = $_SESSION['username'];			
+		}
+
 	}
 	else{
 		$_SESSION['usernamePhaseOne'] = $_SESSION['username'];
 		$_SESSION['usernamePhaseTwo'] = $_SESSION['username'];
 	}
-
-	if($now >= $phaseOneBeginning and 
-	   $now <  $phaseTwoBeginning){
-	   header("Location: showWedgeInformation.php");
-	   return;
+	if($phaseOneStarted and !$phaseTwoStarted and
+		$now <  $phaseTwoBeginning){
+		header("Location: showWedgeInformation.php");
+		return;
 	}
-	if($now >= $phaseTwoBeginning and
-	   $now <= $phaseTwoEnd){
-	   header("Location: createPlan.php");
-	   return;
+	if($phaseOneStarted and $phaseTwoStarted and
+	   $now <  $phaseTwoEnd){
+		header("Location: createPlan.php");
+		return;
 	}
-	header("Location: results.php");
-	return;
 }
 else{
 	header("Location: waitPage.php");
