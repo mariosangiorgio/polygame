@@ -20,10 +20,6 @@ if( $_SESSION['loggedIn'] == "yes" and
 			  '". $_SESSION['username']."' );" ;
 	mysql_query($query,$connection);
 	
-	// Delete from Game
-	$query = "DELETE FROM `Game` WHERE `Organizer ID` = '".$_SESSION['username']."';" ;
-	mysql_query($query,$connection);
-	
 	// Delete Results
 	$query = "DELETE FROM `Results` WHERE `Game ID` IN
 			  ( SELECT `Game ID` FROM `Game` WHERE `Organizer ID` =
@@ -65,6 +61,16 @@ if( $_SESSION['loggedIn'] == "yes" and
 			  '". $_SESSION['username']."' );" ;
 	mysql_query($query,$connection);	
 	//print $query;		
+	
+	// Delete Voters
+	$query = "DELETE FROM `Game Voters` WHERE `Game ID` IN
+			  ( SELECT `Game ID` FROM `Game` WHERE `Organizer ID` =
+			  '". $_SESSION['username']."' );" ;
+	mysql_query($query,$connection);
+	
+	// Delete from Game
+	$query = "DELETE FROM `Game` WHERE `Organizer ID` = '".$_SESSION['username']."';" ;
+	mysql_query($query,$connection);
 		
 	header("Location: organize.php");
 }
