@@ -16,8 +16,8 @@ At the beginning we have to provide:
   * ~~Make the form to input the data (And decide where it is better to store it)~~
   * ~~Allow users to insert just one poster.~~ ~~If there is already a poster the player is asked to edit it and not to insert a new one.~~
   * ~~Users can check their solution with the values provided by the instructors.~~
-  * Add a link to come back to the wedge information page
-  * When the phase one is over the system should take the users to the phase two
+  * ~~Add a link to come back to the wedge information page~~
+  * ~~When the phase one is over the system should take the users to the phase two~~
 
 === Plan-Selection Phase ===
   * ~~We have to provide an interactive table to each team, in order to make them able to create their own mix. The table should show what is going on when a wedge is selected.~~
@@ -83,3 +83,4 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * impedire inserimento lettere in creazione gioco
  * localizzazione wedge
  * gestire underscore: non accettarlo in input e metterlo nel db
+ * formattazione testo nel poster
