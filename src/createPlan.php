@@ -4,8 +4,32 @@ session_start();
 
 ?>
 
-<body>
-    <script type="application/javascript">
+<link href="Design.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+	color: #CCCCCC;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style><body class="Design">
+      <div align="center">
+        <script type="application/javascript">
     
     function validate(currentWedge) {
     	var wedgesUsed = 0;
@@ -37,12 +61,15 @@ session_start();
 
     }
     
-    </script>
-    <noscript>
-      <p>Your browser either does not support JavaScript, or you have JavaScript turned off.</p>
+      </script>
+          <noscript>
+        </noscript>
+      </div>
+    <noscript><p align="center">Your browser either does not support JavaScript, or you have JavaScript turned off.</p>
     </noscript>
     
-<?php
+      <div align="center">
+        <?php
 
 //Here I fill all the lines with the wedge data
 require("./businessLogic/databaseLogin.php");
@@ -133,4 +160,5 @@ else{
 	print "<BR><BR><A HREF=\"Logout.php\">Logout</A>";
 }
 ?>
+      </div>
 </body>
