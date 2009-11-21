@@ -35,7 +35,30 @@ session_start();
     			    	="Assignement is ok";
     }
 </script>
-<noscript>
+<link href="Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+	color: #CCCCCC;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style><noscript>
 <p>Your browser either does not support JavaScript, or you have JavaScript turned off.</p>
 </noscript>
     
@@ -47,10 +70,16 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
 	?>
-<A HREF="./chooseWedges.php">Choose wedges</A> | Assign wedges to users
-<BR><BR>
 
-<?php
+    <div align="center" class="Design">
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p><A HREF="./chooseWedges.php">Choose wedges</A> | Assign wedges to users
+        <BR>
+        <BR>
+
+        <?php
 	
 	//Checking if there are the right number of players and wedges
 	$query = "SELECT
@@ -63,8 +92,12 @@ if( $_SESSION['loggedIn'] == "yes" and
 			 FROM `Groups`
 			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0'
 			 ) as numberOfGroups,
-			(SELECT count(*)				FROM `Game Players`				WHERE `Game ID` = currentGameID AND `Player ID` NOT IN
-				(SELECT `Player`				 FROM `Groups`				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0')			
+			(SELECT count(*)
+				FROM `Game Players`
+				WHERE `Game ID` = currentGameID AND `Player ID` NOT IN
+				(SELECT `Player`
+				 FROM `Groups`
+				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0')			
 			) as numberOfPlayers,
 	          (SELECT count(*)
 	           FROM `Game Wedges`
@@ -134,9 +167,12 @@ if( $_SESSION['loggedIn'] == "yes" and
 					 
 	$data	 = mysql_query($query,$connection);
 	?>
-	<FORM METHOD="POST" ACTION='./businessLogic/insertPlayerWedgeAssignment.php'>
-	<TABLE ID="UsersWedges">
-	<?php
+	        </p>
+    </div>
+    <FORM METHOD="POST" ACTION='./businessLogic/insertPlayerWedgeAssignment.php'>
+	<div align="center">
+	  <TABLE ID="UsersWedges">
+	    <?php
 		$counter =0;
 		while($player = mysql_fetch_array($data)){
 			print "<TR><TD>".$player['Player']."</TD><TD>";
@@ -148,12 +184,19 @@ if( $_SESSION['loggedIn'] == "yes" and
 			$counter = $counter + 1;
 		}
 	?>
-	</TABLE>
-	<input type="submit" id="submitButton" disabled="true">
-	<LABEL ID="status">Please select a wedge for every player</LABEL>
+      </TABLE>
+	  <span class="Design">
+	  <input type="submit" id="submitButton" disabled="true">
+	  </span></div>
+	<span class="Design">
+	<LABEL ID="status">	</LABEL>
+	</span>
+	<LABEL ID="status"><div align="center" class="Design">Please select a wedge for every player</div>
+	</LABEL>
 	</form>
-	<BR><A HREF=organize.php>Back to organize page</A><BR>
-	<?php
+	<div align="center" class="Design"><BR>
+    <A HREF=organize.php>Back to organize page</A><BR>
+    <?php
 }
 
 else{
@@ -162,3 +205,4 @@ else{
 
 
 ?>
+    </div>
