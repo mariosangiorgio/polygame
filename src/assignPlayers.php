@@ -1,3 +1,14 @@
+<link href="Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+-->
+</style><p align="center" class="Design">&nbsp;</p>
 <?php
 session_start();
 //Security check
