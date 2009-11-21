@@ -18,25 +18,62 @@ return ( (k > 47 && k < 58) || k==8 || k==9 || (k > 36 && k < 41) || k==17);
 
 
 <FORM METHOD="POST" ACTION="./businessLogic/insertNewGame.php" id="new" action="javascript://">
-<TABLE>
-<TR><TD><b>First phase</b></TD></TR>
-<TR><TD>Delay (minutes) before complete information </TD><TD><INPUT TYPE="text" NAME="length1a" VALUE="20" onkeypress="return alpha(event)"></TD></TR>
-<TR><TD>Delay (minutes) before submit solution </TD><TD><INPUT TYPE="text" NAME="length1b" VALUE="20" onkeypress="return alpha(event)"></TD></TR>
-<TR><TD>Delay (minutes) before poster </TD><TD><INPUT TYPE="text" NAME="length1c" VALUE="60" onkeypress="return alpha(event)"></TD></TR>
-<TR><TD><b>Second phase</b></TD></TR>
-<TR><TD>Length (minutes) of second phase </TD><TD><INPUT TYPE="text" NAME="length2" VALUE="120" onkeypress="return alpha(event)"></TD></TR>
-<TR><TD><b>Other values</b></TD></TR>
-<TR><TD>Time (minutes) given for one poster presentation</TD><TD><INPUT TYPE="text" NAME="presentation" VALUE="3" onkeypress="return alpha(event)"></TD></TR>
-</TABLE>
-
-<INPUT TYPE="submit" VALUE="Insert">
-</FORM><BR>
-<A HREF=organize.php>Cancel</A><BR>
-
-<?php
+<link href="Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+	color: #CCCCCC;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style>
+<div align="center" class="Design">
+  <p>&nbsp;  </p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="431" height="144">
+      <param name="movie" value="Flash/logostops.swf" />
+      <param name="quality" value="high" />
+      <embed src="Flash/logostops.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="431" height="144"></embed>
+    </object>
+  </p>
+  <p>&nbsp;</p>
+  <TABLE>
+    <TR><TD><b>First phase</b></TD></TR>
+    <TR><TD>Delay (minutes) before complete information </TD><TD><INPUT TYPE="text" NAME="length1a" VALUE="20" onkeypress="return alpha(event)"></TD></TR>
+    <TR><TD>Delay (minutes) before submit solution </TD><TD><INPUT TYPE="text" NAME="length1b" VALUE="20" onkeypress="return alpha(event)"></TD></TR>
+    <TR><TD>Delay (minutes) before poster </TD><TD><INPUT TYPE="text" NAME="length1c" VALUE="60" onkeypress="return alpha(event)"></TD></TR>
+    <TR><TD><b>Second phase</b></TD></TR>
+    <TR><TD>Length (minutes) of second phase </TD><TD><INPUT TYPE="text" NAME="length2" VALUE="120" onkeypress="return alpha(event)"></TD></TR>
+    <TR><TD><b>Other values</b></TD></TR>
+    <TR><TD>Time (minutes) given for one poster presentation</TD><TD><INPUT TYPE="text" NAME="presentation" VALUE="3" onkeypress="return alpha(event)"></TD></TR>
+  </TABLE>
+  <INPUT TYPE="submit" VALUE="Insert">
+  </FORM>
+  <BR>
+  <A HREF=organize.php>Cancel</A><BR>
+  
+  <?php
 }
 else {
 	print "You must log in as an organizer to access this page!<BR>";
 	print "<A HREF=login.php>Login</A><BR>";
 }
 ?>
+</div>
