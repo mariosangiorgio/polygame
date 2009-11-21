@@ -91,31 +91,70 @@ else{
 }
 
 // Code that prints links on the page
-?>
-<b>Organizer</b><BR>
+?><style type="text/css">
+<!--
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+	color: #CCCCCC;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style>
+<link href="Design.css" rel="stylesheet" type="text/css" />
 
-<?php
+<div align="center" class="Design">
+  <p>&nbsp;  </p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
+      <param name="movie" value="Flash/logostops.swf" />
+      <param name="quality" value="high" />
+      <embed src="Flash/logostops.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
+    </object>
+  </p>
+  <p>&nbsp;</p>
+  <p><b>Organizer</b><BR>
+    
+    <?php
 
 // Phase 0
 if ($_SESSION['gamePhase'] == 0) {
 ?>
-<A HREF=newGame.php>Create a new game</A><BR>
-<?php }
+      <A HREF=newGame.php>Create a new game</A><BR>
+    <?php }
 
 // Phase 1
 else if ($_SESSION['gamePhase'] == 1) {
 ?>
-<A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A><BR>
-<A HREF=newGroup.php>Create <b>groups</b></A><BR>
-<A HREF=assignPlayers.php>Assign <b>players to groups</b></A><BR>
-<A HREF=chooseWedges.php>Choose and view <b>wedges</b></A><BR>
-<A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR>
-
-<A HREF=businessLogic/startGame.php>Start phase one NOW!</A><BR>
-<BR><BR><?php
+      <A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A><BR>
+      <A HREF=newGroup.php>Create <b>groups</b></A><BR>
+      <A HREF=assignPlayers.php>Assign <b>players to groups</b></A><BR>
+      <A HREF=chooseWedges.php>Choose and view <b>wedges</b></A><BR>
+      <A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR>
+    
+      <A HREF=businessLogic/startGame.php>Start phase one NOW!</A><BR>
+    <BR>
+    <BR>
+    <?php
 include("rulesAndPlayers.php");?>
-<BR><BR>
-<?php }
+    <BR>
+    <BR>
+    <?php }
 
 // Phase 2
 else if ($_SESSION['gamePhase'] > 1
@@ -158,11 +197,19 @@ print $starting2."<BR>";*/
 
 
 ?>
+    </p>
+</div>
+<form name="counter">
+  <div align="center">
+    <span class="Design">
+    <input type="text" size="8" 
+name="d2">
+    </span></div>
+</form> 
 
-<form name="counter"><input type="text" size="8" 
-name="d2"></form> 
-
-<script> 
+<div align="center">
+  <span class="Design">
+  <script> 
 <!-- 
 
 <?php 
@@ -196,23 +243,25 @@ function display(){
 } 
 display() 
 --> 
-</script> 
-
-
+  </script> 
+  </span></div>
 <FORM METHOD="POST" ACTION="./businessLogic/giveMoreTime.php">
-Give 
-<select name="minutes">
-  <option VALUE=2> 2 </option>
-  <option VALUE=5> 5 </option>
-  <option VALUE=10> 10 </option>
-  <option VALUE=15> 15 </option>
-  <option VALUE=30> 30 </option>
-</select>
+  <div align="center" class="Design">Give 
+      <select name="minutes">
+        <option VALUE=2> 2 </option>
+        <option VALUE=5> 5 </option>
+        <option VALUE=10> 10 </option>
+        <option VALUE=15> 15 </option>
+        <option VALUE=30> 30 </option>
+        </select>
 more minutes
 <INPUT TYPE="submit" VALUE="Set extra time">
+  </div>
 </FORM>
 
-<?php }
+<div align="center">
+  <span class="Design">
+  <?php }
 
 // Reload script: used to update game status
 if($_SESSION['gamePhase'] >= 2 &&
@@ -222,13 +271,13 @@ if($_SESSION['gamePhase'] >= 2 &&
    if($_SESSION['gamePhase'] != 5 ) {	
 // Auto refresh code (every 30 seconds)
 ?>
-<script type="text/javascript">
+  <script type="text/javascript">
 function reFresh() {
 	location.reload(true)
 }
 window.setInterval("reFresh()", 45000);
-</script>
-<?php }
+  </script>
+  <?php }
 
 	// Game status
 	if( $_SESSION['gamePhase'] == 6 ) {
@@ -291,6 +340,9 @@ else if ($_SESSION['gamePhase'] == 7) {
 
 
 ?>
-
-
-<A HREF=logout.php>Logout</A><BR>
+  
+  
+  <A HREF=logout.php>Logout</A><BR>
+  </span></div>
+<div align="center" class="Design"></div>
+<div align="center" class="Design"></div>
