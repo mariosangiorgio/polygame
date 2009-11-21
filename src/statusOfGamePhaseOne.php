@@ -30,10 +30,47 @@ if( mysql_num_rows($players) == 0 ) {
 }
 
 ?>
+<link href="Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+a:hover {
+	color: #CCCCCC;
+	text-decoration: none;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style>
 
-<table border=".1.">
-<TR><TD>User</TD><TD>Solution</TD><TD>Poster</TD></TR>
-<?php
+<div align="center" class="Design">
+  <p>&nbsp;  </p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>
+    <span class="Design">
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
+      <param name="movie" value="Flash/logostops.swf" />
+      <param name="quality" value="high" />
+      <embed src="Flash/logostops.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
+    </object>
+    </span></p>
+  <p>&nbsp;</p>
+  <table border=".1.">
+    <TR><TD class="Design">User</TD><TD class="Design">Solution</TD><TD class="Design">Poster</TD></TR>
+    <?php
 	while( $row	= mysql_fetch_array($players))
 	{
 		// Username column
@@ -89,5 +126,8 @@ if( mysql_num_rows($players) == 0 ) {
 		
 	}
 ?>
-</table><BR>
-<A HREF=organize.php>Update table</A><BR>
+  </table>
+  <span class="Design"><BR>
+  <A HREF=organize.php>Update table</A><BR>
+  </span></div>
+<div align="center" class="Design"></div>
