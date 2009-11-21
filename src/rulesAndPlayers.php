@@ -9,20 +9,49 @@ Plans are voted and the best one is then shown at the end of the game.
 if($_SESSION['loggedIn']) {
 print "<b>Players</b>";
 
-
-//TODO: fix!!!!!!!!!!!!
-$query = "SELECT
-			 ( SELECT `Game ID`
-			   FROM   `Game`
-			   WHERE	`Organizer ID` =
-			   '".$_SESSION['username']."'
-			 ) as currentGameID,
-			 SELECT DISTINCT `GroupFirstPhase` as `Player ID`
-			 FROM `Groups`
-			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0'
-			 UNION
-			 SELECT `Player ID`				FROM `Game Players`				WHERE `Game ID` = currentGameID AND `Player ID` NOT IN
-				(SELECT `Player`				 FROM `Groups`				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0')";
+$query = "SELECT `GroupFirstPhase` as `Group`, `Player`
+			FROM `Groups`
+			WHERE `GameID` =  ( SELECT `Game ID`
+			                    FROM   `Game`
+					    WHERE  `Organizer ID` = '".$_SESSION['username']."' )
+			      AND `GroupFirstPhase`<>'0'
+			UNION
+			SELECT '-' as `Group`, `Player ID` as `Player`
+			FROM `Game Players`
+			WHERE `Game ID` =  ( SELECT `Game ID`
+					     FROM   `Game`
+			                     WHERE	`Organizer ID` ='".$_SESSION['username']."' )
+			      AND `Player ID` NOT IN (SELECT `Player`
+						      FROM `Groups`
+						      WHERE `GameID` =  ( SELECT `Game ID`
+									   FROM   `Game`
+									   WHERE  `Organizer ID` =
+									   '".$_SESSION['username']."'
+									 )
+								 AND `GroupFirstPhase`<>'0')";
+$data		= mysql_query($query,$connection);
+								 
+$query2 = "SELECT `GroupSecondPhase` as `Group`, `Player`
+			FROM `Groups`
+			WHERE `GameID` =  ( SELECT `Game ID`
+			                    FROM   `Game`
+					    WHERE  `Organizer ID` = '".$_SESSION['username']."' )
+			      AND `GroupSecondPhase`<>'0'
+			UNION
+			SELECT '-' as `Group`, `Player ID` as `Player`
+			FROM `Game Players`
+			WHERE `Game ID` =  ( SELECT `Game ID`
+					     FROM   `Game`
+			                     WHERE	`Organizer ID` ='".$_SESSION['username']."' )
+			      AND `Player ID` NOT IN (SELECT `Player`
+						      FROM `Groups`
+						      WHERE `GameID` =  ( SELECT `Game ID`
+									   FROM   `Game`
+									   WHERE  `Organizer ID` =
+									   '".$_SESSION['username']."'
+									 )
+					 AND `GroupSecondPhase`<>'0')";
+$data2		= mysql_query($query2,$connection);					 
 
 //	$query		= "SELECT `GroupFirstPhase`, `Player` FROM `Groups`
 //	              WHERE `GameID` IN (SELECT `Game ID`
@@ -48,7 +77,7 @@ $query = "SELECT
 	<?php
 	if( mysql_num_rows($data)==0 ) print "No players selected";
 	while( $row	= mysql_fetch_array($data)){
-		print "<TR><TD>".$row['Player ID']."</TD><TD>".$row['Player']."</TD></TR>\n";
+		print "<TR><TD>".$row['Group']."</TD><TD>".$row['Player']."</TD></TR>\n";
 	}
 	?>
 	</table><BR>
@@ -58,7 +87,7 @@ $query = "SELECT
 	<?php
 	if( mysql_num_rows($data2)==0 ) print "No players selected";
 	while( $row	= mysql_fetch_array($data2)){
-		print "<TR><TD>".$row['GroupSecondPhase']."</TD><TD>".$row['Player']."</TD></TR>\n";
+		print "<TR><TD>".$row['Group']."</TD><TD>".$row['Player']."</TD></TR>\n";
 	}
 	?>
 	</table><BR>
@@ -99,7 +128,7 @@ else
 		$title	= mysql_fetch_array($qtitle);
 		
 		// Link column
-		print "<TD><A HREF=\"./showPoster.php?wedgeID=".$row['Wedge ID']."\">".$title['Title']."</A></TD>";	
+		print "<TD>".$title['Title']."</TD>";	
 		
 	}
 ?>
