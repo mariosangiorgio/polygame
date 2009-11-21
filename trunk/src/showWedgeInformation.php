@@ -3,7 +3,41 @@ session_start();
 ?>
 <HEAD>
 <meta http-equiv="Refresh" content="60; url=play.php">
-</HEAD>
+<link href="Design.css" rel="stylesheet" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><style type="text/css">
+<!--
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+	color: #CCCCCC;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style></HEAD>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">
+  <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
+    <param name="movie" value="Flash/dots.swf" />
+    <param name="quality" value="high" />
+    <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
+  </object>
+</p>
+<p align="center" class="Design">&nbsp;</p>
 <?php
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
