@@ -1,3 +1,28 @@
+<link href="Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+a:hover {
+	color: #CCCCCC;
+	text-decoration: none;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style>
+<p align="center" class="Design">&nbsp;</p>
 <?php
 session_start();
 
