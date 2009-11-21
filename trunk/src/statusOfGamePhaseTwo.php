@@ -1,10 +1,27 @@
 <?php
 
-$query1		= "SELECT `Player ID` FROM `Game Players`
-              WHERE `Game ID` IN (SELECT `Game ID`
-                                 FROM `Game`
-                                 WHERE `Organizer ID` = '".
-                                 $_SESSION['username']."' ) ;";
+$query1		= "SELECT DISTINCT `GroupSecondPhase` as `Group`
+			FROM `Groups`
+			WHERE `GameID` =  ( SELECT `Game ID`
+			                    FROM   `Game`
+					    WHERE  `Organizer ID` = '".$_SESSION['username']."' )
+			      AND `GroupSecondPhase`<>'0'
+			UNION
+			SELECT `Player ID` as `Group`
+			FROM `Game Players`
+			WHERE `Game ID` =  ( SELECT `Game ID`
+					     FROM   `Game`
+			                     WHERE	`Organizer ID` ='".$_SESSION['username']."' )
+		      AND `Player ID` NOT IN (SELECT `Player`
+		      FROM `Groups`
+		      WHERE `GameID` =  ( SELECT `Game ID`
+					   FROM   `Game`
+					   WHERE  `Organizer ID` =
+					   '".$_SESSION['username']."'
+					 )
+				 AND `GroupSecondPhase`<>'0')
+			ORDER BY `Group`";
+			
 $players	= mysql_query($query1,$connection);
 //print $query1;
 
@@ -21,11 +38,11 @@ if( mysql_num_rows($players) == 0 ) {
 	while( $row	= mysql_fetch_array($players))
 	{
 		// Username column
-		print "<TR><TD>".$row['Player ID']."</TD>";
+		print "<TR><TD>".$row['Group']."</TD>";
 		
 		// Result column
 		$query2		= "SELECT `Wedge count` FROM `Plans`
-		               WHERE `Player ID` = '".$row['Player ID']."';";
+		               WHERE `Player ID` = '".$row['Group']."';";
         //print $query2;
 		$result 	= mysql_query($query2,$connection);
 		if(mysql_num_rows($result) == 0)

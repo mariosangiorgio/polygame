@@ -1,19 +1,28 @@
 <?php
 
-$query = "SELECT
-			 ( SELECT `Game ID`
-			   FROM   `Game`
-			   WHERE	`Organizer ID` =
-			   '".$_SESSION['username']."'
-			 ) as currentGameID,
-			 SELECT DISTINCT `GroupFirstPhase` as `Player ID`
-			 FROM `Groups`
-			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0'
-			 UNION
-			 SELECT `Player ID`				FROM `Game Players`				WHERE `Game ID` = currentGameID AND `Player ID` NOT IN
-				(SELECT `Player`				 FROM `Groups`				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0')";
+$query = "SELECT DISTINCT `GroupFirstPhase` as `Group`
+			FROM `Groups`
+			WHERE `GameID` =  ( SELECT `Game ID`
+			                    FROM   `Game`
+					    WHERE  `Organizer ID` = '".$_SESSION['username']."' )
+			      AND `GroupFirstPhase`<>'0'
+			UNION
+			SELECT `Player ID` as `Group`
+			FROM `Game Players`
+			WHERE `Game ID` =  ( SELECT `Game ID`
+					     FROM   `Game`
+			                     WHERE	`Organizer ID` ='".$_SESSION['username']."' )
+		      AND `Player ID` NOT IN (SELECT `Player`
+		      FROM `Groups`
+		      WHERE `GameID` =  ( SELECT `Game ID`
+					   FROM   `Game`
+					   WHERE  `Organizer ID` =
+					   '".$_SESSION['username']."'
+					 )
+				 AND `GroupFirstPhase`<>'0')
+			ORDER BY `Group`";
 
-
+$players		= mysql_query($query,$connection);
 
 if( mysql_num_rows($players) == 0 ) {
 	print "No players in this game<BR>";
@@ -28,11 +37,11 @@ if( mysql_num_rows($players) == 0 ) {
 	while( $row	= mysql_fetch_array($players))
 	{
 		// Username column
-		print "<TR><TD>".$row['Player ID']."</TD>";
+		print "<TR><TD>".$row['Group']."</TD>";
 		
 		// Result column
 		$query2		= "SELECT `Is correct`, `Result` FROM `Results`
-		               WHERE `Player ID` = '".$row['Player ID']."';";
+		               WHERE `ID` = '".$row['Group']."';";
         //print $query2;
 		$result 	= mysql_query($query2,$connection);
 		if(mysql_num_rows($result) == 0)
@@ -55,7 +64,7 @@ if( mysql_num_rows($players) == 0 ) {
 		
 		// Poster column
 		$query2		= "SELECT `Pros`, `Cons` FROM `Posters`
-		               WHERE `Player` = '".$row['Player ID']."'
+		               WHERE `Player` = '".$row['Group']."'
 		               AND `Game ID` IN (SELECT `Game ID`
                                  FROM `Game`
                                  WHERE `Organizer ID` = '".
@@ -72,7 +81,7 @@ if( mysql_num_rows($players) == 0 ) {
 			$stringPoster = "Submitted";
 			if( $rowpos['Pros']=="" or $rowpos['Cons']=="" )
 			{
-				$stringPoster = "Not final submission";
+				$stringPoster = "Incomplete submission";
 			}
 		}
 

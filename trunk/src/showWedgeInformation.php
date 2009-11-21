@@ -90,6 +90,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 		   }
 		}
 	}
+	print "<BR><A HREF=\"./Logout.php\">Logout</A><BR>";
 }
 else
 {

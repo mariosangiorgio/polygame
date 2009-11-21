@@ -34,6 +34,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 				    '$references',
 				    $solution,
 				    $tolerance);";
+	//print $query;
 	mysql_query($query,$connection);
 	//Redirect to the main page
 	header("Location: ../index.php");

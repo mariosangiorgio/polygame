@@ -129,6 +129,8 @@ else{
 	print "</TABLE>
 	       <input type=\"submit\" id=\"submitButton\" disabled=\"true\">
 	       </form>";
+	       
+	print "<BR><BR><A HREF=\"Logout.php\">Logout</A>";
 }
 ?>
 </body>

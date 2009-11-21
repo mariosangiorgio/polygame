@@ -27,7 +27,7 @@ else{
 
 	// Put this in database
 	$queryDel = "DELETE FROM `Results`
-				WHERE `Player ID` ='".$_SESSION['usernamePhaseOne']."' 
+				WHERE `ID` ='".$_SESSION['usernamePhaseOne']."' 
 				AND `Game ID` IN
 			    ( SELECT `Game ID` FROM `Game Players` WHERE `Player ID` =
 			    '". $_SESSION['username']."' );" ;
@@ -36,10 +36,11 @@ else{
 	
 	mysql_query($query,$connection);	
 	
-	$queryIns = "INSERT INTO `Results` (`Player ID`, `Result`, `Is correct`, `Game ID`)
+	$queryIns = "INSERT INTO `Results` (`ID`, `Result`, `Is correct`, `Game ID`)
 				VALUES ('".$_SESSION['usernamePhaseOne']."', '".$solution."', '".$correctness."', 
 			    ( SELECT `Game ID` FROM `Game Players` WHERE `Player ID` =
 			    '". $_SESSION['username']."' ));" ;
+    //print $queryIns;
 	$data	= mysql_query($queryIns,$connection);
 	//print $queryIns;
 
