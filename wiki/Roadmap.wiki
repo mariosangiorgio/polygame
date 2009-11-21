@@ -58,10 +58,9 @@ At the beginning we have to provide:
   * ~~He can create the game organizers~~
 
 TODO: Check that all the inputs are validated (For example in newGame)
- * link per tornare indietro dalla pagina delle soluzioni
- * aggiungere i dati (section 3) assieme all'introduzione
- * pro e cons dai poster
- * inserimento dati da file
+ * ~~link per tornare indietro dalla pagina delle soluzioni~~
+ * ~~aggiungere i dati (section 3) assieme all'introduzione~~
+ * ~~pro e cons dai poster~~
  * mostrare conti se la soluzione e' corretta
  * localizzazione wedge
  * ~~20 e' il limite minimo. 20 Deve essere modificabile~~
@@ -86,13 +85,14 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * ~~formattazione testo nel poster~~
 
 NEW
- * togliere SQL da insert new wedge
+ * inserimento dati da file
+ * ~~togliere SQL da insert new wedge~~
  * help
- * modificare user in groups in organize.php
+ * ~~modificare user in groups in organize.php~~
  * aggiornare valore del plan con update tabe: we decided for/because
  * mettere a disposizione presentazione per voter
- * figure nel poster
- * ordine operazioni organizer
+ * ~~figure nel poster~~ >>> provide link!
+ * ~~ordine operazioni organizer~~
  * remove wedge and groups
  * remove user from group when it is removed from the game 
- * aggiungere giocatori singoli alla ricapitolazione
+ * ~~aggiungere giocatori singoli alla ricapitolazione~~
