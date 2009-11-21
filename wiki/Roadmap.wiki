@@ -84,3 +84,15 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * ~~impedire inserimento lettere in creazione gioco~~
  * gestire underscore: non accettarlo in input e metterlo nel db
  * ~~formattazione testo nel poster~~
+
+NEW
+* togliere SQL da insert new wedge
+* help
+* modificare user in groups in organize.php
+* aggiornare valore del plan con update tabe: we decided for/because
+* mettere a disposizione presentazione per voter
+* figure nel poster
+* ordine operazioni organizer
+* remove wedge and groups
+* remove user from group when it is removed from the game
+* aggiungere giocatori singoli alla ricapitolazione
