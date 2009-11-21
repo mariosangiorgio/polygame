@@ -1,9 +1,46 @@
-<BR><b>Rules</b><BR>
+<style type="text/css">
+<!--
+body {
+	margin-left: 10px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+a:hover {
+	color: #CCCCCC;
+	text-decoration: none;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
+}
+-->
+</style>
+<link href="Design.css" rel="stylesheet" type="text/css" />
+<div align="center" class="Design">
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">
+    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
+      <param name="movie" value="Flash/logostops.swf" />
+      <param name="quality" value="high" />
+      <embed src="Flash/logostops.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
+    </object>
+  </p>
+  <p class="Design"><BR>
+    <b>Rules</b><BR>
 Polygame is a game which...<BR>
 It is made of two phases: in the first one every user is assigned to a certain wedge which must be studied in order to summarize in a poster all the pros and cons.<br>
 In the second one the users have to come up with the best mix of wedges to reduce CO2.<br>
 Plans are voted and the best one is then shown at the end of the game.
-<BR><BR>
+<BR>
+<BR>
 
 <?php
 if($_SESSION['loggedIn']) {
@@ -72,26 +109,32 @@ $data2		= mysql_query($query2,$connection);
 	//print $query2;
 	
 ?>
-	<BR><b>Phase 1</b><BR>
-	<table border=".1.">
+	<BR>
+	<b>Phase 1</b><BR>
+  
+  </p>
+  <table border=".1.">
 	<?php
 	if( mysql_num_rows($data)==0 ) print "No players selected";
 	while( $row	= mysql_fetch_array($data)){
 		print "<TR><TD>".$row['Group']."</TD><TD>".$row['Player']."</TD></TR>\n";
 	}
 	?>
-	</table><BR>
+	</table>
+  <BR>
 	
-	<b>Phase 2</b><BR>
-	<table border=".1.">
+  <b>Phase 2</b><BR>
+  
+  <table border=".1.">
 	<?php
 	if( mysql_num_rows($data2)==0 ) print "No players selected";
 	while( $row	= mysql_fetch_array($data2)){
 		print "<TR><TD>".$row['Group']."</TD><TD>".$row['Player']."</TD></TR>\n";
 	}
 	?>
-	</table><BR>
-<?php
+	</table>
+  <BR>
+  <?php
 }
 	print "<BR><BR><b>Wedges association</b><BR>";
 	
@@ -111,10 +154,10 @@ else
 {
 
 ?>
-
-<table border=".1.">
-<TR><TD>Team name</TD><TD>Assigned wedge</TD></TR>
-<?php
+  
+  <table border=".1.">
+  <TR><TD class="Design">Team name</TD><TD class="Design">Assigned wedge</TD></TR>
+  <?php
 	while( $row	= mysql_fetch_array($wedges))
 	{
 		// Username column
@@ -132,8 +175,11 @@ else
 		
 	}
 ?>
-</table><BR>
+    </table>
+  <BR>
 
-<?php
+  <?php
 }
 	?>
+  </div>
+<div align="center" class="Design"></div>
