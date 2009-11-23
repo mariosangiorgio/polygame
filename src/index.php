@@ -1,8 +1,6 @@
 <?php
 session_start();
-<link href="Design.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-<!--
+
 body {
 	margin-left: 10px;
 	margin-top: 10px;
@@ -37,7 +35,9 @@ a:active {
   <p>&nbsp;</p>
 </div>
 <div align="center" class="Design"></div>
-
+<link href="Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
 
 //Redirect to the right page, depending on the status of the logged user
 // There are four possible roles:
