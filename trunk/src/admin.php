@@ -38,5 +38,5 @@ body {
     <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
   </object>
 </p>
-<p align="center"><A HREF=newOrganizer.php class="three"><span class="style1">ADDNEWORGANISER </A><A HREF=showWedges.php class="three"><span class="style2">VIEWAVAILABLEWEDGES </span></A><A HREF=newWedge.php class="three"><span class="style3">ADDNEWWEDGE</A> <A HREF=logout.php class="three">LOGOUT</A><BR>
+<p align="center"><A HREF=newOrganizer.php class="three"><span class="style1">ADDNEWORGANISER </A><A HREF=showWedges.php class="three"><span class="style2">VIEWAVAILABLEWEDGES </span></A><A HREF=newWedge.php class="three">ADDNEWWEDGE</A> <A HREF=logout.php class="three">LOGOUT</A><BR>
 </p>
