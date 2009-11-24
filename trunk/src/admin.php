@@ -4,8 +4,9 @@ a {text-decoration:none}
 <link href="Design.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 p
-{ 
-word-spacing:30px;
+{
+	word-spacing:30px;
+	background-image: url(images/background.png);
 }
 a.three:link {color: #000000}
 a.three:visited {color: #0000ff}
@@ -13,7 +14,6 @@ a.three:hover {background: #CCCCCC}
 <!--
 body,td,th {
 	font-family: Arial, Helvetica, sans-serif;
-	color: #000000;
 }
 body {
 	background-image: url();
@@ -27,7 +27,8 @@ body {
 .style3 {color: #DD137B}
 .style4 {color: #007CC3}
 -->
-</style><body class="Design"><p align="center">&nbsp;
+</style>
+<body class="Design"><p align="center">&nbsp;
   </p>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
