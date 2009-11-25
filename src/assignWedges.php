@@ -37,13 +37,17 @@ session_start();
 </script>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -52,13 +56,23 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
 }
 -->
-</style><noscript>
+</style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<link href="css/Mainstyle.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {
+	font-size: 16pt;
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+}
+-->
+</style>
+<noscript>
 <p>Your browser either does not support JavaScript, or you have JavaScript turned off.</p>
 </noscript>
     
@@ -75,7 +89,7 @@ if( $_SESSION['loggedIn'] == "yes" and
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
-      <p><A HREF="./chooseWedges.php">Choose wedges</A> | Assign wedges to users
+      <p><A HREF="./chooseWedges.php" class="three style1">Choose wedges</A> | Assign wedges to users
         <BR>
         <BR>
 
@@ -167,7 +181,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 					 
 	$data	 = mysql_query($query,$connection);
 	?>
-	        </p>
+      </p>
     </div>
     <FORM METHOD="POST" ACTION='./businessLogic/insertPlayerWedgeAssignment.php'>
 	<div align="center">
@@ -194,9 +208,10 @@ if( $_SESSION['loggedIn'] == "yes" and
 	<LABEL ID="status"><div align="center" class="Design">Please select a wedge for every player</div>
 	</LABEL>
 	</form>
-	<div align="center" class="Design"><BR>
-    <A HREF=organize.php>Back to organize page</A><BR>
-    <?php
+	<div align="center" class="Design">
+	  <p><BR>
+	        <A HREF=organize.php class="three style1">Back to organize page</A><BR>
+        <?php
 }
 
 else{
@@ -205,4 +220,12 @@ else{
 
 
 ?>
-    </div>
+      </p>
+	  <p>&nbsp;</p>
+	  <p>&nbsp;</p>
+	  <p>&nbsp;  </p>
+	</div>
+    <p align="center" class="Design">&nbsp;</p>
+    <p align="center" class="Design">&nbsp;</p>
+    <p align="center" class="Design">&nbsp;</p>
+    
