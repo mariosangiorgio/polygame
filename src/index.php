@@ -22,6 +22,6 @@ if( $_SESSION['loggedIn'] == "yes"){
 }
 //if not logged redirect to login page
 else{
-	header( 'Location: login.php' ) ;
+	header( 'Location: intro.php' ) ;
 }
 ?>
