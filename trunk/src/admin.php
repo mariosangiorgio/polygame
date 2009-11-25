@@ -1,35 +1,61 @@
 <style type="text/css">
+
 a {text-decoration:none}
 </style>
 <link href="Design.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 p
 {
-	word-spacing:30px;
 	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
-a.three:link {color: #000000}
-a.three:visited {color: #0000ff}
-a.three:hover {background: #CCCCCC}
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
 <!--
 body,td,th {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "HelveticaNeueLT Pro 45 Lt", "HelveticaNeueLT Pro 35 Th";
 }
 body {
 	background-image: url();
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-	background-repeat: no-repeat;
 }
-.style2 {color: #84C225}
-.style3 {color: #DD137B}
-.style4 {color: #007CC3}
+	font-family: "HelveticaNeueLT Pro 45 Lt", "HelveticaNeueLT Pro 35 Th";
+}
+.style23 {font-size: 18px}
+.style24 {
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: capitalize;
+	color: #000000;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url(images/background.png);
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16;
+}
+.style26 {font-style: normal; line-height: normal; font-weight: normal; font-variant: normal; text-transform: capitalize; color: #000000; background-repeat: no-repeat; background-position: center center; background-image: url(images/background.png); font-family: "HelveticaNeue LT 107 XBlkCn"; font-size: 24px; }
+.style27 {font-size: 24px}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+}
+a:active {
+	text-decoration: none;
+}
 -->
 </style>
-<body class="Design"><p align="center">&nbsp;
-  </p>
+<link href="Mainstyle.css" rel="stylesheet" type="text/css">
+<link href="css/Mainstyle.css" rel="stylesheet" type="text/css">
+<body class="Design">
+<p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
 <p align="center">
@@ -39,5 +65,14 @@ body {
     <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
   </object>
 </p>
-<p align="center"><A HREF=newOrganizer.php class="three"><span class="style1">ADDNEWORGANISER </A><A HREF=showWedges.php class="three"><span class="style2">VIEWAVAILABLEWEDGES </span></A><A HREF=newWedge.php class="three">ADDNEWWEDGE</A> <A HREF=logout.php class="three">LOGOUT</A><BR>
-</p>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+<p align="center"><span class="Mainstyle"><A HREF=newOrganizer.php class="three">ADD ORGANIZER<br>
+</A><A HREF=showWedges.php class="three">VIEW WEDGES<br>
+</A><A HREF=newWedge.php class="three style8 ">ADD WEDGE<br>
+</A><A HREF=logout.php class="three">LOGOUT</A></span></p>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+<p align="center"><span class="style21"><span class="style7"><BR>
+</span></span></p>
