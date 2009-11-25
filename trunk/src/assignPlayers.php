@@ -1,15 +1,27 @@
-<link href="Design.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
+<link href="Design.css" rel="stylesheet" type="text/css" /><style type="text/css">
 <!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
 }
 -->
-</style><p align="center" class="Design">&nbsp;</p>
-<?php
+</style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<p align="center" class="Design">&nbsp;</p>
+<div align="center" class="Design">
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">
+    <?php
 session_start();
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
@@ -78,3 +90,9 @@ else{
 	print "To perform this operation you must be logged in as an organizer!";
 }
 ?>
+        </p>
+</div>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
