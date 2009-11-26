@@ -1,0 +1,114 @@
+\section{Users roles}
+\label{users}
+
+Polygame features different kind of users:
+\begin{itemize}
+	\item Players
+	\item Organizers
+	\item Voters
+	\item Administrators
+\end{itemize}
+
+One by one these roles will be explained in the next sections.
+An overview of the roles is shown in the following figures
+  \begin{figure}[htbp]
+    \begin{center}
+      \includegraphics[width=8cm]{../img/Users.pdf}
+	%\psfig{file=./pictures/logopm.jpg,width=3.5cm}
+    \end{center}
+  \end{figure}
+
+\subsection{Players}
+\subsubsection{Introduction}
+Those are the most common users and are the ones who take part in the game. They are provided a password by the organizers.		
+Players can take take part in the game in two different ways:
+\begin{itemize}
+	\item singularly
+	\item as part of a group
+\end{itemize}
+There are two different kinds of groups:
+\begin{itemize}
+	\item groups of first phase or groups that study a certain wedge
+	\item groups of second phase or groups that have to come up with a plan (choice of wedges)
+\end{itemize}
+Our web application provides maximum flexibility because a user can be part of different groups in different phases and, if needed, can compete singularly in either one or both phases.
+
+\subsubsection{Game}
+After logging in the user is presented with a web page which is dynamically updated depending on the current phase of the game.\\
+Those are the possible phases:
+\begin{description}
+	\item[Game not started] The user is presented with the rules of the game and is warned that the game is not started
+	\item[Phase 1 just started] This phase is also known as \emph{Wedge introduction} and it is the first phase of the game. The player is presented the topic regarding the wedge and she or he is given time to find a little more information about the topic.
+	\item[Phase 1b] This phase is also known as \emph{Wedge description} and it is the phase in which the player is provided with a more detailed description of the wedge. He or she is also provided with a PDF describing... is given the chance to enter the solution.   %%TODO
+	\item[Last part of phase 1] This phase is also known as \emph{Wedge solution} and in this phase the player (either singularly or as part of a group) is given the chance to enter the poster which should summarize what has been found out about the given wedge. In particular he is given the chance to:
+	\begin{itemize}
+\item enter pros
+\item enter cons
+\item enter additional notes
+\end{itemize}
+
+	\item[Poster presentation] When phase one is over, a break is started. In such break every group (or every single user) is given a few minutes to present the developed poster in front of the audience. For more information about this, please see the Organizer section.\\
+	\item[Wedge plan creation] When the organizer decides so, the second phase is started and, if needed, the player is assigned to a new group. In this second phase the player (possibly along with her or his group-mates) has to come up with a plan to reduce emissions. In this phase users have access to the posters previously created. To summarize the reasons why players have chosen a certain mix of wedges, they are asked to create a short presentation of their solution: such short presentation will be available to voter and will certainly play an important role in their decision.
+	\item[Plan choice] After the game is ended, voters can pick their favorite plan. The plan which gets the more votes is then shown on the organizer page.
+\end{description}
+
+\subsection{Organizers}
+\subsubsection{Introduction}
+Organizers are a central kind of user: they are the creators of the game and for this reason they have a wide range of possible choices.\\
+As for the players, organizers are presented with a webpage whose content changes depending on the current phase of the game.\\
+Administrators provide the password to the organizers.
+
+\subsubsection{Game}
+The organizer has total control over the game: after creating the game she or he can start the game, can move between game phases, assign more time to a phase and end the game prematurely.
+\begin{description}
+	\item[Game not created] After logging in the organize is given the possibility of creating a new game. At this point she or he can choose several parameters of the game:
+		\begin{itemize}
+		\item Timeout before more information about the wedge are provided
+		\item Timeout before the players are allowed to submit a solution
+		\item Timeout before the players are allowed to submit (and, in case, edit) the poster
+		\item Time provided for one poster presentation
+		\item Time provided to come up with a plan to reduce emissions
+		\end{itemize}
+	\item[Game not started] In this phase the organizer can:
+		\begin{itemize}
+		\item Handle players creating new players, deleting them from the database, adding them to the game and removing them from the game
+		\item Handle wedges, choosing the ones which should be part of the game. Please note that the number of wedges should equal the sum of the number of groups of the first phase and singular users
+		\item Handle groups, creating new groups and selecting which players should be part of which group
+		\item Handle voters creating new voters, deleting them from the database, adding them to the game and removing them from the game
+		\end{itemize}	
+	\item[Phase 1] After clicking on start game the organizer is always shown controls to move between phases and to assign more time to a phase. Moreover during all phase one the organizer is shown a table which summarize the status of the game. In particular the table shows, for every single player and every group:
+	\begin{itemize}
+		\item the name of the single player or the name of the group
+		\item whether they have attempted to provide a solution
+		\item whether the solution is correct
+		\item whether a poster has been submitted
+		\item whether the submitted poster is complete (it has both pros and cons)
+	\end{itemize}
+	\item[Poster presentation] The poster presentation phase is entirely handled by the organizer, who chooses the poster to shown and provides a fixed amount of time to the presenter. After the time is elapsed the poster disappears.
+	\item[Phase 2] After clicking on ``start phase two'' the organizer is shown a table which summarize the status of the current phase. In particular the table shows, for every single player and every group:
+	\begin{itemize}
+		\item the name of the single player or the name of the group
+		\item whether they submitted a plan or not
+	\end{itemize}
+	\item[Voting phase] After the game ends and after all voters have provided their opinion, the organizer page shows the results of the voting. Please note that only the winner is shown and that comments provided to that plan are also shown.
+\end{description}
+    \begin{figure}[htbp]
+    \begin{center}
+      \includegraphics[width=12cm]{../img/Organizer.pdf}
+	%\psfig{file=./pictures/logopm.jpg,width=3.5cm}
+    \end{center}
+  \end{figure}
+
+\subsection{Voters}
+Voters are created and chosen by the organizer. Their role starts right after the game ends. They are provided with a page that summarizes all the plans. For each plan a link to the presentation (which summarizes the reasons that have led to a certain plan) is also provided. Voters can pick the one and only one plan they prefer. Additionally they can also provide a comment.\\
+Only comments referring to the winner plan will be shown (on the organizer's page).
+
+\subsection{Administrators}
+Administrators do not handle game as the organizers but they handle some core functionalities of the game. They can:
+	\begin{itemize}
+		\item create new organizers providing a username and a password
+		\item create new wedges, which might be later selected by organizers for their own game
+	\end{itemize}
+  
+  
+  
