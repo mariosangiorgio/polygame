@@ -4,14 +4,14 @@ In this section there is the description of the technology used to create the we
 \subsection{Philosophy}
 Before talking about the technology itself it is important to say something about the philosophy of openness we wanted to maintain within the project, using an open platform to build upon our system and releasing the code with an open source license and the documentation under creative commons.
 
-Since the \emph{polygame} project will be used for educational purposes this attitude is really important: the use of an open platform means that everyone interested in the project can use it without having to face license issues or having to pay something. This openness will definitely help the \emph{polygame} to spread and therefore it is more likely that the activity is going to reach its goal to improve the environmental awareness among the population.
+Since the \emph{polygame} project will be used for educational purposes this attitude is really important: the use of an open platform means that everyone interested in the project can use it without having to face license issues or having to pay something. This openness will definitely help the \emph{polygame} to spread and therefore it is more likely that the activity is going to reach the goal of improving the environmental awareness among the population.
 
 \subsection{Architecture}
 The \emph{polygame} is developed as a web application, because of the huge advantages offered by this kind of architecture for such a project.
 
 The advantage that comes out first is that a web application does not require other than a browser in order to run, so the users are free to choose to work on the platform that best fits their needs.
 
-Another advantage is that there is no need to install anything on the players machines, avoiding the troubles related to the development, the installation and the maintaining of the system.
+Another advantage is that there is no need to install anything on the players machines, avoiding the troubles related to the development, the installation and the maintaineance of the system.
 Moreover it is not likely that the same class plays the \emph{polygame} for a lot of times, so having a solution that requires the less effort possible it is really a good idea.
 
 Last but not least, a web application allows users to play at their own place, making it possible to evolve the \emph{polygame} from a in-class-activity to a networked activity. This may not be the best for the proceeding of the game, because playing in remote limits the possibility of interaction, but it is still a possibility that is kept open by the architectural choice.
@@ -23,8 +23,18 @@ The choice of this platform is supported by several reasons, that makes it the b
 
 The three components are all open source free software, so they can go on well with the project philosophy.
 
-The chosen web application stack can run on almost all the existing mainstream operating systems. That makes it easier to setup a local server or to find an hosting service with the required capabilities. The setup of a local server is even simplified by the use of pre packaged distribution that makes it possible to have the platform running also for someone that is not involved in the development of web applications.
+The chosen web application stack can run on almost all the existing mainstream operating systems. That makes it easier to setup a local server or to find an hosting service with the required capabilities. The setup of a local server is even simplified by the use of pre-packaged distribution that makes it possible to have the platform running also for someone that is not involved in the development of web applications.
 
 Although all the reason mentioned before are really valuable, the most important reason that makes this platform the best solution for the project is that almost every open project uses it. That means that there is a lot of support, documentation and tutorials to help the developer actually doing what he wants.
 
-\subsection{}
+\subsection{Application structure}
+The application follows the classical three tier structure, so there are distinct layers: one for the user interface, one for the interaction with the data and one that actually contains the data.
+
+This structure enforces a logical subdivision of the code and allows an effective collaboration among the different members of the development team. In particular it helps when there is part of the team that works on the design of the interface and another part that develops the application backend.
+\subsection{User interface}
+The user interface is developed using standard HTML code with CSS (Cascading Style Sheet) and Adobe Flash for the animations.
+
+The use of CSS improves the flexibility of the layout: of the style for each element is defined just once in the CSS and then it can be used where needed.
+
+\subsection{Application logic}
+\subsection{Data layer}
