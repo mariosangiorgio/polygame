@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,twoside,openright]{article}
+\documentclass[11pt,a4paper]{article}
 
 \usepackage{graphicx}
 \usepackage{tabularx}
@@ -7,7 +7,8 @@
 \usepackage{amsmath,amssymb}            
 \usepackage{rotating}  
 \usepackage{fancyhdr}  
-\usepackage[scriptsize]{caption2} 
+%\usepackage[scriptsize]{caption2} 
+\hyphenation{a-gen-tiz-za-zio-ne}
 
 \setlength{\paperwidth}{16cm}
 \setlength{\paperheight}{24cm}
@@ -17,9 +18,9 @@
 \addtolength{\evensidemargin} {-0.4 cm}
 \linespread{1.1}
 
-\usepackage[italian]{babel}
+\usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
-\renewcommand{\captionfont}{\normalfont \sffamily \itshape \small}
+%\renewcommand{\captionfont}{\normalfont \sffamily \itshape \small}
 
 \pagestyle{empty}
 
@@ -52,8 +53,8 @@
 \renewcommand{\headrulewidth}{0.3pt} 
 
 \include{1.introduction}
-\include{2.technology}
-\include{3.implementation}
+\include{2.rules}
+\include{3.roles}
 %\include{capitolo4}
 %\include{capitolo5}
 %\include{capitolo6}
@@ -61,7 +62,7 @@
 
 \clearpage
 % ---- Bibliography ----
-\addcontentsline{toc}{chapter}{Bibliografia}
+\addcontentsline{toc}{section}{Bibliography}
 \bibliographystyle{plain}
 \bibliography{bibl_tesi}
 %\nocite{*}
