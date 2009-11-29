@@ -36,6 +36,15 @@ a:active {
 -->
 </style>
 <link href="css/Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {
+	color: #DD137B;
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16pt;
+}
+-->
+</style>
 </head>
 <?php
 
@@ -56,39 +65,45 @@ if( $_SESSION['loggedIn'] == "yes" and
     <div align="center" class="Design">
       <TABLE>
         <TR>
-          <TD><div align="center">Wedge title</div></TD>
+          <TD><div align="center" class="style1">Wedge title</div></TD>
       <TD><TEXTAREA name="title" rows="1" cols="80"><?php print $row['Title']; ?></TEXTAREA></TD>
       </TR>
         <TR>
-          <TD><div align="center">Introduction</div></TD>
+          <TD><div align="center" class="style1">Introduction</div></TD>
       <TD><TEXTAREA class="widgEditor" name="introduction" rows="20" cols="80"><?php print $row['Introduction']; ?></TEXTAREA></TD>
       </TR>
         <TR>
-          <TD><div align="center">History</div></TD>
+          <TD><div align="center" class="style1">History</div></TD>
       <TD><TEXTAREA class="widgEditor" name="history" rows="20" cols="80"><?php print $row['History']; ?></TEXTAREA></TD>
       </TR>
         <TR>
-          <TD><div align="center">Present use</div></TD>
+          <TD><div align="center" class="style1">Present use</div></TD>
       <TD><TEXTAREA class="widgEditor" name="presentUse" rows="20" cols="80"><?php print $row['Present use']; ?></TEXTAREA></TD>
       </TR>
         <TR>
-          <TD><div align="center">National situation</div></TD>
+          <TD><div align="center" class="style1">
+            <p>National<br />
+              situation</p>
+            </div></TD>
       <TD><TEXTAREA class="widgEditor" name="nationalSituation" rows="20" cols="80"><?php print $row['National situation']; ?></TEXTAREA></TD>
       </TR>
         <TR>
-          <TD><div align="center">Emission reduction</div></TD>
+          <TD><div align="center" class="style1">
+            <p>Emission<br />
+              reduction</p>
+            </div></TD>
       <TD><TEXTAREA class="widgEditor" name="emissionReduction"><?php print $row['Emission reduction']; ?></TEXTAREA></TD>
       </TR
 ><TR>
-        <TD><div align="center">References</div></TD>
+        <TD><div align="center" class="style1">References</div></TD>
       <TD><TEXTAREA class="widgEditor" name="references" rows="20" cols="80"><?php print $row['References']; ?></TEXTAREA></TD>
       </TR>
         <TR>
-          <TD><div align="center">Solution</div></TD>
+          <TD><div align="center" class="style1">Solution</div></TD>
       <TD><INPUT type="text" name="solution" onkeyup="this.value = this.value.replace (/\D/, '');" value="<?php print $row['Solution']; ?>"></TD>
       </TR>
         <TR>
-          <TD><div align="center">Tolerance</div></TD>
+          <TD><div align="center" class="style1">Tolerance</div></TD>
       <TD><INPUT type="text" name="tolerance" onkeyup="this.value = this.value.replace (/\D/, '');" value="<?php print $row['Error Tolerance']; ?>"></TD>
       </TR>
       </TABLE>
