@@ -16,12 +16,7 @@ p
 a.three:link {color: #DD137B}
 a.three:visited {color: #DD137B}
 a.three:hover {background: #DD137B}
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-}
+
 a:hover {
 	text-decoration: none;
 }

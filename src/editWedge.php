@@ -20,12 +20,7 @@ a.three:hover {background: #DD137B}
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><style type="text/css">
 <!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-}
+
 a:link {
 	text-decoration: none;
 }
