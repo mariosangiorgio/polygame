@@ -70,7 +70,6 @@ a:active {
 <div align="center" class="Design">
   <p>&nbsp;</p>
   <p>&nbsp;</p>
-  <p>&nbsp;  </p>
 </div>
 <H3 align="center" class="Design">Wondering what PolyGame is?</H3>
 <div align="center" class="Design">PolyGame is a...</div>

@@ -1,11 +1,5 @@
 <style type="text/css">
 <!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-}
 a:link {
 	text-decoration: none;
 }
@@ -14,7 +8,6 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
@@ -22,9 +15,12 @@ a:active {
 -->
 </style>
 <link href="Design.css" rel="stylesheet" type="text/css" />
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
 <div align="center" class="Design"></div>
 <div align="center" class="Design"></div>
-<?php
+<div align="center" class="Design">
+  <p class="Design">
+    <?php
 session_start();
 
 //Cleaning up the session
@@ -34,3 +30,24 @@ session_destroy();
 header("Location: index.php");
 
 ?>
+  </p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;    </p>
+</div>
