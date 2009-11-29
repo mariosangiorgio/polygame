@@ -3,13 +3,17 @@ session_start();
 ?>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -18,27 +22,37 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
 }
 -->
 </style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16pt;
+}
+-->
+</style>
 <div align="center" class="Design">
   <div align="center" class="Design">
-    <p>&nbsp;    </p>
-    <p>&nbsp;</p>
-    <p>&nbsp;</p>
-    <p>
+    <p align="center">&nbsp;    </p>
+    <p align="center">&nbsp;</p>
+    <p align="center">&nbsp;</p>
+    <p align="center">
+      
+      <span class="Design">
       <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
         <param name="movie" value="Flash/dots.swf" />
         <param name="quality" value="high" />
         <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
       </object>
-    </p>
-    <p>&nbsp;</p>
-    <p><A href=viewGroups.php>View existing groups</A> <A href=organize.php>Back</A>
+      </span></p>
+    <p align="center">&nbsp;</p>
+    <p align="center" class="Design"><A href=viewGroups.php class="three style1">View existing groups</A> <A href=organize.php class="three style1">Back</A>
       
       <script type="text/javascript">
 <!--
@@ -48,7 +62,7 @@ a:active {
 return ( k != 32 );
 }
 // -->
-      </script>
+        </script>
       </p>
   </div>
 </div>
@@ -56,46 +70,84 @@ return ( k != 32 );
 	  ACTION='./businessLogic/insertGroup.php'>
   
   
-  <div align="center">
-    <TABLE>
-      <TR>
-        <TD class="Design">Name</TD>
-        <TD class="Design">          <span class="Design">
-          <INPUT TYPE='text' NAME='name' onkeypress="return alpha(event)">        
-        </span></TD>
-      </TR>
-        
-          <span class="Design">
-          <TR>
-          </span>
-      
-      <TD class="Design">Phase</TD>
-            
-            <span class="Design">
-            <TD>
-            </span>
+          <div align="center">
+            <TABLE>
+              <TR>
+                <TD class="Design">Name</TD>
+          <TD class="Design">            <span class="Design">
+          <INPUT TYPE='text' NAME='name' onkeypress="return alpha(event)">          
+          </span></TD>
+        </TR>
+                
+                    <span class="Design"><span class="Design">                    </span>
+              
+                  
+                  <span class="Design">
+                  <TR>
+                  </span>
+                
+                    <span class="Design"></span>                    </span>
+              
+                
+              <TD class="Design">Phase</TD>
+              
+                <span class="Design"><span class="Design">                </span>
           
-        
-          <span class="Design">
-          <SELECT NAME='phase'>
-          </span>
-      
-      <OPTION VALUE='One'><span class="Design"> First Phase
-      </span>
-      <OPTION VALUE='Two'><span class="Design"> Second Phase
-      </span>
-        
-          <span class="Design">
-          </TD>
-          </span>
-      
-        
+                  
+                  <span class="Design">
+                  <TD>
+                  </span>
+                
+                    <span class="Design"></span>                    </span>
+              
+                
+                
+                    <span class="Design"><span class="Design">                    </span>
+              
+                  
+                  <span class="Design">
+                  <SELECT NAME='phase'>
+                  </span>
+                
+                    <span class="Design"></span>                    </span>
+              
+                
+              <OPTION VALUE='One'><span class="Design"> First Phase
+              </span>
+              <OPTION VALUE='Two'><span class="Design"> Second Phase
+                    
+              </span>
+                  
+                <span class="Design">
+                </TD>
+                </span>
+              
+              
+                    
+          
           <span class="Design">
           </TR>
           </span>
-      </TABLE>
-      
-    <span class="Design">
+                  </TABLE>
+  </div>
+  <p align="center" class="Design"><br />
     <input type="submit" id="Insert">
-    </span></div>
+  </p>
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">&nbsp;</p>
+  <div align="center"><span class="Design"><br />  
+    <br />  
+    <br />  
+    <br />  
+    <br />  
+    <br />  
+    <br />  
+    </span><br />
+  </div>
 </FORM>
