@@ -1,11 +1,17 @@
-<link href="Design.css" rel="stylesheet" type="text/css" />
+<link href="Design.css" rel="stylesheet" type="text/css" /><link href="css/Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: none;
+}
+a:active {
+	text-decoration: none;
 }
 -->
 </style><div align="center">
@@ -25,11 +31,26 @@ body {
 </p>
 </div>
 <FORM action="./checkSolutionValue.php" method="post">
-	<div align="center"><span class="Design">
-    <INPUT name="solution"
+	<div align="center">
+	  <p class="Design">
+	    <INPUT name="solution"
 		   onkeyup="this.value = this.value.replace (/\D./, '');">
-    <INPUT type="Submit" value="Submit">
-    <INPUT type="reset">
-    </span>
-    </div>
+	    <INPUT type="Submit" value="Submit">
+	    <INPUT type="reset">
+      </p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;</p>
+	  <p class="Design">&nbsp;  </p>
+	</div>
 </FORM>
