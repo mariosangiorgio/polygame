@@ -1,12 +1,16 @@
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -15,15 +19,22 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
 }
 -->
-</style><div align="center" class="Design"></div>
+</style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
 <div align="center" class="Design"></div>
-<?php
+<div align="center" class="Design"></div>
+<div align="center">
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">
+    <?php
 session_start();
 header("Location: showGamePlayers.php");
 
@@ -47,3 +58,27 @@ else{
 	print "To perform this operation you must be logged in as an organizer!";
 }
 ?>
+          </p>
+</div>
+<div align="center" class="Design"></div>
+<div align="center" class="Design">
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</div>
