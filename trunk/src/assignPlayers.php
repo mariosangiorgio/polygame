@@ -17,10 +17,12 @@ a:active {
 <link href="css/Design.css" rel="stylesheet" type="text/css" />
 <p align="center" class="Design">&nbsp;</p>
 <div align="center" class="Design">
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">&nbsp;</p>
+  <p align="center" class="Design">
+    
+    <span class="Design">
     <?php
 session_start();
 //Security check
@@ -90,9 +92,18 @@ else{
 	print "To perform this operation you must be logged in as an organizer!";
 }
 ?>
-        </p>
+    </span></p>
 </div>
-<p align="center">&nbsp;</p>
-<p align="center">&nbsp;</p>
-<p align="center">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
 <p align="center" class="Design">&nbsp;</p>

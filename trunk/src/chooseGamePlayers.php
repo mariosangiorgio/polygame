@@ -5,13 +5,17 @@ require("./businessLogic/databaseLogin.php");
 ?>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -20,7 +24,6 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
@@ -29,6 +32,18 @@ a:active {
 </style>
 
 
+<link href="css/Mainstyle.css" rel="stylesheet" type="text/css" />
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {font-size: 16pt}
+.style4 {
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16pt;
+}
+.style5 {font-family: "HelveticaNeue LT 107 XBlkCn"}
+-->
+</style>
 <div align="center" class="Design">
   <p>&nbsp;  </p>
   <p>&nbsp;</p>
@@ -41,11 +56,11 @@ a:active {
     </object>
   </p>
   <p>Choose game players |
-    <A HREF="./showGamePlayers.php">View players list</A> |
-    <A HREF="./newPlayer.php">Add new players</A> |
-    <A HREF="./deletePlayers.php">Delete players from the database</A><BR>
+    <A HREF="./showGamePlayers.php" class="three style4">View players list</A> |
+    <A HREF="./newPlayer.php" class="three style4">Add new players</A> |
+    <A HREF="./deletePlayers.php" class="three style1 style5">Delete players from the database</A><BR>
     <BR>
-    </p>
+  </p>
 </div>
 <FORM METHOD="POST" ACTION="./businessLogic/chooseGamePlayer.php">
   <div align="center">
@@ -87,19 +102,31 @@ if( $_SESSION['loggedIn'] == "yes" and
 		//print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['username']."\"></TD><TD>".$row['username']."</TD><TD>".$row['role']."</TD><TD><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\"><input type=\"radio\" name=\"radio1\" checked><br></td></TR>\n";
 	}
 	?>
-      </table>
-    <span class="Design"><BR>
-    <?php
+    </table>
+    <p class="Design"><?php
 }
 else {
 	print "You must log in as an organizer to access this page!";
 }
 ?>
-    
-    <INPUT TYPE="submit" VALUE="Choose players">
-    </span></div>
+      </p>
+    <p class="Design">
+      <INPUT TYPE="submit" VALUE="Choose players">
+    </p>
+  </div>
 </FORM>
 
-<div align="center" class="Design"><BR>
-  <A HREF=organize.php>Back to organize page</A><BR>
+<div align="center" class="Mainstyle"><BR>
+  <A HREF=organize.php class="three style1">Back to organize page</A><BR>
+</div>
+<div align="center" class="Design"></div>
+<div align="center" class="Design">
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
 </div>

@@ -1,14 +1,17 @@
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:hover {
-	color: #CCCCCC;
 	text-decoration: none;
 }
 a:link {
@@ -22,8 +25,14 @@ a:active {
 }
 -->
 </style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
 <p align="center" class="Design">&nbsp;</p>
-<?php
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<div align="center" class="Design">
+  <p>
+    <?php
 session_start();
 
 require("./businessLogic/databaseLogin.php");
@@ -69,5 +78,26 @@ else{
 	$data	= mysql_query($queryIns,$connection);
 	//print $queryIns;
 
-print "<BR><A HREF=\"./\">Back to Wedge</A>";
+print "<BR><A HREF=\"./\" class="three">Back to Wedge</A>";
 ?>
+</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;  </p>
+</div>
+<div align="center" class="Design">
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</div>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
