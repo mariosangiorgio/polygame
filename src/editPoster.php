@@ -5,6 +5,17 @@ session_start();
 	@import "css/info.css";
 	@import "css/main.css";
 	@import "css/widgEditor.css";
+	
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
+}
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
 body {
 	margin-left: 10px;
 	margin-top: 10px;
@@ -12,7 +23,6 @@ body {
 	margin-bottom: 10px;
 }
 a:hover {
-	color: #CCCCCC;
 	text-decoration: none;
 }
 a:link {
@@ -28,6 +38,14 @@ a:active {
 <script type="text/javascript" src="scripts/widgEditor.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <link href="Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+body,td,th {
+	font-family: HelveticaNeueLT Pro 45 Lt, HelveticaNeueLT Pro 35 Th;
+}
+-->
+</style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
 </head>
 <?php
 
@@ -64,7 +82,7 @@ $poster = mysql_fetch_array($data);
 <FORM action="./businessLogic/updatePoster.php" method="post">
   <div align="center" class="Design">
     <p class="Design">Pros<BR>
-      <TEXTAREA class="widgEditor" name="Pros" rows="20" cols="80"><?php print $poster['Pros']; ?></TEXTAREA>
+        <TEXTAREA class="widgEditor" name="Pros" rows="20" cols="80"><?php print $poster['Pros']; ?></TEXTAREA>
       <BR>
     Cons<BR>
     <TEXTAREA class="widgEditor" name="Cons" rows="20" cols="80"><?php print $poster['Cons']; ?></TEXTAREA>
@@ -79,12 +97,12 @@ $poster = mysql_fetch_array($data);
 
 <div align="center">
   <p class="Design"><br>
-    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
-      <param name="movie" value="Flash/dots.swf" />
-      <param name="quality" value="high" />
-      <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
-    </object>
+      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
+        <param name="movie" value="Flash/dots.swf" />
+        <param name="quality" value="high" />
+        <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
+        </object>
     </p>
   <p class="Design"><br>
-    <a href="showWedgeInformation.php">Back to wedge</a></p>
+      <a href="showWedgeInformation.php">Back to wedge</a></p>
 </div>
