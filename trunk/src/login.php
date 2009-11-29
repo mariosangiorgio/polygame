@@ -8,6 +8,16 @@ if( $_SESSION['loggedIn'] == "yes"){
 else{
 ?>
 <link href="Design.css" rel="stylesheet" type="text/css" /><style type="text/css">
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
+}
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
 <!--
 a:link {
 	text-decoration: none;
@@ -52,12 +62,12 @@ a:active {
     </TR>
   </TABLE>
   
-  <span class="Design">
-  <INPUT TYPE="submit" VALUE="Login">
-  </span></div>
+  <p class="Design">
+    <INPUT TYPE="submit" VALUE="Login">
+  </p>
+  </div>
 </FORM>
 <div align="center" class="Design">
-  <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>&nbsp;  </p>
@@ -74,18 +84,12 @@ a:active {
     <?php
 }
 ?>
-    </p>
+  </p>
   <p class="Design">&nbsp;</p>
   <p class="Design">&nbsp;</p>
   <p class="Design">&nbsp;</p>
 </div>
-<div align="center" class="Design">
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-</div>
+<div align="center" class="Design"></div>
 <div align="center">
-  <p>&nbsp;</p>
   <p>&nbsp;</p>
 </div>
