@@ -7,6 +7,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 
 
 <script type="text/javascript">
+
 <!--
     function alpha(e) {
         var k;
@@ -20,13 +21,17 @@ return ( (k > 47 && k < 58) || k==8 || k==9 || (k > 36 && k < 41) || k==17);
 <FORM METHOD="POST" ACTION="./businessLogic/insertNewGame.php" id="new" action="javascript://">
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -35,11 +40,20 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
 }
+-->
+</style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16pt;
+}
+.style6 {color: #DD137B; font-weight: bold; font-family: "HelveticaNeue LT 107 XBlkCn"; font-size: 16pt; }
 -->
 </style>
 <div align="center" class="Design">
@@ -55,25 +69,41 @@ a:active {
   </p>
   <p>&nbsp;</p>
   <TABLE>
-    <TR><TD><b>First phase</b></TD></TR>
+    <TR><TD><span class="style6">First phase</span></TD>
+    </TR>
     <TR><TD>Delay (minutes) before complete information </TD><TD><INPUT TYPE="text" NAME="length1a" VALUE="20" onkeypress="return alpha(event)"></TD></TR>
     <TR><TD>Delay (minutes) before submit solution </TD><TD><INPUT TYPE="text" NAME="length1b" VALUE="20" onkeypress="return alpha(event)"></TD></TR>
     <TR><TD>Delay (minutes) before poster </TD><TD><INPUT TYPE="text" NAME="length1c" VALUE="60" onkeypress="return alpha(event)"></TD></TR>
-    <TR><TD><b>Second phase</b></TD></TR>
+    <TR><TD><span class="style6">Second phase</span></TD>
+    </TR>
     <TR><TD>Length (minutes) of second phase </TD><TD><INPUT TYPE="text" NAME="length2" VALUE="120" onkeypress="return alpha(event)"></TD></TR>
-    <TR><TD><b>Other values</b></TD></TR>
+    <TR><TD><span class="style6">Other values</span></TD>
+    </TR>
     <TR><TD>Time (minutes) given for one poster presentation</TD><TD><INPUT TYPE="text" NAME="presentation" VALUE="3" onkeypress="return alpha(event)"></TD></TR>
   </TABLE>
-  <INPUT TYPE="submit" VALUE="Insert">
-  </FORM>
-  <BR>
-  <A HREF=organize.php>Cancel</A><BR>
-  
-  <?php
+  <p>
+    <INPUT TYPE="submit" VALUE="Insert">
+    <br />
+    </FORM>
+    <BR>
+    <A HREF=organize.php class="three style1">Cancel</A><BR>
+    
+    <?php
 }
 else {
 	print "You must log in as an organizer to access this page!<BR>";
-	print "<A HREF=login.php>Login</A><BR>";
+	print "<A HREF=login.php class="three style1">Login</A><BR>";
 }
 ?>
+</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;  </p>
 </div>
+<div align="center" class="Design"></div>
