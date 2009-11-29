@@ -1,12 +1,16 @@
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -15,14 +19,16 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
 }
 -->
-</style><div align="center" class="Design"></div>
-<?php
+</style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<div align="center" class="Design"></div>
+<div align="center" class="Design">
+  <?php
 session_start();
 
 //Security check
@@ -108,3 +114,27 @@ else{
 	print "To perform this operation you must be logged in as an organizer!";
 }
 ?>
+</div>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
+<p align="center" class="Design">&nbsp;</p>
