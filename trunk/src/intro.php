@@ -5,14 +5,20 @@
 <title>Untitled Document</title>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
+}
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
 <!--
 body {
 	background-image: url(images/background.png);
-	background-repeat: no-repeat;
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+	background-repeat: repeat;
 }
 a:link {
 	text-decoration: none;
@@ -22,13 +28,22 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
 }
 -->
-</style></head>
+</style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16pt;
+}
+-->
+</style>
+</head>
 
 <body>
 <div align="center" class="Design">
@@ -44,7 +59,13 @@ a:active {
   </p>
 </div>
 <div align="center" class="Design">
-  <p><a href="login.php">ENTER</a></p>
+  <p><a href="login.php" class="three style1">ENTER</a></p>
+  <p>&nbsp;</p>
+</div>
+<div align="center" class="Design">
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
   <p>&nbsp;</p>
 </div>
 </body>
