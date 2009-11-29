@@ -6,7 +6,7 @@ h1
 	height: 105px;
 	margin: 0 4em 0 0;
 	padding: 0;
-	background-image: url(../images/logo.gif);
+	background-image: url(../images/background.png);
 	background-repeat: no-repeat;
 	font-size: 100%
 }
@@ -47,7 +47,7 @@ dd
 {
 	height: 105px;
 	margin-bottom: 2em;
-	background-image: url(../images/header_bg.gif);
+	background-image: url(../images/background.png);
 	background-repeat: repeat-x;
 	color: #0066CC;
 	text-align: left;
