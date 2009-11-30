@@ -7,13 +7,17 @@ if( $_SESSION['loggedIn'] == "yes" and
 ?>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -22,7 +26,6 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
@@ -32,45 +35,54 @@ a:active {
 
 
 
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16pt;
+}
+.style3 {font-style: normal; line-height: normal; font-weight: normal; font-variant: normal; text-transform: none; color: #000000; background-image: url(../images/background.png); background-attachment: fixed; background-repeat: repeat; background-position: right bottom; font-size: 12pt;}
+.style4 {font-size: 16pt}
+.style5 {font-family: "HelveticaNeue LT 107 XBlkCn"}
+.style6 {font-size: 12pt; }
+-->
+</style>
 <div align="center" class="Design">
   <p>&nbsp;  </p>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>
+    
+    <span class="Design">
     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
       <param name="movie" value="Flash/dots.swf" />
       <param name="quality" value="high" />
       <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
     </object>
-  </p>
-  <p><A HREF="./chooseGameVoters.php">Choose game voters</A> |
-    <A HREF="./showGameVoters.php">View voters list</A> |
+    </span></p>
+  <p class="Design"><A HREF="./chooseGameVoters.php" class="three style1">Choose game voters</A> |
+      <A HREF="./showGameVoters.php" class="three style1">View voters list</A> |
 Add new voters |
-    <A HREF="./deleteGameVoters.php">Delete voters from the database</A><BR>
+      <A HREF="./deleteGameVoters.php" class="three style1">Delete voters from the database</A><BR>
     <BR>
 
 Please enter username and password for the new voter: <BR>
     </p>
 </div>
 <FORM METHOD="POST" ACTION="./businessLogic/insertNewVoter.php">
-  <div align="center">
+  <div align="center" class="Design">
   <TABLE>
     <TR><TD class="Design">Name</TD><TD class="Design">Password</TD></TR>
     <TR>
-      <TD class="Design">
-        <span class="Design">
-        <INPUT TYPE="text" NAME="username">      
-        </span></TD>
-    <TD class="Design">
-      <span class="Design">
-      <INPUT TYPE="password" NAME="password">    
-      </span></TD>
+      <TD class="Design">        <INPUT TYPE="text" NAME="username">        </TD>
+    <TD class="Design">      <INPUT TYPE="password" NAME="password">      </TD>
     </TR>
   </TABLE>
   
-  <span class="Design">
   <INPUT TYPE="submit" VALUE="Insert">
-  </span></div>
+  <br />
+  </div>
 </FORM>
 <div align="center">
   
@@ -93,6 +105,20 @@ else {
 ?>
   
   <BR>
-  <A HREF=organize.php>Back to organize page</A><BR>
+  </span><span class="style3"><span class="style4"><span class="style5"><A HREF=organize.php class="three ">Back to organize page</A></span></span></span><span class="Design style4 style5"><span class="style6"></span></span><span class="Design"><BR>
   </span></div>
 <div align="center" class="Design"></div>
+<div align="center" class="Design">
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</div>
