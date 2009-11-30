@@ -1,17 +1,20 @@
 <?php
 session_start();
-?>
-<HEAD>
+?><HEAD>
 <meta http-equiv="Refresh" content="60; url=play.php">
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -20,13 +23,15 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
 }
 -->
-</style></HEAD>
+</style>
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+</HEAD>
+
 <p align="center" class="Design">&nbsp;</p>
 <p align="center" class="Design">&nbsp;</p>
 <p align="center" class="Design">&nbsp;</p>
@@ -38,7 +43,9 @@ a:active {
   </object>
 </p>
 <p align="center" class="Design">&nbsp;</p>
-<?php
+<div align="center">
+  <p class="Design">
+    <?php
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role']     == "player"){
@@ -130,4 +137,17 @@ else
 {
 	print "You should be logged in as an user to view this page";
 }
-?>
+?></p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+</div>
