@@ -31,13 +31,17 @@ $data	= mysql_query($query2,$connection);
 $sec	= mysql_fetch_array($data);
 		
 		?><style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+		p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -46,7 +50,6 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
@@ -55,31 +58,54 @@ a:active {
 </style>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 
-		 <div align="center" class="Design">
+		 <link href="css/Design.css" rel="stylesheet" type="text/css" />
+         <style type="text/css">
+<!--
+.style2 {
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #000000;
+	background-image: url(../images/background.png);
+	background-attachment: fixed;
+	background-repeat: repeat;
+	background-position: right bottom;
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16px;
+}
+-->
+         </style>
+         <div align="center" class="Design">
 		   <p class="Design">&nbsp;	       </p>
 		   <p class="Design">&nbsp;</p>
 		   <p class="Design">&nbsp;</p>
 		   <p class="Design">
+		     <span class="Design">
 		     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
 		       <param name="movie" value="Flash/dots.swf" />
 		       <param name="quality" value="high" />
 		       <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
 	         </object>
-                                 </p>
+             </span></p>
 		   <p class="Design">&nbsp;</p>
 		   
+		   <span class="Design">
 		   <button type="button" onClick="display();">Start countdown</button>
+		   </span>
 		   <p>&nbsp;</p>
 		 </div>
 	    <form name="counter">
 		   <div align="center">
+		     
 		     <span class="Design">
 		     <input type="text" size="8" 
 name="d2">
 	         </span></div>
 	    </form> 
-		 <div align="center">
-           <span class="Design">
+		 <div align="center" class="Design">
+           
 <?php
  $seconds = $sec['Presentation time'] % 60;
  $minutes = floor($sec['Presentation time'] / 60);
@@ -133,10 +159,24 @@ function display(){
 ";
 		print $poster['Notes']."<BR>
 ";
-		print "<A HREF=\"./\">Back</A>";
+		print "<span class="style2"><A HREF=\"./\" class="three">Back</A></span>";
 	}
 	else{
 		return;
 	}
-}</span></div>
+}</div>
          <div align="center" class="Design"></div>
+         <div align="center" class="Design">
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+           <p>&nbsp;</p>
+         </div>
+         
