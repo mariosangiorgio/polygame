@@ -1,11 +1,15 @@
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -14,7 +18,6 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
@@ -22,6 +25,15 @@ a:active {
 -->
 </style>
 <link href="Design.css" rel="stylesheet" type="text/css" />
+<link href="css/Design.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+.style1 {
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16pt;
+}
+-->
+</style>
 <body class="Design"><div align="center" class="Design">
   <p>&nbsp;  </p>
   <p>&nbsp;</p>
@@ -40,8 +52,8 @@ include("rulesAndPlayers.php");
 ?>
     <BR>
     <BR>
-    <A HREF=index.php>Retry</A>
+    <A HREF=index.php class="three style1">Retry</A>
     <BR>
-  <A HREF=logout.php>Logout</A></p>
+  <A HREF=logout.php class="three style1">Logout</A></p>
 </div>
 <div align="center" class="Design"></div>
