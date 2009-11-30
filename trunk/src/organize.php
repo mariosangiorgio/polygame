@@ -142,6 +142,7 @@ a:active {
 	font-size: 16pt;
 	font-family: "HelveticaNeue LT 107 XBlkCn";
 }
+.style8 {font-family: "HelveticaNeue LT 107 XBlkCn"; font-size: 16px; }
 -->
 </style>
 <div align="center" class="Design">
@@ -170,7 +171,7 @@ if ($_SESSION['gamePhase'] == 0) {
 // Phase 1
 else if ($_SESSION['gamePhase'] == 1) {
 ?>
-      <span class="style1"><A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A></span><BR>
+      <span class="style8"><A HREF=chooseGamePlayers.php class="three">Choose and view <b>players</b></A></span><BR>
       <A HREF=newGroup.php class="three style1 style4">Create <b>groups</b></A><BR>
       <A HREF=assignPlayers.php class="three style1 style5">Assign <b>players to groups</b></A><BR>
       <A HREF=chooseWedges.php class="three style1 style5">Choose and view <b>wedges</b></A><BR>
@@ -226,7 +227,7 @@ print $starting2."<BR>";*/
 
 
 ?>
-    </p>
+  </p>
 </div>
 <form name="counter">
   <div align="center">
