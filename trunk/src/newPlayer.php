@@ -7,13 +7,17 @@ if( $_SESSION['loggedIn'] == "yes" and
 ?>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -22,7 +26,6 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
@@ -30,6 +33,15 @@ a:active {
 -->
 </style>
 
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16pt;
+}
+-->
+</style>
 <div align="center" class="Design">
   <p>&nbsp;  </p>
   <p>&nbsp;</p>
@@ -41,10 +53,10 @@ a:active {
       <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
     </object>
   </p>
-  <p class="Design"><A HREF="./chooseGamePlayers.php">Choose game players</A> |
-      <A HREF="./showGamePlayers.php">View players list</A> |
+  <p class="Design"><A HREF="./chooseGamePlayers.php" class="three style1">Choose game players</A> |
+      <A HREF="./showGamePlayers.php" class="three style1">View players list</A> |
 Add new players |
-      <A HREF="./deletePlayers.php">Delete players from the database</A><BR>
+      <A HREF="./deletePlayers.php" class="three style1">Delete players from the database</A><BR>
     <BR>
 
 Please enter username and password for the new player: <BR>
@@ -66,11 +78,13 @@ Please enter username and password for the new player: <BR>
   
   <span class="Design">
   <INPUT TYPE="submit" VALUE="Insert">
-  </span></div>
+  </span><br />
+  </div>
 </FORM>
 
-<div align="center" class="Design"><BR>
-  <BR>
+<div align="center" class="Design">
+  <p><BR>
+    <BR>
   Those are the players currently in the database:<BR>
   <?php	
 	$query		= "SELECT `username`, `role` FROM `Users`
@@ -89,6 +103,15 @@ else {
 ?>
 
   <BR>
-  <A HREF=organize.php>Back to organize page</A><BR>
+  <A HREF=organize.php class="three style1">Back to organize page</A></p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p><BR>
+    </p>
 </div>
 <div align="center" class="Design"></div>
