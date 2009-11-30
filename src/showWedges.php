@@ -1,5 +1,4 @@
     <?php
-session_start();
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 p
@@ -47,7 +46,7 @@ a:active {
 <div align="center" class="Design"></div>
 <div align="center">
   <p class="Design">
-
+session_start();
 require("./businessLogic/databaseLogin.php");
 
 if( $_SESSION['loggedIn'] == "yes" and
