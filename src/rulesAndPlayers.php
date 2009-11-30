@@ -54,6 +54,7 @@ Polygame is a game which...<BR>
 It is made of two phases: in the first one every user is assigned to a certain wedge which must be studied in order to summarize in a poster all the pros and cons.<br>
 In the second one the users have to come up with the best mix of wedges to reduce CO2.<br>
 Plans are voted and the best one is then shown at the end of the game.<br />
+20 Wedges below make the possible mix of achieving the Kyoto Protocol 2012. <br />
 <br />
 <img src="images/icons.png" alt="Wedges" width="672" height="762" /><BR>
 <BR>
