@@ -1,11 +1,15 @@
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -14,7 +18,6 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
@@ -22,6 +25,7 @@ a:active {
 -->
 </style>
 <link href="Design.css" rel="stylesheet" type="text/css" />
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
 <div align="center" class="Design">
   <p>&nbsp;  </p>
   <p>&nbsp;</p>
@@ -36,7 +40,9 @@ a:active {
   <p>&nbsp;</p>
 </div>
 <div align="center" class="Design"></div>
-<?php
+<div align="center" class="Design">
+  <p>
+    <?php
 session_start();
 require("./businessLogic/databaseLogin.php");
 
@@ -57,3 +63,20 @@ else {
 	print "You must log in as an organizer to access this page!";
 }
 ?>
+</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;  </p>
+</div>
