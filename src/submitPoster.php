@@ -5,12 +5,6 @@ session_start();
 	@import "css/info.css";
 	@import "css/main.css";
 	@import "css/widgEditor.css";
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-}
 </style>
 <script type="text/javascript" src="scripts/widgEditor.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
