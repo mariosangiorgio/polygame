@@ -92,13 +92,17 @@ else{
 
 // Code that prints links on the page
 ?><style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:link {
 	text-decoration: none;
 }
@@ -107,7 +111,6 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
@@ -116,38 +119,64 @@ a:active {
 </style>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style1 {
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+	font-size: 16pt;
+}
+.style4 {font-size: 16px}
+.style5 {font-size: 16}
+.style7 {
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #000000;
+	background-image: url(../images/background.png);
+	background-attachment: fixed;
+	background-repeat: repeat;
+	background-position: right bottom;
+	font-size: 16pt;
+	font-family: "HelveticaNeue LT 107 XBlkCn";
+}
+-->
+</style>
 <div align="center" class="Design">
   <p>&nbsp;  </p>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
   <p>
+    
     <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
       <param name="movie" value="Flash/logostops.swf" />
       <param name="quality" value="high" />
       <embed src="Flash/logostops.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
     </object>
-  </p>
+    </p>
   <p>&nbsp;</p>
-  <p><b>Organizer</b><BR>
+  <p class="Design"><b>Organizer</b><BR>
     
     <?php
 
 // Phase 0
 if ($_SESSION['gamePhase'] == 0) {
 ?>
-      <A HREF=newGame.php>Create a new game</A><BR>
+      <A HREF=newGame.php class="three style1">Create a new game</A><BR>
     <?php }
 
 // Phase 1
 else if ($_SESSION['gamePhase'] == 1) {
 ?>
-      <A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A><BR>
-      <A HREF=newGroup.php>Create <b>groups</b></A><BR>
-      <A HREF=assignPlayers.php>Assign <b>players to groups</b></A><BR>
-      <A HREF=chooseWedges.php>Choose and view <b>wedges</b></A><BR>
-      <A HREF=chooseGameVoters.php>Choose and view <b>voters</b></A><BR>
+      <span class="style1"><A HREF=chooseGamePlayers.php>Choose and view <b>players</b></A></span><BR>
+      <A HREF=newGroup.php class="three style1 style4">Create <b>groups</b></A><BR>
+      <A HREF=assignPlayers.php class="three style1 style5">Assign <b>players to groups</b></A><BR>
+      <A HREF=chooseWedges.php class="three style1 style5">Choose and view <b>wedges</b></A><BR>
+      <A HREF=chooseGameVoters.php class="three style1 style5">Choose and view <b>voters</b></A><BR>
     
-      <A HREF=businessLogic/startGame.php>Start phase one NOW!</A><BR>
+      <A HREF=businessLogic/startGame.php class="three style1">Start phase one NOW!</A><BR>
     <BR>
     <BR>
     <?php
@@ -201,6 +230,7 @@ print $starting2."<BR>";*/
 </div>
 <form name="counter">
   <div align="center">
+    
     <span class="Design">
     <input type="text" size="8" 
 name="d2">
@@ -208,6 +238,7 @@ name="d2">
 </form> 
 
 <div align="center">
+  
   <span class="Design">
   <script> 
 <!-- 
@@ -253,15 +284,16 @@ display()
         <option VALUE=10> 10 </option>
         <option VALUE=15> 15 </option>
         <option VALUE=30> 30 </option>
-        </select>
+      </select>
 more minutes
 <INPUT TYPE="submit" VALUE="Set extra time">
   </div>
 </FORM>
 
-<div align="center">
-  <span class="Design">
-  <?php }
+<div align="center" class="Design">
+  
+  <p>
+    <?php }
 
 // Reload script: used to update game status
 if($_SESSION['gamePhase'] >= 2 &&
@@ -271,13 +303,13 @@ if($_SESSION['gamePhase'] >= 2 &&
    if($_SESSION['gamePhase'] != 5 ) {	
 // Auto refresh code (every 30 seconds)
 ?>
-  <script type="text/javascript">
+    <script type="text/javascript">
 function reFresh() {
 	location.reload(true)
 }
 window.setInterval("reFresh()", 45000);
-  </script>
-  <?php }
+    </script>
+    <?php }
 
 	// Game status
 	if( $_SESSION['gamePhase'] == 6 ) {
@@ -340,9 +372,13 @@ else if ($_SESSION['gamePhase'] == 7) {
 
 
 ?>
-  
-  
-  <A HREF=logout.php>Logout</A><BR>
-  </span></div>
+    <span class="style7"><A HREF=logout.php class="three ">Logout</A></span></p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p><BR>
+  </p>
+</div>
 <div align="center" class="Design"></div>
 <div align="center" class="Design"></div>
