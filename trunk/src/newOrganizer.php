@@ -6,17 +6,18 @@ if( $_SESSION['loggedIn'] == "yes" and
 ?>
 <link href="Design.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
+}
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
 <!--
 .style1 {font-size: 9pt}
-body,td,th {
-	font-family: Arial, Helvetica, sans-serif;
-}
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
-}
 a:link {
 	text-decoration: none;
 }
@@ -25,7 +26,6 @@ a:visited {
 }
 a:hover {
 	text-decoration: none;
-	color: #CCCCCC;
 }
 a:active {
 	text-decoration: none;
@@ -33,6 +33,7 @@ a:active {
 -->
 </style>
 
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
 <FORM METHOD="POST" ACTION="./businessLogic/insertNewOrganizer.php">
   <div align="center" class="Design">
     <p>&nbsp;</p>
@@ -54,16 +55,38 @@ a:active {
     <TD class="Design"><INPUT TYPE="password" NAME="password"></TD>
     </TR>
   </TABLE>
-    <br>
-    <INPUT TYPE="submit" VALUE="Insert">
+    <p><br>
+      <INPUT TYPE="submit" VALUE="Insert">
+      <br />  
+      <br />  
+      <br />  
+      <br />  
+      <br />  
+      <br />  
+      <br />  
+      <br />  
+    </p>
+    <p><br />  
+      <br />  
+      <br />  
+      <br />
+    </p>
   </div>
 </FORM>
-<div align="left">
-  <?php
+
+<div align="center">
+  <p>
+    <?php
 }
 else {
         print "You must log in as an administrator to access this page!";
 }
 ?>
+  </p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
+  <p class="Design">&nbsp;</p>
 </div>
-<div align="center" class="Design"></div>
+  <div align="center" class="Design"></div>
