@@ -32,15 +32,18 @@ if( mysql_num_rows($players) == 0 ) {
 ?>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	margin-left: 10px;
-	margin-top: 10px;
-	margin-right: 10px;
-	margin-bottom: 10px;
+p
+{
+	background-image: url(images/background.png);
+	background-position: right bottom;
+	background-repeat: repeat;
+	background-attachment: fixed;
 }
+a.three:link {color: #DD137B}
+a.three:visited {color: #DD137B}
+a.three:hover {background: #DD137B}
+<!--
 a:hover {
-	color: #CCCCCC;
 	text-decoration: none;
 }
 a:link {
@@ -55,6 +58,26 @@ a:active {
 -->
 </style>
 
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.style2 {
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	color: #000000;
+	background-image: url(../images/background.png);
+	background-attachment: fixed;
+	background-repeat: repeat;
+	background-position: right bottom;
+	font-family: "HelveticaNeueLT Pro 45 Lt", "HelveticaNeueLT Pro 35 Th";
+	font-size: 16pt;
+}
+.style3 {font-family: "HelveticaNeue LT 107 XBlkCn"}
+-->
+</style>
 <div align="center" class="Design">
   <p>&nbsp;  </p>
   <p>&nbsp;</p>
@@ -128,6 +151,22 @@ a:active {
 ?>
   </table>
   <span class="Design"><BR>
-  <A HREF=organize.php>Update table</A><BR>
+  </span><span class="style2"><A HREF=organize.php class="three  style3">Update table</A></span><span class="Design"><BR>
   </span></div>
 <div align="center" class="Design"></div>
+<div align="center" class="Design">
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+</div>
