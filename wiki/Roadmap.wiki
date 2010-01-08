@@ -84,7 +84,7 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * gestire underscore: non accettarlo in input e metterlo nel db
  * ~~formattazione testo nel poster~~
 
-NEW
+After meeting with Casagrandi
  * inserimento dati da file
  * ~~togliere SQL da insert new wedge~~
  * help
@@ -96,3 +96,11 @@ NEW
  * remove wedge and groups
  * remove user from group when it is removed from the game 
  * ~~aggiungere giocatori singoli alla ricapitolazione~~
+
+After Xmas holiday
+ * keep an eye on newGroup.php and rulesAndPlayers.php
+
+
+*For Marko*
+ * intro.php has some issues
+ * ...
