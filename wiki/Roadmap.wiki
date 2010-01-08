@@ -119,6 +119,7 @@ TODO: Check that all the inputs are validated (For example in newGame)
   <p class="Design">&nbsp;</p>
   <p class="Design">&nbsp;</p>
 }}} Could you please clean that?
+  * the mentioned problem causes A LOT of extra spaces in the webpages
   * the background sometimes makes the page less readable. We know it's hard, but could you please think of something that doesn't alter readability?
  * *editWedge*: when the administrator modifies a wedge the "update" button is UNDER the animation. Could you please move it ABOVE?
  * *showWedges* there is just the list of the wedges. It isn't formatted
