@@ -104,6 +104,8 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * keep an eye on newGroup.php and rulesAndPlayers.php
  * rename insert button in "editWedge" to "UPDATE", add "cancel", etc..-
  * page to delete organizers
+ * fill in the questions in login.php
+ * credits page... maybe it's better to put it since casagrandi has asked for it. I think it would be cool to follow an informal approach and put only the name (maybe with a picture).
 
 ==Facoltativi==
  * unificare add/delete wedge e add/delete organizer nella schermata admin
