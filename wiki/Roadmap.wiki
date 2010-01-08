@@ -84,7 +84,9 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * gestire underscore: non accettarlo in input e metterlo nel db
  * ~~formattazione testo nel poster~~
 
-After meeting with Casagrandi
+=TO DO=
+
+==After meeting with Casagrandi==
  * inserimento dati da file
  * ~~togliere SQL da insert new wedge~~
  * help
@@ -96,11 +98,12 @@ After meeting with Casagrandi
  * remove wedge and groups
  * remove user from group when it is removed from the game 
  * ~~aggiungere giocatori singoli alla ricapitolazione~~
+ * description of the game in the homepage
 
-After Xmas holiday
+==After Xmas holiday==
  * keep an eye on newGroup.php and rulesAndPlayers.php
 
 
-*For Marko*
+==*For Marko*==
  * intro.php has some font issues: currently we see the "Verdana" font but it is not the font specified in the CSS
  * in admin.php when the mouse is over a link it is impossible to read the text. The color of the background is the same than the color of the text.
