@@ -110,6 +110,8 @@ if( $_SESSION['loggedIn'] == "yes" and
       <INPUT type="hidden" name="id" value="<?php print $row['Wedge ID']; ?>">
       <p>
         <INPUT TYPE="submit" VALUE="Update">
+        <input type="button" value="Delete"
+        	   onClick="location.href='./businessLogic/deleteWedge.php?wedgeID=<?php print $row['Wedge ID']; ?>'">
         <input type="button" value="Cancel" onClick="location.href='showWedges.php'">
       </p>
     </div>
