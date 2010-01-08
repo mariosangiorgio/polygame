@@ -102,10 +102,12 @@ TODO: Check that all the inputs are validated (For example in newGame)
 
 ==After Xmas holiday==
  * keep an eye on newGroup.php and rulesAndPlayers.php
+ * rename insert button in "editWedge" to "UPDATE", add "cancel", etc..-
+ * page to delete organizers
 
 
 ==*For Marko*==
  * *all pages*
   * there are some fount issue. The HelveticaNeue LT font isn't standard nor it is installed on all the operating systems. This means that the text is rendered in Times New Roman rather than the chosen font.
   * the style for the links specifies the same color for the text and for the background when the mouse is over the link, making the text unreadable when the link is selected.
- * *editWedge*: when the administrator modifies a wedge the "insert" button is UNDER the animation. Could you please move it ABOVE?
+ * *editWedge*: when the administrator modifies a wedge the "update" button is UNDER the animation. Could you please move it ABOVE?
