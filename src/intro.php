@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Untitled Document</title>
-<link href="Design.css" rel="stylesheet" type="text/css" />
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 p
 {
@@ -34,11 +34,10 @@ a:active {
 }
 -->
 </style>
-<link href="css/Design.css" rel="stylesheet" type="text/css" />
+
 <style type="text/css">
 <!--
 .style1 {
-	font-family: "HelveticaNeue LT 107 XBlkCn";
 	font-size: 16pt;
 }
 -->

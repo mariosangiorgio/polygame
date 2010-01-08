@@ -69,7 +69,7 @@ a:active {
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
 <p align="center"><span class="Mainstyle"><A HREF=newOrganizer.php class="three">ADD ORGANIZER<br>
-</A><A HREF=showWedges.php class="three">VIEW WEDGES<br>
+</A><A HREF=showWedges.php class="three">VIEW AND EDIT WEDGES<br>
 </A><A HREF=newWedge.php class="three style8 ">ADD WEDGE<br>
 </A><A HREF=logout.php class="three">LOGOUT</A></span></p>
 <p align="center">&nbsp;</p>

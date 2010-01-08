@@ -107,21 +107,10 @@ if( $_SESSION['loggedIn'] == "yes" and
       <TD><INPUT type="text" name="tolerance" onkeyup="this.value = this.value.replace (/\D/, '');" value="<?php print $row['Error Tolerance']; ?>"></TD>
       </TR>
       </TABLE>
-      <p>&nbsp;</p>
-      <p>&nbsp;      </p>
+      <INPUT type="hidden" name="id" value="<?php print $row['Wedge ID']; ?>">
       <p>
-        <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
-          <param name="movie" value="Flash/dots.swf" />
-          <param name="quality" value="high" />
-          <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
-        </object>
-      </p>
-      <p>&nbsp;</p>
-      <p>
-        <INPUT type="hidden" name="id" value="<?php print $row['Wedge ID']; ?>">
-      </p>
-      <p>
-        <INPUT TYPE="submit" VALUE="Insert">
+        <INPUT TYPE="submit" VALUE="Update">
+        <input type="button" value="Cancel" onClick="location.href='showWedges.php'">
       </p>
     </div>
   </div>
