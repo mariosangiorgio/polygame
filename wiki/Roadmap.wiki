@@ -105,5 +105,5 @@ TODO: Check that all the inputs are validated (For example in newGame)
 
 
 ==*For Marko*==
- * intro.php has some font issues: currently we see the "Times" font but it is not the font specified in the CSS
- * in admin.php when the mouse is over a link it is impossible to read the text. The color of the background is the same than the color of the text.
+ * there are some fount issue. The HelveticaNeue LT font isn't standard nor it is installed on all the operating systems. This means that the text is rendered in Times New Roman rather than the chosen font.
+ * the style for the links specifies the same color for the text and for the background when the mouse is over the link, making the text unreadable when the link is selected.
