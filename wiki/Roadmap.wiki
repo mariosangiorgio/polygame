@@ -105,6 +105,8 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * rename insert button in "editWedge" to "UPDATE", add "cancel", etc..-
  * page to delete organizers
 
+==Facoltativi==
+ * unificare add/delete wedge e add/delete organizer nella schermata admin
 
 ==*For Marko*==
  * *all pages*
