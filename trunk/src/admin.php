@@ -68,11 +68,19 @@ a:active {
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
-<p align="center"><span class="Mainstyle"><A HREF=newOrganizer.php class="three">Add organizers<br>
-<A HREF=deleteOrganizers.php class="three">Delete organizers<br>
-</A><A HREF=showWedges.php class="three">View and edit wedges<br>
-</A><A HREF=newWedge.php class="three style8 ">Add wedge<br>
-</A><A HREF=logout.php class="three">Logout</A></span></p>
+<p align="center">
+<span class="Mainstyle">
+<B>Organizer</B> - 
+<A HREF=newOrganizer.php class="three">add</A> - 
+<A HREF=deleteOrganizers.php class="three">delete</A><br>
+
+<B>Wedge</B> - 
+</A><A HREF=newWedge.php class="three style8 ">add</A> - 
+</A><A HREF=showWedges.php class="three">modify</A>
+<BR>
+
+<B></A><A HREF=logout.php class="three">Logout</A></B>
+</span></p>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
 <p align="center"><span class="style21"><span class="style7"><BR>
