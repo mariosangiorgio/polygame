@@ -103,4 +103,4 @@ After Xmas holiday
 
 *For Marko*
  * intro.php has some issues
- * ...
+ * in admin.php when the mouse is over a link it is impossible to read the text. The color of the background is the same than the color of the text.
