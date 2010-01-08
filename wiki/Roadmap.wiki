@@ -105,5 +105,5 @@ TODO: Check that all the inputs are validated (For example in newGame)
 
 
 ==*For Marko*==
- * intro.php has some font issues: currently we see the "Verdana" font but it is not the font specified in the CSS
+ * intro.php has some font issues: currently we see the "Times" font but it is not the font specified in the CSS
  * in admin.php when the mouse is over a link it is impossible to read the text. The color of the background is the same than the color of the text.
