@@ -58,6 +58,23 @@ if( $_SESSION['loggedIn'] == "yes" and
 			$total = $total + $count;
 			$data	= mysql_query($query,$connection);
 	}
+	
+	//Storing the poster for the Plan
+	$overview = mysql_real_escape_string($_POST['Overview']);
+	$reasons  = mysql_real_escape_string($_POST['Reasons']); 
+	$query =
+		"INSERT
+			INTO `Plan Posters`
+				 (`Game ID`, `Player`, `Overview`,`Reasons`)
+			VALUES
+				 (".$gameID.",
+				   '".$_SESSION['usernamePhaseTwo']."',
+				   '".$overview."',
+				   '".$reasons."'
+				 )";
+	$total = $total + $count;
+	$data	= mysql_query($query,$connection);
+
 	Header("Location: ../createPlan.php");
 }
 else{
