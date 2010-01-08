@@ -1,3 +1,61 @@
+<<<<<<< .mine
+<?php
+session_start();
+?>
+<A HREF=assignPlayers.php>Assign <b>players to groups</b></A><BR> |
+Add a new group |
+<A href=deleteGroups.php>Delete groups</A><BR>
+
+
+<script type="text/javascript">
+<!--
+    function alpha(e) {
+        var k;
+        document.all ? k = e.keyCode : k = e.which;
+return ( k != 32 );
+}
+// -->
+</script>
+
+<FORM METHOD="POST"
+	  ACTION='./businessLogic/insertGroup.php'>
+<TABLE>
+<TR>
+<TD>Name</TD>
+<TD><INPUT TYPE='text' NAME='name' onkeypress="return alpha(event)"></TD>
+</TR>
+<TR>
+<TD>Phase</TD>
+<TD>
+	<SELECT NAME='phase'>
+	<OPTION VALUE='One'> First Phase
+	<OPTION VALUE='Two'> Second Phase
+</TD>
+</TR>
+</TABLE>
+<input type="submit" id="Insert">
+</FORM>
+
+<BR><BR>Groups currently associated to this game:<BR>
+<?php
+//Printing existing groups
+	$query = "SELECT `GroupName`, `Phase`
+			  FROM   `Game Groups`
+			  WHERE  `GameID` =
+			  			(SELECT `Game ID`
+				   		 FROM   `Game`
+				   		 WHERE	`Organizer ID` = '".
+				   		 		 $_SESSION['username']."')
+			 ORDER BY `Phase` ASC;";
+	$data  = mysql_query($query,$connection);
+	print "<TABLE>";
+	while($row = mysql_fetch_array($data)){
+		print "<TR><TD>".$row['GroupName']."</TD><TD>".$row['Phase']."</TD></TR>";
+	}
+	print "</TABLE><BR>";
+	}
+?>
+<BR><A href=organize.php>Back to organizer page</A>=======
 <?php
 session_start();
 ?>
@@ -151,3 +209,4 @@ return ( k != 32 );
     </span><br />
   </div>
 </FORM>
+>>>>>>> .r280
