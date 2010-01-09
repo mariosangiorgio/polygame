@@ -71,15 +71,7 @@ a:active {
   <p>&nbsp;</p>
   <p>&nbsp;</p>
 </div>
-<H3 align="center" class="Design">Wondering what PolyGame is?</H3>
-<div align="center" class="Design">PolyGame is a...</div>
-<H3 align="center" class="Design">Wondering who made it?</H3>
-<div align="center" class="Design">
-  <p class="Design">PolyGame was conceived by Prof... and it has been developed by Three students from Alta Scuola Politecnica.</p>
-  <p class="Design">&copy; 2009 <BR>
-    
-    
-    
+
     <?php
 }
 ?>
