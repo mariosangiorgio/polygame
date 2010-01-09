@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <style type="text/css">
 p
 {
@@ -32,7 +35,6 @@ a:active {
     <span class="Design">
     <?php
 
-session_start();
 
 require("./businessLogic/databaseLogin.php");
 

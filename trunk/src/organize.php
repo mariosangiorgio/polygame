@@ -171,7 +171,7 @@ if ($_SESSION['gamePhase'] == 0) {
 // Phase 1
 else if ($_SESSION['gamePhase'] == 1) {
 ?>
-      <span class="style8"><A HREF=chooseGamePlayers.php class="three">Choose and view <b>players</b></A></span><BR>
+      <span class="three style1 style4"><A HREF=chooseGamePlayers.php class="three">Choose and view <b>players</b></A></span><BR>
       <A HREF=newGroup.php class="three style1 style4">Create <b>groups</b></A><BR>
       <A HREF=assignPlayers.php class="three style1 style5">Assign <b>players to groups</b></A><BR>
       <A HREF=chooseWedges.php class="three style1 style5">Choose and view <b>wedges</b></A><BR>
@@ -329,36 +329,36 @@ window.setInterval("reFresh()", 45000);
 // Menu entries
 if($_SESSION['gamePhase'] == 1) //game created
 {
-	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 else if($_SESSION['gamePhase'] == 2) //1a
 {
 	print "<a href=./businessLogic/goToNextPhase.php>Go to next phase (1b)</a><BR>";
-	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 else if($_SESSION['gamePhase'] == 3) //1b
 {
 	print "<a href=./businessLogic/goToPreviousPhase.php>Go to previous phase (1a)</a><BR>";
 	print "<a href=./businessLogic/goToNextPhase.php>Go to next phase (1c)</a><BR>";
-	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 else if($_SESSION['gamePhase'] == 4) //1c
 {
 	print "<a href=./businessLogic/goToPreviousPhase.php>Go to previous phase (1b)</a><BR>";
 	print "<a href=./businessLogic/goToNextPhase.php>Go to break between phase 1 and 2</a><BR>";
-	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 else if($_SESSION['gamePhase'] == 5)
 {
 	print "Phase 1 is over, press the button to start phase 2<BR>";
 	print "<A HREF=businessLogic/startPhaseTwo.php>Start phase 2 NOW</A><BR>";
 	print "<a href=./businessLogic/goToPreviousPhase.php>Go back to phase 1c</a><BR>";
-	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 else if($_SESSION['gamePhase'] == 6)
 {
 	print "<a href=./businessLogic/goToNextPhase.php>End game and view results</a><BR>";	
-	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 else if ($_SESSION['gamePhase'] == 7) {
 	print "The game is over! Hope everyone had fun...<BR>";
@@ -367,7 +367,7 @@ else if ($_SESSION['gamePhase'] == 7) {
 	print "<BR>";
 	include("standings.php");
 	
-	print "<BR><BR><A HREF=deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
+	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 
 

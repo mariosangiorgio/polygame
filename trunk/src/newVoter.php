@@ -64,7 +64,7 @@ a:active {
   <p class="Design"><A HREF="./chooseGameVoters.php" class="three style1">Choose game voters</A> |
       <A HREF="./showGameVoters.php" class="three style1">View voters list</A> |
 Add new voters |
-      <A HREF="./deleteGameVoters.php" class="three style1">Delete voters from the database</A><BR>
+      <A HREF="./deleteVoters.php" class="three style1">Delete voters from the database</A><BR>
     <BR>
 
 Please enter username and password for the new voter: <BR>

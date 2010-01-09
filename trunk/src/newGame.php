@@ -91,8 +91,10 @@ a:active {
     <?php
 }
 else {
-	print "You must log in as an organizer to access this page!<BR>";
-	print "<A HREF=login.php class="three style1">Login</A><BR>";
+	?>
+	You must log in as an organizer to access this page!<BR>
+	"<A HREF=login.php class="three style1">Login</A><BR>
+	<?php
 }
 ?>
 </p>
