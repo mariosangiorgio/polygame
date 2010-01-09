@@ -5,6 +5,19 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role']     == "voter"){
 	require("./businessLogic/databaseLogin.php");
 	
+	//Checking if the voter is involved in a game
+	$query = "SELECT *
+			  FROM `Game Voters`
+			  WHERE `Voter ID` = '".$_SESSION['username']."'";
+	$data  = mysql_query($query,$connection);
+	if(mysql_num_rows($data) == 0){
+		print "Please wait to be inserted in a game<BR>";
+		print "Try again later<BR>";
+		return;
+	}
+	
+	//Checking if the game reached the voting phase
+	
 	//Getting the plans sorted by teams
 	//First getting all the wedges used in the Plans
 	$query = "SELECT DISTINCT `Title`, `Plans`.`Wedge ID`

@@ -35,7 +35,7 @@ session_start();
     			    	="Assignement is ok";
     }
 </script>
-<link href="Design.css" rel="stylesheet" type="text/css" />
+<link href="css/Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 p
 {
@@ -62,7 +62,7 @@ a:active {
 }
 -->
 </style>
-<link href="css/Design.css" rel="stylesheet" type="text/css" />
+
 <link href="css/Mainstyle.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
@@ -202,11 +202,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 	  <span class="Design">
 	  <input type="submit" id="submitButton" disabled="true">
 	  </span></div>
-	<span class="Design">
-	<LABEL ID="status">	</LABEL>
-	</span>
-	<LABEL ID="status"><div align="center" class="Design">Please select a wedge for every player</div>
-	</LABEL>
+	<div align="center" class="Design">
+	<LABEL ID="status">Please select a wedge for every player</LABEL>
+	</div>
 	</form>
 	<div align="center" class="Design">
 	  <p><BR>
