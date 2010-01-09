@@ -58,7 +58,8 @@ a:active {
   </p>
 </div>
 <div align="center" class="Design">
-  <p><a href="login.php" class="three style1">ENTER</a></p>
+  <p><a href="info.php" class="three style1">MORE INFO ON POLYGAME</a></p>
+  <p><a href="login.php" class="three style1">LOGIN NOW</a></p>
   <p>&nbsp;</p>
 </div>
 <div align="center" class="Design">
