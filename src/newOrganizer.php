@@ -55,21 +55,9 @@ a:active {
     <TD class="Design"><INPUT TYPE="password" NAME="password"></TD>
     </TR>
   </TABLE>
-    <p><br>
+    <p>
       <INPUT TYPE="submit" VALUE="Insert">
-      <br />  
-      <br />  
-      <br />  
-      <br />  
-      <br />  
-      <br />  
-      <br />  
-      <br />  
-    </p>
-    <p><br />  
-      <br />  
-      <br />  
-      <br />
+      <input type="button" value="Cancel" onClick="location.href='admin.php'">
     </p>
   </div>
 </FORM>
@@ -82,11 +70,3 @@ else {
         print "You must log in as an administrator to access this page!";
 }
 ?>
-  </p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-</div>
-  <div align="center" class="Design"></div>
