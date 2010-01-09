@@ -60,7 +60,7 @@ a:active {
     <BR>
       </p>
 </div>
-<FORM METHOD="POST" ACTION="./deleteGameVoters.php">
+<FORM METHOD="POST" ACTION="./businessLogic/deleteGameVoters.php">
   <div align="center" class="Design">
     
     <?php

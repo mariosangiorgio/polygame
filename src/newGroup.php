@@ -1,61 +1,3 @@
-<<<<<<< .mine
-<?php
-session_start();
-?>
-<A HREF=assignPlayers.php>Assign <b>players to groups</b></A><BR> |
-Add a new group |
-<A href=deleteGroups.php>Delete groups</A><BR>
-
-
-<script type="text/javascript">
-<!--
-    function alpha(e) {
-        var k;
-        document.all ? k = e.keyCode : k = e.which;
-return ( k != 32 );
-}
-// -->
-</script>
-
-<FORM METHOD="POST"
-	  ACTION='./businessLogic/insertGroup.php'>
-<TABLE>
-<TR>
-<TD>Name</TD>
-<TD><INPUT TYPE='text' NAME='name' onkeypress="return alpha(event)"></TD>
-</TR>
-<TR>
-<TD>Phase</TD>
-<TD>
-	<SELECT NAME='phase'>
-	<OPTION VALUE='One'> First Phase
-	<OPTION VALUE='Two'> Second Phase
-</TD>
-</TR>
-</TABLE>
-<input type="submit" id="Insert">
-</FORM>
-
-<BR><BR>Groups currently associated to this game:<BR>
-<?php
-//Printing existing groups
-	$query = "SELECT `GroupName`, `Phase`
-			  FROM   `Game Groups`
-			  WHERE  `GameID` =
-			  			(SELECT `Game ID`
-				   		 FROM   `Game`
-				   		 WHERE	`Organizer ID` = '".
-				   		 		 $_SESSION['username']."')
-			 ORDER BY `Phase` ASC;";
-	$data  = mysql_query($query,$connection);
-	print "<TABLE>";
-	while($row = mysql_fetch_array($data)){
-		print "<TR><TD>".$row['GroupName']."</TD><TD>".$row['Phase']."</TD></TR>";
-	}
-	print "</TABLE><BR>";
-	}
-?>
-<BR><A href=organize.php>Back to organizer page</A>=======
 <?php
 session_start();
 ?>
@@ -110,7 +52,7 @@ a:active {
       </object>
       </span></p>
     <p align="center">&nbsp;</p>
-    <p align="center" class="Design"><A href=viewGroups.php class="three style1">View existing groups</A> <A href=organize.php class="three style1">Back</A>
+   <p align="center" class="Design"> Add a new group | <A href=viewGroups.php class="three style1">View existing groups</A><BR><BR>
       
       <script type="text/javascript">
 <!--
@@ -126,8 +68,7 @@ return ( k != 32 );
 </div>
 <FORM METHOD="POST"
 	  ACTION='./businessLogic/insertGroup.php'>
-  
-  
+    
           <div align="center">
             <TABLE>
               <TR>
@@ -191,22 +132,10 @@ return ( k != 32 );
   <p align="center" class="Design"><br />
     <input type="submit" id="Insert">
   </p>
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">&nbsp;</p>
-  <div align="center"><span class="Design"><br />  
-    <br />  
-    <br />  
-    <br />  
-    <br />  
-    <br />  
-    <br />  
-    </span><br />
-  </div>
-</FORM>
->>>>>>> .r280
+  
+ </FORM>
+
+
+<BR><BR> <p align="center" class="Design">
+<A href=organize.php class="three style1">Back to organizer page</A> 
+</p>

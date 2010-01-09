@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <link href="Design.css" rel="stylesheet" type="text/css" /><style type="text/css">
 <!--
 a:link {
@@ -24,7 +28,6 @@ a:active {
     
     <span class="Design">
     <?php
-session_start();
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){

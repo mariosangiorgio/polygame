@@ -69,8 +69,8 @@ if( $_SESSION['loggedIn'] == "yes" and
       <BR>
       <?php
 	
-	print "Choose players you want to delete.<BR>";
-	print "Please note that you can't delete players that are associated to a game.<BR>";
+	print "Choose voters you want to delete.<BR>";
+	print "Please note that you can't delete voters that are associated to a game.<BR>";
 	
 	$query		= "SELECT `username`, `role` FROM `Users` WHERE `role` = 'voter'
 				   AND username NOT IN ( SELECT `Voter ID` from `Game Voters`  );";

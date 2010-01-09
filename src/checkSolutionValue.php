@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 p
@@ -33,7 +36,6 @@ a:active {
 <div align="center" class="Design">
   <p>
     <?php
-session_start();
 
 require("./businessLogic/databaseLogin.php");
 

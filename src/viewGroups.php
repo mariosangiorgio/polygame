@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 p
@@ -45,8 +49,6 @@ a:active {
   <p>
     <?php
 
-session_start();
-
 require("./businessLogic/databaseLogin.php");
 
 if( $_SESSION['loggedIn'] == "yes" and
@@ -61,26 +63,20 @@ if( $_SESSION['loggedIn'] == "yes" and
 				   		 		 $_SESSION['username']."')
 			 ORDER BY `Phase` ASC;";
 	$data  = mysql_query($query,$connection);
+	?>
+    <p align="center" class="Design"><A href=newGroup.php class="three style1">Add a new group</A> 
+    | View existing groups <BR><BR>
+	<?php
+	
+	if(mysql_num_rows($data) == 0) print "There are no groups at present";
+	
 	print "<TABLE>";
 	while($row = mysql_fetch_array($data)){
 		print "<TR><TD>".$row['GroupName']."</TD><TD>".$row['Phase']."</TD></TR>";
 	}
 	print "</TABLE><BR>";
-	print "<A href=newGroup.php class="three">Add new group</A> <A href=organize.php class="three">Back</A>";
+	//print "<A href=newGroup.php class=\"three\">Add new group</A> 
+	print "<BR><BR> <A href=organize.php class=\"three\">Back to organizer page</A>";
 	}
 
 ?>
-</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;  </p>
-</div>

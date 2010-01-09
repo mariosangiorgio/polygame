@@ -1,40 +1,10 @@
-<link href="Design.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-p
-{
-	background-image: url(images/background.png);
-	background-position: right bottom;
-	background-repeat: repeat;
-	background-attachment: fixed;
-}
-a.three:link {color: #DD137B}
-a.three:visited {color: #DD137B}
-a.three:hover {background: #DD137B}
-<!--
-a:link {
-	text-decoration: none;
-}
-a:visited {
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: none;
-}
-a:active {
-	text-decoration: none;
-}
--->
-</style>
-<link href="css/Design.css" rel="stylesheet" type="text/css" />
-<div align="center" class="Design"></div>
-<div align="center" class="Design">
-  <?php
+<?php
 session_start();
-
+  
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
-	require("./businessLogic/databaseLogin.php");
+	require("./databaseLogin.php");
 	
 	$_SESSION['gamePhase'] = 0;
 
@@ -108,33 +78,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$query = "DELETE FROM `Game` WHERE `Organizer ID` = '".$_SESSION['username']."';" ;
 	mysql_query($query,$connection);
 		
-	header("Location: organize.php");
+	header("Location: ../organize.php");
 }
 else{
 	print "To perform this operation you must be logged in as an organizer!";
 }
 ?>
-</div>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>

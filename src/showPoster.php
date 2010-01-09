@@ -159,12 +159,16 @@ function display(){
 ";
 		print $poster['Notes']."<BR>
 ";
-		print "<span class="style2"><A HREF=\"./\" class="three">Back</A></span>";
+		?>
+		<span class="style2"><A HREF="./" class="three">Back</A></span>
+		<?php
 	}
 	else{
 		return;
 	}
-}</div>
+}
+?>
+</div>
          <div align="center" class="Design"></div>
          <div align="center" class="Design">
            <p>&nbsp;</p>
