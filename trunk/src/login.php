@@ -7,14 +7,7 @@ if( $_SESSION['loggedIn'] == "yes"){
 	}
 else{
 ?>
-<link href="Design.css" rel="stylesheet" type="text/css" /><style type="text/css">
-p
-{
-	background-image: url(images/background.png);
-	background-position: right bottom;
-	background-repeat: repeat;
-	background-attachment: fixed;
-}
+<link href="css/Design.css" rel="stylesheet" type="text/css" /><style type="text/css">
 a.three:link {color: #DD137B}
 a.three:visited {color: #DD137B}
 a.three:hover {background: #DD137B}
@@ -34,7 +27,6 @@ a:active {
 -->
 </style>
 <link href="css/Mainstyle.css" rel="stylesheet" type="text/css" />
-<link href="css/Design.css" rel="stylesheet" type="text/css" />
 <H2 align="center" class="Design">&nbsp;</H2>
 <H2 align="center" class="Design">&nbsp;</H2>
 <H2 align="center" class="Design">&nbsp;</H2>
