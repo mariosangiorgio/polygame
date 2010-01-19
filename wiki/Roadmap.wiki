@@ -128,4 +128,5 @@ TODO: Check that all the inputs are validated (For example in newGame)
  * *editWedge*: when the administrator modifies a wedge the "update" button is UNDER the animation. Could you please move it ABOVE?
  * *showWedges* there is just the list of the wedges. It isn't formatted
  * *assignWedges*: text that appears while handling the menus is not centered
+ * *organize*: make timer bigger and more beautiful!
  * many links do not belong to any class and for this reason they're rendered with the default font, size and color. This happens for example in the organizer page, during a game for the links "Go to previous phase" and "Go to next phase"
