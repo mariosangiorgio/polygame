@@ -427,16 +427,4 @@ else if ($_SESSION['gamePhase'] == 7) {
 	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 
-
-
 ?>
-    <span class="style7"><A HREF=logout.php class="three ">Logout</A></span></p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p><BR>
-  </p>
-</div>
-<div align="center" class="Design"></div>
-<div align="center" class="Design"></div>

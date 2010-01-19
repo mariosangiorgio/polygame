@@ -20,13 +20,8 @@ a:active {
 </style>
 <link href="css/Design.css" rel="stylesheet" type="text/css" />
 <p align="center" class="Design">&nbsp;</p>
-<div align="center" class="Design">
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">&nbsp;</p>
-  <p align="center" class="Design">
-    
-    <span class="Design">
+<div align="center" class="Design">    
+<span class="Design">
     <?php
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
@@ -41,8 +36,8 @@ if( $_SESSION['loggedIn'] == "yes" and
 				   					  WHERE	`Organizer ID` =
 				   					         '".$_SESSION['username']."');";
 	$data	 = mysql_query($query,$connection);
-	$teamsPhaseOne = "<OPTION VALUE=\"0\">Single player";
-	$teamsPhaseTwo = "<OPTION VALUE=\"0\">Single player";
+	$teamsPhaseOne = "<OPTION VALUE=\"\">Single player";
+	$teamsPhaseTwo = "<OPTION VALUE=\"\">Single player";
 	while($row = mysql_fetch_array($data)){
 		if($row['Phase'] == 'One'){
 			$teamsPhaseOne = $teamsPhaseOne . 
@@ -103,16 +98,3 @@ else{
 ?>
     </span></p>
 </div>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
