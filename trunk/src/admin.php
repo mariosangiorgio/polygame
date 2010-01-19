@@ -70,14 +70,20 @@ a:active {
 <p align="center">&nbsp;</p>
 <p align="center">
 <span class="Mainstyle">
-<B>Organizer</B> - 
+<A HREF=manageOrganizers.php class="three">Manage <b>game organizers</b></A><BR>
+<!-- <B>Organizer</B> -  
 <A HREF=newOrganizer.php class="three">add</A> - 
-<A HREF=deleteOrganizers.php class="three">delete</A><br>
+<A HREF=deleteOrganizers.php class="three">delete</A><br> -->
 
-<B>Wedge</B> - 
+<A HREF=manageWedges.php class="three">Manage <b>wedges</b></A>
+<!-- <B>Wedge</B> - 
 </A><A HREF=newWedge.php class="three style8 ">add</A> - 
-</A><A HREF=showWedges.php class="three">modify</A>
+</A><A HREF=showWedges.php class="three">modify</A> -->
 <BR>
+Help resources: <A HREF="docs/documentation.pdf" class="three">Technical manual</A>
+| <A HREF="docs/manual.pdf" class="three">User manual</A>
+
+<BR><BR><BR>
 
 <B></A><A HREF=logout.php class="three">Logout</A></B>
 </span></p>

@@ -90,6 +90,12 @@ if( $_SESSION['loggedIn'] == "yes" and
 	print "</TABLE>";
 	print "<input type=\"submit\" id=\"submitButton\" ></form>";
 
+	?>
+	<div align="center" class="Design"><BR>
+    <A HREF=organize.php class="three style1">Back to organizer page</A><BR>
+</div>
+	<?php
+
 }
 else{
 	print "To perform this operation you must be logged in as an organizer!";

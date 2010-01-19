@@ -125,9 +125,13 @@ if( $_SESSION['loggedIn'] == "yes" and
   <p align="center" class="Design">
     <span class="Design">
     <INPUT TYPE="submit" VALUE="Insert">
-    <input type="button" value="Cancel" onClick="location.href='admin.php'">
+    <!-- <input type="button" value="Cancel" onClick="location.href='admin.php'"> -->
   </span></p>
 </FORM>
+
+<div align="center" class="Design"><BR>
+    <A HREF=manageWedges.php class="three style1">Back to wedge page</A><BR>
+</div>
 
 
 <div align="center">
