@@ -1,40 +1,5 @@
 <?php
 session_start();
-?>
-<style type="text/css">
-p
-{
-	background-image: url(images/background.png);
-	background-position: right bottom;
-	background-repeat: repeat;
-	background-attachment: fixed;
-}
-a.three:link {color: #DD137B}
-a.three:visited {color: #DD137B}
-a.three:hover {background: #DD137B}
-<!--
-a:hover {
-	text-decoration: none;
-}
-a:link {
-	text-decoration: none;
-}
-a:visited {
-	text-decoration: none;
-}
-a:active {
-	text-decoration: none;
-}
--->
-</style>
-<link href="Design.css" rel="stylesheet" type="text/css" />
-<link href="css/Design.css" rel="stylesheet" type="text/css" />
-<div align="center" class="Design"></div>
-<div align="center" class="Design">
-  <p class="Design">
-    <span class="Design">
-    <?php
-
 
 require("./businessLogic/databaseLogin.php");
 
@@ -109,28 +74,3 @@ else{
 
 print "ERROR";
 ?>
-    </span></p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-  <p class="Design">&nbsp;</p>
-</div>
