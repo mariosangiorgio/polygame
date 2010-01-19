@@ -29,14 +29,10 @@ a:active {
 -->
 </style>
 <link href="css/Design.css" rel="stylesheet" type="text/css" />
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
 <div align="center" class="Design">
-  <p>
-    <?php
+<p>
 
+<?php
 require("./businessLogic/databaseLogin.php");
 
 $query 	= 
@@ -79,27 +75,6 @@ else{
     //print $queryIns;
 	$data	= mysql_query($queryIns,$connection);
 	//print $queryIns;
-
-print "<BR><A HREF=\"./\" class="three">Back to Wedge</A>";
+	print "<BR><A HREF=\"./\" class=\"three\">Back to Wedge</A>";
 ?>
 </p>
-  <p>&nbsp;</p>
-  <p>&nbsp;  </p>
-</div>
-<div align="center" class="Design">
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-</div>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p align="center" class="Design">&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
