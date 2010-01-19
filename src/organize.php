@@ -14,6 +14,54 @@ require("./businessLogic/databaseLogin.php");
 
 // Sets default value
 $_SESSION['gamePhase'] = 0;
+$_SESSION['gameCanStart'] = 0;
+
+// Queries to enable/disable "start game" button
+$query		= "SELECT `Player ID` FROM `Game Players`
+	           WHERE `Game ID` IN (SELECT `Game ID`
+	                                 FROM `Game`
+	                                 WHERE `Organizer ID` = '".
+	                                 $_SESSION['username']
+	                                 ."' ) ;";
+$data		= mysql_query($query,$connection);
+$numPlayers = mysql_num_rows($data);
+
+$query		= "SELECT `Wedge ID` FROM `Game Wedges`
+	           WHERE `Game ID` IN (SELECT `Game ID`
+	                                 FROM `Game`
+	                                 WHERE `Organizer ID` = '".
+	                                 $_SESSION['username']
+	                                 ."' ) ;";
+$data		= mysql_query($query,$connection);
+$numWedges  = mysql_num_rows($data);
+
+$query		= "SELECT `User ID` FROM `Wedge Players`
+	           WHERE `Game ID` IN (SELECT `Game ID`
+	                                 FROM `Game`
+	                                 WHERE `Organizer ID` = '".
+	                                 $_SESSION['username']
+	                                 ."' ) ;";
+$data		= mysql_query($query,$connection);
+$numAssociatedWedges  = mysql_num_rows($data);
+
+$query		= "SELECT `Voter ID` FROM `Game Voters`
+	           WHERE `Game ID` IN (SELECT `Game ID`
+	                                 FROM `Game`
+	                                 WHERE `Organizer ID` = '".
+	                                 $_SESSION['username']
+	                                 ."' ) ;";
+$data		= mysql_query($query,$connection);
+$numVoters  = mysql_num_rows($data);
+
+//print $numPlayers." ".$numWedges." ".$numAssociatedWedges." ".$numVoters;
+
+if(	$numPlayers >= 1 and
+	$numWedges >= 1 and
+	//$numAssociatedWedges == $numPlayers and
+	$numVoters >= 1 )
+{
+	$_SESSION['gameCanStart'] = 1;	
+}
 
 // Finds if there are games associated with organizer
 // (Basically chooses between phase 0 and 1)
@@ -61,6 +109,7 @@ $endingPhase1		= $startingTime +
 $endingTime		   	= $starting2 +
 					 $game['Length 2'];
 
+
 if($gameIsStarted) {
 	if($phaseTwoIsStarted) {
 		if($now > $endingTime) 		$_SESSION['gamePhase'] = 7; //end
@@ -75,6 +124,8 @@ if($gameIsStarted) {
 }
 else{
 	if($now < $startingTime)	$_SESSION['gamePhase'] = 1; //created
+	
+	
 }
 
  //DEBUG
@@ -176,8 +227,14 @@ else if ($_SESSION['gamePhase'] == 1) {
       <A HREF=assignPlayers.php class="three style1 style5">Assign <b>players to groups</b></A><BR>
       <A HREF=chooseWedges.php class="three style1 style5">Choose and view <b>wedges</b></A><BR>
       <A HREF=chooseGameVoters.php class="three style1 style5">Choose and view <b>voters</b></A><BR>
-    
-      <A HREF=businessLogic/startGame.php class="three style1">Start phase one NOW!</A><BR>
+      
+      <?php
+      if($_SESSION['gameCanStart'] == 1)
+      {?>
+      	
+      	<A HREF=businessLogic/startGame.php class="three style1">Start phase one NOW!</A><BR>
+      <?php
+      }?>
     <BR>
     <BR>
     <?php
@@ -194,24 +251,24 @@ else if ($_SESSION['gamePhase'] > 1
 
 $now	= time();
 $countdown = 0;
-if($_SESSION['gamePhase'] == 2)	
+if($_SESSION['gamePhase'] == 2)	 //1a
 {
-	print "We are currently in phase 1a<BR>";
+	print "We are currently in the phase when only the topic is shown<BR>";
 	$countdown	= $starting1b - $now;
 }
-else if($_SESSION['gamePhase'] == 3)
+else if($_SESSION['gamePhase'] == 3) //1b
 {
-	print "We are currently in phase 1b<BR>";
+	print "We are currently in the phase when all the data is shown<BR>";
 	$countdown	= $starting1c - $now;
 }
-else if($_SESSION['gamePhase'] == 4)
+else if($_SESSION['gamePhase'] == 4)  //1c
 {
-	print "We are currently in phase 1c<BR>";
+	print "We are currently in the phase when players are expected to come up with a solution<BR>";
 	$countdown	= $endingPhase1 - $now;
 }
-else if($_SESSION['gamePhase'] == 6)
+else if($_SESSION['gamePhase'] == 6)  //2
 {
-	print "We are currently in phase 2<BR>";
+	print "We are currently in phase when players are expected to come up with a plan<BR>";
 	$countdown	= $endingTime - $now;
 }
 
