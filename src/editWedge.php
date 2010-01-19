@@ -103,20 +103,25 @@ if( $_SESSION['loggedIn'] == "yes" and
       <TD><INPUT type="text" name="solution" onkeyup="this.value = this.value.replace (/\D/, '');" value="<?php print $row['Solution']; ?>"></TD>
       </TR>
         <TR>
-          <TD><div align="center" class="style1">Tolerance</div></TD>
+          <TD><div align="center" class="style1">Tolerance (%)</div></TD>
       <TD><INPUT type="text" name="tolerance" onkeyup="this.value = this.value.replace (/\D/, '');" value="<?php print $row['Error Tolerance']; ?>"></TD>
       </TR>
       </TABLE>
       <INPUT type="hidden" name="id" value="<?php print $row['Wedge ID']; ?>">
       <p>
-        <INPUT TYPE="submit" VALUE="Update">
-        <input type="button" value="Delete"
+        <INPUT TYPE="submit" VALUE="Update this wedge">
+        <input type="button" value="Delete this wedge"
         	   onClick="location.href='./businessLogic/deleteWedge.php?wedgeID=<?php print $row['Wedge ID']; ?>'">
-        <input type="button" value="Cancel" onClick="location.href='showWedges.php'">
+        <!-- <input type="button" value="Cancel" onClick="location.href='showWedges.php'"> -->
       </p>
     </div>
   </div>
 </FORM>
+
+<div align="center" class="Design"><BR><BR>
+    <A HREF=manageWedges.php class="three style1">Back to wedge page (no changes applied)</A><BR>
+</div>
+
 <div align="center">
   <?php
 }	

@@ -390,18 +390,18 @@ if($_SESSION['gamePhase'] == 1) //game created
 }
 else if($_SESSION['gamePhase'] == 2) //1a
 {
-	print "<a href=./businessLogic/goToNextPhase.php>Go to next phase (1b)</a><BR>";
+	print "<a href=./businessLogic/goToNextPhase.php>Go to next phase (show players complete information about wedges)</a><BR>";
 	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 else if($_SESSION['gamePhase'] == 3) //1b
 {
-	print "<a href=./businessLogic/goToPreviousPhase.php>Go to previous phase (1a)</a><BR>";
-	print "<a href=./businessLogic/goToNextPhase.php>Go to next phase (1c)</a><BR>";
+	print "<a href=./businessLogic/goToPreviousPhase.php>Go to previous phase (show players only hints about wedges)</a><BR>";
+	print "<a href=./businessLogic/goToNextPhase.php>Go to next phase (enable solution submission)</a><BR>";
 	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 else if($_SESSION['gamePhase'] == 4) //1c
 {
-	print "<a href=./businessLogic/goToPreviousPhase.php>Go to previous phase (1b)</a><BR>";
+	print "<a href=./businessLogic/goToPreviousPhase.php>Go to previous phase (disable solution submission)</a><BR>";
 	print "<a href=./businessLogic/goToNextPhase.php>Go to break between phase 1 and 2</a><BR>";
 	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
@@ -409,7 +409,7 @@ else if($_SESSION['gamePhase'] == 5)
 {
 	print "Phase 1 is over, press the button to start phase 2<BR>";
 	print "<A HREF=businessLogic/startPhaseTwo.php>Start phase 2 NOW</A><BR>";
-	print "<a href=./businessLogic/goToPreviousPhase.php>Go back to phase 1c</a><BR>";
+	print "<a href=./businessLogic/goToPreviousPhase.php>Go back to phase 1 (enable solution submission once again)</a><BR>";
 	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
 else if($_SESSION['gamePhase'] == 6)
