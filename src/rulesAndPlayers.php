@@ -62,7 +62,7 @@ $query = "SELECT `GroupFirstPhase` as `Group`, `Player`
 			WHERE `GameID` =  ( SELECT `Game ID`
 			                    FROM   `Game`
 					    WHERE  `Organizer ID` = '".$_SESSION['username']."' )
-			      AND `GroupFirstPhase`<>'0'
+			      AND `GroupFirstPhase`<>''
 			UNION
 			SELECT '-' as `Group`, `Player ID` as `Player`
 			FROM `Game Players`
@@ -76,7 +76,7 @@ $query = "SELECT `GroupFirstPhase` as `Group`, `Player`
 									   WHERE  `Organizer ID` =
 									   '".$_SESSION['username']."'
 									 )
-								 AND `GroupFirstPhase`<>'0')";
+								 AND `GroupFirstPhase`<>'')";
 $data		= mysql_query($query,$connection);
 								 
 $query2 = "SELECT `GroupSecondPhase` as `Group`, `Player`
@@ -84,7 +84,7 @@ $query2 = "SELECT `GroupSecondPhase` as `Group`, `Player`
 			WHERE `GameID` =  ( SELECT `Game ID`
 			                    FROM   `Game`
 					    WHERE  `Organizer ID` = '".$_SESSION['username']."' )
-			      AND `GroupSecondPhase`<>'0'
+			      AND `GroupSecondPhase`<>''
 			UNION
 			SELECT '-' as `Group`, `Player ID` as `Player`
 			FROM `Game Players`
@@ -98,7 +98,7 @@ $query2 = "SELECT `GroupSecondPhase` as `Group`, `Player`
 									   WHERE  `Organizer ID` =
 									   '".$_SESSION['username']."'
 									 )
-					 AND `GroupSecondPhase`<>'0')";
+					 AND `GroupSecondPhase`<>'')";
 $data2		= mysql_query($query2,$connection);					 
 
 //	$query		= "SELECT `GroupFirstPhase`, `Player` FROM `Groups`

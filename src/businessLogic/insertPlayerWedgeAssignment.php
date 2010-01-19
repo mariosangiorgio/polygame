@@ -14,7 +14,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 						   WHERE	`Organizer ID` =
 						   '".$_SESSION['username']."'
 						 )
-					AND `GroupFirstPhase`<>'0'
+					AND `GroupFirstPhase`<>''
 					UNION
 					SELECT `Player ID`
 					FROM `Game Players`
@@ -30,7 +30,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 						   WHERE  `Organizer ID` =
 						   '".$_SESSION['username']."'
 						 )
-					 AND `GroupFirstPhase`<>'0')";
+					 AND `GroupFirstPhase`<>'')";
 					 
 	$data	 = mysql_query($query,$connection);
 	$index = 0;

@@ -104,14 +104,14 @@ if( $_SESSION['loggedIn'] == "yes" and
 			 ) as currentGameID,
 			 ( SELECT count(DISTINCT `GroupFirstPhase`)
 			 FROM `Groups`
-			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0'
+			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>''
 			 ) as numberOfGroups,
 			(SELECT count(*)
 				FROM `Game Players`
 				WHERE `Game ID` = currentGameID AND `Player ID` NOT IN
 				(SELECT `Player`
 				 FROM `Groups`
-				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'0')			
+				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'')			
 			) as numberOfPlayers,
 	          (SELECT count(*)
 	           FROM `Game Wedges`
@@ -161,7 +161,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 						   WHERE	`Organizer ID` =
 						   '".$_SESSION['username']."'
 						 )
-					AND `GroupFirstPhase`<>'0'
+					AND `GroupFirstPhase`<>''
 					UNION
 					SELECT `Player ID`
 					FROM `Game Players`
@@ -177,7 +177,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 						   WHERE  `Organizer ID` =
 						   '".$_SESSION['username']."'
 						 )
-					 AND `GroupFirstPhase`<>'0')";
+					 AND `GroupFirstPhase`<>'')";
 					 
 	$data	 = mysql_query($query,$connection);
 	?>
@@ -218,17 +218,5 @@ else{
 
 
 ?>
-      </p>
-	  <p>&nbsp;</p>
-	  <p>&nbsp;</p>
-	  <p>&nbsp;  </p>
-	</div>
-    <p align="center" class="Design">&nbsp;</p>
-    <p align="center" class="Design">&nbsp;</p>
-    <p align="center" class="Design">&nbsp;</p>
-    <p align="center" class="Design">&nbsp;</p>
-    <p align="center" class="Design">&nbsp;</p>
-    <p align="center" class="Design">&nbsp;</p>
-    <p align="center" class="Design">&nbsp;</p>
-    <p align="center" class="Design">&nbsp;</p>
-    
+</p>
+</div>
