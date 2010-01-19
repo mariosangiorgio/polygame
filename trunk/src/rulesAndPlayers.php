@@ -52,7 +52,9 @@ Plans are voted and the best one is then shown at the end of the game.<br />
 <BR>
 
 <?php
-if($_SESSION['loggedIn']) {
+if($_SESSION['loggedIn'] and $_SESSION['role'] == "organizer") {
+
+
 print "<b>Players</b>";
 
 $query = "SELECT `GroupFirstPhase` as `Group`, `Player`
@@ -143,7 +145,9 @@ $data2		= mysql_query($query2,$connection);
 	</table>
   <span class="Design"><BR>
   <?php
-}
+
+
+
 	print "<BR><BR><b>Wedges association</b><BR>";
 	
 	// Extract all game wedges
@@ -187,6 +191,8 @@ else
   <p class="Design"><BR>
     
     <?php
+
+}
 }
 	?>
   </p>

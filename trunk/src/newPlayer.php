@@ -82,6 +82,23 @@ Please enter username and password for the new player: <BR>
   </div>
 </FORM>
 
+
+<div align="center" class="Design">
+  <p>
+<BR><BR>
+Import users from file:<BR>
+<form
+	action="importUsers.php"
+	method="post"
+	enctype="multipart/form-data">
+	
+<input type="file" name="users" />
+<input type="submit" value="Send" />
+</form>
+    </p>
+</div>
+
+
 <div align="center" class="Design">
   <p><BR>
     <BR>
