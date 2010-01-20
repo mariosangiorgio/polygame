@@ -37,7 +37,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	//print $query;
 	mysql_query($query,$connection);
 	//Redirect to the main page
-	header("Location: ../index.php");
+	header("Location: ../manageWedges.php");
 }
 else{
 	print "To perform this operation you must be logged in as an administrator!";
