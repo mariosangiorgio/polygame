@@ -100,16 +100,28 @@ if( $_SESSION['loggedIn'] == "yes" and
       </TR>
         <TR>
           <TD><div align="center" class="style1">Solution</div></TD>
-      <TD><INPUT type="text" name="solution" onkeyup="this.value = this.value.replace (/\D/, '');" value="<?php print $row['Solution']; ?>"></TD>
+      <TD><INPUT type="text" name="solution" onkeyup="
+      			if(/^([0-9]+\.[0-9]+|[0-9]*\.[0-9]+|[0-9]+\.[0-9]*|[0-9]+)$/.test(this.value)){
+      				document.getElementById('submitButton').disabled=false;
+      			}
+      			else{
+      				document.getElementById('submitButton').disabled=true;
+      			}" value="<?php print $row['Solution']; ?>"></TD>
       </TR>
         <TR>
           <TD><div align="center" class="style1">Tolerance (%)</div></TD>
-      <TD><INPUT type="text" name="tolerance" onkeyup="this.value = this.value.replace (/\D/, '');" value="<?php print $row['Error Tolerance']; ?>"></TD>
+      <TD><INPUT type="text" name="tolerance" onkeyup="
+      			if(/^([0-9]+\.[0-9]+|[0-9]*\.[0-9]+|[0-9]+\.[0-9]*|[0-9]+)$/.test(this.value)){
+      				document.getElementById('submitButton').disabled=false;
+      			}
+      			else{
+      				document.getElementById('submitButton').disabled=true;
+      			};" value="<?php print $row['Error Tolerance']; ?>"></TD>
       </TR>
       </TABLE>
       <INPUT type="hidden" name="id" value="<?php print $row['Wedge ID']; ?>">
       <p>
-        <INPUT TYPE="submit" VALUE="Update this wedge">
+        <INPUT TYPE="submit" id="submitButton" VALUE="Update this wedge">
         <input type="button" value="Delete this wedge"
         	   onClick="location.href='./businessLogic/deleteWedge.php?wedgeID=<?php print $row['Wedge ID']; ?>'">
         <!-- <input type="button" value="Cancel" onClick="location.href='showWedges.php'"> -->

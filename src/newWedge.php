@@ -108,18 +108,27 @@ if( $_SESSION['loggedIn'] == "yes" and
             <TEXTAREA class="widgEditor" name="references" rows="20" cols="80"></TEXTAREA>
             </span></TD>
             </TR>
-                        <TR>
-                          <TD class="Design"><div align="center" class="style1">Solution</div></TD>
-          <TD class="Design">            <span class="Design">
-          <INPUT type="text" name="solution" onkeyup="this.value = this.value.replace (/\D/, '');">          
-          </span></TD>
-        </TR>
-                        <TR>
-                          <TD class="Design"><div align="center" class="style1">Tolerance</div></TD>
-          <TD class="Design">            <span class="Design">
-          <INPUT type="text" name="tolerance" onkeyup="this.value = this.value.replace (/\D/, '');">          
-          </span></TD>
-        </TR>
+          <TR>
+          <TD><div align="center" class="style1">Solution</div></TD>
+      <TD><INPUT type="text" name="solution" onkeyup="
+      			if(/^([0-9]+\.[0-9]+|[0-9]*\.[0-9]+|[0-9]+\.[0-9]*|[0-9]+)$/.test(this.value)){
+      				document.getElementById('submitButton').disabled=false;
+      			}
+      			else{
+      				document.getElementById('submitButton').disabled=true;
+      			}" value="<?php print $row['Solution']; ?>"></TD>
+      </TR>
+        <TR>
+          <TD><div align="center" class="style1">Tolerance (%)</div></TD>
+      <TD><INPUT type="text" name="tolerance" onkeyup="
+      			if(/^([0-9]+\.[0-9]+|[0-9]*\.[0-9]+|[0-9]+\.[0-9]*|[0-9]+)$/.test(this.value)){
+      				document.getElementById('submitButton').disabled=false;
+      			}
+      			else{
+      				document.getElementById('submitButton').disabled=true;
+      			};" value="<?php print $row['Error Tolerance']; ?>"></TD>
+      </TR>
+
                           </TABLE>
   </div>
   <p align="center" class="Design">
