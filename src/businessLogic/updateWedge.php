@@ -14,8 +14,10 @@ require("./databaseLogin.php");
 	$references			= mysql_real_escape_string($_POST['references']);
 	$solution			= (float) mysql_real_escape_string($_POST['solution']);
 	$tolerance			= (float) mysql_real_escape_string($_POST['tolerance']);
-	$id					= (int)	  mysql_real_escape_string($_POST['tolerance']);
+	$id					= (int)	  mysql_real_escape_string($_POST['id']);
 
+	if($tolerance < 0 or $tolerance > 300) $tolerance = 5;
+	
 	$query		= "UPDATE `Wedges` 
 					SET
 					`Title` 			= '$title',
@@ -30,5 +32,5 @@ require("./databaseLogin.php");
 					WHERE `Wedge ID` = $id";
 	mysql_query($query,$connection);
 	//Redirect to the main page
-	header("Location: ../index.php");
+	header("Location: ../manageWedges.php");
 ?>

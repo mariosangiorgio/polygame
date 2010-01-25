@@ -13,7 +13,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	Click on a wedge to edit it.<BR><BR>
 	<?php
 	while( $row	= mysql_fetch_array($data)){
-		print "<A HREF=editWedge.php?wedge=".$row['Title'].">".$row['Title']."</A><BR>";
+		print "<A HREF=\"editWedge.php?wedge=".$row['Title']."\">".$row['Title']."</A><BR>";
 	}
 	
 	?>
