@@ -69,6 +69,7 @@ if( $_SESSION['loggedIn'] == "yes" and
           <TD class="Design">
             <span class="Design">
             <TEXTAREA class="widgEditor" name="introduction" rows="20" cols="80"></TEXTAREA>
+            <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
             </span></TD>
         </TR>
                         <TR>
@@ -76,6 +77,7 @@ if( $_SESSION['loggedIn'] == "yes" and
           <TD class="Design">
             <span class="Design">
             <TEXTAREA class="widgEditor" name="history" rows="20" cols="80"></TEXTAREA>
+            <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
             </span></TD>
         </TR>
                         <TR>
@@ -83,6 +85,7 @@ if( $_SESSION['loggedIn'] == "yes" and
           <TD class="Design">
             <span class="Design">
             <TEXTAREA class="widgEditor" name="presentUse" rows="20" cols="80"></TEXTAREA>
+            <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
             </span></TD>
         </TR>
                         <TR>
@@ -91,6 +94,7 @@ if( $_SESSION['loggedIn'] == "yes" and
           <TD class="Design">
             <span class="Design">
             <TEXTAREA class="widgEditor" name="nationalSituation" rows="20" cols="80"></TEXTAREA>
+            <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
             </span></TD>
         </TR>
                         <TR>
@@ -99,6 +103,7 @@ if( $_SESSION['loggedIn'] == "yes" and
           <TD class="Design">
             <span class="Design">
             <TEXTAREA class="widgEditor" name="emissionReduction"></TEXTAREA>
+            <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
             </span></TD>
         </TR
 ><TR>

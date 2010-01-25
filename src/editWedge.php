@@ -70,29 +70,39 @@ if( $_SESSION['loggedIn'] == "yes" and
       </TR>
         <TR>
           <TD><div align="center" class="style1">Introduction</div></TD>
-      <TD><TEXTAREA class="widgEditor" name="introduction" rows="20" cols="80"><?php print $row['Introduction']; ?></TEXTAREA></TD>
+      <TD><TEXTAREA class="widgEditor" name="introduction" rows="20" cols="80"><?php print $row['Introduction']; ?></TEXTAREA>
+      <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
+      </TD>
       </TR>
         <TR>
           <TD><div align="center" class="style1">History</div></TD>
-      <TD><TEXTAREA class="widgEditor" name="history" rows="20" cols="80"><?php print $row['History']; ?></TEXTAREA></TD>
+      <TD><TEXTAREA class="widgEditor" name="history" rows="20" cols="80"><?php print $row['History']; ?></TEXTAREA>
+      <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
+      </TD>
       </TR>
         <TR>
           <TD><div align="center" class="style1">Present use</div></TD>
-      <TD><TEXTAREA class="widgEditor" name="presentUse" rows="20" cols="80"><?php print $row['Present use']; ?></TEXTAREA></TD>
+      <TD><TEXTAREA class="widgEditor" name="presentUse" rows="20" cols="80"><?php print $row['Present use']; ?></TEXTAREA>
+      <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
+      </TD>
       </TR>
         <TR>
           <TD><div align="center" class="style1">
             <p>National<br />
               situation</p>
             </div></TD>
-      <TD><TEXTAREA class="widgEditor" name="nationalSituation" rows="20" cols="80"><?php print $row['National situation']; ?></TEXTAREA></TD>
+      <TD><TEXTAREA class="widgEditor" name="nationalSituation" rows="20" cols="80"><?php print $row['National situation']; ?></TEXTAREA>
+      <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
+      </TD>
       </TR>
         <TR>
           <TD><div align="center" class="style1">
             <p>Emission<br />
               reduction</p>
             </div></TD>
-      <TD><TEXTAREA class="widgEditor" name="emissionReduction"><?php print $row['Emission reduction']; ?></TEXTAREA></TD>
+      <TD><TEXTAREA class="widgEditor" name="emissionReduction"><?php print $row['Emission reduction']; ?></TEXTAREA>
+      <A HREF="./uploadImageForm.php" target="_blank">upload image</A>
+      </TD>
       </TR
 ><TR>
         <TD><div align="center" class="style1">References</div></TD>
