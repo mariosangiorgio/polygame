@@ -38,7 +38,8 @@ if( $_SESSION['loggedIn'] == "yes" and
 	 if (move_uploaded_file($image['tmp_name'], $uploadfile)) {
 	 	echo "Upload OK";
 	 	echo "<BR>";
-	 	echo $uploadfile;
+	 	echo "Use this as the image URL: ";
+	 	echo substr($uploadfile,1);
 	 }
 	 else{
 	 	echo "Possible file upload attack!\n";
