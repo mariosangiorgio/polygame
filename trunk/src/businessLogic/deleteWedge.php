@@ -11,7 +11,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$query = "DELETE FROM `Wedges` WHERE `Wedge ID` = ".$wedgeID;
 	mysql_query($query,$connection);
 	
-	header("Location: ../admin.php");
+	header("Location: ../manageWedges.php");
 }
 else{
 	print "To perform this operation you must be logged in as an administrator!";

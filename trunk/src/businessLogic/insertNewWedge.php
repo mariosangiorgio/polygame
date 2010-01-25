@@ -13,6 +13,8 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$references			= mysql_real_escape_string($_POST['references']);
 	$solution			= (float) mysql_real_escape_string($_POST['solution']);
 	$tolerance			= (float) mysql_real_escape_string($_POST['tolerance']);
+	
+	if($tolerance < 0 or $tolerance > 300) $tolerance = 5;
 
 	$query		= "INSERT INTO `Wedges` (
 					`Title`,
