@@ -52,7 +52,7 @@ The goal is not only to make players more aware of the climate crisis but also p
 </div>
 <H3 align="center" class="Design"><b>Wondering who made it?</b></H3>
 <div align="center" class="Design">
-  <p class="Design"><b>PolyGame</b> was conceived by <a href="http://home.dei.polimi.it/casagran/">Prof. Renato Casagrandi</a> and Giulia Fiorense. It has been developed by three students from the Alta Scuola Politecnica: Marko, Mario, and Marco.</p><BR><BR>
+  <p class="Design"><b>PolyGame</b> was conceived by <a href="http://home.dei.polimi.it/casagran/">Prof. Renato Casagrandi</a> and Giulia Fiorense. It has been developed by five students from the Alta Scuola Politecnica: Martina, Matteo, Marko, Mario, and Marco.</p><BR><BR>
   
 <H3 align="center" class="Design"><b>Wondering how to try it?</b></H3>
 <div align="center" class="Design">

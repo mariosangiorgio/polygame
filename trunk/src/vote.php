@@ -41,6 +41,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 		$titles[$wedges] = $wedge['Title'];
 		$wedges = $wedges + 1;
 	}
+	print_r($titles);
 	$query = $query."FROM  `Plans`
 	                 WHERE `Game ID`=
 	                 			(SELECT `Game ID`

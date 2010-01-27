@@ -70,4 +70,21 @@ function generatePassword($length=9, $strength=0) {
 	return $password;
 }
 
+function searchInArray($array, $searchKey) {
+	foreach ($array as $i => $value) {
+    	if($array[$i] == $serachKey) return 1;
+	}
+	return 0;
+}
+
+function mysql_to_array( $mysql_array ) {
+	while( $row = mysql_fetch_array($mysql_array) ){
+		$array[] = $row['username'];
+	}
+	//print "Array conversion... ";
+	//print_r($array);
+	return $array;
+}
+
+
 ?>

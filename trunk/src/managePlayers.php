@@ -1,6 +1,7 @@
 <?php
 session_start();
-require("./businessLogic/databaseLogin.php");
+require_once("./businessLogic/databaseLogin.php");
+require_once("./businessLogic/businessLogicArrayFunctions.php");
 
 ?>
 <link href="Design.css" rel="stylesheet" type="text/css" />
@@ -62,45 +63,108 @@ a:active {
     <?php
 
 if( $_SESSION['loggedIn'] == "yes" and
-	$_SESSION['role'] == "organizer"){
+	$_SESSION['role'] == "organizer") {
 	
 	print "Choose players you want in the game.<BR>";
 	print "Please note that you won't be able to choose players already involved in a game.<BR>";
 	print "Players will be added to the current game.<BR>";
 	
-	$query		= "SELECT `username`, `role` FROM `Users` WHERE `role` = 'player'
-					   AND username NOT IN ( SELECT `Player ID` from `Game Players`  );";
-	$data		= mysql_query($query,$connection);
+	// Only players created by current organizer should be handled!
+	
+	$query									= "SELECT `username` FROM `Users` WHERE `role` = 'player'
+					   						   AND `creator` = '".$_SESSION['username']."' ;";
+	$playersCreatedByOrganizer 				= mysql_query($query,$connection);
+	$allPlayers 							= mysql_to_array($playersCreatedByOrganizer);
+	//print_r($allPlayers);
+	//print $query;
+	
+	$query									= "SELECT `Player ID` as username FROM `Game Players`
+	        		  						    WHERE `Game ID` IN (SELECT `Game ID`
+	                					   		 FROM `Game`
+	                      				   		WHERE `Organizer ID` = '".
+	                                       				$_SESSION['username']
+	                                       				."' ) ;";
+	$playersCreatedByOrganizerAndInGame	    = mysql_query($query,$connection);
+	$gamePlayers 							= mysql_to_array($playersCreatedByOrganizerAndInGame);
+	//print $query;
+	
+	$query									= "SELECT `username` FROM `Users`
+	        		  						    WHERE `username` NOT IN (SELECT `Player ID`
+	                					   		 						  FROM `Game Players`
+	                      				   								 WHERE `Game ID`
+	                    	  				   								 IN (SELECT `Game ID`
+								                					   		 FROM `Game`
+	                      										   		WHERE `Organizer ID` = '".
+	                                       								$_SESSION['username']
+	                                       								."' )
+	                                       								)
+	                                       		AND `creator` ='".
+	                                       			$_SESSION['username']
+	                                       		    ."'
+	                                       		 ;";
+	$playersCreatedByOrganizerAndNotInGame  = mysql_query($query,$connection);
+	$nonGamePlayers							= mysql_to_array($playersCreatedByOrganizerAndNotInGame);
+	//print_r($nonGamePlayers);
+	//print $query;
+	
+	
+	// End of querys
+	
 	?>
-    </span>
-    <table border=".0."> <!-- MAIN TWO-COLUMN TABLE -->
+	
+	<!-- Script to switch action -->
+	<SCRIPT language="JavaScript">
+	function OnSubmitForm()
+	{
+	  if(document.playersForm.operation[0].checked == true)
+	  {
+	    document.playersForm.action ="./businessLogic/chooseGamePlayer.php";
+	  }
+	  else
+	  if(document.playersForm.operation[1].checked == true)
+	  {
+	    document.playersForm.action ="./businessLogic/deletePlayer.php";
+	  }
+	  return true;
+	}
+	</SCRIPT>
+	
+    <table border=".1."> <!-- MAIN TWO-COLUMN TABLE -->
 		<TR><TD>
-		
-	    <FORM METHOD="POST" ACTION="./businessLogic/chooseGamePlayer.php">
-		<FORM METHOD="POST" ACTION="./businessLogic/deletePlayer.php">
 
 		<?php
-			$query		= "SELECT `username`, `role` FROM `Users` WHERE `role` = 'player'
-				   		   AND username NOT IN ( SELECT `Player ID` from `Game Players`  );";
-			$data		= mysql_query($query,$connection);
 			
-			if(mysql_num_rows($data)==0)
-				print "No players available";
-			else {
-		?>
-    		</p>
-        		<table border=".0." width="180" valign="bottom"> <!-- LEFT TABLE -->
-        <?php
-			while( $row	= mysql_fetch_array($data))
+			if(mysql_num_rows($playersCreatedByOrganizer)==0)
 			{
-				print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['username']."\"></TD><TD>".$row['username']."</TD></TR>\n";
+				print "This organizer has created no players so far";
+				foreach ($allPlayers as $i => $player) {
+					print "<TR height=\"25\"><TD></TD><TD></TD></TR>\n";
+				}
+				reset($allPlayers);
 			}
+			else
+			{
+		?>
+		   <FORM NAME="playersForm" METHOD="POST" onSubmit="return OnSubmitForm();">
+    		</p>
+        		<table border=".1." width="180" valign="bottom"> <!-- LEFT TABLE -->
+        <?php
+	       	foreach ($allPlayers as $i => $player) {
+				$research = searchInArray($nonGamePlayers, $player);
+				if( $research == 1 ) {
+					print "<TR height=\"25\"><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$player."\"></TD><TD>".$player."</TD></TR>\n";
+				}
+				else print "<TR height=\"25\"><TD></TD><TD></TD></TR>\n";
+			}
+			reset($allPlayers);
 		?>
       			</table>
 			<BR>
-			<INPUT TYPE="submit" VALUE="Add to game"><BR><BR>
-			</FORM>
-			<INPUT TYPE="submit" VALUE="Permanentely delete">
+			<INPUT TYPE="radio" name="operation" VALUE="1" checked>Add to game<BR>
+			<INPUT TYPE="radio" name="operation" VALUE="2">Delete from database<BR>
+		    <P>
+			    <INPUT TYPE="SUBMIT" name="Submit" VALUE="Submit">
+		    </P>
 			</FORM>
 		<?php
 			}
@@ -109,33 +173,40 @@ if( $_SESSION['loggedIn'] == "yes" and
 		<TD>
 		<?php
 		
-			$query		= "SELECT `Player ID` FROM `Game Players`
-	        		      WHERE `Game ID` IN (SELECT `Game ID`
-	                                 FROM `Game`
-	                                 WHERE `Organizer ID` = '".
-	                                 $_SESSION['username']
-	                                 ."' ) ;";
-			$data		= mysql_query($query,$connection);
-			if(mysql_num_rows($data)==0)
-				print "No players available";
+			if(mysql_num_rows($playersCreatedByOrganizerAndInGame)==0)
+			{
+				//print "No players in the game";
+				foreach ($allPlayers as $i => $player) {
+					print "<TR height=\"25\"><TD></TD><TD></TD></TR>\n";
+				}
+				reset($allPlayers);
+			}
 			else {
 		?>
     	
     	<FORM METHOD="POST" ACTION="./businessLogic/deleteGamePlayers.php">
-    	<table border=".0." width="180" valign="bottom"> <!-- right table -->
+    	<table border=".1." width="180" valign="bottom"> <!-- right table -->
       	<?php
-			while( $row	= mysql_fetch_array($data))
-			{
-				print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['Player ID']."\"></TD><TD>".$row['Player ID']."</TD></TR>\n";
+      		foreach ($allPlayers as $i => $player) {
+				$research = searchInArray($gamePlayers, $player);
+				if( $research == 1 ) {
+					print "<TR height=\"25\"><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$player."\"></TD><TD>".$player."</TD></TR>\n";
+				}
+				else print "<TR height=\"25\"><TD></TD><TD></TD></TR>\n";
 			}
+				print "<BR><BR><BR><BR>"
+				reset($allPlayers);
 		?>
       	</table>
-		<BR>
 		<INPUT TYPE="submit" VALUE="Remove from game">
+
+		<BR>
 		</TD>
 		</TR>
 	</table> <!-- MAIN TWO-COLUMN TABLE -->
-
+	</span>
+	<BR><BR><BR>
+	
     <?php
 			}
     ?>
@@ -146,8 +217,9 @@ else {
 	print "You must log in as an organizer to access this page!";
 }
 ?>
-     </p>
-
-<div align="center" class="Mainstyle"><BR>
+<div align="center" class="Mainstyle">
   <A HREF=organize.php class="three style1">Back to organize page</A><BR>
 </div>
+     </p>
+
+
