@@ -36,6 +36,14 @@ if( $_SESSION['loggedIn'] == "yes" and
 	while($index >= 0){
 		if($assignment["ONE".$players[$index]] !='' OR
 		   $assignment["TWO".$players[$index]] !=''){
+		//Cleaning up old entries
+		$query = "DELETE FROM `Groups` WHERE `Player` = '".$players[$index]."' AND
+											 `GameID` = (SELECT `Game ID`
+											 			 FROM   `Game`
+											 			 WHERE  `Organizer ID` = '".$_SESSION['username']."'
+											 			 )";
+		mysql_query($query,$connection);
+		//Inserting the new value
 		$query = "INSERT INTO `Groups`
 				  	(`Player`,
 				  	 `GroupFirstPhase`,
