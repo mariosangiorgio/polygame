@@ -35,12 +35,13 @@ if( $_SESSION['loggedIn'] == "yes" and
 				         WHERE `Organizer ID` ='".$_SESSION['username']."')";
 	$data = mysql_query($query,$connection);
 	
-	print "<FORM METHOD=\"POST\"
+	print "<FORM NAME=\"assignments\" METHOD=\"POST\"
 	             ACTION='./businessLogic/assignPlayersToGroups.php'>";
 	print "<TABLE>";
 	print "<TR><TD>Player</TD><TD>Phase One Team</TD><TD>Phase Two Team</TD><TD>Reset</TD></TR>";
 	
 	$counter =0;
+	$enableAll = "";
 	while($player = mysql_fetch_array($data)){
 		$alreadyAssignedQuery = "SELECT `Player`, `GroupFirstPhase`, `GroupSecondPhase`
 								 FROM	`Groups`
@@ -87,9 +88,12 @@ if( $_SESSION['loggedIn'] == "yes" and
 			print "</TD><TD></TD></TR>";
 		}
 		$counter = $counter + 1;
+		$enableAll = $enableAll."document.getElementsByName(\"ONE".$player['Player ID']."\")[0].disabled=false;document.getElementsByName(\"TWO".$player['Player ID']."\")[0].disabled=false;";
 	}
 	print "</TABLE>";
-	print "<input type=\"submit\" id=\"submitButton\" ></form>";
+	print "<input type=\"submit\" id=\"submitButton\" onclick='";
+	print $enableAll."assignments.submit();return false;";
+	print "' ></form>";
 
 	?>
 	<div align="center" class="Design"><BR>
@@ -102,5 +106,3 @@ else{
 	print "To perform this operation you must be logged in as an organizer!";
 }
 ?>
-    </span></p>
-</div>
