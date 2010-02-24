@@ -1,28 +1,6 @@
 <?php
 session_start();
-?>
 
-<link href="Design.css" rel="stylesheet" type="text/css" /><style type="text/css">
-<!--
-a:link {
-	text-decoration: none;
-}
-a:visited {
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: none;
-}
-a:active {
-	text-decoration: none;
-}
--->
-</style>
-<link href="css/Design.css" rel="stylesheet" type="text/css" />
-<p align="center" class="Design">&nbsp;</p>
-<div align="center" class="Design">    
-<span class="Design">
-    <?php
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
@@ -54,32 +32,60 @@ if( $_SESSION['loggedIn'] == "yes" and
 			  WHERE  `Game ID` =
 			  			(SELECT `Game ID`
 				         FROM `Game`
-				         WHERE `Organizer ID` ='".$_SESSION['username']."')
-				         and
-			  		 `Player ID` NOT IN
-			  		 	(SELECT `Player`
-			  		 	 FROM `Groups`
-			  		 	 WHERE `GameID` = `Game ID`)";
+				         WHERE `Organizer ID` ='".$_SESSION['username']."')";
 	$data = mysql_query($query,$connection);
 	
 	print "<FORM METHOD=\"POST\"
 	             ACTION='./businessLogic/assignPlayersToGroups.php'>";
 	print "<TABLE>";
-	print "<TR><TD>Player</TD><TD>Phase One Team</TD><TD>Phase Two Team</TD></TR>";
+	print "<TR><TD>Player</TD><TD>Phase One Team</TD><TD>Phase Two Team</TD><TD>Reset</TD></TR>";
 	
 	$counter =0;
 	while($player = mysql_fetch_array($data)){
-		print "<TR><TD>".$player['Player ID']."</TD><TD>";
-		print "<SELECT ID=player".$counter.
-		      " NAME=ONE".$player['Player ID'].">";
-		print $teamsPhaseOne;
-		print "</SELECT>";
-		print "</TD><TD>";
-		print "<SELECT ID=player".$counter.
-		      " NAME=TWO".$player['Player ID'].">";
-		print $teamsPhaseTwo;
-		print "</SELECT>";
-		print "</TD></TR>";
+		$alreadyAssignedQuery = "SELECT `Player`, `GroupFirstPhase`, `GroupSecondPhase`
+								 FROM	`Groups`
+								 WHERE  `Player` ='".$player['Player ID']."' AND
+								 		`GameID` = (SELECT `Game ID`
+								 					FROM   `Game`
+								 					WHERE	`Organizer ID` ='".$_SESSION['username']."');";
+		$alreadyAssignedData = mysql_query($alreadyAssignedQuery,$connection);
+		
+		if($groups = mysql_fetch_array($alreadyAssignedData)){
+			print "<TR><TD>".$player['Player ID']."</TD><TD>";
+			print "<SELECT
+					DISABLED = 'disabled'
+					ID=player".$counter.
+				  " NAME=ONE".$player['Player ID'].">";
+			print str_replace("VALUE=\"".$groups['GroupFirstPhase']."\"","SELECTED VALUE=\"".$groups['GroupFirstPhase']."\"",$teamsPhaseOne);
+			print "</SELECT>";
+			print "</TD><TD>";
+			print "<SELECT
+						DISABLED = 'disabled'
+						ID=player".$counter.
+				  " NAME=TWO".$player['Player ID'].">";
+			print str_replace("VALUE=\"".$groups['GroupSecondPhase']."\"","SELECTED VALUE=\"".$groups['GroupSecondPhase']."\"",$teamsPhaseTwo);
+			print "</SELECT>";
+			print "</TD><TD NAME=EDIT".$player['Player ID']."
+						<A href=null
+						   onclick='document.getElementsByName(\"ONE".$player['Player ID']."\")[0].disabled=false;".
+						           "document.getElementsByName(\"TWO".$player['Player ID']."\")[0].disabled=false;".
+						           "document.getElementsByName(\"EDIT".$player['Player ID']."\")[0].innerHTML=\"\";".
+						           "return false'
+						 >EDIT</A></TD></TR>";
+		}
+		else{
+			print "<TR><TD>".$player['Player ID']."</TD><TD>";
+			print "<SELECT ID=player".$counter.
+				  " NAME=ONE".$player['Player ID'].">";
+			print $teamsPhaseOne;
+			print "</SELECT>";
+			print "</TD><TD>";
+			print "<SELECT ID=player".$counter.
+				  " NAME=TWO".$player['Player ID'].">";
+			print $teamsPhaseTwo;
+			print "</SELECT>";
+			print "</TD><TD></TD></TR>";
+		}
 		$counter = $counter + 1;
 	}
 	print "</TABLE>";
