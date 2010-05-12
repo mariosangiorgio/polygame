@@ -17,6 +17,7 @@ if($row['PasswordValid']==0){
 	$_SESSION['username']	= $username;
 	$_SESSION['role']		= $row['role'];
 	header("Location: ../setPassword.php");
+	return;
 }
 
 if(sha1("polygame".$password) == $row['password']){
@@ -25,6 +26,7 @@ if(sha1("polygame".$password) == $row['password']){
 	$_SESSION['role']		= $row['role'];
 	
 	header("Location: ../index.php");
+	return;
 	}
 else{
 	print "Login error. Please, double check your username and password.";

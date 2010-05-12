@@ -1,16 +1,5 @@
 <?php
 
-function databaseLogin(){
-	$host		= "mysql.netsons.com";
-	$database	= "polygame_polygame";
-	$username	= "polygame_user";
-	$password	= "12qwaszx";
-	$connection	= mysql_connect($host,$username,$password);
-	mysql_select_db($database,$connection);
-	
-	return $connection;
-}
-
 // Function to fix up PHP's messing up POST input containing dots, etc.
 function getRealPOST() {
     $pairs = explode("&", file_get_contents("php://input"));
@@ -22,22 +11,6 @@ function getRealPOST() {
         $vars[$name] = $value;
     }
     return $vars;
-}
-
-function insertNewPlayer($username, $password){
-	$connection = databaseLogin();
-	
-	//Sanitizing inputs
-	$username	= mysql_real_escape_string($username);
-	$password	= mysql_real_escape_string($password);
-	//Hashing and salting the password
-	$password	= sha1("polygame".$password);
-	
-	//Insert new player in USERS table
-	$query		= "INSERT INTO `Users` (`username`,`role`,`password`)
-				   VALUES ('$username', 'player', '$password');";
-	
-	$data		= mysql_query($query,$connection);
 }
 
 function generatePassword($length=9, $strength=0) {
@@ -81,8 +54,6 @@ function mysql_to_array( $mysql_array ) {
 	while( $row = mysql_fetch_array($mysql_array) ){
 		$array[] = $row['username'];
 	}
-	//print "Array conversion... ";
-	//print_r($array);
 	return $array;
 }
 
