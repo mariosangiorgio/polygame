@@ -1,7 +1,7 @@
 <?php
 session_start();
 require("./businessLogicFunctions.php");
-$connection = databaseLogin();
+require("./databaseLogin.php");
 
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and

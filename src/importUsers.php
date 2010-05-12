@@ -1,20 +1,27 @@
-TEST PAGE TO READ AN UPLOADED FILE<BR>
 <?php
-require("./businessLogic/businessLogicFunctions.php");
+require("./businessLogic/databaseLogin.php");
 
 $filename = $_FILES['users']['tmp_name'];
 $tempFile = file($filename);
 
-echo "<TABLE>";
+echo "IMPORT SUCCESSFUL<BR>";
+
 foreach ($tempFile as $line_num => $line) {
     $username = htmlspecialchars($line);
     $username = preg_replace("/[\n\r]/","",$username); 
-    $password = generatePassword();
+    $username = mysql_real_escape_string($username);
     
-    echo "<TR><TD>" . $username . "</TD><TD>" . $password . "</TD></TR>";
-
-    insertNewPlayer($username, $password);
+    echo $username;
+    echo "<BR>";
+    
+    $query = "INSERT INTO `Users`
+    		  (`Username`,`PasswordValid`,`Role`)
+    		  VALUES
+    		  ('".$username."',0,'Player')";
+    mysql_query($query,$connection);
 }
-echo "</TABLE>";
+
+echo "<A HREF='./organize.php'>Back to organizer page</A>";
+
 
 ?>
