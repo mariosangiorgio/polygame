@@ -5,7 +5,7 @@ session_start();
 require("./databaseLogin.php");
 
 $query 	= 
-	"INSERT INTO `polygame_polygame`.`Posters` (
+	"INSERT INTO `Posters` (
 	 `Player`, `Game ID`, `Wedge ID`, `Pros`,
 	 `Cons`, `Notes`)
 	 VALUES ( '".$_SESSION['usernamePhaseOne']."',
