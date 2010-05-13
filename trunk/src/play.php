@@ -72,5 +72,6 @@ else{
 	return;
 }
 
-print "ERROR";
+print "An error occurred, please logout and then login again.<BR>";
+print "<A HREF='./logout.php'>Logout</A>";
 ?>

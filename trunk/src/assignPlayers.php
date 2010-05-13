@@ -56,17 +56,17 @@ if( $_SESSION['loggedIn'] == "yes" and
 			print "<SELECT
 					DISABLED = 'disabled'
 					ID=player".$counter.
-				  " NAME=ONE".$player['Player ID'].">";
+				  " NAME='ONE".$player['Player ID']."'>";
 			print str_replace("VALUE=\"".$groups['GroupFirstPhase']."\"","SELECTED VALUE=\"".$groups['GroupFirstPhase']."\"",$teamsPhaseOne);
 			print "</SELECT>";
 			print "</TD><TD>";
 			print "<SELECT
 						DISABLED = 'disabled'
 						ID=player".$counter.
-				  " NAME=TWO".$player['Player ID'].">";
+				  " NAME='TWO".$player['Player ID']."'>";
 			print str_replace("VALUE=\"".$groups['GroupSecondPhase']."\"","SELECTED VALUE=\"".$groups['GroupSecondPhase']."\"",$teamsPhaseTwo);
 			print "</SELECT>";
-			print "</TD><TD NAME=EDIT".$player['Player ID']."
+			print "</TD><TD NAME='EDIT".$player['Player ID']."'
 						<A href=null
 						   onclick='document.getElementsByName(\"ONE".$player['Player ID']."\")[0].disabled=false;".
 						           "document.getElementsByName(\"TWO".$player['Player ID']."\")[0].disabled=false;".
@@ -77,12 +77,12 @@ if( $_SESSION['loggedIn'] == "yes" and
 		else{
 			print "<TR><TD>".$player['Player ID']."</TD><TD>";
 			print "<SELECT ID=player".$counter.
-				  " NAME=ONE".$player['Player ID'].">";
+				  " NAME='ONE".$player['Player ID']."'>";
 			print $teamsPhaseOne;
 			print "</SELECT>";
 			print "</TD><TD>";
 			print "<SELECT ID=player".$counter.
-				  " NAME=TWO".$player['Player ID'].">";
+				  " NAME='TWO".$player['Player ID']."'>";
 			print $teamsPhaseTwo;
 			print "</SELECT>";
 			print "</TD><TD></TD></TR>";
