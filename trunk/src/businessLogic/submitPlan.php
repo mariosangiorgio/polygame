@@ -48,13 +48,14 @@ if( $_SESSION['loggedIn'] == "yes" and
 	foreach(array_keys($wedgesSelected) as $wedge){
 			$query =
 				"INSERT
-					INTO `polygame_polygame`.`Plans`
+					INTO `Plans`
 						 (`Game ID`,`Player ID`,`Wedge ID`,`Wedge Count`)
 					VALUES
 						 (".$gameID.",
 						   '".$_SESSION['usernamePhaseTwo']."',
 						   ".$wedge.",
 						   ".$wedgesSelected[$wedge].")";
+			echo $query;
 			$total = $total + $count;
 			$data	= mysql_query($query,$connection);
 	}
@@ -74,7 +75,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 				 )";
 	$total = $total + $count;
 	$data	= mysql_query($query,$connection);
-
+	
 	Header("Location: ../createPlan.php");
 }
 else{

@@ -1,7 +1,7 @@
 <?php
 session_start();
 ?><HEAD>
-<meta http-equiv="Refresh" content="60; url=play.php">
+<meta http-equiv="Refresh" content="60; url=index.php">
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><style type="text/css">
 p

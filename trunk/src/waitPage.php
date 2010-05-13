@@ -1,3 +1,4 @@
+<meta http-equiv="refresh" content="60; url=./index.php">
 <style type="text/css">
 p
 {

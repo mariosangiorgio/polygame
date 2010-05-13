@@ -7,6 +7,15 @@ require("./databaseLogin.php");
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
+	//Cleaning up old data!
+	$query = "DELETE
+			  FROM `Wedge Players`
+			  WHERE `Game ID` =  ( SELECT `Game ID`
+			  					  FROM   `Game`
+								  WHERE  `Organizer ID` =
+								  		'".$_SESSION['username']."') ";
+	mysql_query($query,$connection);
+	
 	//Getting users
 	$query		= "SELECT `GroupFirstPhase` as `Player`
 					FROM `Groups`
