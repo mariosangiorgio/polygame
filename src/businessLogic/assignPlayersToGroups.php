@@ -1,6 +1,7 @@
 <?php
 session_start();
 require("./databaseLogin.php");
+require("./businessLogicFunctions.php");
 
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
@@ -16,21 +17,23 @@ if( $_SESSION['loggedIn'] == "yes" and
 
 	$data	 = mysql_query($query,$connection);
 	$index = 0;
+	
+	$REAL_POST = getRealPOST();
+	
 	while($player = mysql_fetch_array($data)){
 			$assignment["ONE".$player['Player ID']] =
-					$_POST["ONE".$player['Player ID']];
+					$REAL_POST["ONE".$player['Player ID']];
 			$assignment["TWO".$player['Player ID']] =
-					$_POST["TWO".$player['Player ID']];
+					$REAL_POST["TWO".$player['Player ID']];
 			$players[$index] = $player['Player ID'];
 			$index = $index + 1;
-
 	}
 
 	//Cleaning up old entries
-	$query = "DELETE FROM `Groups` WHERE `GameID` = (SELECT `Game ID`
-											 			 FROM   `Game`
-											 			 WHERE  `Organizer ID` = '".$_SESSION['username']."'
-											 			 )";
+	$query = "DELETE FROM `Groups` WHERE `GameID` =
+				(SELECT `Game ID`
+				 FROM   `Game`
+				 WHERE  `Organizer ID` = '".$_SESSION['username']."' )";
 	mysql_query($query,$connection);
 	//Inserting data
 	$index = $index - 1;
