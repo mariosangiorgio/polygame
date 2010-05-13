@@ -8,11 +8,19 @@ if( $_SESSION['loggedIn'] == "yes" and
 	//Sanitizing inputs
 	$username	= mysql_real_escape_string($_POST['username']);
 	$password	= mysql_real_escape_string($_POST['password']);
-	//Hashing and salting the password
-	$password	= sha1("polygame".$password);
 	//Query
-	$query		= "INSERT INTO `Users` (`username`,`role`,`password`)
-				   VALUES ('$username', 'voter', '$password');";
+	if($password == ""){
+		//Hashing and salting the password
+		$password	= sha1("polygame".$password);
+		$query = "INSERT INTO `Users`
+				  (`username`,`role`,`password`,`PasswordValid`)
+				  VALUES ('$username', 'voter', '$password',1);";
+	}
+	else{
+		$query = "INSERT INTO `Users`
+				  (`username`,`role`,`PasswordValid`)
+				  VALUES ('$username', 'voter's,0);";
+	}
 	$data		= mysql_query($query,$connection);
 	
 	//Redirect to the main page
