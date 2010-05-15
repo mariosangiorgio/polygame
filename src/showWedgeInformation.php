@@ -1,6 +1,4 @@
-<?php
-session_start();
-?><HEAD>
+<HEAD>
 <meta http-equiv="Refresh" content="60; url=index.php">
 <link href="Design.css" rel="stylesheet" type="text/css" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /><style type="text/css">
@@ -31,6 +29,10 @@ a:active {
 </style>
 <link href="css/Design.css" rel="stylesheet" type="text/css" />
 </HEAD>
+<?php
+session_start();
+require("./showUserInfo.php");
+?>
 
 <p align="center" class="Design">&nbsp;</p>
 <p align="center" class="Design">&nbsp;</p>

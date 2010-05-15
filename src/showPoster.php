@@ -11,20 +11,21 @@ if( $_SESSION['loggedIn'] == "yes" and
 		$wedgeID	= intval($_GET['wedgeID']);
 		if($_SESSION['role'] == "player"){
 			$query		=
-			"SELECT *
-			 FROM  `Posters`,`Game Players`
-			 WHERE `Posters`.`Wedge ID` = ".$wedgeID." AND 
+			"SELECT * 
+			 FROM  `Posters`,`Game Players`,`Wedges`
+			 WHERE `Wedges`.`Wedge ID` = $wedgeID AND
+			 	   `Posters`.`Wedge ID` = $wedgeID AND 
 				   `Posters`.`Game ID`=`Game Players`.`Game ID` AND
 				   `Game Players`.`Player ID`='".$_SESSION['username']."'";
 		}
 		if($_SESSION['role'] == "organizer"){
 			$query		=
 			"SELECT *
-			 FROM  `Posters`,`Game`
-			 WHERE `Posters`.`Wedge ID` = ".$wedgeID." AND 
+			 FROM  `Posters`,`Game`,`Wedges`
+			 WHERE `Wedges`.`Wedge ID` = $wedgeID AND
+			 	   `Posters`.`Wedge ID` = $wedgeID AND 
 				   `Posters`.`Game ID`=`Game`.`Game ID` AND
 				   `Organizer ID`='".$_SESSION['username']."'";
-
 $query2 = "SELECT `Presentation time` FROM `Game`
 		  WHERE `Organizer ID` = '".$_SESSION['username']."';";
 $data	= mysql_query($query2,$connection);
@@ -148,19 +149,15 @@ function display(){
 		
 		$data	= mysql_query($query,$connection);
 		$poster	= mysql_fetch_array($data);
-		print "<B>PROS</B><BR>";
-		print $poster['Pros']."<BR>
-";
-		print "<B>CONS</B><BR>
-";
-		print $poster['Cons']."<BR>
-";
-		print "<B>NOTES</B><BR>
-";
-		print $poster['Notes']."<BR>
-";
+		print "<h1>".$poster['Title']."</h1>";
+		print "<BR><B>PROS</B><BR>";
+		print $poster['Pros']."<BR>";
+		print "<B>CONS</B><BR>";
+		print $poster['Cons']."<BR>";
+		print "<B>NOTES</B><BR>";
+		print $poster['Notes']."<BR>";
 		?>
-		<span class="style2"><A HREF="./" class="three">Back</A></span>
+<span class="style2"><A HREF="./" class="three">Back</A></span>
 		<?php
 	}
 	else{
@@ -169,18 +166,3 @@ function display(){
 }
 ?>
 </div>
-         <div align="center" class="Design"></div>
-         <div align="center" class="Design">
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-           <p>&nbsp;</p>
-         </div>
-         

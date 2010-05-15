@@ -1,4 +1,8 @@
 <meta http-equiv="refresh" content="60; url=./index.php">
+<?php
+session_start();
+require("./showUserInfo.php");
+?>
 <style type="text/css">
 p
 {
