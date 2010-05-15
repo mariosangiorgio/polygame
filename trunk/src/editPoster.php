@@ -1,5 +1,6 @@
 <?php
 session_start();
+require("./showUserInfo.php");
 ?><head>
 <style type="text/css" media="all">
 	@import "css/info.css";
@@ -64,7 +65,6 @@ if(
 	$now > $checkSolutionTime and
 	$now < $endPhase
 	){
-	print "Poster:<BR>";
 }
 //Retreiving the existing poster from the database
 require("./businessLogic/databaseLogin.php");
@@ -72,7 +72,7 @@ require("./businessLogic/databaseLogin.php");
 $query 	= 
 	"SELECT *
 	 FROM `Posters`
-	 WHERE `Player`='".$_SESSION['username']."' and 
+	 WHERE `Player`='".$_SESSION['usernamePhaseOne']."' and 
 	 	   `Game ID` = (SELECT `Game ID`
 	 	   				FROM `Game Players`
 	 	   				WHERE `Player ID` ='".$_SESSION['username']."')
@@ -97,15 +97,6 @@ $poster = mysql_fetch_array($data);
     </p>
   </div>
 </FORM>
-
-<div align="center" class="Design">
-  <p class="Design"><br>
-      <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
-        <param name="movie" value="Flash/dots.swf" />
-        <param name="quality" value="high" />
-        <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
-    </object>
-  </p>
   <p class="Design"><br>
       <a href="showWedgeInformation.php" class="three style1">Back to wedge</a></p>
 </div>

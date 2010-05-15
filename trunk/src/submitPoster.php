@@ -1,5 +1,6 @@
 <?php
 session_start();
+require("./showUserInfo.php");
 ?><head>
 <style type="text/css" media="all">
 	@import "css/info.css";
@@ -74,17 +75,6 @@ if(
 	Notes<BR>
 	<TEXTAREA class="widgEditor" name="Notes" rows="20" cols="80"></TEXTAREA>
 	  </p>
-	  <p>&nbsp;</p>
-	  <p>
-	    
-	    <span class="Design">
-	    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" width="461" height="144">
-	      <param name="movie" value="Flash/dots.swf" />
-	      <param name="quality" value="high" />
-	      <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
-        </object>
-        </span></p>
-	  <p>&nbsp;</p>
 	  <p class="Design"><BR>
       <INPUT type="Submit" value="Submit">
             </p>

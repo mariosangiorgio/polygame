@@ -91,4 +91,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	}
 	header("Location: ../organize.php");
 }
+else{
+	echo "ERROR: To access this page you must be an organizer";
+}
 ?>

@@ -4,6 +4,12 @@ require("./businessLogic/databaseLogin.php");
 $team = mysql_real_escape_string($_GET['team']);
 $voter = $_SESSION['username'];
 
+$term = mysql_real_escape_string($_GET['term']);
+if($term != "shortTerm" and $term != "longTerm"){
+	echo "Unknown term";
+	return;
+}
+
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role']     == "voter"){
@@ -13,7 +19,10 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$query = "SELECT `Title`, `Wedge Count`
 			  FROM `Wedges`, `Plans`
 			  WHERE `Wedges`.`Wedge ID` = `Plans`.`Wedge ID` AND
-			  		`Player ID`='$team' AND
+			  		`Player ID`='$team'
+			  			AND
+			  		`Term` = '$term'
+			  			AND
 			  		`Game ID`=  (SELECT `Game ID`
 	                 			 FROM   `Game Voters`
 	                 			 WHERE	`Voter ID`='$voter')";
@@ -29,7 +38,10 @@ if( $_SESSION['loggedIn'] == "yes" and
 	
 	// Poster
 	$query = "SELECT * FROM `Plan Posters`
-			  WHERE Player='$team' AND
+			  WHERE Player='$team'
+			  			AND
+			  		`Term` = '$term'
+			  			AND
 			  		`Game ID`=  (SELECT `Game ID`
 	                 			 FROM   `Game Voters`
 	                 			 WHERE	`Voter ID`='$voter')";

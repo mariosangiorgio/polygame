@@ -38,13 +38,13 @@ if($game['Started']){
 	$data	= mysql_query($query,$connection);
 	
 	if( $game	= mysql_fetch_array($data) ){
-		if($game['GroupFirstPhase'] != '0'){
+		if($game['GroupFirstPhase'] != ''){
 			$_SESSION['usernamePhaseOne'] = $game['GroupFirstPhase'];
 		}
 		else{
 			$_SESSION['usernamePhaseOne'] = $_SESSION['username'];			
 		}
-		if($game['GroupSecondPhase'] != '0'){
+		if($game['GroupSecondPhase'] != ''){
 			$_SESSION['usernamePhaseTwo'] = $game['GroupSecondPhase'];
 		}
 		else{

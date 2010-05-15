@@ -1,6 +1,12 @@
 <?php
 session_start();
+require("./showUserInfo.php");
 
+if($_SESSION['loggedIn'] != "yes" or
+   $_SESSION['role'] != "player"){
+	echo "You must be a player to access this page";
+	return;
+}
 ?>
 <style type="text/css" media="all">
 	@import "css/info.css";

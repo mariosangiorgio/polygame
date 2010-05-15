@@ -16,7 +16,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 			  WHERE
 			  	`Term` = '$term'
 			  		AND
-			  	`Player ID` = '".$_SESSION['username']."'";
+			  	`Player ID` = '".$_SESSION['usernamePhaseTwo']."'";
 	$data  = mysql_query($query,$connection);
 	Header("Location: ../createPlan.php");
 }

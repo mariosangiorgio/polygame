@@ -1,3 +1,7 @@
+<?php
+session_start();
+require("./showUserInfo.php");
+?>
 <link href="Design.css" rel="stylesheet" type="text/css" /><link href="css/Design.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
