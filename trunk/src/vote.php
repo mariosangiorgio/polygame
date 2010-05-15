@@ -41,7 +41,6 @@ if( $_SESSION['loggedIn'] == "yes" and
 		$titles[$wedges] = $wedge['Title'];
 		$wedges = $wedges + 1;
 	}
-	print_r($titles);
 	$query = $query."FROM  `Plans`
 	                 WHERE `Game ID`=
 	                 			(SELECT `Game ID`
@@ -102,7 +101,13 @@ a:active {
 	  </TR>
 	      <?
 	while($plan=mysql_fetch_array($data)){
-		print "<TR><TD>".$plan['Player']."</TD>";
+		?>
+		<TR>
+		<TD>
+		<A HREF="./planDetails.php?team=<?php print $plan['Player'];?>">
+		<?php print $plan['Player']; ?></A>
+		</TD>
+		<?
 		for($i=0;$i<$wedges;$i=$i+1){
 			print "<TD>".$plan[$titles[$i]]."</TD>";
 		}
@@ -115,7 +120,12 @@ a:active {
         </TABLE>
 	    
 	    <span class="Design">
-	    <input type="text" name="comment">
+	    <BR>
+	    Write here a comment
+	    <BR>
+	    <TEXTAREA type="textarea" rows=5 cols=20 name="comment">
+	    </TEXTAREA>
+	    <BR>
 	    <input type="submit" id="submitButton">
         </span></div>
 	</form>
