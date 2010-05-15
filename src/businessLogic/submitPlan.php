@@ -3,6 +3,13 @@ session_start();
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "player"){
 	require("./databaseLogin.php");
+	
+	$term = mysql_real_escape_string($_POST['term']);
+	if($term != "shortTerm" and $term != "longTerm"){
+		echo "Unknown term";
+		return;
+	}
+	
 	//TODO: Check that it is the time for the submission!
 	$query 	=
 		"SELECT
@@ -49,13 +56,11 @@ if( $_SESSION['loggedIn'] == "yes" and
 			$query =
 				"INSERT
 					INTO `Plans`
-						 (`Game ID`,`Player ID`,`Wedge ID`,`Wedge Count`)
+						 (`Game ID`,`Player ID`,`Wedge ID`,`Wedge Count`,`Term`)
 					VALUES
 						 (".$gameID.",
-						   '".$_SESSION['usernamePhaseTwo']."',
-						   ".$wedge.",
-						   ".$wedgesSelected[$wedge].")";
-			echo $query;
+						   '".$_SESSION['usernamePhaseTwo']."',$wedge,
+						   ".$wedgesSelected[$wedge].",'$term')";
 			$total = $total + $count;
 			$data	= mysql_query($query,$connection);
 	}
@@ -66,13 +71,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$query =
 		"INSERT
 			INTO `Plan Posters`
-				 (`Game ID`, `Player`, `Overview`,`Reasons`)
+				 (`Game ID`, `Player`, `Overview`,`Reasons`,`Term`)
 			VALUES
-				 (".$gameID.",
-				   '".$_SESSION['usernamePhaseTwo']."',
-				   '".$overview."',
-				   '".$reasons."'
-				 )";
+				 ($gameID, '".$_SESSION['usernamePhaseTwo']."', '$overview', '$reasons', '$term')";
 	$total = $total + $count;
 	$data	= mysql_query($query,$connection);
 	
