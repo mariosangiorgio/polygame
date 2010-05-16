@@ -12,6 +12,10 @@ require("./businessLogic/databaseLogin.php");
 // 6. Game started and not yet finished: phase 2
 // 7. Game finished
 
+if( $_SESSION['loggedIn'] == "yes" and
+	$_SESSION['role'] == "organizer"){
+
+
 // Sets default value
 $_SESSION['gamePhase'] = 0;
 $_SESSION['gameCanStart'] = 0;
@@ -53,15 +57,41 @@ $query		= "SELECT `Voter ID` FROM `Game Voters`
 $data		= mysql_query($query,$connection);
 $numVoters  = mysql_num_rows($data);
 
+// wedge-players
+$query = "SELECT
+			 ( SELECT `Game ID`
+			   FROM   `Game`
+			   WHERE	`Organizer ID` =
+			   '".$_SESSION['username']."'
+			 ) as currentGameID,
+			 ( SELECT count(DISTINCT `GroupFirstPhase`)
+			 FROM `Groups`
+			 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>''
+			 ) as numberOfGroups,
+			(SELECT count(*)
+				FROM `Game Players`
+				WHERE `Game ID` = currentGameID AND `Player ID` NOT IN
+				(SELECT `Player`
+				 FROM `Groups`
+				 WHERE `GameID` = currentGameID AND `GroupFirstPhase`<>'')			
+			) as numberOfPlayers,
+	          (SELECT count(*)
+	           FROM `Game Wedges`
+	           WHERE `Game ID` = (SELECT `Game ID`
+	                             FROM    `Game`
+	                             WHERE   `Organizer ID` =
+	                             '".$_SESSION['username']."')
+	           ) as numberOfWedges";
+	
+	$data	 = mysql_query($query,$connection);
+	$wedgePlayersCount	 = mysql_fetch_array($data);
+	//print $query."<BR>";
+	/*print $wedgePlayersCount['numberOfPlayers']."<BR>";
+	print $wedgePlayersCount['numberOfGroups']."<BR>";
+	print $wedgePlayersCount['numberOfWedges'];*/
+		
 //print $numPlayers." ".$numWedges." ".$numAssociatedWedges." ".$numVoters;
 
-if(	$numPlayers >= 1 and
-	$numWedges >= 1 and
-	//$numAssociatedWedges == $numPlayers and
-	$numVoters >= 1 )
-{
-	$_SESSION['gameCanStart'] = 1;	
-}
 
 // Finds if there are games associated with organizer
 // (Basically chooses between phase 0 and 1)
@@ -94,9 +124,16 @@ if($game != 0) {
 $now	= time();
 $gameIsStarted		= $game['Started'];
 $phaseTwoIsStarted	= $game['Started Phase 2'];
+/*$stringTime1		= $game['Starting time']." GMT";
+$stringTime2		= $game['Starting time Phase 2']." GMT";
+echo $stringTime1;
+echo $stringTime2;
+echo $game['Starting time Phase 2']."<BR><BR><BR>";*/
 $startingTime		= strtotime($game['Starting time']);
 $startingTimePhase2	= strtotime($game['Starting time Phase 2']);
 $starting2			= $startingTimePhase2; //for compatibility
+//echo $starting2."<BR>";
+if(!$starting2) echo $startingTimePhase2."<BR>";
 $starting1b			= $startingTime +
 					 $game['Length 1a'];
 $starting1c			= $startingTime +
@@ -109,6 +146,16 @@ $endingPhase1		= $startingTime +
 $endingTime		   	= $starting2 +
 					 $game['Length 2'];
 
+if(	$numPlayers >= 1 and
+	$numWedges >= 1 and
+	//$numAssociatedWedges == $numPlayers and
+	$numVoters >= 1 and
+	(($wedgePlayersCount['numberOfPlayers'] + $wedgePlayersCount['numberOfGroups']) == $wedgePlayersCount['numberOfWedges']) and
+	!$gameIsStarted
+	)
+{
+	$_SESSION['gameCanStart'] = 1;	
+}
 
 if($gameIsStarted) {
 	if($phaseTwoIsStarted) {
@@ -129,15 +176,15 @@ else{
 }
 
  //DEBUG
-//print $gameIsStarted." ".$phaseTwoIsStarted." ";
-//print "Now: ".$now." ";
-//print $startingTime." ";
-//print $starting1b." ";
-//print $starting1c." ";
-//print $endingPhase1." ";
-//print $starting2." ";
-//print $endingTime."      ";
-//print $_SESSION['gamePhase']." ";
+/*print $gameIsStarted." ".$phaseTwoIsStarted." ";
+print "Now: ".$now." ";
+print $startingTime." ";
+print $starting1b." ";
+print $starting1c." ";
+print $endingPhase1." ";
+print $starting2." ";
+print $endingTime."      ";
+print $_SESSION['gamePhase']." ";*/
 
 }
 
@@ -390,6 +437,7 @@ if($_SESSION['gamePhase'] == 1) //game created
 }
 else if($_SESSION['gamePhase'] == 2) //1a
 {
+	print "<a href=./businessLogic/goToPreviousPhase.php>Emergency stop of the game (use only if really needed)</a><BR><BR>";
 	print "<a href=./businessLogic/goToNextPhase.php>Go to next phase (show players complete information about wedges)</a><BR>";
 	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
@@ -414,6 +462,7 @@ else if($_SESSION['gamePhase'] == 5)
 }
 else if($_SESSION['gamePhase'] == 6)
 {
+	print "<a href=./businessLogic/goToPreviousPhase.php>Go back to break between phase 1 and phase 2</a><BR>";
 	print "<a href=./businessLogic/goToNextPhase.php>End game and view results</a><BR>";	
 	print "<BR><BR><A HREF=./businessLogic/deleteGame.php>Abandon game and delete all data linked to this game</A><BR>";
 }
@@ -431,10 +480,13 @@ else if ($_SESSION['gamePhase'] == 7) {
 
 if ($_SESSION['gamePhase'] > 0 && ($numPlayers > 0 or $numVoters > 0)) {
 ?>
-	<span class="style7"><A HREF=resetPassword.php class="three ">Reset user password</A></span><BR>
+	<span class="style7"><A HREF=resetUserPassword.php class="three ">Reset user password</A></span><BR>
+
+   <span class="style7"><A HREF=logout.php class="three ">Logout</A></span></p>
+
 <?php
 }
-
-
+	}
+	else print "You must be logged in as organizer to access this page"
 ?>
-   <span class="style7"><A HREF=logout.php class="three ">Logout</A></span></p>
+

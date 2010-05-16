@@ -13,7 +13,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$data		= mysql_query($query,$connection);
 	
 	sleep(1);
-	header("Location: ../organizer.php");
+	header("Location: ../organize.php");
 }
 else {
 	print "You must log in as an organizer to access this page!";

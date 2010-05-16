@@ -89,7 +89,8 @@ if( $_SESSION['loggedIn'] == "yes" and
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
-      <p><A HREF="./chooseWedges.php" class="three style1">Choose wedges</A> | Assign wedges to users
+      <p><A HREF="./chooseWedges.php" class="three style1">Choose wedges</A> |
+       <A HREF="./showGameWedges.php" class="three style1">View and delete wedges</A> | Assign wedges <BR>
         <BR>
         <BR>
 

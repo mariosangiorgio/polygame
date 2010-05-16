@@ -74,7 +74,9 @@ if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
 	?>    
-      Choose wedges |      </span><span class="style3"><A HREF="./assignWedges.php" class="three">Assign wedges to users</A></span><span class="Design">
+      Choose wedges |
+    <A HREF="./showGameWedges.php" class="three style1">View and delete wedges</A> |
+    <A HREF="./assignWedges.php" class="three style1">Assign wedges</A><BR>
       <BR>
       <BR>
       
