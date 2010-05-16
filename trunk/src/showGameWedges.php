@@ -51,53 +51,58 @@ a:active {
       <embed src="Flash/dots.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="461" height="144"></embed>
     </object>
     </span></p>
-  <p class="Design"><A HREF="./chooseGamePlayers.php" class="three style1">Choose game players</A> |
-    View players list |
-      <A HREF="./newPlayer.php" class="three style1">Add new players</A> |
-      <A HREF="./deletePlayers.php" class="three style1">Delete players from the database</A><BR>
+  <p class="Design"><A HREF="./chooseWedges.php" class="three style1">Choose wedges</A> |
+    View and delete wedges |
+      <A HREF="./assignWedges.php" class="three style1">Assign wedges</A><BR>
     <BR>
   </p>
 </div>
-<FORM METHOD="POST" ACTION="./businessLogic/deleteGamePlayers.php">
-  <div align="center" class="Design">
     
     <?php
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer"){
 	
-	$query		= "SELECT `Player ID` FROM `Game Players`
-	              WHERE `Game ID` IN (SELECT `Game ID`
+	$query		= "SELECT `Title`, `Wedge ID` FROM `Wedges`
+	              WHERE `Wedge ID` IN (SELECT `Wedge ID`
+	                                 FROM `Game Wedges`
+	                                 WHERE `Game ID` = 
+	                                 (SELECT `Game ID`
 	                                 FROM `Game`
 	                                 WHERE `Organizer ID` = '".
 	                                 $_SESSION['username']
-	                                 ."' ) ;";
+	                                 ."' )) ;";
 	$data		= mysql_query($query,$connection);
+	
+	if(mysql_num_rows($data) > 0) {
 	
 	//while( $row	= mysql_fetch_array($data)){
 	//	print $row['Player ID']."<BR>";
 	//}
 ?>
-    
+<div align="center" class="Design"><BR>
+    <FORM METHOD="POST" ACTION="./businessLogic/deleteGameWedges.php">
+
     <table border=".1.">
       <?php
 	while( $row	= mysql_fetch_array($data)){
-		print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['Player ID']."\"></TD><TD>".$row['Player ID']."</TD></TR>\n";
+		print "<TR><TD><input type=\"checkbox\" name=\"selectedUsers[]\" value=\"".$row['Wedge ID']."\"></TD><TD>".$row['Title']."</TD></TR>\n";
 	}
 	?>
       </table>
     <BR>
-    
+   <br />
+    <INPUT TYPE="submit" VALUE="Delete selected wedges from game">
+    <br />
+    </div>
+</FORM>
+</div>
     <?php	
+	}
 }
 else {
 	print "You must log in as an organizer to access this page!";
 }
 ?>
-    <br />
-    <INPUT TYPE="submit" VALUE="Delete selected players from game">
-    <br />
-    </div>
-</FORM>
 
 <div align="center" class="Design">
   <p><BR>

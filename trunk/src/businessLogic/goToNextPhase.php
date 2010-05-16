@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+//echo $_SESSION['gamePhase'];
+
 //Security check
 if( $_SESSION['loggedIn'] == "yes" and
 	$_SESSION['role'] == "organizer" and
@@ -52,6 +54,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 		{
 			$deltaTime = $endingPhase1 - $now;
 			$phase = 'Length 1c';
+			//print $deltaTime;
 		}
 		else if( $_SESSION['gamePhase'] == 6 )
 		{

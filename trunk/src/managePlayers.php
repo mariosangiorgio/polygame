@@ -194,7 +194,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 				}
 				else print "<TR height=\"25\"><TD></TD><TD></TD></TR>\n";
 			}
-				print "<BR><BR><BR><BR>"
+				print "<BR><BR><BR><BR>";
 				reset($allPlayers);
 		?>
       	</table>

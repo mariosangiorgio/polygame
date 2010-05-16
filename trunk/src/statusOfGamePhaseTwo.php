@@ -1,5 +1,4 @@
 <?php
-
 $query1		= "SELECT DISTINCT `GroupSecondPhase` as `Group`
 			FROM `Groups`
 			WHERE `GameID` =  ( SELECT `Game ID`
@@ -71,7 +70,7 @@ a:active {
 <div align="center" class="Design">
  
   <table border=".1.">
-    <TR><TD class="Design">User</TD><TD class="Design">Wedge selection</TD></TR>
+    <TR><TD class="Design">User</TD><TD class="Design">Short-term wedge mix</TD><TD class="Design">Long-term wedge mix</TD></TR>
     <?php
 	while( $row	= mysql_fetch_array($players))
 	{
@@ -79,18 +78,42 @@ a:active {
 		print "<TR><TD>".$row['Group']."</TD>";
 		
 		// Result column
-		$query2		= "SELECT `Wedge count` FROM `Plans`
-		               WHERE `Player ID` = '".$row['Group']."';";
-        //print $query2;
-		$result 	= mysql_query($query2,$connection);
-		if(mysql_num_rows($result) == 0)
+		$query_short	= "SELECT `Wedge count` FROM `Plans`
+		               WHERE `Player ID` = '".$row['Group']."'
+		               AND `Term` = 'shortTerm';";
+		$result_short 	= mysql_query($query_short,$connection);
+		
+		$query_long		= "SELECT `Wedge count` FROM `Plans`
+		               WHERE `Player ID` = '".$row['Group']."'
+		               AND `Term` = 'longTerm';";
+        $result_long 	= mysql_query($query_long,$connection);
+        
+        /*print $query_short."<BR>";
+        print $query_long."<BR>";
+		
+        print $result_short."<BR>";
+        print $result_long."<BR>";	
+        print mysql_num_rows($result_short)."<BR>";
+        print mysql_num_rows($result_long)."<BR>";*/
+        
+		if(mysql_num_rows($result_short) == 0)
 		{
 			print "<TD>Not submitted</TD>";
 		}
 		else
 		{
-			print "<TD>Submitted</TD></TR>";	
+			print "<TD>Submitted</TD>";	
 		}
+		
+		if(mysql_num_rows($result_long) == 0)
+		{
+			print "<TD>Not submitted</TD>";
+		}
+		else
+		{
+			print "<TD>Submitted</TD>";	
+		}
+		print "</TR>";
 		
 	}
 ?>

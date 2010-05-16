@@ -41,15 +41,15 @@ a:active {
   <p class="Design">&nbsp;</p>
   
   <p class="Design"><BR>
-    <b class="three style1">Rules</b><BR>
-Polygame is a game which...<BR>
+<!--    <b class="three style1">Rules</b><BR>
+ Polygame is a game which...<BR>
 It is made of two phases: in the first one every user is assigned to a certain wedge which must be studied in order to summarize in a poster all the pros and cons.<br>
 In the second one the users have to come up with the best mix of wedges to reduce CO2.<br>
 Plans are voted and the best one is then shown at the end of the game.<br />
 20 Wedges below make the possible mix of achieving the Kyoto Protocol 2012. <br />
 <br />
 <img src="images/icons.png" alt="Wedges" width="672" height="762" /><BR>
-<BR>
+<BR> -->
 
 <?php
 if($_SESSION['loggedIn'] and $_SESSION['role'] == "organizer") {
@@ -57,6 +57,8 @@ if($_SESSION['loggedIn'] and $_SESSION['role'] == "organizer") {
 
 print "<b>Players</b>";
 
+			//there used to be
+			//SELECT '-' as `Group`, `Player ID` as `Player`
 $query = "SELECT `GroupFirstPhase` as `Group`, `Player`
 			FROM `Groups`
 			WHERE `GameID` =  ( SELECT `Game ID`
@@ -64,7 +66,7 @@ $query = "SELECT `GroupFirstPhase` as `Group`, `Player`
 					    WHERE  `Organizer ID` = '".$_SESSION['username']."' )
 			      AND `GroupFirstPhase`<>''
 			UNION
-			SELECT '-' as `Group`, `Player ID` as `Player`
+			SELECT '(single player)' as `Group`, `Player ID` as `Player`
 			FROM `Game Players`
 			WHERE `Game ID` =  ( SELECT `Game ID`
 					     FROM   `Game`
@@ -86,7 +88,7 @@ $query2 = "SELECT `GroupSecondPhase` as `Group`, `Player`
 					    WHERE  `Organizer ID` = '".$_SESSION['username']."' )
 			      AND `GroupSecondPhase`<>''
 			UNION
-			SELECT '-' as `Group`, `Player ID` as `Player`
+			SELECT '(single player)' as `Group`, `Player ID` as `Player`
 			FROM `Game Players`
 			WHERE `Game ID` =  ( SELECT `Game ID`
 					     FROM   `Game`
@@ -125,7 +127,7 @@ $data2		= mysql_query($query2,$connection);
   </p>
   <table border=".1.">
 	<?php
-	if( mysql_num_rows($data)==0 ) print "No players selected";
+	if( mysql_num_rows($data)==0 ) print "No players selected for first phase";
 	while( $row	= mysql_fetch_array($data)){
 		print "<TR><TD>".$row['Group']."</TD><TD>".$row['Player']."</TD></TR>\n";
 	}
@@ -137,7 +139,7 @@ $data2		= mysql_query($query2,$connection);
   </span>
   <table border=".1.">
 	<?php
-	if( mysql_num_rows($data2)==0 ) print "No players selected";
+	if( mysql_num_rows($data2)==0 ) print "No players selected for second phase";
 	while( $row	= mysql_fetch_array($data2)){
 		print "<TR><TD>".$row['Group']."</TD><TD>".$row['Player']."</TD></TR>\n";
 	}
@@ -168,7 +170,7 @@ else
 ?>
   </span>
   <table border=".1.">
-  <TR><TD class="style1">Team name</TD><TD class="style1">Assigned wedge</TD></TR>
+  <TR><TD class="style1">Team or player name</TD><TD class="style1">Assigned wedge</TD></TR>
   <?php
 	while( $row	= mysql_fetch_array($wedges))
 	{

@@ -26,7 +26,7 @@ if( $_SESSION['loggedIn'] == "yes" and
 					   ", ".$length1b.", 
 					   ".$length1c.", 
 					   ".$length2.",
-					   '2999-12-12 11:11:11',
+					   '2035-12-12 11:11:11',
 					   '".$presentation."' );";
 		$data		= mysql_query($query,$connection);
 		

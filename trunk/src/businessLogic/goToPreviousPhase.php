@@ -52,6 +52,14 @@ if( $_SESSION['loggedIn'] == "yes" and
 			$deltaTime = $now - $endingPhase1;
 			$phase = 'Length 1c';		
 		}
+		else if( $_SESSION['gamePhase'] == 6 ) //end
+		{
+			//TODO
+			//$deltaTime = $now - $endingTime;
+			//$phase = 'Length 2';		
+			//Redirect to the main page
+			header("Location: ../organize.php");
+		}
 		else if( $_SESSION['gamePhase'] == 7 ) //end
 		{
 			$deltaTime = $now - $endingTime;
@@ -72,7 +80,22 @@ if( $_SESSION['loggedIn'] == "yes" and
 	header("Location: ../organize.php");
 	
 }
+else if( $_SESSION['loggedIn'] == "yes" and
+	$_SESSION['role'] == "organizer" and
+	$_SESSION['gamePhase'] == 2  )
 
+{
+	require("./databaseLogin.php");
+	$_SESSION['gamePhase'] = 1;
+	
+	$query		= "UPDATE `Game`
+					SET `Starting time` = '2035-12-12 11:11:11', `Started` = 0
+					WHERE `Organizer ID` = '".$_SESSION['username']."';";
+	$data		= mysql_query($query,$connection);
+	//print $query;
+	sleep(1);
+	header("Location: ../organize.php");
+}
 else{
 	print "To perform this operation you must be logged in as an organizer and be in an active game!";
 }
