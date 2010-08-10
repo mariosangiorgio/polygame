@@ -1,0 +1,45 @@
+\section{Technology}
+In this section there is the description of the technology used to create the web application that supports the \emph{PolyGame} activity.
+
+\subsection{Philosophy}
+Before talking about the technology itself it is important to say something about the philosophy of openness we wanted to maintain within the project, using an open platform to build upon our system and releasing the code with an open source license and the documentation under creative commons.
+
+Since the \emph{PolyGame} project will be used for educational purposes this attitude is really important: the use of an open platform means that everyone interested in the project can use it without having to face license issues or having to pay something. This openness will definitely help the \emph{PolyGame} to spread and therefore it is more likely that the activity is going to reach the goal of improving the environmental awareness among the population.
+
+\subsection{Architecture}
+The \emph{PolyGame} is developed as a web application, because of the huge advantages offered by this kind of architecture for such a project.
+
+The advantage that comes out first is that a web application does not require other than a browser in order to run, so the users are free to choose to work on the platform that best fits their needs.
+
+Another advantage is that there is no need to install anything on the players machines, avoiding the troubles related to the development, the installation and the maintaineance of the system.
+Moreover it is not likely that the same class plays the \emph{PolyGame} for a lot of times, so having a solution that requires the less effort possible it is really a good idea.
+
+Last but not least, a web application allows users to play at their own place, making it possible to evolve the \emph{PolyGame} from a in-class-activity to a networked activity. This may not be the best for the proceeding of the game, because playing in remote limits the possibility of interaction, but it is still a possibility that is kept open by the architectural choice.
+
+\subsection{Platform}
+In order to make easier and affordable the deployment of the web application, the \emph{PolyGame} relies on the well known \emph{Apache}, \emph{mySQL}, \emph{PHP} stack that is a standard solution for the development and deployment of this kind of applications.
+
+The choice of this platform is supported by several reasons, that makes it the best platform according to our needs.
+
+The three components are all open source free software, so they can go on well with the project philosophy.
+
+The chosen web application stack can run on almost all the existing mainstream operating systems. That makes it easier to setup a local server or to find an hosting service with the required capabilities. The setup of a local server is even simplified by the use of pre-packaged distribution that makes it possible to have the platform running also for someone that is not involved in the development of web applications.
+
+Although all the reason mentioned before are really valuable, the most important reason that makes this platform the best solution for the project is that almost every open project uses it. That means that there is a lot of support, documentation and tutorials to help the developer actually doing what he wants.
+
+\subsection{Application structure}
+The application follows the classical three tier structure, so there are distinct layers: one for the user interface, one for the interaction with the data and one that actually contains the data.
+
+This structure enforces a logical subdivision of the code and allows an effective collaboration among the different members of the development team. In particular it helps when there is part of the team that works on the design of the interface and another part that develops the application backend.
+\subsubsection{User interface}
+The user interface is developed using standard HTML code with CSS (Cascading Style Sheet) and Adobe Flash for the animations.
+
+The use of CSS improves the flexibility of the layout: of the style for each element is defined just once in the CSS and then it can be used where needed.
+
+Flash makes it possible to create more appealing interfaces, introducing animation to convey better the underlying ideas, to create a better user experience and to make the application usage more intuitive.
+
+\subsubsection{Application logic}
+The application logic is a bridge between the user interface and the database. It has to process the request from the user, apply the modification to the database accordingly to what the user wants to do. This layers also contains the code to enforces all the rules of the game.
+
+\subsubsection{Data layer}
+It is the database where all the information to keep the state of the \emph{PolyGame}. It is used to keep track of all the users, the wedge information and the state of the active games.

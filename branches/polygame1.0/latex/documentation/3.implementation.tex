@@ -1,0 +1,52 @@
+\section{Implementation}
+In this section will be discussed the details about the implementation.
+
+\subsection{Administration}
+The administration section is based on the \emph{admin.php} page that contains a menu with links to the other administrative functions.
+
+The administrator can create a new organizer with the \emph{newOrganizer.php} page, create a new wedge throught the \emph{newWedge.php} page.
+
+\subsection{Organization}
+The organizer, once created by the administrator, can manage all the aspect of the game. The main management page is \emph{organize.php} that dynamically proposes the menu accordingly with the current game phase.
+
+When the organizer has to setup the game has access to the pages to select which teams, players, voters and wedges will be involved in the game (Using respectively the \emph{newGroup.php}, \emph{chooseGamePlayers.php}, \emph{newVoter.php} and \emph{chooseWedges.php}) and choose which player will take part to the game in each team (Using \emph{assignPlayers.php}).
+Finally he has to decide for each wedge who will have to analyze it in the first phase of the game with the \emph{assignWedges.php} page.
+
+Once the game is set up the organizer page changes and shows for each phase the remaining time, gives the chance to add more time or to skip to the next phase. At each game phase information about what is going on are shown, to make it easier for the organizer to understand wether everything is or there is something going wrong.
+
+\subsection{Playing the PolyGame}
+The core of the game section of the game is the \emph{play.php} page. This page redirects the player to the page of the current phase of the game: \emph{showWedgeInformation.php} for the first phase and \emph{createPlan.php} for the second phase.
+
+In the page for the first phase the wedge information are show accordingly to the game settings. At the end of the phase, the pages to submit and check the result (\emph{checkSolution.php}) and the poster containing a brief summary of the advantages and the disadvantages  (\emph{submitPoster.php})are made available for the players to submit.
+
+In the page to create the wedge mix to build an environmental plan, there are available all the information of the wedges and all the submitted poster to allow the user to give all the knowledge to make the player able to make their decision.
+
+\subsection{Voting}
+The \emph{voter.php} page manages the voting phase, providing a chart with the wedges chosen by each team. Voters have to submit their choice and to provide a comment to support their choice.
+
+\subsection{Database}
+The database contains all the information to keep track of the state of the game.
+The table that contains all the data are:
+\newline
+\emph{Users}, where the login information for all the user are stored.
+\newline
+\emph{Groups}, that contains the group information.
+\newline
+\emph{Game}, that contains all the setting for each game.
+\newline
+\emph{Game Groups}, \emph{Game Players}, \emph{Game Voters}, \emph{Game Wedges} that links all the elements with a game.
+\newline
+\emph{Wedges}, that contains all the information for the wedges.  \emph{Wedge Players}, that links the player with the wedge they are assigned to. \emph{Posters} contains the poster for each wedge produced by the users.
+\newline
+\emph{Plans} and \emph{Plan Posters} where the plan and the presentation produced by the user are stored.
+\emph{Votes} contains the final votes.
+
+
+\subsection{Organization}
+To better manage the work of the team on the project the project \emph{http://code.google.com/p/PolyGame/} has been created on Google Code.
+
+This gave to the developers several different tools to better manage the development.
+All the code is on the associated svn repository, to help the developers going on with the development at the same time and to keep track of the evolution of the application.
+The wiki of the project contains information about the development to help the team planning where to put the effort at each stage.
+
+In addition e-mail message and Skype has been used for other communications among the people of the \emph{PolyGame} team.
