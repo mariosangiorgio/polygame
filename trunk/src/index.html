@@ -1,0 +1,18 @@
+<script language="javascript" src="./libraries/jquery-1.4.1.min.js"></script>
+
+<div id="list">Hello</div>
+
+<script language="javascript">
+function appendToList(data){
+		$('#list').html("")
+		$.each(data, function(i,item){
+			$('#list').append('<p>' + item.title + '</p>' +
+						 	  '<p>' + item.description + '</p>');
+					});
+}
+
+function retrieveList(){
+	$.getJSON('./data/sample.json', appendToList);
+}
+</script>
+<A href="#" onclick="retrieveList()">Show more</A>
