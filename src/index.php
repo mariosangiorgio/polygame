@@ -10,8 +10,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="css/main.css" type="text/css" rel="stylesheet" />
 	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.4.custom.css" rel="stylesheet" />	
-	<script type="text/JavaScript" src="libraries/jquery-1.4.1.min.js"></script>
-	<script type="text/Javascript" src="libraries/jquery-ui-1.8.4.custom.min.js"></script> 
+	<script type="text/JavaScript" src="lib/jquery-1.4.1.min.js"></script>
+	<script type="text/Javascript" src="lib/jquery-ui-1.8.4.custom.min.js"></script> 
 	<script type="text/javascript"> 
 	( function($) {
 		$(document).ready( function() 
