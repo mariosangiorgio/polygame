@@ -1,0 +1,80 @@
+body {
+	font-family: Times, "Times New Roman", Georgia, serif;
+	font-size:1em;
+	line-height:1.4em;
+}
+h1 {
+	font-size: 1.8em;
+}
+img {
+	border: none;
+}
+#wrapper {
+	margin: 0% 20% 5% 20%;
+	height: 100%;
+}
+#languages {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+}
+#languages img {
+	margin: 3px;
+	border: 0px;
+}
+#top {
+	margin: 0 5% 0 5%;
+	height: 20%;
+	text-align: center;
+}
+#middle {
+	margin: 5% 0 5% 0;
+	height: 20%;
+}
+#bottom {
+	margin-bottom: 5%;
+}
+#accordion {
+	padding: 0 0 10% 20%;
+	width: 60%;
+	font-size: 0.9em;
+	float: left;
+}
+#accordion img {
+	float: left;
+	margin-right: 1em;
+}
+#accordion a {
+	font-size: 1.1em;
+}
+#update {
+	float:left;
+	margin-left: 5%;
+}
+#update a {
+	font-style: italic;
+	font-weight: bold;
+	color: black;
+}
+#logo {
+	text-align: center;
+}
+#play {
+	clear:both;
+	text-align: center;
+}
+#play  input{
+	height: 2.5em;
+	width: 10em;
+	font-size: 1.8em;
+	font-weight: bold;
+	color: #736F6E;
+}
+.accordionText {
+	text-align: justify;
+}
+.accordionLink {
+	text-align: right;
+	font-size: 0.9em;
+	font-style: italic;
+}
