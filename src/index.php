@@ -55,22 +55,26 @@
 </script>
 </head>
 <body>
-	<div id="wrapper">
+	<div id="top">
+		<div id="stripe">
+			<img src="images/welcome.png" height="100px" />
+		</div>
 		<div id="languages"> 
 			<a href="index.php?lang=en"><img src="images/en.png" /></a> 
 			<a href="index.php?lang=de"><img src="images/de.png" /></a> 
-		</div> 
-		<div id="top">
-			<img src="images/poly.png" height="130px" />
 		</div>
-		<div id="middle">
-			<h1><? include("lang/".$lang."/index/h1_1.txt") ?></h1>
-			<p><? include("lang/".$lang."/index/p_1.txt") ?></p>
-		</div>
-		<div id="bottom">
-			<h1><? include("lang/".$lang."/index/h1_2.txt") ?></h1>
-		</div>
-		<div id="accordion">
+	</div>
+
+	<div id="wrapper">
+		<div id="columnLeft">
+			<div id="middle">
+				<h1><? include("lang/".$lang."/index/h1_1.txt") ?></h1>
+				<p><? include("lang/".$lang."/index/p_1.txt") ?></p>
+			</div>
+			<div id="bottom">
+				<h1><? include("lang/".$lang."/index/h1_2.txt") ?></h1>
+			</div>
+			<div id="accordion">
 <? 
 	$wedge_limit = 3;
 	$number_of_wedges = 0;
@@ -96,12 +100,16 @@
 		$number_of_wedges++;
 	}
 ?>
-		</div>
+			</div>
 		<div id="update">
 			<a href="#">Show more</a>
 		</div>
-		<div id="play">
-			<input type="button" value="Play now!"></input>
+		</div>
+		<div id="columnRight">
+			Here goes login box.
+			<div id="button">
+				<input type="button" value="Request new account"></input>
+			</div>
 		</div>
 	</div>
 </body>
