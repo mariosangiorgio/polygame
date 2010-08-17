@@ -6,7 +6,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title><? echo PAGE_TITLE; ?></title>
+	<title><? echo $TEXT['main-page_title']; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="css/main.css" type="text/css" rel="stylesheet" />
 	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.4.custom.css" rel="stylesheet" />	
@@ -32,9 +32,13 @@
 						$("#accordion").replaceWith('<div id="accordion"></div>');
 						$.each( json, function( index, wedge ) 
 						{
-							var result = '<h3><a href="#">' + wedge.title + '</a></h3>' +
+							var result = '<h3><a>' + wedge.title + '</a></h3>' +
 										'<div><img src="' + wedge.image + 
-										'" width="66px" height="84px" />' + wedge.summary + '</div>';
+										'" width="66px" height="84px" />' + 
+										'<p class="accordionText">' + wedge.summary +
+										'</p><p class="accordionLink">' +
+										'<a href="wedgeInfo.php?id=' + wedge.id +
+										'">more info</a></p></div>';
 							$("#accordion").append( result );
 						})
 						$("#accordion").accordion( accordionOption );	
@@ -48,11 +52,22 @@
 				});
 			});
 			
+			$("#login").find('a').click( function() 
+			{
+				$("#login").hide('blind');
+				$("#newAccount").show('blind');
+			});			
+			
+			$("#newAccount").find('a').click( function() 
+			{
+				$("#newAccount").hide('blind');
+				$("#login").show('blind');
+			});
+			
 			$("#accordion").accordion( accordionOption );
 		});
 	})(jQuery);
 	</script>
-</script>
 </head>
 <body>
 	<div id="header">
@@ -68,15 +83,15 @@
 	<div id="wrapper">
 		<div id="columnLeft">
 			<div class="top">
-				<h1><? include("lang/".$lang."/index/h1_1.txt") ?></h1>
-				<p><? include("lang/".$lang."/index/p_1.txt") ?></p>
+				<h1><? echo $TEXT['main-h1_1']; ?></h1>
+				<p><? echo $TEXT['main-p_1']; ?></p>
 			</div>
 			<div class="bottom">
-				<h1><? include("lang/".$lang."/index/h1_2.txt") ?></h1>
+				<h1><? echo $TEXT['main-h1_2']; ?></h1>
 			</div>
 			<div id="accordion">
 <? 
-	$wedge_limit = 3;
+	$wedge_limit = 2;
 	$number_of_wedges = 0;
 	
 	$query = "SELECT `Wedge ID` as id, Title, Summary, Image FROM Wedges WHERE Language='$lang' ORDER BY Preferences DESC";
@@ -86,35 +101,70 @@
 			( $number_of_wedges < $wedge_limit ))
 	{
 ?>
-			<h3><a><? echo $wedge['Title']; ?></a></h3>
-			<div>
-				<img src="<? echo $wedge['Image']; ?>" width="66px" height="84px" />
-				<p class="accordionText">
-					<? echo $wedge['Summary']; ?>
-				</p>
-				<p class="accordionLink">
-					<a href="backend/wedgeInfo.php?id=<? echo $wedge['id']; ?>">more info</a>
-				</p>
-			</div>
+		<h3><a><? echo $wedge['Title']; ?></a></h3>
+		<div>
+			<img src="<? echo $wedge['Image']; ?>" width="66px" height="84px" />
+			<p class="accordionText">
+				<? echo $wedge['Summary']; ?>
+			</p>
+			<p class="accordionLink">
+				<a href="wedgeInfo.php?id=<? echo $wedge['id']; ?>"><? echo $TEXT['main-a_1']; ?></a>
+			</p>
+		</div>
 <?		
 		$number_of_wedges++;
 	}
 ?>
 			</div>
 		<div id="update">
-			<a href="#">Show more</a>
+			<a href="#"><? echo $TEXT['main-a_2']; ?></a>
 		</div>
 		</div>
 		<div id="columnRight">
-			<h2>Login or create an account</h2>
-			Da sistemare
-			<FORM METHOD="POST" ACTION="./businessLogic/authentication.php">
-  				<INPUT TYPE="text" NAME="username"><BR> 
-        	    <INPUT TYPE="password" NAME="password"><BR>
-         		<INPUT TYPE="submit" VALUE="Login">
-         	</FORM>
-			<div id="button">
-				<input type="button" value="Request new account"></input>
+			
+			<div id="login">
+				<form method="post" action="./businesslogic/authentication.php">
+				<fieldset>
+					<legend>Login</legend>
+					<table class="loginTable">
+					<tbody>
+						<tr>
+							<td>Username</td>
+							<td><input type="text" name="username"></td>
+						</tr>
+						<tr>
+							<td>Password</td>
+							<td><input type="password" name="password"></td>
+						</tr>
+					</tbody>
+					</table>
+					<input class="button" type="submit" value="login"/>
+					<input class="button" type="reset" value="cancel"/>
+					<p>... or <a href="#">request new account »</a></p>
+				</fieldset>
+				</form>
+			</div>
+			<div id="newAccount">
+				<form method="post" action="./businesslogic/newAccount.php">
+				<fieldset>
+					<legend>New Account</legend>
+					<table class="loginTable">
+					<tbody>
+						<tr>
+							<td>Username</td>
+							<td><input type="text" name="username"></td>
+						</tr>
+						<tr>
+							<td>Email address</td>
+							<td><input type="password" name="password"></td>
+						</tr>
+					</tbody>
+					</table>
+					<input class="button" type="submit" value="confirm"/>
+					<input class="button" type="reset" value="cancel"/>
+					<p>... already registered? <a href="#">Login here »</a></p>
+				</fieldset>
+				</form>
 			</div>
 		</div>
 	</div>
