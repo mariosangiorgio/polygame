@@ -62,7 +62,7 @@
 		</div>
 		<div id="languages"> 
 			<a href="index.php?lang=en"><img src="images/en.png" /></a> 
-			<a href="index.php?lang=de"><img src="images/de.png" /></a> 
+			<a href="index.php?lang=it"><img src="images/it.png" /></a> 
 		</div>
 	</div>
 	<div id="wrapper">
@@ -107,7 +107,7 @@
 		</div>
 		<div id="columnRight">
 			<h2>Login or create an account</h2>
-			Login here
+			Da sistemare
 			<FORM METHOD="POST" ACTION="./businessLogic/authentication.php">
   				<INPUT TYPE="text" NAME="username"><BR> 
         	    <INPUT TYPE="password" NAME="password"><BR>
