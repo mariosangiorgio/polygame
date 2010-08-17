@@ -34,13 +34,12 @@ img {
 	background: #fff;
 }
 #columnRight {
-	float:left;
-	width: 33%;
+/* 	float:left; */
 /* 	padding: 50px 2% 0; */
 	margin-right: 15px;
 	margin-left: 15px;
-	padding-top: 150px;
-
+	padding-top: 40px;
+	padding-right: 15px;
 }
 #stripe {
 	width:100%;
