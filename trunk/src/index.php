@@ -55,23 +55,23 @@
 </script>
 </head>
 <body>
-	<div id="top">
-		<div id="stripe">
-			<img src="images/welcome.png" height="100px" />
+	<div id="header">
+		<div id="stripe" />
+		<div id="logo">
+			<img src="images/welcome-new.png" height="150px" />
 		</div>
 		<div id="languages"> 
 			<a href="index.php?lang=en"><img src="images/en.png" /></a> 
 			<a href="index.php?lang=de"><img src="images/de.png" /></a> 
 		</div>
 	</div>
-
 	<div id="wrapper">
 		<div id="columnLeft">
-			<div id="middle">
+			<div class="top">
 				<h1><? include("lang/".$lang."/index/h1_1.txt") ?></h1>
 				<p><? include("lang/".$lang."/index/p_1.txt") ?></p>
 			</div>
-			<div id="bottom">
+			<div class="bottom">
 				<h1><? include("lang/".$lang."/index/h1_2.txt") ?></h1>
 			</div>
 			<div id="accordion">
@@ -106,7 +106,13 @@
 		</div>
 		</div>
 		<div id="columnRight">
-			Here goes login box.
+			<h2>Login or create an account</h2>
+			Login here
+			<FORM METHOD="POST" ACTION="./businessLogic/authentication.php">
+  				<INPUT TYPE="text" NAME="username"><BR> 
+        	    <INPUT TYPE="password" NAME="password"><BR>
+         		<INPUT TYPE="submit" VALUE="Login">
+         	</FORM>
 			<div id="button">
 				<input type="button" value="Request new account"></input>
 			</div>
