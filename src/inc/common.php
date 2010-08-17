@@ -12,7 +12,7 @@
 	{
 		$lang = $_SESSION['lang'];
 	}
-	else if( isSet($_COOKIE['lang']))
+	else if( isSet( $_COOKIE['lang']))
 	{
 		$lang = $_COOKIE['lang'];
 		$_SESSION['lang'] = $lang;
@@ -26,16 +26,16 @@
 	switch( $lang ) 
 	{
 		case 'en':
-			$lang_file = 'en/en.php';
+			$lang_file = 'en.php';
 		break;
 		case 'de':
-			$lang_file = 'de/de.php';
+			$lang_file = 'de.php';
 		break;
 		case 'it':
-			$lang_file = 'it/it.php';
+			$lang_file = 'it.php';
 		break;
 		default:
-			$lang_file = 'en/en.php';
+			$lang_file = 'en.php';
 
 	}
 
