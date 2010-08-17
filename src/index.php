@@ -91,7 +91,7 @@
 			</div>
 			<div id="accordion">
 <? 
-	$wedge_limit = 2;
+	$wedge_limit = 3;
 	$number_of_wedges = 0;
 	
 	$query = "SELECT `Wedge ID` as id, Title, Summary, Image FROM Wedges WHERE Language='$lang' ORDER BY Preferences DESC";
@@ -121,7 +121,6 @@
 		</div>
 		</div>
 		<div id="columnRight">
-			
 			<div id="login">
 				<form method="post" action="./businesslogic/authentication.php">
 				<fieldset>
@@ -166,6 +165,7 @@
 				</fieldset>
 				</form>
 			</div>
+
 		</div>
 	</div>
 </body>
