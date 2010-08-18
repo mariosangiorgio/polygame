@@ -3,10 +3,11 @@
 	font-family: Helvetica;
 }
 body {
-	font-size:14px;
-	line-height:1.4em;
 	margin-left: 2%;
 	margin-right: 2%;
+	font-size:14px;
+	line-height:1.4em;
+	text-align: justify;
 }
 h1 {
 	font-size: 18px;
@@ -26,7 +27,7 @@ img {
 }
 #columnLeft {
 	float: left;
-	width: 67%;
+	width: 65%;
 	height: 100%;
 	padding-right: 15px;
 	padding-left: 15px;
@@ -34,8 +35,9 @@ img {
 	background: #fff;
 }
 #columnRight {
-/* 	float:left; */
+ 	float:left; 
 /* 	padding: 50px 2% 0; */
+	width: 27%;
 	margin-right: 15px;
 	margin-left: 15px;
 	padding-top: 40px;
