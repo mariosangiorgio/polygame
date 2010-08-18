@@ -54,12 +54,14 @@
 			
 			$("#login").find('a').click( function() 
 			{
+				$("#login").find('div').hide();
 				$("#login").hide('blind');
 				$("#newAccount").show('blind');
 			});			
 			
 			$("#newAccount").find('a').click( function() 
 			{
+				$("#newAccount").find('div').hide();
 				$("#newAccount").hide('blind');
 				$("#login").show('blind');
 			});
@@ -67,6 +69,49 @@
 			$("#accordion").accordion( accordionOption );
 		});
 	})(jQuery);
+	
+	function checkForm( form ) 
+	{
+		var errorStr = "";
+		
+		if( form.name == "loginForm" )
+		{
+			if( !form.username.value )
+			{
+				errorStr += " Username";
+				if( !form.password.value )
+					errorStr += " and password";
+				errorStr += " missing.";
+			}
+			else if( !form.password.value )
+				errorStr += " Password missing.";
+			
+		}
+		if( form.name == "newAccountForm" )
+		{
+			if( !form.username.value )
+			{
+				errorStr += " Username";
+				if( !form.mail.value )
+					errorStr += " and mail";
+				errorStr += " missing.";
+			}
+			else if( !form.mail.value )
+				errorStr += " Password missing.";
+		}
+		
+		if( errorStr )
+		{
+			jQuery( form ).find('div').find('p:last').text( errorStr );
+			jQuery( form ).find('div').show('blind');
+		}
+		return false;
+	}
+	function resetForm( form ) 
+	{
+		jQuery( form ).find('div').find('p:last').text('');
+		jQuery( form ).find('div:visible').hide('blind');
+	}
 	</script>
 </head>
 <body>
@@ -122,9 +167,22 @@
 		</div>
 		<div id="columnRight">
 			<div id="login">
-				<form method="post" action="./businesslogic/authentication.php">
-				<fieldset>
+				<form 
+					name="loginForm" 
+					method="post" 
+					action="./businesslogic/authentication.php" 
+					onsubmit="return checkForm(this);"
+					onreset="return resetForm(this);"
+				>
+				<fieldset class="ui-corner-all">
 					<legend>Login</legend>
+					<div class="errorClass ui-corner-all">
+						<p>
+							<span class="ui-icon ui-icon-info"></span> 
+							<strong>Warning!</strong><br />
+						</p> 
+						<p class="errorDetail"></p>
+					</div>
 					<table class="loginTable">
 					<tbody>
 						<tr>
@@ -137,16 +195,29 @@
 						</tr>
 					</tbody>
 					</table>
-					<input class="button" type="submit" value="login"/>
-					<input class="button" type="reset" value="cancel"/>
+					<input class="button" type="submit" value="Login"/>
+					<input class="button" type="reset" value="Cancel"/>
 					<p>... or <a href="#">request new account »</a></p>
 				</fieldset>
 				</form>
 			</div>
 			<div id="newAccount">
-				<form method="post" action="./businesslogic/newAccount.php">
-				<fieldset>
+				<form
+					name="newAccountForm" 
+					method="post"
+					action="./businesslogic/authentication.php" 
+					onsubmit="return checkForm(this);"
+					onreset="return resetForm(this);"
+				>
+				<fieldset class="ui-corner-all">
 					<legend>New Account</legend>
+					<div class="errorClass ui-corner-all">
+						<p>
+							<span class="ui-icon ui-icon-info"></span> 
+							<strong>Warning!</strong><br />
+						</p> 
+						<p class="errorDetail"></p>
+					</div>
 					<table class="loginTable">
 					<tbody>
 						<tr>
@@ -155,12 +226,12 @@
 						</tr>
 						<tr>
 							<td>Email address</td>
-							<td><input type="password" name="password"></td>
+							<td><input type="text" name="mail"></td>
 						</tr>
 					</tbody>
 					</table>
-					<input class="button" type="submit" value="confirm"/>
-					<input class="button" type="reset" value="cancel"/>
+					<input class="button" type="submit" value="Confirm"/>
+					<input class="button" type="reset" value="Cancel"/>
 					<p>... already registered? <a href="#">Login here »</a></p>
 				</fieldset>
 				</form>
