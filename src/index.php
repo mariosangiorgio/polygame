@@ -37,7 +37,7 @@
 										'" width="66px" height="84px" />' + 
 										'<p class="accordionText">' + wedge.summary +
 										'</p><p class="accordionLink">' +
-										'<a href="wedgeInfo.php?id=' + wedge.id +
+										'<a href="backend/wedgeInfo.php?id=' + wedge.id +
 										'">more info</a></p></div>';
 							$("#accordion").append( result );
 						})
@@ -153,7 +153,7 @@
 				<? echo $wedge['Summary']; ?>
 			</p>
 			<p class="accordionLink">
-				<a href="wedgeInfo.php?id=<? echo $wedge['id']; ?>"><? echo $TEXT['main-a_1']; ?></a>
+				<a href="backend/wedgeInfo.php?id=<? echo $wedge['id']; ?>"><? echo $TEXT['main-a_1']; ?></a>
 			</p>
 		</div>
 <?		
