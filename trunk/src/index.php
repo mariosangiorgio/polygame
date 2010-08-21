@@ -114,7 +114,7 @@
 	}
 	</script>
 </head>
-<body>
+<body onload="document.loginForm.username.focus()">
 	<div id="header">
 		<div id="stripe" />
 		<div id="logo">
