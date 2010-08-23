@@ -119,15 +119,18 @@ img {
 	margin-right: 4%;
 /* 	padding: 0 0 10% 0; */
 	width: 75%;
-	font-size: 0.9em;
 	float: left;
 }
-#accordion img {
+.accordion img {
 	float: left;
 	margin-right: 1em;
 }
-#accordion a {
-	font-size: 1.1em;
+.accordion a {
+	font-size: 1em;
+	text-align: left;
+}
+.accordion p {
+	font-size: 0.9em;
 }
 #update {
 	float:left;
