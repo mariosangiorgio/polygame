@@ -1,6 +1,9 @@
 <?php 
-	include_once("inc/db_connect.php");
-	include_once("inc/common.php");
+	include_once("./inc/db_connect.php");
+	include_once("./inc/common.php");
+	include_once("./backend/utils.php");
+	
+	session_start();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -21,6 +24,8 @@
 									autoHeight: false, 
 									animated: 'bounceslide' };
 			
+			$("#accordion").accordion( accordionOption );
+			
 			$('#update').click( function() 
 			{
 				$.ajax({
@@ -29,7 +34,7 @@
 					dataType: 'json',
 					success: function( json ) 
 					{
-						$("#accordion").replaceWith('<div id="accordion"></div>');
+						$("#accordion").replaceWith('<div id="accordion" class="accordion"></div>');
 						$.each( json, function( index, wedge ) 
 						{
 							var result = '<h3><a>' + wedge.title + '</a></h3>' +
@@ -52,66 +57,129 @@
 				});
 			});
 			
-			$("#login").find('a').click( function() 
-			{
-				$("#login").find('div').hide();
-				$("#login").hide('blind');
-				$("#newAccount").show('blind');
-			});			
+			$('#login').find('form input:first').focus();
 			
-			$("#newAccount").find('a').click( function() 
+			$('#login').find('a').click( function() 
 			{
-				$("#newAccount").find('div').hide();
-				$("#newAccount").hide('blind');
-				$("#login").show('blind');
+				$('#login div').hide();
+				$('#login').hide('blind');
+				$('#newAccount').show('blind', function() {
+					$('#newAccount form').find('input:first').focus();
+				});
 			});
 			
-			$("#accordion").accordion( accordionOption );
+			$('#newAccount').find('a').click( function() 
+			{
+				$('#newAccount div').hide();
+				$('#newAccount').hide('blind');
+				$('#login').show('blind', function() 
+				{
+					$('#login form').find('input:first').focus();
+				});
+			});
+
+			$('form').submit( function( event )
+			{
+				event.preventDefault();
+				
+				if( checkForm( this ))
+				{
+					$('input[name="usingAjax"]', this ).val('true');
+					var $this = $(this);
+					var url = $this.attr('action');
+					var dataToSend = $this.serialize();
+					var typeOfDataToReceive = 'json';
+					var callback = function( response ){
+						if( response.code != "200" )
+						{
+							$('div p:last', $this ).text( response.message );
+							$('div', $this ).show('blind', function() 
+							{
+								if( response.code == "401" )
+									$('input[name="password"]', $this ).focus();
+								else if( response.code == "402" )
+									$('input[name="username"]', $this ).focus();
+							});
+						}
+					};
+					
+					$.post( url, dataToSend, callback, typeOfDataToReceive );
+				}
+				return false;
+			});
 		});
 	})(jQuery);
 	
 	function checkForm( form ) 
 	{
+		var firstInput = true, secondInput = true;
 		var errorStr = "";
 		
 		if( form.name == "loginForm" )
 		{
 			if( !form.username.value )
 			{
+				firstInput = false;
 				errorStr += " Username";
 				if( !form.password.value )
+				{
+					secondInput = false;
 					errorStr += " and password";
+				}
 				errorStr += " missing.";
 			}
 			else if( !form.password.value )
-				errorStr += " Password missing.";
-			
+			{
+				secondInput = false;
+				errorStr += "Password missing.";
+			}	
 		}
 		if( form.name == "newAccountForm" )
 		{
 			if( !form.username.value )
 			{
+				firstInput = false;
 				errorStr += " Username";
 				if( !form.mail.value )
+				{
+					secondInput = false;
 					errorStr += " and mail";
+				}
 				errorStr += " missing.";
 			}
 			else if( !form.mail.value )
-				errorStr += " Password missing.";
+			{
+				secondInput = false;
+				errorStr += "Mail missing.";
+			}	
 		}
 		
 		if( errorStr )
 		{
-			jQuery( form ).find('div').find('p:last').text( errorStr );
-			jQuery( form ).find('div').show('blind');
+			$(form).find('div p:last').text( errorStr );
+			$(form).find('div').show('blind', function() {
+				if( !firstInput )
+					$(form).find('input[name="username"]').focus();
+				else if( !secondInput )
+				{
+					if( form.name == "loginForm" )
+						$(form).find('input[name="password"]').focus();
+					else
+						$(form).find('input[name="mail"]').focus();
+				}
+			});
+			return false;
 		}
-		return false;
+		
+		return true;
 	}
+	
 	function resetForm( form ) 
 	{
-		jQuery( form ).find('div').find('p:last').text('');
-		jQuery( form ).find('div:visible').hide('blind');
-	}
+		$(form).find('div p:last').text('');
+		$(form).find('div:visible').hide('blind');
+		$(form).find('input:first').focus();
+	}		
 	</script>
 </head>
 <body onload="document.loginForm.username.focus()">
@@ -131,48 +199,65 @@
 				<h1><? echo $TEXT['main-h1_1']; ?></h1>
 				<p><? echo $TEXT['main-p_1']; ?></p>
 			</div>
-			<div class="bottom">
+			<div class="middle">
 				<h1><? echo $TEXT['main-h1_2']; ?></h1>
-			</div>
-			<div id="accordion">
+				<div id="accordion" class="accordion">
 <? 
-	$wedge_limit = 3;
-	$number_of_wedges = 0;
+	$wedgeLimit = 2;
+	$numberOfWedges = 0;
 	
-	$query = "SELECT `Wedge ID` as id, Title, Summary, Image FROM Wedges WHERE Language='$lang' ORDER BY Preferences DESC";
+	$query = "SELECT min(`Wedge ID`) as min, max(`Wedge ID`) as max FROM `Wedges`";
+	$result = mysql_query( $query, $connection );
+	$wedgeIdLimit = mysql_fetch_array( $result );
+	
+	$counter = 0;
+	$vector = generateRandomSequence( $wedgeIdLimit['min'], $wedgeIdLimit['max'] );
+	
+	$query = "SELECT `Wedge ID` as id, Title, Summary, Image ". 
+			 "FROM Wedges ".
+			 "WHERE Language='$lang' AND ( ";
+	while( $counter < $wedgeLimit )
+	{
+		$query = $query."`Wedge ID`=".$vector[$counter];
+		$counter++;
+		if( $counter == $wedgeLimit )
+			$query = $query." )";
+		else
+			$query = $query." OR ";
+	}
 	
 	$data = mysql_query( $query, $connection );
 	while(( $wedge = mysql_fetch_array( $data )) && 
-			( $number_of_wedges < $wedge_limit ))
+			( $numberOfWedges < $wedgeLimit ))
 	{
 ?>
-		<h3><a><? echo $wedge['Title']; ?></a></h3>
-		<div>
-			<img src="<? echo $wedge['Image']; ?>" width="66px" height="84px" />
-			<p class="accordionText">
-				<? echo $wedge['Summary']; ?>
-			</p>
-			<p class="accordionLink">
-				<a href="backend/wedgeInfo.php?id=<? echo $wedge['id']; ?>"><? echo $TEXT['main-a_1']; ?></a>
-			</p>
-		</div>
+					<h3><a><? echo $wedge['Title']; ?></a></h3>
+					<div>
+						<img src="<? echo $wedge['Image']; ?>" width="66px" height="84px" />
+						<p class="accordionText">
+							<? echo $wedge['Summary']; ?>
+						</p>
+						<p class="accordionLink">
+							<a href="wedgeInfo.php?id=<? echo $wedge['id']; ?>"><? echo $TEXT['main-a_1']; ?></a>
+						</p>
+					</div>
 <?		
-		$number_of_wedges++;
+		$numberOfWedges++;
 	}
 ?>
+				</div>
+				<div id="update">
+					<a href="#"><? echo $TEXT['main-a_2']; ?></a>
+				</div>
 			</div>
-		<div id="update">
-			<a href="#"><? echo $TEXT['main-a_2']; ?></a>
-		</div>
 		</div>
 		<div id="columnRight">
 			<div id="login">
 				<form 
-					name="loginForm" 
-					method="post" 
-					action="./businesslogic/authentication.php" 
-					onsubmit="return checkForm(this);"
-					onreset="return resetForm(this);"
+					name="loginForm"
+					method="post"
+					action="./backend/authentication.php"
+					onreset="resetForm(this)"
 				>
 				<fieldset class="ui-corner-all">
 					<legend>Login</legend>
@@ -195,8 +280,9 @@
 						</tr>
 					</tbody>
 					</table>
-					<input class="button" type="submit" value="Login"/>
-					<input class="button" type="reset" value="Cancel"/>
+					<input class="button" type="submit" value="Login" />
+					<input class="button" type="reset" value="Cancel" />
+					<input type="hidden" name="usingAjax" value="false" />
 					<p>... or <a href="#">request new account »</a></p>
 				</fieldset>
 				</form>
@@ -205,9 +291,8 @@
 				<form
 					name="newAccountForm" 
 					method="post"
-					action="./businesslogic/authentication.php" 
-					onsubmit="return checkForm(this);"
-					onreset="return resetForm(this);"
+					action="./businesslogic/authentication.php"
+					onreset="resetForm(this)"
 				>
 				<fieldset class="ui-corner-all">
 					<legend>New Account</legend>
@@ -232,11 +317,11 @@
 					</table>
 					<input class="button" type="submit" value="Confirm"/>
 					<input class="button" type="reset" value="Cancel"/>
+					<input type="hidden" name="usingAjax" value="false" />
 					<p>... already registered? <a href="#">Login here »</a></p>
 				</fieldset>
 				</form>
 			</div>
-
 		</div>
 	</div>
 </body>
