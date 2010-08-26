@@ -42,8 +42,9 @@
 										'" width="66px" height="84px" />' + 
 										'<p class="accordionText">' + wedge.summary +
 										'</p><p class="accordionLink">' +
-										'<a href="backend/wedgeInfo.php?id=' + wedge.id +
-										'">more info</a></p></div>';
+										'<a href="backend/wedgeInfo.php?id=' + wedge.id + '">' +
+										'<? echo $TEXT['main-js_1']; ?>' +
+										'</a></p></div>';
 							$("#accordion").append( result );
 						})
 						$("#accordion").accordion( accordionOption );	
@@ -52,7 +53,7 @@
 					error: function( xhr, textStatus, errorThrown ) 
 					{
 						$('accordion').html("");
-						$('accordion').append('An error occurred! ' + errorThrown );
+						$('accordion').append( '<? echo $TEXT['main-js_2']; ?>' + errorThrown );
 					}
 				});
 			});
@@ -92,7 +93,7 @@
 					var callback = function( response ){
 						if( response.code != "200" )
 						{
-							$('div p:last', $this ).text( response.message );
+							$('div strong', $this ).text( response.message );
 							$('div', $this ).show('blind', function() 
 							{
 								if( response.code == "401" )
@@ -101,6 +102,8 @@
 									$('input[name="username"]', $this ).focus();
 							});
 						}
+						else
+							location.assign("./index.php");
 					};
 					
 					$.post( url, dataToSend, callback, typeOfDataToReceive );
@@ -120,18 +123,18 @@
 			if( !form.username.value )
 			{
 				firstInput = false;
-				errorStr += " Username";
+				errorStr += " <? echo $TEXT['main-js_3']; ?>";
 				if( !form.password.value )
 				{
 					secondInput = false;
-					errorStr += " and password";
+					errorStr += " <? echo $TEXT['main-js_4']; ?>";
 				}
-				errorStr += " missing.";
+				errorStr += " <? echo $TEXT['main-js_5']; ?>";
 			}
 			else if( !form.password.value )
 			{
 				secondInput = false;
-				errorStr += "Password missing.";
+				errorStr += "<? echo $TEXT['main-js_6']; ?>";
 			}	
 		}
 		if( form.name == "newAccountForm" )
@@ -139,24 +142,24 @@
 			if( !form.username.value )
 			{
 				firstInput = false;
-				errorStr += " Username";
+				errorStr += " <? echo $TEXT['main-js_3']; ?>";
 				if( !form.mail.value )
 				{
 					secondInput = false;
-					errorStr += " and mail";
+					errorStr += " <? echo $TEXT['main-js_7']; ?>";
 				}
-				errorStr += " missing.";
+				errorStr += " <? echo $TEXT['main-js_5']; ?>";
 			}
 			else if( !form.mail.value )
 			{
 				secondInput = false;
-				errorStr += "Mail missing.";
+				errorStr += "<? echo $TEXT['main-js_8']; ?>";
 			}	
 		}
 		
 		if( errorStr )
 		{
-			$(form).find('div p:last').text( errorStr );
+			$(form).find('div strong').text( errorStr );
 			$(form).find('div').show('blind', function() {
 				if( !firstInput )
 					$(form).find('input[name="username"]').focus();
@@ -176,23 +179,17 @@
 	
 	function resetForm( form ) 
 	{
-		$(form).find('div p:last').text('');
+		$(form).find('div strong').text('');
 		$(form).find('div:visible').hide('blind');
 		$(form).find('input:first').focus();
 	}		
 	</script>
 </head>
-<body onload="document.loginForm.username.focus()">
-	<div id="header">
-		<div id="stripe" />
-		<div id="logo">
-			<img src="images/welcome-new.png" height="150px" />
-		</div>
-		<div id="languages"> 
-			<a href="index.php?lang=en"><img src="images/en.png" /></a> 
-			<a href="index.php?lang=it"><img src="images/it.png" /></a> 
-		</div>
-	</div>
+<body>
+	<? 
+		$stripeImageUrl = "./images/welcome-new.png";
+		include "header.php"; 
+	?>
 	<div id="wrapper">
 		<div id="columnLeft">
 			<div class="top">
@@ -251,6 +248,10 @@
 				</div>
 			</div>
 		</div>
+<?
+	if( !( $_SESSION['loggedIn'] == "yes" )) 
+	{
+?>
 		<div id="columnRight">
 			<div id="login">
 				<form 
@@ -260,30 +261,29 @@
 					onreset="resetForm(this)"
 				>
 				<fieldset class="ui-corner-all">
-					<legend>Login</legend>
+					<legend><? echo $TEXT['main-legend_1']; ?></legend>
 					<div class="errorClass ui-corner-all">
 						<p>
 							<span class="ui-icon ui-icon-info"></span> 
-							<strong>Warning!</strong><br />
-						</p> 
-						<p class="errorDetail"></p>
+							<strong></strong>
+						</p>
 					</div>
 					<table class="loginTable">
 					<tbody>
 						<tr>
-							<td>Username</td>
+							<td><? echo $TEXT['main-td_1']; ?></td>
 							<td><input type="text" name="username"></td>
 						</tr>
 						<tr>
-							<td>Password</td>
+							<td><? echo $TEXT['main-td_2']; ?></td>
 							<td><input type="password" name="password"></td>
 						</tr>
 					</tbody>
 					</table>
-					<input class="button" type="submit" value="Login" />
-					<input class="button" type="reset" value="Cancel" />
+					<input class="button" type="submit" value="<? echo $TEXT['main-button_1']; ?>" />
+					<input class="button" type="reset" value="<? echo $TEXT['main-button_2']; ?>" />
 					<input type="hidden" name="usingAjax" value="false" />
-					<p>... or <a href="#">request new account »</a></p>
+					<p><? echo $TEXT['main-p_2']; ?><a href="#"><? echo $TEXT['main-a_3']; ?></a></p>
 				</fieldset>
 				</form>
 			</div>
@@ -295,34 +295,36 @@
 					onreset="resetForm(this)"
 				>
 				<fieldset class="ui-corner-all">
-					<legend>New Account</legend>
+					<legend><? echo $TEXT['main-legend_2']; ?></legend>
 					<div class="errorClass ui-corner-all">
 						<p>
 							<span class="ui-icon ui-icon-info"></span> 
-							<strong>Warning!</strong><br />
-						</p> 
-						<p class="errorDetail"></p>
+							<strong></strong>
+						</p>
 					</div>
 					<table class="loginTable">
 					<tbody>
 						<tr>
-							<td>Username</td>
+							<td><? echo $TEXT['main-td_3']; ?></td>
 							<td><input type="text" name="username"></td>
 						</tr>
 						<tr>
-							<td>Email address</td>
+							<td><? echo $TEXT['main-td_4']; ?></td>
 							<td><input type="text" name="mail"></td>
 						</tr>
 					</tbody>
 					</table>
-					<input class="button" type="submit" value="Confirm"/>
-					<input class="button" type="reset" value="Cancel"/>
+					<input class="button" type="submit" value="<? echo $TEXT['main-button_3']; ?>"/>
+					<input class="button" type="reset" value="<? echo $TEXT['main-button_2']; ?>"/>
 					<input type="hidden" name="usingAjax" value="false" />
-					<p>... already registered? <a href="#">Login here »</a></p>
+					<p><? echo $TEXT['main-p_3']; ?><a href="#"><? echo $TEXT['main-a_4']; ?></a></p>
 				</fieldset>
 				</form>
 			</div>
 		</div>
+<?
+	}
+?>
 	</div>
 </body>
 </html>

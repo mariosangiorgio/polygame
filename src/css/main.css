@@ -188,8 +188,5 @@ img {
 .errorClass .ui-icon {
 	float: left; 
 	margin: 0 0.5em;
-	background-image:url("ui-lightness/images/ui-icons_228ef1_256x240.png");
-}
-.errorDetail {
-	padding: 0 10%;
+	background-image:url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
 }

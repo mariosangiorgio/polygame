@@ -43,16 +43,9 @@
 	</script> 
 </head>
 <body>
-	<div id="header">
-		<div id="stripe" />
-		<div id="logo">
-			<img src="images/poly-new.png" height="75px" />
-		</div>
-		<div id="languages"> 
-			<a href="index.php?lang=en"><img src="images/en.png" /></a> 
-			<a href="index.php?lang=it"><img src="images/it.png" /></a> 
-		</div>
-	</div>
+	<?
+		include "header.php"; 
+	?>
 	<div id="wrapper">
 		<div id="columnLeft">
 			<div id="top">
