@@ -115,8 +115,7 @@ img {
 
 /* JQuery */
 #accordion {
-	margin-left: 4%;
-	margin-right: 4%;
+	margin: 2% 4%;
 /* 	padding: 0 0 10% 0; */
 	width: 75%;
 	float: left;
@@ -142,6 +141,8 @@ img {
 	color: black;
 }
 #login {
+	padding: 1% 5%;
+	background: #D7EBF9;
 	text-align: center;
 }
 .button  {
@@ -154,6 +155,9 @@ img {
 }
 #newAccount {
 	display: none;
+	padding: 1% 5%;
+	background: #D7EBF9;
+	text-align: center;
 }
 .accordionText {
 	text-align: justify;

@@ -42,7 +42,7 @@
 										'" width="66px" height="84px" />' + 
 										'<p class="accordionText">' + wedge.summary +
 										'</p><p class="accordionLink">' +
-										'<a href="backend/wedgeInfo.php?id=' + wedge.id + '">' +
+										'<a href="wedgeInfo.php?id=' + wedge.id + '">' +
 										'<? echo $TEXT['main-js_1']; ?>' +
 										'</a></p></div>';
 							$("#accordion").append( result );
@@ -254,14 +254,13 @@
 ?>
 		<div id="columnRight">
 			<div id="login">
+				<h2><? echo $TEXT['main-legend_1']; ?></h2>
 				<form 
 					name="loginForm"
 					method="post"
 					action="./backend/authentication.php"
 					onreset="resetForm(this)"
 				>
-				<fieldset class="ui-corner-all">
-					<legend><? echo $TEXT['main-legend_1']; ?></legend>
 					<div class="errorClass ui-corner-all">
 						<p>
 							<span class="ui-icon ui-icon-info"></span> 
@@ -284,18 +283,16 @@
 					<input class="button" type="reset" value="<? echo $TEXT['main-button_2']; ?>" />
 					<input type="hidden" name="usingAjax" value="false" />
 					<p><? echo $TEXT['main-p_2']; ?><a href="#"><? echo $TEXT['main-a_3']; ?></a></p>
-				</fieldset>
 				</form>
 			</div>
 			<div id="newAccount">
+				<h2><? echo $TEXT['main-legend_2']; ?></h2>
 				<form
 					name="newAccountForm" 
 					method="post"
 					action="./businesslogic/authentication.php"
 					onreset="resetForm(this)"
 				>
-				<fieldset class="ui-corner-all">
-					<legend><? echo $TEXT['main-legend_2']; ?></legend>
 					<div class="errorClass ui-corner-all">
 						<p>
 							<span class="ui-icon ui-icon-info"></span> 
@@ -318,7 +315,6 @@
 					<input class="button" type="reset" value="<? echo $TEXT['main-button_2']; ?>"/>
 					<input type="hidden" name="usingAjax" value="false" />
 					<p><? echo $TEXT['main-p_3']; ?><a href="#"><? echo $TEXT['main-a_4']; ?></a></p>
-				</fieldset>
 				</form>
 			</div>
 		</div>
