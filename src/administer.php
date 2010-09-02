@@ -27,6 +27,11 @@
 	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.4.custom.css" rel="stylesheet" />	
 	<script type="text/JavaScript" src="lib/jquery-1.4.1.min.js"></script>
 	<script type="text/JavaScript" src="lib/jquery-ui-1.8.4.custom.min.js"></script>
+	<style>
+	.delete{
+		float:right;
+		}
+	</style>
 </head>
 <body>
 	<?
@@ -45,7 +50,10 @@
 				<h2>Existing orgnizers</h2>
 				<?
 					foreach($currentOrganizers as $organizer){
-						echo "<DIV name='".$organizer['username']."'>".$organizer['username']."</DIV>";
+						$username = $organizer['username'];
+						echo "<DIV name='$username'>$username";
+						echo "<SPAN class=delete>DELETE</SPAN>";
+						echo "</DIV>";
 					}
 					echo "<DIV id='showAll' style='color: red;'>Show all</DIV>";
 				?>
@@ -57,6 +65,11 @@
 			//TODO: add proposals
 		</div>
 	</div>
+</div>
+
+<!-- Confirmation dialog -->
+<div id="dialog-confirm" title="Delete the organizer?">
+<p>This operation cannot be undone, are you sure?</p>
 </div>
 
 <!-- ajax script -->
@@ -74,19 +87,55 @@ more.click(function(){
 	});
 	
 	//Getting the full list from the server
-	$.getJSON("backend/getAllOrganizers.php",
+	var parameters = {operation: 'getAllOrganizers'};
+	$.getJSON("backend/administration.php",
+			  parameters,
         function(data){
-          $.each(data, function(i,item){
+          $.each(data,function(i,item){
           	var name = item.name;
           	if($.inArray(name,names) == -1){
-          		existingOrganizers.append("<DIV name='"+name+"'>"+name+"</DIV>");
+          		existingOrganizers.append("<DIV name='"+name+"'>"+name+"<SPAN class=delete>DELETE</SPAN></DIV>");
           	}
           });
+          bindDeleteEvent();
          });
-	more.remove();
+     more.remove();
 });
 
-</script>
+var dialog = $("#dialog-confirm").dialog(
+				{autoOpen: false,
+				 resizable: false,
+				 modal: true
+				 }
+				 );
 
+function bindDeleteEvent(){
+	var deleteOrganizer = $(".delete");
+	deleteOrganizer.each(function(i,item){
+		$(this).click(function(){
+			var parentElement = $(this).parent();
+			dialog.dialog(
+				{
+				buttons: {
+				 	'Ok': function() {
+				 		$(this).dialog('close');
+				 		parentElement.css('background-color','red');
+				 		parentElement.slideUp();
+				 		},
+				 	Cancel: function() {
+				 		$(this).dialog('close');
+				 		}
+				 	}
+				 }
+				 );
+			dialog.dialog("open");
+		});
+	});
+}
+
+bindDeleteEvent();
+
+
+</script>
 </body>
 </html>
