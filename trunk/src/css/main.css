@@ -7,7 +7,8 @@ body {
 	margin-right: 2%;
 	font-size:14px;
 	line-height:1.4em;
-	text-align: justify;
+	text-align: left;
+	background: #fff;
 }
 h1 {
 	font-size: 18px;
@@ -18,38 +19,26 @@ h2 {
 img {
 	border: none;
 }
-
+a {
+	color: #2779AA;
+	font-weight: bold;
+}
 
 /* Home page layout */
 #wrapper {
-	padding-top: 135px;
-/* 	height: 100%; */
+	margin: 135px 0 5% 0;
 }
-#columnLeft {
+.columnLeft {
 	float: left;
-	width: 65%;
-	height: 100%;
-	padding-right: 15px;
-	padding-left: 15px;
-	text-align: left;
-	background: #fff;
+	width: 64%;
+	margin: 0 1.5%;
 }
-#columnRight {
+.columnRight {
  	float:left; 
-/* 	padding: 50px 2% 0; */
-	width: 27%;
-	margin-right: 15px;
-	margin-left: 15px;
-	padding-top: 40px;
-	padding-right: 15px;
+	width: 30%;
+	margin: 0 1.5%;
 }
-
-#singleColumn {
-	float:			none;
-	text-align: 	left;
-	width:			 40%;
-	margin:			auto;
-}
+/* Header Section */
 #stripe {
 	width:100%;
 	height:25px;
@@ -73,7 +62,6 @@ img {
 #languages img {
 	margin: 3px;
 }
-
 #header {
 	height: 20%;
 	text-align: center;
@@ -119,13 +107,15 @@ img {
 	margin-right: 2%;
 	margin-bottom: 5%;
 }
+.title {
+	text-align: center;
+}
 
 /* JQuery */
 #accordion {
-	margin: 2% 4%;
+	margin: 4% 15%;
 /* 	padding: 0 0 10% 0; */
-	width: 75%;
-	float: left;
+	width: 70%;
 }
 .accordion img {
 	float: left;
@@ -139,8 +129,8 @@ img {
 	font-size: 0.9em;
 }
 #update {
-	float:left;
-	margin-left: 5%;
+	margin-right: 17%;
+	text-align: right;
 }
 #update a {
 	font-style: italic;

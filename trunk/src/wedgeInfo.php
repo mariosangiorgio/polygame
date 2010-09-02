@@ -11,8 +11,10 @@
 	{
 		$wedgeId = $_GET['id'];
 		$lang = $_SESSION['lang'];
-		$query = "SELECT Title, Introduction, History, Image FROM Wedges WHERE Language='$lang' AND `Wedge ID`=$wedgeId";
-
+		$query = "SELECT `Title`, `Image`, `Introduction`, `Summary`, `History`, `Present use`,".
+				 "`National situation`, `Emission reduction`, `References`". 
+				 "FROM `wedges` WHERE Language='$lang' AND `Wedge ID`=$wedgeId";
+		
 		$result = mysql_query( $query, $connection );
 		$wedgeInfo = mysql_fetch_array( $result );
 	}
@@ -38,6 +40,8 @@
 									animated: 'bounceslide' };
 			
 			$("#wedgeList").accordion( accordionOption );
+			
+			$("#tabs").tabs();
 		});
 	})(jQuery);
 	</script> 
@@ -47,19 +51,47 @@
 		include "header.php"; 
 	?>
 	<div id="wrapper">
-		<div id="columnLeft">
-			<div id="top">
+		<div class="title">
+			<div class="columnLeft">
 				<h1><? echo $wedgeInfo['Title']; ?></h1>
-				<p><? echo $wedgeInfo['Introduction']; ?></p>
 			</div>
-			<div id="image">
-				<img src="<? echo $wedgeInfo['Image']; ?>" />
-			</div>
-			<div id="bottom">
-				<p><? echo $wedgeInfo['History']; ?></p>
+			<div class="columnRight">
+				<h1>Other wedges...</h1>
+			</div>			
+		</div>
+		<div class="columnLeft">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Introduction</a></li>
+					<li><a href="#tabs-2">History</a></li>
+					<li><a href="#tabs-3">Present Use</a></li>
+					<li><a href="#tabs-4">National situation</a></li>
+					<li><a href="#tabs-5">Emission reduction</a></li>
+					<li><a href="#tabs-6">References</a></li>
+				</ul>
+				<div id="tabs-1">
+					<p>
+						<? echo htmlentities($wedgeInfo['Introduction']); ?>
+					</p>
+				</div>				
+				<div id="tabs-2">
+					<p><? echo htmlentities($wedgeInfo['History']); ?></p>
+				</div>
+				<div id="tabs-3">
+					<p><? echo htmlentities($wedgeInfo['Present use']); ?></p>
+				</div>
+				<div id="tabs-4">					
+					<p><? echo htmlentities($wedgeInfo['National situation']); ?></p>
+				</div>				
+				<div id="tabs-5">					
+					<p><? echo htmlentities($wedgeInfo['Emission reduction']); ?></p>
+				</div>				
+				<div id="tabs-6">					
+					<p><? echo htmlentities($wedgeInfo['References']); ?></p>
+				</div>
 			</div>
 		</div>
-		<div id="columnRight">
+		<div class="columnRight">
 			<div id="wedgeList" class="accordion">
 <? 
 	$query = "SELECT `Wedge ID` as id, Title, Summary, Image ". 

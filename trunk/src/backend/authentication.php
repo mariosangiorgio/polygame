@@ -13,7 +13,7 @@
 	{
 		// User exists, check if password is correct
 		$user = mysql_fetch_array( $result );
-		if( $password == $user['password'] )
+		if( sha1( "polygame".$password ) == $user['password'] )
 		{
 			// Password is correct
 			$_SESSION['loggedIn']	= "yes";
