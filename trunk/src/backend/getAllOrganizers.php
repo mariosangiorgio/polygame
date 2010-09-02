@@ -2,7 +2,8 @@
 	session_start();
 	include_once("../inc/db_connect.php");
 	include_once("utils.php");
-		$query = "SELECT `username` FROM `Users` WHERE `role`='organizer'";
+	
+	$query = "SELECT `username` FROM `Users` WHERE `role`='organizer'";
 	
 	$result = mysql_query( $query, $connection );
 	
@@ -17,7 +18,7 @@
 	$result = array();
 	while( $index < $counter )
 	{
-		$result['organizer'.$index] = $organizers[$index];
+		$result[] = $organizers[$index];
 		$index++;
 	}
 	
