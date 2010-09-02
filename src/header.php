@@ -16,27 +16,28 @@
 	if( $_SESSION['loggedIn'] == "yes" ) 
 	{
 ?>
-	<div id="name">
-		<? echo $TEXT['header-div_1'].", ".$_SESSION['username']."!" ?>
-	</div>
+		<div id="name">
+			<? echo $TEXT['header-div_1'].", ".$_SESSION['username']."!" ?>
+		</div>
 <?
 	}
 ?>
-	<div id="logo">
-		<img src="<? echo $stripeImageUrl; ?>" height="<? echo $height; ?>" />
-	</div>
-	<div id="languages-head"> 
-		<a href="index.php?lang=en"><img src="images/en.png" /></a> 
-		<a href="index.php?lang=it"><img src="images/it.png" /></a> 
-	</div>
+		<div id="logo">
+			<img src="<? echo $stripeImageUrl; ?>" height="<? echo $height; ?>" />
+		</div>
+		<div id="languages-head"> 
+			<a href="index.php?lang=en"><img src="images/en.png" /></a> 
+			<a href="index.php?lang=it"><img src="images/it.png" /></a> 
+		</div>
 <?
 	if( $_SESSION['loggedIn'] == "yes" )
 	{
 ?>
-	<div id="logout">
-		<a href="logout.php"><? echo $TEXT['header-a_1']; ?></a> 
-	</div>
+		<div id="logout">
+			<a href="logout.php"><? echo $TEXT['header-a_1']; ?></a> 
+		</div>
 <?
 	}
 ?>
+	</div>
 </div>

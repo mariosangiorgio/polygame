@@ -2,7 +2,7 @@
 	include_once("./inc/db_connect.php");
 	include_once("./inc/common.php");
 	include_once("./backend/utils.php");
-	
+		
 	session_start();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -191,7 +191,7 @@
 		include "header.php"; 
 	?>
 	<div id="wrapper">
-		<div id="columnLeft">
+		<div class="columnLeft">
 			<div class="top">
 				<h1><? echo $TEXT['main-h1_1']; ?></h1>
 				<p><? echo $TEXT['main-p_1']; ?></p>
@@ -243,16 +243,16 @@
 	}
 ?>
 				</div>
-				<div id="update">
-					<a href="#"><? echo $TEXT['main-a_2']; ?></a>
-				</div>
+			</div>
+			<div id="update">
+				<a href="#"><? echo $TEXT['main-a_2']; ?></a>
 			</div>
 		</div>
 <?
 	if( !( $_SESSION['loggedIn'] == "yes" )) 
 	{
 ?>
-		<div id="columnRight">
+		<div class="columnRight">
 			<div id="login">
 				<h2><? echo $TEXT['main-legend_1']; ?></h2>
 				<form 
@@ -290,7 +290,7 @@
 				<form
 					name="newAccountForm" 
 					method="post"
-					action="./businesslogic/authentication.php"
+					action="./backend/newUser.php"
 					onreset="resetForm(this)"
 				>
 					<div class="errorClass ui-corner-all">

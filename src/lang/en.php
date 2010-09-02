@@ -21,7 +21,7 @@
 	$TEXT['main-p_3'] = "... already registered? ";
 	$TEXT['main-a_1'] = "more info";
 	$TEXT['main-a_2'] = "Show more";
-	$TEXT['main-a_3'] = "request new account &raquo;";
+	$TEXT['main-a_3'] = htmlentities("request new account »");
 	$TEXT['main-a_4'] = "Login here &raquo;";
 	$TEXT['main-legend_1'] = "Login";
 	$TEXT['main-legend_2'] = "New account";
