@@ -129,6 +129,16 @@ function bindDeleteEvent(){
 				buttons: {
 				 	'Ok': function() {
 				 		$(this).dialog('close');
+				 		//Call to the backend to remove the organizer
+				 		var username = parentElement.attr('name');
+
+				 		var parameters = {
+				 							operation:	'deleteOrganizer',
+				 							username:	username
+				 						 };
+				 		$.getJSON("backend/administration.php",parameters);
+				 		
+				 		//Removing it also from the user interface
 				 		parentElement.css('background-color','red');
 				 		parentElement.slideUp();
 				 		},
