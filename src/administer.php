@@ -4,18 +4,7 @@
 	include_once("./inc/common.php");
 	include_once("./backend/utils.php");
 	
-	//TODO: check if the user has the rights to access this page
 	//TODO: add multi language support to this page
-	
-	//Loading current organizers from the database
-	$currentOrganizers = array();
-	
-	$query = "SELECT `username` FROM `Users` WHERE `role`='organizer' LIMIT 3";
-	$result = mysql_query( $query, $connection );
-	while($currentOrganizer = mysql_fetch_array( $result )){
-		$currentOrganizers[] = $currentOrganizer;
-	}
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -35,10 +24,31 @@
 </head>
 <body>
 	<?
-		include "header.php"; 
+		include "header.php";
+		if(!checkAuthorization("administrator")){
+			?>
+			<div id="wrapper">
+			<div id="singleColumn">
+			Please log in as an administrator
+			</div>
+			</div>
+			<?
+			return;
+		}
+		else{
+			//Loading current organizers from the database
+			//TODO: randomize list
+			$currentOrganizers = array();
+			
+			$query = "SELECT `username` FROM `Users` WHERE `role`='organizer' LIMIT 3";
+			$result = mysql_query( $query, $connection );
+			while($currentOrganizer = mysql_fetch_array( $result )){
+				$currentOrganizers[] = $currentOrganizer;
+			}
+		}
 	?>
 <div id="wrapper">
-	<div id="singleColumn">
+	<div class="singleColumn">
 		<div id="organizers">
 			<h1>Organizers of polygame</h1>
 			<div id="pendingRequests">
