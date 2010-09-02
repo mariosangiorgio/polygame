@@ -43,6 +43,23 @@
 	$TEXT['main-js_7'] = "e mail";
 	$TEXT['main-js_8'] = "Mail mancante.";
 	
+	/*
+	------------------
+	Administration Page : administer.php
+	------------------
+	*/
+	$TEXT['administration-page_title'] 				 = 'Pagina di amministrazione';
+	$TEXT['administration-page_login-error-message'] = "Per visualizzare questa pagina effettuare l'accesso come amministratore";
+	$TEXT['administration-page_organizers-heading']	 = 'Organizzatori del Polygame';
+	$TEXT['administration-page_pending-requests']	 = 'Richieste da valutare';
+	$TEXT['administration-page_active-organizers']	 = 'Organizzatori attivi';
+	$TEXT['administration-page_delete']				 = 'ELIMINA';
+	$TEXT['administration-page_show-all']			 = 'Mostra tutti';
+	$TEXT['administration-page_submitted-wedges']    = 'Cunei proposti';
+	$TEXT['administration-page_dialog-title']		 = 'Eliminazione di un organizzatore';
+	$TEXT['administration-page_dialog-message']		 = 'Questa operazione non potrˆ essere annullata, effettuarla comunque?';
+
+	
 	/* 
 	------------------
 	Header: header.php
