@@ -1,7 +1,12 @@
 <?php 
 	session_start();
+	
 	include_once("../inc/db_connect.php");
 	include_once("utils.php");
+	
+	if(!checkAuthorization("administrator")){
+		return;
+	}
 	
 	if( isSet( $_GET['operation']))
 	{

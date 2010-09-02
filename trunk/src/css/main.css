@@ -38,6 +38,13 @@ a {
 	width: 30%;
 	margin: 0 1.5%;
 }
+
+.singleColumn {
+	float:			none;
+	text-align: 	left;
+	width:			 40%;
+	margin:			auto;
+}
 /* Header Section */
 #stripe {
 	width:100%;
