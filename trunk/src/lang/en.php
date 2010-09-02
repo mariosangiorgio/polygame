@@ -41,6 +41,22 @@
 	$TEXT['main-js_7'] = "and mail";
 	$TEXT['main-js_8'] = "Mail missing.";
 	
+	/*
+	------------------
+	Administration Page : administer.php
+	------------------
+	*/
+	$TEXT['administration-page_title'] 				 = 'Administration Page';
+	$TEXT['administration-page_login-error-message'] = 'Please log in as an administrator to access this page';
+	$TEXT['administration-page_organizers-heading']	 = 'Organizers of the Polygame';
+	$TEXT['administration-page_pending-requests']	 = 'Pending requests';
+	$TEXT['administration-page_active-organizers']	 = 'Active organizers';
+	$TEXT['administration-page_delete']				 = 'DELETE';
+	$TEXT['administration-page_show-all']			 = 'Show All';
+	$TEXT['administration-page_submitted-wedges']    = 'Submitted wedges';
+	$TEXT['administration-page_dialog-title']		 = 'Delete the organizer';
+	$TEXT['administration-page_dialog-message']		 = 'This operation cannot be undone, are you sure?';
+	
 	/* 
 	------------------
 	Header: header.php

@@ -10,7 +10,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title>Administration page</title>
+	<title><? echo $TEXT['administration-page_title']; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="css/main.css" type="text/css" rel="stylesheet" />
 	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.4.custom.css" rel="stylesheet" />	
@@ -29,7 +29,7 @@
 			?>
 			<div id="wrapper">
 			<div id="singleColumn">
-			Please log in as an administrator
+			<? echo $TEXT['administration-page_login-error-message']; ?>
 			</div>
 			</div>
 			<?
@@ -50,36 +50,36 @@
 <div id="wrapper">
 	<div class="singleColumn">
 		<div id="organizers">
-			<h1>Organizers of polygame</h1>
+			<h1><? echo $TEXT['administration-page_organizers-heading']; ?></h1>
 			<div id="pendingRequests">
-				<h2>New requests</h2>
+				<h2><? echo $TEXT['administration-page_pending-requests']; ?></h2>
 				//TODO: add pending requests
 			</div>
 			
 			<div id="existingOrganizers">
-				<h2>Existing orgnizers</h2>
+				<h2><? echo $TEXT['administration-page_active-organizers']; ?></h2>
 				<?
 					foreach($currentOrganizers as $organizer){
 						$username = $organizer['username'];
 						echo "<DIV name='$username'>$username";
-						echo "<SPAN class=delete>DELETE</SPAN>";
+						echo "<SPAN class=delete>".$TEXT['administration-page_delete']."</SPAN>";
 						echo "</DIV>";
 					}
-					echo "<DIV id='showAll' style='color: red;'>Show all</DIV>";
+					echo "<DIV id='showAll' style='color: red;'>".$TEXT['administration-page_show-all']."</DIV>";
 				?>
 			</div>
 		</div>
 		
 		<div id="wedges">
-			<h1>Wedges proposal</h1>
+			<h1><? echo $TEXT['administration-page_submitted-wedges']; ?></h1>
 			//TODO: add proposals
 		</div>
 	</div>
 </div>
 
 <!-- Confirmation dialog -->
-<div id="dialog-confirm" title="Delete the organizer?">
-<p>This operation cannot be undone, are you sure?</p>
+<div id="dialog-confirm" title="<? echo $TEXT['administration-page_dialog-title']; ?>">
+<p><? echo $TEXT['administration-page_dialog-message']; ?></p>
 </div>
 
 <!-- ajax script -->
@@ -104,7 +104,7 @@ more.click(function(){
           $.each(data,function(i,item){
           	var name = item.name;
           	if($.inArray(name,names) == -1){
-          		existingOrganizers.append("<DIV name='"+name+"'>"+name+"<SPAN class=delete>DELETE</SPAN></DIV>");
+          		existingOrganizers.append("<DIV name='"+name+"'>"+name+"<SPAN class=delete><? echo $TEXT['administration-page_delete']; ?></SPAN></DIV>");
           	}
           });
           bindDeleteEvent();
