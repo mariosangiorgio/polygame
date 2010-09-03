@@ -41,4 +41,16 @@
 		
 		return $vector;
 	}
+	
+	function generatePassword( $username )
+	{
+		$passwordLength = 10;
+		srand((double) microtime() * 1000000);
+		
+		$password = sha1("polygame".$username + rand());
+		$init = rand( 0, strlen( password ) - $passwordLenght );
+		$password = substr( $password, $init, $passwordLength );
+		
+		return $password;
+	}
 ?>

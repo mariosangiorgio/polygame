@@ -34,13 +34,14 @@
 	$TEXT['main-button_3'] = "confirm";
 	$TEXT['main-js_1'] = "more info";
 	$TEXT['main-js_2'] = "An error occurred!";
-	$TEXT['main-js_3'] = "Username";
-	$TEXT['main-js_4'] = "and password";
-	$TEXT['main-js_5'] = "missing.";
-	$TEXT['main-js_6'] = "Password missing.";
-	$TEXT['main-js_7'] = "and mail";
-	$TEXT['main-js_8'] = "Mail missing.";
-	
+	$TEXT['main-username_1'] = "Username missing.";
+	$TEXT['main-username_2'] = "Username must be between 6 and 12 characters long.";
+	$TEXT['main-username_3'] = "Username must contain only letters (a-z) and numbers (0-9).";
+	$TEXT['main-password_1'] = "Password missing.";
+	$TEXT['main-password_2'] = "Password must be between 6 and 12 characters long.";
+	$TEXT['main-password_3'] = "Password must contain only letters (a-z) and numbers (0-9).";
+	$TEXT['main-mail_1'] = "Email address missing.";
+	$TEXT['main-mail_2'] = "Invalid Email address";
 	/*
 	------------------
 	Administration Page : administer.php
@@ -66,4 +67,14 @@
 	$TEXT['header-div_1'] = "Hi";
 	$TEXT['header-a_1'] = "Logout";
 	
+	/* 
+	------------------
+	New User: newUser.php
+	------------------
+	*/
+	$TEXT['newUser-message_1_1'] = "Username";
+	$TEXT['newUser-message_1_2'] = "is not available.";
+	$TEXT['newUser-message_3'] = "An error occurred while creating new account";
+	$TEXT['newUser-message_4'] = "Registration correctly done";
+	$TEXT['newUser-message_5'] = "Unable to send mail to";
 ?>
