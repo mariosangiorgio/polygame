@@ -38,6 +38,4 @@
 			$lang_file = 'en.php';
 
 	}
-
-	include_once 'lang/'.$lang_file;
 ?>

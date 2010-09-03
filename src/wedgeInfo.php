@@ -1,7 +1,7 @@
 <?php
-	session_start();
-	include_once("./inc/db_connect.php");
 	include_once("./inc/common.php");
+	include_once 'lang/'.$lang_file;
+	include_once("./inc/db_connect.php");
 	include_once("./backend/utils.php");
 	
 	$wedgeInfo = null;
@@ -13,10 +13,9 @@
 		$lang = $_SESSION['lang'];
 		$query = "SELECT `Title`, `Image`, `Introduction`, `Summary`, `History`, `Present use`,".
 				 "`National situation`, `Emission reduction`, `References`". 
-				 "FROM `wedges` WHERE Language='$lang' AND `Wedge ID`=$wedgeId";
-		
+				 "FROM `Wedges` WHERE Language='$lang' AND `Wedge ID`=$wedgeId";
 		$result = mysql_query( $query, $connection );
-		$wedgeInfo = mysql_fetch_array( $result );
+		$wedgeInfo = mysql_fetch_array( $result );		
 	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"

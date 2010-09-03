@@ -1,9 +1,8 @@
 <?php 
-	include_once("./inc/db_connect.php");
 	include_once("./inc/common.php");
+	include_once 'lang/'.$lang_file;
+	include_once("./inc/db_connect.php");
 	include_once("./backend/utils.php");
-		
-	session_start();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -88,24 +87,46 @@
 					$('input[name="usingAjax"]', this ).val('true');
 					var $this = $(this);
 					var url = $this.attr('action');
+					var formName = $this.attr('name');
 					var dataToSend = $this.serialize();
 					var typeOfDataToReceive = 'json';
-					var callback = function( response ){
-						if( response.code != "200" )
-						{
-							$('div strong', $this ).text( response.message );
-							$('div', $this ).show('blind', function() 
+					var callback;
+					if( formName == "loginForm" )
+					{
+						callback = function( response ){
+							if( response.code != "200" )
 							{
-								if( response.code == "401" )
-									$('input[name="password"]', $this ).focus();
-								else if( response.code == "402" )
-									$('input[name="username"]', $this ).focus();
-							});
-						}
-						else
-							location.assign("./index.php");
-					};
-					
+								$('div.errorClass strong', $this ).html( response.message );
+								$('div.errorClass', $this ).show('blind', function() 
+								{
+									if( response.code == "302" )
+										$('input[name="password"]', $this ).focus();
+									else if( response.code == "303" )
+										$('input[name="username"]', $this ).focus();
+								});
+							}
+							else
+								location.assign("./index.php");
+						};
+					}
+					else if( formName == "newAccountForm" )
+					{
+						callback = function( response ){
+							if( response.code != "200" )
+							{
+								$('div.errorClass strong', $this ).html( response.message );
+								$('div.errorClass', $this ).show('blind', function() 
+								{
+									if( response.code == "402" )
+										$('input[name="username"]', $this ).focus();
+									else if( response.code == "403" || response.code == "404" )
+										$('input[name="mail"]', $this ).focus();
+								});
+							}
+							else
+								location.assign("./index.php");
+						};
+					}
 					$.post( url, dataToSend, callback, typeOfDataToReceive );
 				}
 				return false;
@@ -115,55 +136,65 @@
 	
 	function checkForm( form ) 
 	{
-		var firstInput = true, secondInput = true;
-		var errorStr = "";
+		var username_re = /^[a-z0-9]{6,12}$/i;
+		var password_re = /^[a-z0-9]{6,12}$/i;
+		var mail_re = /^.+@.+\..+$/i;
+		var firstInput = "", secondInput = "";
 		
 		if( form.name == "loginForm" )
 		{
 			if( !form.username.value )
+				firstInput += " <? echo $TEXT['main-username_1']; ?>";
+			else
 			{
-				firstInput = false;
-				errorStr += " <? echo $TEXT['main-js_3']; ?>";
-				if( !form.password.value )
-				{
-					secondInput = false;
-					errorStr += " <? echo $TEXT['main-js_4']; ?>";
-				}
-				errorStr += " <? echo $TEXT['main-js_5']; ?>";
+				var username = form.username.value;
+				if( username.length < 6 || username.length > 12 )
+					firstInput += " <? echo $TEXT['main-username_2']; ?>";
+				else if( !username_re.test( username ))
+					firstInput += " <? echo $TEXT['main-username_3']; ?>";
 			}
-			else if( !form.password.value )
+			if( !firstInput )
 			{
-				secondInput = false;
-				errorStr += "<? echo $TEXT['main-js_6']; ?>";
-			}	
+				if( !form.password.value )
+					secondInput += " <? echo $TEXT['main-password_1']; ?>";
+				else
+				{
+					var password = form.password.value;
+					if( password.length < 6 || password.length > 12 )
+						secondInput += " <? echo $TEXT['main-password_2']; ?>";
+					else if( !password_re.test( password ))
+						secondInput += " <? echo $TEXT['main-password_3']; ?>";
+				}
+			}
 		}
 		if( form.name == "newAccountForm" )
 		{
 			if( !form.username.value )
+				firstInput += " <? echo $TEXT['main-username_1']; ?>";
+			else
 			{
-				firstInput = false;
-				errorStr += " <? echo $TEXT['main-js_3']; ?>";
-				if( !form.mail.value )
-				{
-					secondInput = false;
-					errorStr += " <? echo $TEXT['main-js_7']; ?>";
-				}
-				errorStr += " <? echo $TEXT['main-js_5']; ?>";
+				var username = form.username.value;
+				if( username.length < 6 || username.length > 12 )
+					firstInput += " <? echo $TEXT['main-username_2']; ?>";
+				else if( !username_re.test( username ))
+					firstInput += " <? echo $TEXT['main-username_3']; ?>";
 			}
-			else if( !form.mail.value )
+			if( !firstInput )
 			{
-				secondInput = false;
-				errorStr += "<? echo $TEXT['main-js_8']; ?>";
-			}	
+				if( !form.mail.value )
+					secondInput += " <? echo $TEXT['main-mail_1']; ?>";
+				else if( !mail_re.test( form.mail.value ))
+					secondInput += " <? echo $TEXT['main-mail_2']; ?>";
+			}
 		}
 		
-		if( errorStr )
+		if( firstInput || secondInput )
 		{
-			$(form).find('div strong').text( errorStr );
-			$(form).find('div').show('blind', function() {
-				if( !firstInput )
+			$(form).find('div.errorClass strong').html( firstInput + secondInput );
+			$(form).find('div.errorClass').show('blind', function() {
+				if( firstInput )
 					$(form).find('input[name="username"]').focus();
-				else if( !secondInput )
+				else if( secondInput )
 				{
 					if( form.name == "loginForm" )
 						$(form).find('input[name="password"]').focus();
@@ -173,15 +204,15 @@
 			});
 			return false;
 		}
-		
 		return true;
 	}
 	
-	function resetForm( form ) 
+	function resetForm( form )
 	{
-		$(form).find('div strong').text('');
-		$(form).find('div:visible').hide('blind');
-		$(form).find('input:first').focus();
+		$(form).find('div.errorClass:visible').hide('blind', function() {
+			$(form).find('div.errorClass strong').html('');
+			$(form).find('input:first').focus();
+		});
 	}		
 	</script>
 </head>
@@ -261,10 +292,26 @@
 					action="./backend/authentication.php"
 					onreset="resetForm(this)"
 				>
-					<div class="errorClass ui-corner-all">
+					<div 
+						class="errorClass ui-corner-all"
+<?
+		if( isSet( $_SESSION['response'] ))
+			if( $_SESSION['response']['form'] == 'loginForm' )
+				echo "style=\"display:block;\"";
+?>							
+						>
 						<p>
-							<span class="ui-icon ui-icon-info"></span> 
-							<strong></strong>
+							<span class="ui-icon ui-icon-info"></span>
+							<strong>
+<?
+		if( isSet( $_SESSION['response'] ))
+			if( $_SESSION['response']['form'] == 'loginForm' )
+			{
+				echo $_SESSION['response']['message'];
+				unset( $_SESSION['response'] );
+			}
+?>							
+							</strong>
 						</p>
 					</div>
 					<table class="loginTable">
@@ -293,10 +340,26 @@
 					action="./backend/newUser.php"
 					onreset="resetForm(this)"
 				>
-					<div class="errorClass ui-corner-all">
+					<div 
+						class="errorClass ui-corner-all"
+<?
+		if( isSet( $_SESSION['response'] ))
+			if( $_SESSION['response']['form'] == 'newAccountForm' )
+				echo "style=\"display:block;\"";
+?>						
+						>
 						<p>
-							<span class="ui-icon ui-icon-info"></span> 
-							<strong></strong>
+							<span class="ui-icon ui-icon-info"></span>
+							<strong>
+<?
+		if( isSet( $_SESSION['response'] ))
+			if( $_SESSION['response']['form'] == 'newAccountForm' )
+			{
+				echo $_SESSION['response']['message'];
+				unset( $_SESSION['response'] );
+			}
+?>							
+							</strong>
 						</p>
 					</div>
 					<table class="loginTable">
