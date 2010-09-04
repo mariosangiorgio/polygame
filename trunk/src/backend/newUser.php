@@ -54,7 +54,7 @@
 			{
 				// Email correctly sended
 				$query = "INSERT INTO `Users` ( `username`, `role`, `password` )".
-						 "VALUES ( '$username', 'player', '$password' )";
+						 "VALUES ( '$username', 'player', '".sha1( "polygame".$password )."' )";
 				$result = mysql_query( $query, $connection );
 				if( !$result )
 					$response = array( 
