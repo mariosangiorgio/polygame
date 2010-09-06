@@ -58,6 +58,22 @@
 	$TEXT['administration-page_dialog-title']		 = 'Delete the organizer';
 	$TEXT['administration-page_dialog-message']		 = 'This operation cannot be undone, are you sure?';
 	
+	/*
+	------------------
+	Administration Page : administer.php
+	------------------
+	*/
+	$TEXT['organization-page_title']			= 'Organization page';
+	$TEXT['organizer-page_login-error-message'] = 'Please log in as an organizer to access this page';
+
+	$TEXT['organizer-page_intro-title']			= 'Are you ready to start a new game?';
+	$TEXT['organizer-page_intro-content']		= 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.';
+	$TEXT['organizer-page_rule-link']			= 'Review the rules of the Polygame';
+
+	$TEXT['organizer-page_suggestions-title']			= 'Do you want to improve future games?';
+	$TEXT['organizer-page_suggestions-feedback']		= 'Leave feedback or ';
+	$TEXT['organizer-page_suggestions-propose-wedge']	= 'propose a new wedge';
+	
 	/* 
 	------------------
 	Header: header.php

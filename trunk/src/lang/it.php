@@ -58,6 +58,13 @@
 	$TEXT['administration-page_submitted-wedges']    = 'Cunei proposti';
 	$TEXT['administration-page_dialog-title']		 = 'Eliminazione di un organizzatore';
 	$TEXT['administration-page_dialog-message']		 = 'Questa operazione non potrˆ essere annullata, effettuarla comunque?';
+	
+	/*
+	------------------
+	Administration Page : administer.php
+	------------------
+	*/
+	$TEXT['organization-page_title']	= 'Organizza il Polygame';
 
 	
 	/* 
