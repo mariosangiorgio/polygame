@@ -3,8 +3,6 @@
 	include_once("./inc/db_connect.php");
 	include_once("./inc/common.php");
 	include_once("./backend/utils.php");
-	
-	//TODO: add multi language support to this page
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -28,7 +26,7 @@
 		if(!checkAuthorization("administrator")){
 			?>
 			<div id="wrapper">
-			<div id="singleColumn">
+			<div class="singleColumn">
 			<? echo $TEXT['administration-page_login-error-message']; ?>
 			</div>
 			</div>
