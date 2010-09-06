@@ -7,7 +7,12 @@
 	$wedgeInfo = null;
 	$wedgeId = null;
 	
-	if( isSet( $_GET['id']))
+	$edit = false;
+	if(isSet($_GET['edit']) && checkAuthorization("organizer")){
+		$edit = true;
+	}
+	
+	if( isSet( $_GET['id']) && !$edit)
 	{
 		$wedgeId = $_GET['id'];
 		$lang = $_SESSION['lang'];
@@ -17,17 +22,25 @@
 		$result = mysql_query( $query, $connection );
 		$wedgeInfo = mysql_fetch_array( $result );		
 	}
+	
+	$sections = array('Introduction', 'History', 'Present use',
+					  'National situation', 'Emission reduction',
+					  'References');
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title><? echo $wedgeInfo['Title']; ?></title>
+	<title>
+	<? if($edit){ ?>Propose your wedge!<? } else{echo $wedgeInfo['Title'];} ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="css/main.css" type="text/css" rel="stylesheet" />
 	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.4.custom.css" rel="stylesheet" />	
 	<script type="text/JavaScript" src="lib/jquery-1.4.1.min.js"></script>
 	<script type="text/Javascript" src="lib/jquery-ui-1.8.4.custom.min.js"></script>
+	<script type="text/javascript" src="wymeditor/jquery.wymeditor.min.js"></script>
+	<script type="text/javascript">$(function() {$('.wymeditor').wymeditor();});</script>
 	<script type="text/Javascript"> 
 	
 	( function($) {
@@ -52,68 +65,102 @@
 	<div id="wrapper">
 		<div class="title">
 			<div class="columnLeft">
-				<h1><? echo $wedgeInfo['Title']; ?></h1>
+				<h1><?
+				if($edit){
+					?>
+				<textarea
+					id='editor-title'
+					style='width: 40%'
+					rows="1">Insert here the title of your wedge</textarea><?
+				}
+				else{
+					echo $wedgeInfo['Title'];
+				}
+				?></h1>
 			</div>
 			<div class="columnRight">
-				<h1>Other wedges...</h1>
-			</div>			
+			<?
+			if(!$edit){
+				echo "<h1>Other wedges...</h1>";
+			}
+			else{
+				echo "<h1>Checklist</h1>";
+			}
+			?>
+			</div>
 		</div>
 		<div class="columnLeft">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Introduction</a></li>
-					<li><a href="#tabs-2">History</a></li>
-					<li><a href="#tabs-3">Present Use</a></li>
-					<li><a href="#tabs-4">National situation</a></li>
-					<li><a href="#tabs-5">Emission reduction</a></li>
-					<li><a href="#tabs-6">References</a></li>
+				<?
+					$index = 1;
+					foreach($sections as $tab){
+					?>
+						<li><a href="#tabs-<? echo $index; ?>"><? echo $tab; ?></a></li>
+						<?
+						$index++;
+					}
+				?>
 				</ul>
-				<div id="tabs-1">
-					<p>
-						<? echo htmlentities($wedgeInfo['Introduction']); ?>
-					</p>
-				</div>				
-				<div id="tabs-2">
-					<p><? echo htmlentities($wedgeInfo['History']); ?></p>
-				</div>
-				<div id="tabs-3">
-					<p><? echo htmlentities($wedgeInfo['Present use']); ?></p>
-				</div>
-				<div id="tabs-4">					
-					<p><? echo htmlentities($wedgeInfo['National situation']); ?></p>
-				</div>				
-				<div id="tabs-5">					
-					<p><? echo htmlentities($wedgeInfo['Emission reduction']); ?></p>
-				</div>				
-				<div id="tabs-6">					
-					<p><? echo htmlentities($wedgeInfo['References']); ?></p>
-				</div>
+				<?
+					$index = 1;
+					foreach($sections as $tab){
+						?>
+						<div id="tabs-<? echo $index; ?>"><p>
+						<?
+						if($edit){ ?>
+							<TEXTAREA class='wymeditor' id='editor-<? echo str_replace(' ','-',$tab);?>'></TEXTAREA>
+						<?
+						}
+						else{
+							echo htmlentities($wedgeInfo[$tab]);
+						}
+						?>
+						</p></div>				
+						<?
+						$index++;
+					}
+				?>
 			</div>
 		</div>
-		<div class="columnRight">
+		<?
+		if($edit){
+			echo "<div id='checklist-title'>Title</div>";
+			foreach($sections as $section){
+				echo "<div id='checklist-".str_replace(' ','-',$section)."'>$section</div>";
+			}
+			?>
+			<DIV id='submitButton'>
+			<BUTTON class='wymupdate'>Submit</BUTTON>
+			</DIV>
+			<?
+		}
+		else{
+			?>
+			<div class="columnRight">
 			<div id="wedgeList" class="accordion">
-<? 
-	$query = "SELECT `Wedge ID` as id, Title, Summary, Image ". 
-			 "FROM Wedges ".
-			 "WHERE Language='$lang' AND ( `Wedge ID` <> $wedgeId )";
-	$data = mysql_query( $query, $connection );
-	
-	$counter = 0;
-	while( $wedge = mysql_fetch_array( $data )) 
-	{
-		$wedges[$counter] = array(  'Id' 		=> $wedge['id'],
-									'Title' 	=> $wedge['Title'],
-									'Summary' 	=> $wedge['Summary'],
-									'Image' 	=> $wedge['Image'] );
-		$counter++;
-	}
-	
-	$vector = generateRandomSequence( 0, $counter );
-	$index = 0;
-	while( $counter > 0 )
-	{
-		$wedge = $wedges[$vector[$index]];
-?>
+			<? 
+			$query = "SELECT `Wedge ID` as id, Title, Summary, Image ". 
+					 "FROM Wedges ".
+			 		 "WHERE Language='$lang' AND ( `Wedge ID` <> $wedgeId )";
+			$data = mysql_query( $query, $connection );
+			
+			$counter = 0;
+			while( $wedge = mysql_fetch_array( $data )) 
+			{
+				$wedges[$counter] = array(  'Id' 		=> $wedge['id'],
+											'Title' 	=> $wedge['Title'],
+											'Summary' 	=> $wedge['Summary'],
+											'Image' 	=> $wedge['Image'] );
+				$counter++;
+			}
+			
+			$vector = generateRandomSequence( 0, $counter );
+			$index = 0;
+			while( $counter > 0 )
+			{
+				$wedge = $wedges[$vector[$index]];
+				?>
 				<h3><a><? echo $wedges[$vector[$index]]['Title']; ?></a></h3>
 				<div>
 					<img src="<? echo $wedge['Image']; ?>" width="66px" height="84px" />
@@ -124,13 +171,44 @@
 						<a href="wedgeInfo.php?id=<? echo $wedge['Id']; ?>"><? echo $TEXT['main-a_1']; ?></a>
 					</p>
 				</div>
-<?		
-		$counter--;
-		$index++;
-	}
-?>
+			<?
+			$counter--;
+			$index++;
+			}
+			?>
 			</div>
 		</div>
+		<? } ?>
 	</div>
 </body>
+<script type="text/javascript">
+var edited = new Array();
+edited.push('title')
+<? foreach($sections as $section){ echo "\nedited.push('".str_replace(' ','-',$section)."');";}?>
+
+$("[id^=checklist-]").css('color','red');
+
+var submitButton = $('button',"#submitButton");
+submitButton.button();
+submitButton.click(
+	function(){
+		var i = 0;
+		while(i < (edited.length-1)){
+			$.wymeditors(i).update();
+			i++;
+		}
+
+		var allOk = true;
+		for(var item in edited){
+			if($("#editor-"+edited[item]).val() != ""){
+				$("#checklist-"+edited[item]).css('color','green');
+			}
+			else{
+				$("#checklist-"+edited[item]).css('color','red');
+				allOk = false;
+			}
+		}
+	}
+);
+</script>
 </html>
