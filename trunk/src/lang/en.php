@@ -73,6 +73,11 @@
 	$TEXT['organizer-page_suggestions-title']			= 'Do you want to improve future games?';
 	$TEXT['organizer-page_suggestions-feedback']		= 'Leave feedback or ';
 	$TEXT['organizer-page_suggestions-propose-wedge']	= 'propose a new wedge';
+	$TEXT['organizer-page_default-feedback']			= 'Enter your feedback here';
+	$TEXT['organizer-page_new-game-button']				= 'Create a new game';
+	$TEXT['organizer-page_send-your-feedback']			= 'Send your feedback';
+	$TEXT['organizer-page_confirmation-dialog-title']	= 'Submission successful';
+	$TEXT['organizer-page_confirmation-dialog-message']	= 'The administrators will soon take care of your submission';
 	
 	/* 
 	------------------

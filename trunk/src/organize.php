@@ -49,22 +49,75 @@
 					<a href='#'><? echo $TEXT['organizer-page_suggestions-propose-wedge']; ?></a></p>
 				</div>
 				<div id=textwrapper>
-				<textarea id=feedback style='width: 100%;'>enter your feedback here</textarea>
+				<textarea id=feedback style='width: 100%;'><? echo $TEXT['organizer-page_default-feedback']; ?>
+				</textarea>
 				</div>
 			</div>
 			
 			<div class="columnRight">
 				<DIV id="newGameLink">
-				CREATE A NEW GAME
+				<BUTTON><? echo $TEXT['organizer-page_new-game-button']; ?></BUTTON>
 				</DIV>
 				<DIV id="feedbackLink">
-				SEND FEEDBACK
+				<BUTTON><? echo $TEXT['organizer-page_send-your-feedback']; ?></BUTTON>
 				</DIV>
 			</div>
 			<?
 		}
 	?>
 </div>
+
+<!-- Confirmation dialog -->
+<div id="submission-confirmation" title="<? echo $TEXT['organizer-page_confirmation-dialog-title']; ?>">
+<p><? echo $TEXT['organizer-page_confirmation-dialog-message']; ?></p>
+</div>
+
+
+<script type="text/JavaScript">
+var textEdited = false;
+
+var feedbackTextbox = $('#feedback');
+feedbackTextbox.focus(
+	function(){
+		if(! textEdited){
+			feedbackTextbox.val("");
+			textEdited = true;
+		}
+	}
+);
+
+var createNewGameButton = $('button',"#newGameLink");
+createNewGameButton.button();
+createNewGameButton.click(function(){window.location.href='./createNewGame.php';});
+
+var dialog = $("#submission-confirmation").dialog(
+				{autoOpen: false,
+				 resizable: false,
+				 modal: true
+				 }
+				 );
+
+
+var sendFeedbackButton = $('button',"#feedbackLink");
+sendFeedbackButton.button();
+sendFeedbackButton.click(
+	function(){
+		var feedbackText = feedbackTextbox.val();
+		var parameters = {
+			operation:	'submitFeedback',
+			feedback:	feedbackText
+			};
+		$.getJSON(
+			"backend/organization.php",
+			parameters,
+			function(data){
+				dialog.dialog("open");
+				feedbackTextbox.val("");
+			}
+		);
+	}
+);
+</script>
 
 </body>
 </html>
