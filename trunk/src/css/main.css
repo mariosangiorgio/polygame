@@ -150,12 +150,7 @@ a {
 	text-align: center;
 }
 .button  {
-	margin: 0 15px;
-	height: 2.5em;
-	width: 6em;
-	font-size: 0.9em;
-	font-weight: bold;
-	color: #736F6E;
+	margin: 0 5%;
 }
 #newAccount {
 	display: none;
@@ -201,4 +196,16 @@ a {
 .errorClass  p {
 	padding: 2% 5%;
 	line-height: 1.2em;
+}
+#wedgeDetails {
+	text-align: justify;
+}
+#wedgeDetails  h2 {
+	border-bottom:1px solid #AAAAAA;
+}
+#newGameButton {
+	font-size:1.3em;
+	height:3em;
+	margin:30% 15%;
+	width:70%;
 }

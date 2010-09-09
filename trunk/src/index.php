@@ -279,11 +279,11 @@
 				<a href="#"><? echo $TEXT['main-a_2']; ?></a>
 			</div>
 		</div>
+		<div class="columnRight">
 <?
 	if( !( $_SESSION['loggedIn'] == "yes" )) 
 	{
 ?>
-		<div class="columnRight">
 			<div id="login">
 				<h2><? echo $TEXT['main-legend_1']; ?></h2>
 				<form 
@@ -326,8 +326,8 @@
 						</tr>
 					</tbody>
 					</table>
-					<input class="button" type="submit" value="<? echo $TEXT['main-button_1']; ?>" />
-					<input class="button" type="reset" value="<? echo $TEXT['main-button_2']; ?>" />
+					<input type="submit" value="<? echo $TEXT['main-button_1']; ?>" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+					<input type="reset" value="<? echo $TEXT['main-button_2']; ?>" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
 					<input type="hidden" name="usingAjax" value="false" />
 					<p><? echo $TEXT['main-p_2']; ?><a href="#"><? echo $TEXT['main-a_3']; ?></a></p>
 				</form>
@@ -374,16 +374,24 @@
 						</tr>
 					</tbody>
 					</table>
-					<input class="button" type="submit" value="<? echo $TEXT['main-button_3']; ?>"/>
-					<input class="button" type="reset" value="<? echo $TEXT['main-button_2']; ?>"/>
+					<input type="submit" value="<? echo $TEXT['main-button_3']; ?>" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
+					<input type="reset" value="<? echo $TEXT['main-button_2']; ?>" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
 					<input type="hidden" name="usingAjax" value="false" />
 					<p><? echo $TEXT['main-p_3']; ?><a href="#"><? echo $TEXT['main-a_4']; ?></a></p>
 				</form>
 			</div>
-		</div>
+<?
+	}
+	else
+	{
+?>
+			<button id="newGameButton" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+				<a href="./organize.php" class="ui-button-text">Create a new game</a>
+			</button>
 <?
 	}
 ?>
+		</div>
 	</div>
 </body>
 </html>
