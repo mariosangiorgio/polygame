@@ -12,7 +12,7 @@
 		$edit = true;
 	}
 	
-	if( isSet( $_GET['id']) && !$edit)
+	if( isSet( $_GET['id']) && !$edit )
 	{
 		$wedgeId = $_GET['id'];
 		$lang = $_SESSION['lang'];
@@ -52,8 +52,6 @@
 									animated: 'bounceslide' };
 			
 			$("#wedgeList").accordion( accordionOption );
-			
-			$("#tabs").tabs();
 		});
 	})(jQuery);
 	</script> 
@@ -79,48 +77,63 @@
 				?></h1>
 			</div>
 			<div class="columnRight">
-			<?
-			if(!$edit){
-				echo "<h1>Other wedges...</h1>";
-			}
-			else{
-				echo "<h1>Checklist</h1>";
-			}
-			?>
+				<h1>
+				<?
+				if(!$edit){
+					echo "Other wedges...";
+				}
+				else{
+					echo "Checklist";
+				}
+				?>
+				</h1>
 			</div>
 		</div>
 		<div class="columnLeft">
+<?	
+	if( $edit )
+	{
+?>
 			<div id="tabs">
 				<ul>
-				<?
-					$index = 1;
-					foreach($sections as $tab){
-					?>
-						<li><a href="#tabs-<? echo $index; ?>"><? echo $tab; ?></a></li>
-						<?
-						$index++;
-					}
-				?>
+<?
+		$index = 1;
+		foreach( $sections as $tab ){
+?>
+					<li><a href="#tabs-<? echo $index; ?>"><? echo $tab; ?></a></li>
+<?
+			$index++;
+		}
+?>
 				</ul>
-				<?
-					$index = 1;
-					foreach($sections as $tab){
-						?>
-						<div id="tabs-<? echo $index; ?>"><p>
-						<?
-						if($edit){ ?>
-							<TEXTAREA class='wymeditor' id='editor-<? echo str_replace(' ','-',$tab);?>'></TEXTAREA>
-						<?
-						}
-						else{
-							echo htmlentities($wedgeInfo[$tab]);
-						}
-						?>
-						</p></div>				
-						<?
-						$index++;
-					}
-				?>
+<?
+		$index = 1;
+		foreach( $sections as $tab )
+		{
+?>
+				<div id="tabs-<? echo $index; ?>">
+					<p><textarea class='wymeditor' id='editor-<? echo str_replace(' ','-',$tab); ?>' /></p>
+				</div>				
+<?
+			$index++;
+		}
+	}
+	else
+	{
+?>
+			<div id="wedgeDetails">
+<?
+		foreach( $sections as $tab )
+		{
+?>
+				<div>
+					<h2><? echo $tab; ?></h2>
+					<p><? echo htmlentities( $wedgeInfo[$tab] ); ?></p>
+				</div>
+<?
+		}
+	}
+?>
 			</div>
 		</div>
 		<?

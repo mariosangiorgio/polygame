@@ -29,9 +29,9 @@
 	$TEXT['main-td_2'] = "Password";
 	$TEXT['main-td_3'] = "Username";
 	$TEXT['main-td_4'] = "Email";
-	$TEXT['main-button_1'] = "login";
-	$TEXT['main-button_2'] = "cancel";
-	$TEXT['main-button_3'] = "confirm";
+	$TEXT['main-button_1'] = "Login";
+	$TEXT['main-button_2'] = "Cancel";
+	$TEXT['main-button_3'] = "Confirm";
 	$TEXT['main-js_1'] = "more info";
 	$TEXT['main-js_2'] = "An error occurred!";
 	$TEXT['main-username_1'] = "Username missing.";

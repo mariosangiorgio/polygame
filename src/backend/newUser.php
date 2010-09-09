@@ -53,6 +53,7 @@
 			if( $mailsend )
 			{
 				// Email correctly sended
+				$password = sha1( "polygame".$password );
 				$query = "INSERT INTO `Users` ( `username`, `role`, `password` )".
 						 "VALUES ( '$username', 'player', '".sha1( "polygame".$password )."' )";
 				$result = mysql_query( $query, $connection );
