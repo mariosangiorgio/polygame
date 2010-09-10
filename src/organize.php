@@ -1,7 +1,7 @@
 <?php
-	session_start();
-	include_once("./inc/db_connect.php");
 	include_once("./inc/common.php");
+	include_once 'lang/'.$lang_file;
+	include_once("./inc/db_connect.php");
 	include_once("./backend/utils.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
