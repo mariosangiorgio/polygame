@@ -149,9 +149,7 @@ a {
 	background: #D7EBF9;
 	text-align: center;
 }
-.button  {
-	margin: 0 5%;
-}
+
 #newAccount {
 	display: none;
 	padding: 1% 5%;
@@ -203,9 +201,92 @@ a {
 #wedgeDetails  h2 {
 	border-bottom:1px solid #AAAAAA;
 }
-#newGameButton {
+#largeButton {
 	font-size:1.3em;
 	height:3em;
 	margin:30% 15%;
 	width:70%;
+}
+.button  {
+	margin: 2% 5%;
+}
+#organizerBar {
+	text-align: center;
+}
+.organizeBar .ui-button-text-only .ui-button-text {
+	height: 1.6em;
+	line-height: 1.6em;
+}
+.organizeBar .ui-buttonset .ui-button {
+	width: 18em;
+}
+.phases {
+	margin: 3% 8%;
+}
+.phases .ui-slider-horizontal {
+	height:0.5em;
+}
+.phases  table {
+	width: 80%;
+	margin: 2em 10%;
+	border-collapse: collapse;
+}
+.phases  table tr {
+	border: 10px solid white;
+}
+.phases table td {
+	padding: 0.5em 3em 2em 3em;
+	width: 50%;
+	vertical-align: top;
+}
+.phases table tfoot {
+	text-align: center;
+}
+.phases table tfoot button {
+	margin-top: 4%;
+	width: 45%;
+}
+.phases h1 {
+	text-align: center;
+}
+.firstCol {
+	background: none repeat scroll 0 0 #D7EBF9;
+}
+.secondCol h1 {
+	background: none repeat scroll 0 0 #D7EBF9;
+	font-size: 16px;
+	line-height: 1.8em;
+	margin-left: -15%;
+	text-align: left;
+	text-indent: 15%;
+}
+#advancedButton {
+	text-align: right;
+	margin-top: 2em;
+}
+#advancedButton  a {
+	font-style: italic;
+	cursor: pointer;
+	text-decoration: underline;
+}
+#advancedOptions {
+	display: none;
+	margin: 0 7% 2em;
+	width: 86%;
+	text-align: justify;
+}
+.phases .ui-slider .ui-slider-handle {
+	cursor: pointer;
+	height: 0.8em;
+	width: 0.7em;
+	margin-top: 0.1em;
+}
+.phases .ui-slider {
+	text-align: right;
+}
+.phases .ui-widget-header {
+	background: url("images/ui-bg_highlight-hard_100_f2f5f7_1x100.png") repeat-x scroll 50% 50% #3BAAE3;
+	border: 1px solid #AED0EA;
+	color:#222222;
+	font-weight:bold;
 }

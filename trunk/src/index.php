@@ -382,11 +382,19 @@
 			</div>
 <?
 	}
-	else
+	else if( $_SESSION['role'] == "organizer" )
 	{
 ?>
-			<button id="newGameButton" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+			<button id="largeButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
 				<a href="./organize.php" class="ui-button-text">Create a new game</a>
+			</button>
+<?
+	}
+	else if( $_SESSION['role'] == "player" )
+	{
+?>
+			<button id="largeButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+				<a href="./play.php" class="ui-button-text">Start to play</a>
 			</button>
 <?
 	}
