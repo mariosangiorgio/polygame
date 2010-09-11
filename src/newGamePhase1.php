@@ -1,4 +1,5 @@
-<div id="divPhase1">
+<? include "newGameBar.php"; ?>
+<div id="divPhase1" class="phases">
 	<p>As a first thing you should decide the timing for the three phases of the game</p>
 	<form
 		name="phase1Form"
@@ -19,11 +20,31 @@
 					<input type="hidden" name="time1" value="" />
 				</div>
 				<br />
+<?
+	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
+	{			
+?>
+				<div id="advancedButton">
+					<a class="link">Basic options</a>
+					<input type="hidden" name="advanced" value="true" />
+				</div>
+<?	
+	}
+	else {
+?>
 				<div id="advancedButton">
 					<a class="link">Advanced options</a>
 					<input type="hidden" name="advanced" value="false" />
 				</div>
-				<div id="advancedOptions">
+<?
+	}
+?>				
+				<div id="advancedOptions" 
+<?
+	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
+		echo "style=\"display:block\" ";
+?>				
+				>
 					<p>Time before complete wedge information is shown to players</p>
 					<div id="slider2">
 						<p><strong></strong></p>
@@ -75,7 +96,7 @@
 	<tfoot>
 		<tr>
 			<td colspan="2">
-				<button type="submit" id="forwardButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+				<button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
 					<span class="ui-button-text">I'm done with durations!</span>
 				</button>
 			</td>
@@ -125,7 +146,7 @@
 			value: 
 <?	
 	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
-		echo $_SESSION['phase1']['time2'].", ";
+		echo $_SESSION['phase1']['time3'].", ";
 	else
 		echo "25, ";
 ?>
@@ -206,7 +227,7 @@
 			var typeOfDataToReceive = 'html';
 			var callback = function( response )
 			{
-				$("#phases").html( response );
+				$("#wrapper").html( response );
 				$('#organizerBar label[for="phase<? echo $phaseNumber; ?>"]').removeClass('ui-state-active');
 				$('#organizerBar label[for="phase<? echo ( $phaseNumber + 1 ); ?>"]').addClass('ui-state-active');
 				$('#organizerBar label[for="phase<? echo ( $phaseNumber + 1 ); ?>"]').toggleClass('unreachable reachable');

@@ -1,7 +1,7 @@
 <div id="organizerBar" class="organizeBar">
 	<span class="ui-buttonset">
 <?
-	$numberOfPhases = 4;
+	$numberOfPhases = 5;
 	for( $index = 1; $index <= $numberOfPhases; $index++ )
 	{
 ?>
@@ -36,7 +36,7 @@
 (function($) {
 	$(document).ready( function() 
 	{
-		$('#organizerBar label.reachable').click( function() 
+		var loadPhaseFromBar = function() 
 		{
 			var $this = $(this);
 			var phase = $(this).attr('for'); 
@@ -49,23 +49,7 @@
 				dataType: 'html',
 				success: function( response ) 
 				{
-					$("#phases").html( response );
-					$('#organizerBar label.ui-state-active').removeClass('ui-state-active');
-					$($this).addClass('ui-state-active');
-					
-					var currentPhase = $($this).attr('for'); 
-					var currentPhaseNumber = currentPhase.charAt( currentPhase.length - 1 ); 
-					
-					var labels = $('#organizerBar label');
-					for( var index = 0; index < labels.length; index++ )
-					{
-						var phase = $(labels[index]).attr('for'); 
-						var phaseNumber = phase.charAt( phase.length - 1 );
-						if( phaseNumber <= currentPhaseNumber )
-							$(labels[index]).removeClass('unreachable').addClass('reachable');
-						else
-							$(labels[index]).removeClass('reachable').addClass('unreachable');
-					}
+					$("#wrapper").html( response );
 				},
 				error: function( xhr, textStatus, errorThrown ) 
 				{
@@ -73,7 +57,8 @@
 				}
 			});
 		
-		});
+		};
+		$('#organizerBar label.reachable').click( loadPhaseFromBar );
 	});
 })(jQuery);
 </script>

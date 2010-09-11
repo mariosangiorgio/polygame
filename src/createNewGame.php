@@ -25,9 +25,26 @@
 			if( isSet( $_POST['time3'] ))
 				$parameters['time3'] = $_POST['time3'];
 		}
-		$_SESSION['phase1'] = $parameters;
+		if( $parameters )
+			$_SESSION['phase1'] = $parameters;
 	}
-	
+	if( $phaseNumber == 3 )
+	{
+		if( isSet( $_POST['wedgesSelected'] ))
+		{
+			if( $_POST['wedgesSelected'] != 0 )
+			{
+				$parameters['wedgesSelected'] = $_POST['wedgesSelected'];
+				for( $index = 0; $index < $_POST['wedgesSelected']; $index++ )
+					if( $_POST['wedge'.$index] )
+						$parameters['wedge'.$_POST['wedge'.$index]] = $_POST['wedge'.$index];
+				
+				$_SESSION['phase2'] = $parameters;
+			}
+			else
+				unSet( $_SESSION['phase2'] );
+		}
+	}
 	if(( isSet( $_POST['usingAjax'] ) && $_POST['usingAjax'] == 'true' ))
 		include "newGamePhase".$phaseNumber.".php";
 	else
@@ -47,10 +64,7 @@
 <body>
 	<? include "header.php"; ?>
 	<div id="wrapper">
-		<? include "newGameBar.php"; ?>
-		<div id="phases" class="phases">
-			<? include "newGamePhase".$phaseNumber.".php"; ?>
-		</div>			
+		<? include "newGamePhase".$phaseNumber.".php"; ?>
 	</div>
 </body>
 </html>

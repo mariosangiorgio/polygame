@@ -218,7 +218,7 @@ a {
 	line-height: 1.6em;
 }
 .organizeBar .ui-buttonset .ui-button {
-	width: 18em;
+	width: 18%;
 }
 .organizeBar .unreachable {
 	cursor: default;
@@ -288,7 +288,7 @@ a {
 	text-align: right;
 }
 .phases .ui-widget-header {
-	background: url("./ui-lightness/images/ui-bg_highlight-hard_100_f2f5f7_1x100.png") repeat-x scroll 50% 50% #3BAAE3;
+	background: url("./ui-lightness/images/ui-bg_glass_50_3baae3_1x400.png") repeat-x scroll 50% 50% #3BAAE3;
 	border: 1px solid #AED0EA;
 	color: #222222;
 	font-weight: bold;
