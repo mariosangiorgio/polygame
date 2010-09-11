@@ -220,6 +220,9 @@ a {
 .organizeBar .ui-buttonset .ui-button {
 	width: 18em;
 }
+.organizeBar .unreachable {
+	cursor: default;
+}
 .phases {
 	margin: 3% 8%;
 }
@@ -264,7 +267,7 @@ a {
 	text-align: right;
 	margin-top: 2em;
 }
-#advancedButton  a {
+.link {
 	font-style: italic;
 	cursor: pointer;
 	text-decoration: underline;
@@ -285,8 +288,41 @@ a {
 	text-align: right;
 }
 .phases .ui-widget-header {
-	background: url("images/ui-bg_highlight-hard_100_f2f5f7_1x100.png") repeat-x scroll 50% 50% #3BAAE3;
+	background: url("./ui-lightness/images/ui-bg_highlight-hard_100_f2f5f7_1x100.png") repeat-x scroll 50% 50% #3BAAE3;
 	border: 1px solid #AED0EA;
-	color:#222222;
-	font-weight:bold;
+	color: #222222;
+	font-weight: bold;
+}
+#selectable .ui-selectee { 
+	background: url("./ui-lightness/images/ui-bg_glass_80_d7ebf9_1x400.png") repeat-x scroll 50% 50% #D7EBF9;
+	border: 1px solid #AED0EA;
+	color: #2779AA;
+}
+#selectable .ui-selected { 
+	background: url("./ui-lightness/images/ui-bg_glass_50_3baae3_1x400.png") repeat-x scroll 50% 50% #3BAAE3; 
+	color: white; 
+}
+#selectingButton {
+	margin: 0 15% 2% 15%; 
+	width: 70%;
+	text-align: left;
+}
+#selectingButton a {
+	margin-right: 2%;
+}
+#selectable { 
+	list-style-type: none; 
+	margin: 0 15%; 
+	width: 70%;
+	text-align: center;
+	padding: 0; 
+}
+#selectable li { 
+	cursor: pointer;
+	margin: 0.1em; 
+	padding: 0.4em; 
+	font-size: 1.1em; 
+	height: 1.6em;
+	line-height: 1.6em;
+	font-weight: bold;
 }

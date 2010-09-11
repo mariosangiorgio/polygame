@@ -1,10 +1,21 @@
 <div id="divPhase2">
 	<p>Now choose the wedge that will be part of the game: in this part of the game every group of player is assigned a wedge, has to solve a problem linked to the wedge, and has to summarize in a poster the pros and cons of the wedge</p>
+	<form
+		name="phase12Form"
+		action="./createNewGame.php"
+		method="POST"
+	>
+		<input type="hidden" name="usingAjax" value="false" />
+		<input type="hidden" name="phase" value="<? echo ( $phaseNumber + 1 ); ?>" />
 	<table>
 	<tbody>
 		<tr>
 			<td>
-				<ul>
+				<div id="selectingButton">
+					<a id="selectAll" class="link">Select all</a>
+					<a id="deselectAll" class="link">Deselect all</a>
+				</div>
+				<ol id="selectable">
 <? 
 	$query = "SELECT `Wedge ID` as id, Title ". 
 			 "FROM Wedges ".
@@ -14,7 +25,7 @@
 	$counter = 0;
 	while( $wedge = mysql_fetch_array( $data )) 
 	{
-		$wedges[$counter] = array(  'Id' 		=> $wedge['id'],
+		$wedges[$counter] = array(  'id' 		=> $wedge['id'],
 									'Title' 	=> $wedge['Title'] );
 		$counter++;
 	}
@@ -25,13 +36,16 @@
 	{
 		$wedge = $wedges[$vector[$index]];
 ?>
-					<li><? echo $wedges[$vector[$index]]['Title']; ?></li>
+					<li class="ui-corner-all ui-selectee">
+						<input type="hidden" name="<? echo $wedges[$vector[$index]]['id']; ?>" value="false" />
+						<? echo $wedges[$vector[$index]]['Title']; ?>
+					</li>
 <?
 		$counter--;
 		$index++;
 	}
 ?>
-				</ul>
+				</ol>
 			</td>
 		</tr>
 	</tbody>					
@@ -48,89 +62,48 @@
 	</div>
 </div>
 <script type="text/javascript">
-	$(function() {
-		$("#slider1").slider({
-			range: "min",
-			value: 55,
-			min: 10,
-			max: 100,
-			slide: function(event, ui) {
-				$("#slider1 p strong").text( ui.value + ' min');
-			}
-		});
-		$("#slider2").slider({
-			range: "min",
-			value: 25,
-			min: 5,
-			max: 50,
-			slide: function(event, ui) {
-				$("#slider2 p strong").text( ui.value + ' min');
-			}
-		});
-		$("#slider3").slider({
-			range: "min",
-			value: 25,
-			min: 5,
-			max: 50,
-			slide: function(event, ui) {
-				$("#slider3 p strong").text( ui.value + ' min');
-			}
-		});
-		$("#slider4").slider({
-			range: "min",
-			value: 5,
-			min: 1,
-			max: 10,
-			slide: function(event, ui) {
-				$("#slider4 p strong").text( ui.value + ' min');
-			}
-		});
-		$("#slider5").slider({
-			range: "min",
-			value: 150,
-			min: 10,
-			max: 300,
-			slide: function(event, ui) {
-				$("#slider5 p strong").text( ui.value + ' min');
-			}
-		});
-		$("#slider1 p strong").text( $("#slider1").slider("value") + ' min' );
-		$("#slider2 p strong").text( $("#slider2").slider("value") + ' min' );
-		$("#slider3 p strong").text( $("#slider3").slider("value") + ' min' );
-		$("#slider4 p strong").text( $("#slider4").slider("value") + ' min' );
-		$("#slider5 p strong").text( $("#slider5").slider("value") + ' min' );
-
-		$('#advancedButton a').click( function() {
-			if( $('#advancedOptions').css('display') == 'none' )
-			{
-				$('#advancedButton a').text("Basic options");	
-				$('#advancedOptions').show('blind');
-			}
-			else
-			{			
-				$('#advancedButton a').text("Advanced options");	
-				$('#advancedOptions').hide('blind');
-			}
-		});
-		
-		$('#forwardButton').click( function() 
+(function($) {
+	$(document).ready( function() 
+	{
+		$('#divPhase2 form').submit( function( event )
 		{
-			$.ajax({
-				type: 'GET',
-				url: './createNewGame.php',
-				data: { phase: '<? echo ( $phaseNumber + 1 ); ?>',
-						usingAjax: 'true' },
-				dataType: 'html',
-				success: function( response ) 
-				{
-					$("#phases").replaceWith( response );
-				},
-				error: function( xhr, textStatus, errorThrown ) 
-				{
-					// TODO: catch error states
-				}
-			});
+			event.preventDefault();
+			$('input[name="usingAjax"]', this ).val('true');
+			var $this = $(this);
+			var url = $this.attr('action');
+			var formName = $this.attr('name');
+			var dataToSend = $this.serialize();
+			var typeOfDataToReceive = 'html';
+			var callback = function( response )
+			{
+				$("#phases").html( response );
+				$('#organizerBar label[for="phase<? echo $phaseNumber; ?>"]').removeClass('ui-state-active');
+				$('#organizerBar label[for="phase<? echo ( $phaseNumber + 1 ); ?>"]').addClass('ui-state-active');
+				$('#organizerBar label[for="phase<? echo ( $phaseNumber + 1 ); ?>"]').toggleClass('unreachable reachable');
+			};
+			
+			$.post( url, dataToSend, callback, typeOfDataToReceive );	
+		});
 		
+		$('#selectable li').click( function() {
+			$(this).toggleClass('ui-selected ui-selectee');
+			if( $('input[type="hidden"]', this ).attr('value') == "true" )
+				 $('input[type="hidden"]', this ).val("false");
+			else
+				 $('input[type="hidden"]', this ).val("true");
+		});
+		
+		$('#selectAll').click( function() {
+			$('#selectable li').removeClass('ui-selectee');
+			$('#selectable li').addClass('ui-selected');
+			$('#selectable li input[type="hidden"]').val("true");
+		});
+		
+		$('#deselectAll').click( function() {
+			$('#selectable li').removeClass('ui-selected');
+			$('#selectable li').addClass('ui-selectee');
+			$('#selectable li input[type="hidden"]').val("false");
 		});
 	});
+})(jQuery);
 </script>

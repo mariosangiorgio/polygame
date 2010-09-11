@@ -1,15 +1,34 @@
 <?php
-	session_start();
-	include_once("./inc/db_connect.php");
 	include_once("./inc/common.php");
+	include_once './lang/'.$lang_file;
+	include_once("./inc/db_connect.php");
 	include_once("./backend/utils.php");
 	
-	if( isset( $_GET['phase'] ))
-		// TODO: check if( $_GET['phase'] < 0 || $_GET['phase'] > 4 )
-		$phaseNumber = $_GET['phase'];
+	if( isset( $_POST['phase'] ))
+		// TODO: check if( $_POST['phase'] < 0 || $_POST['phase'] > 4 )
+		$phaseNumber = $_POST['phase'];
 	else
 		$phaseNumber = 1;
-	if(( isSet( $_GET['usingAjax'] ) && $_GET['usingAjax'] == 'true' ))
+	
+	if( $phaseNumber == 2 )
+	{	
+		if( isSet( $_POST['time1'] ))
+			$parameters['time1'] = $_POST['time1'];
+		if( isSet( $_POST['time4'] ))
+			$parameters['time4'] = $_POST['time4'];
+		if( isSet( $_POST['time5'] ))
+			$parameters['time5'] = $_POST['time5'];
+		if( isSet( $_POST['advanced'] ) && $_POST['advanced'] == "true" )
+		{
+			if( isSet( $_POST['time2'] ))
+				$parameters['time2'] = $_POST['time2'];
+			if( isSet( $_POST['time3'] ))
+				$parameters['time3'] = $_POST['time3'];
+		}
+		$_SESSION['phase1'] = $parameters;
+	}
+	
+	if(( isSet( $_POST['usingAjax'] ) && $_POST['usingAjax'] == 'true' ))
 		include "newGamePhase".$phaseNumber.".php";
 	else
 	{
