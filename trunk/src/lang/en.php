@@ -98,4 +98,19 @@
 	$TEXT['newUser-message_3'] = "An error occurred while creating new account";
 	$TEXT['newUser-message_4'] = "Registration correctly done";
 	$TEXT['newUser-message_5'] = "Unable to send mail to";
+	
+	
+	/* 
+	------------------
+	New Game Bar: newGameBar.php
+	------------------
+	*/
+	
+	$TEXT['newGameBar-phase_1'] = "Choose wedges";
+	$TEXT['newGameBar-phase_2'] = "Choose game duration";
+	$TEXT['newGameBar-phase_3'] = "Make groups";
+	$TEXT['newGameBar-phase_4'] = "Choose voters";
+	$TEXT['newGameBar-phase_5'] = "";
+	
+	
 ?>

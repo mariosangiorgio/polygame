@@ -3,7 +3,7 @@
 	on the stripe. If the variable isn't set, it will be used the default image.
 -->
 <div id="header">
-	<div id="stripe" />
+	<div id="stripe">
 <?
 	if( $stripeImageUrl )
 		$height = "150px";
