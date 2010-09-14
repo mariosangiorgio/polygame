@@ -293,6 +293,15 @@ a {
 	color: #222222;
 	font-weight: bold;
 }
+#nextPhaseButton {
+	clear: both;
+	width: 100%;
+	text-align: center;
+	padding: 2% 0;
+}
+#nextPhaseButton button {
+	width: 30%;
+}
 #selectable .ui-selectee { 
 	background: url("./ui-lightness/images/ui-bg_glass_80_d7ebf9_1x400.png") repeat-x scroll 50% 50% #D7EBF9;
 	border: 1px solid #AED0EA;
@@ -325,4 +334,92 @@ a {
 	height: 1.6em;
 	line-height: 1.6em;
 	font-weight: bold;
+}
+.playerList th {
+	text-align: center;
+}
+#insertUser {
+	width: 25%;
+	margin: 3em 7%;
+	float: left;
+}
+#insertUser .insertTitle {
+	border-bottom: 3px solid #2779AA;
+	font-size: 1em;
+	font-weight: bold;
+	color: #2779AA;
+	text-align: left;
+	text-indent: 0.5em;
+	padding: 0.2em 0;
+}
+#insertUser .insertContent p {
+	margin: 1.4em 0;
+	text-align: center;
+	text-indent: 0.5em;
+	color: black;
+	font-weight: normal;
+}
+#insertUser .insertContent input{
+	float: right;
+}
+#insertUser .insertButton {
+	text-align: center;
+}
+#insertUser .insertButton span {
+	font-size: 0.8em;
+	line-height: 1;
+}
+#insertUser .errorClass {
+	margin: 1.2em 0.5em;
+	background: none;
+}
+#insertUser .errorClass p {
+	padding: 0.5em 0.5em;
+	margin: 0;
+}
+#playerList {
+	float: left;
+	margin: 3em 0 5% 5%;
+	width: 35%;
+}
+#playerList tr {
+	border: 0;
+}
+#playerList thead tr {
+	height: 1.5em;
+}
+#playerList td {
+	border-bottom: 2px solid #D7EBF9;
+	font-size: 1em;
+	padding: 0.4em;
+	text-indent: 0.5em;
+	vertical-align: middle;
+	min-width: 15em;
+	max-width: 15em;
+}
+#playerList tbody tr:hover td {
+	color: #2779AA;
+	font-style: italic;
+}
+#playerList  th {
+	border-bottom: 3px solid #2779AA;
+	color: #2779AA;
+	font-size: 1em;
+	font-weight: bold;
+	padding: 0.2em 0.5em;
+	min-width: 15em;
+	max-width: 15em;
+}
+#playerList tfoot button {
+	width: 60%;
+}
+#playerList .emptyTable  td {
+	font-weight: bold;
+	padding: 2em 0 2em 35%;
+}
+#playerList td.hiddenColumn {
+	display: none;
+	border: 0;
+	width: 5%;
+	min-width: 0em;
 }
