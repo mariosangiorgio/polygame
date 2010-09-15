@@ -8,7 +8,7 @@
 	>
 		<input type="hidden" name="usingAjax" value="false" />
 		<input type="hidden" name="phase" value="<? echo ( $phaseNumber + 1 ); ?>" />
-	<table>
+	<table class="phaseTable">
 	<tbody>
 		<tr>
 			<td class="firstCol">
@@ -93,16 +93,12 @@
 			</td>
 		</tr>
 	</tbody>					
-	<tfoot>
-		<tr>
-			<td colspan="2">
-				<button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
-					<span class="ui-button-text">I'm done with durations!</span>
-				</button>
-			</td>
-		</tr>
-	</tfoot>					
 	</table>					
+	<div id="nextPhaseButton">
+		<button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+			<span class="ui-button-text">I'm done with durations!</span>
+		</button>
+	</div>
 	</form>
 </div>
 <script type="text/javascript">
