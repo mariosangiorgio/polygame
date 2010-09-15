@@ -17,7 +17,7 @@
 		echo "value=\"0\""
 ?> 		
 		/>
-	<table>
+	<table class="phaseTable">
 	<tbody>
 		<tr>
 			<td>
@@ -48,7 +48,7 @@
 ?>
 					<li class="ui-corner-all 
 <?
-		if( isSet( $_SESSION['phase2'] )&& $_SESSION['phase2']['wedge'.$wedge['id']] )
+		if( isSet( $_SESSION['phase2'] )&& $_SESSION['phase2']['wedges']['wedge'.$wedge['id']] )
 			echo "ui-selected \">";
 		else
 			echo "ui-selectee \">";
@@ -59,7 +59,7 @@
 							value="<? echo $wedge['id']; ?>" 
 							class="ui-helper-hidden-accessible" 
 <?
-		if( isSet( $_SESSION['phase2'] )&& $_SESSION['phase2']['wedge'.$wedge['id']] )
+		if( isSet( $_SESSION['phase2'] )&& $_SESSION['phase2']['wedges']['wedge'.$wedge['id']] )
 			echo "checked";
 ?>			
 						/>
@@ -73,17 +73,13 @@
 				</ol>
 			</td>
 		</tr>
-	</tbody>					
-	<tfoot>
-		<tr>
-			<td colspan="2">
-				<button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
-					<span class="ui-button-text">I'm done with wedges!</span>
-				</button>
-			</td>
-		</tr>
-	</tfoot>					
+	</tbody>									
 	</table>				
+	<div id="nextPhaseButton">
+		<button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
+			<span class="ui-button-text">I'm done with wedges!</span>
+		</button>
+	</div>
 	</form>				
 	</div>
 </div>

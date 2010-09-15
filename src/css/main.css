@@ -226,36 +226,36 @@ a {
 .phases {
 	margin: 3% 8%;
 }
+.phases h1 {
+	text-align: center;
+}
 .phases .ui-slider-horizontal {
 	height:0.5em;
 }
-.phases  table {
+.phaseTable {
 	width: 80%;
 	margin: 2em 10%;
 	border-collapse: collapse;
 }
-.phases  table tr {
+.phaseTable tr {
 	border: 10px solid white;
 }
-.phases table td {
+.phaseTable td {
 	padding: 0.5em 3em 2em 3em;
 	width: 50%;
 	vertical-align: top;
 }
-.phases table tfoot {
+.phaseTable tfoot {
 	text-align: center;
 }
-.phases table tfoot button {
+.phaseTable tfoot button {
 	margin-top: 4%;
 	width: 45%;
 }
-.phases h1 {
-	text-align: center;
-}
-.firstCol {
+.phaseTable .firstCol {
 	background: none repeat scroll 0 0 #D7EBF9;
 }
-.secondCol h1 {
+.phaseTable .secondCol h1 {
 	background: none repeat scroll 0 0 #D7EBF9;
 	font-size: 16px;
 	line-height: 1.8em;
@@ -335,91 +335,112 @@ a {
 	line-height: 1.6em;
 	font-weight: bold;
 }
-.playerList th {
-	text-align: center;
+.playerList {
+	background: #D7EBF9;
+	margin: 5% 15%;
+	width: 70%;
+	border: 1px solid #AED0EA;
 }
-#insertUser {
-	width: 25%;
-	margin: 3em 7%;
-	float: left;
-}
-#insertUser .insertTitle {
-	border-bottom: 3px solid #2779AA;
-	font-size: 1em;
+.playerList p {
+	margin: 1em;
+	padding-bottom: 0.2ex;
+	border-bottom: 3px solid #3BAAE3;
+	font-size: 1.2em;
 	font-weight: bold;
-	color: #2779AA;
-	text-align: left;
-	text-indent: 0.5em;
-	padding: 0.2em 0;
+	text-indent: 1ex;
 }
-#insertUser .insertContent p {
-	margin: 1.4em 0;
-	text-align: center;
-	text-indent: 0.5em;
-	color: black;
-	font-weight: normal;
+.playerList  table {
+	width: 96%;
+	margin: 0 1.5% 2% 2.5%;
+	border-collapse: separate;
 }
-#insertUser .insertContent input{
-	float: right;
-}
-#insertUser .insertButton {
-	text-align: center;
-}
-#insertUser .insertButton span {
-	font-size: 0.8em;
-	line-height: 1;
-}
-#insertUser .errorClass {
-	margin: 1.2em 0.5em;
-	background: none;
-}
-#insertUser .errorClass p {
-	padding: 0.5em 0.5em;
-	margin: 0;
-}
-#playerList {
-	float: left;
-	margin: 3em 0 5% 5%;
-	width: 35%;
-}
-#playerList tr {
+.playerList  table tr {
 	border: 0;
 }
-#playerList thead tr {
-	height: 1.5em;
-}
-#playerList td {
-	border-bottom: 2px solid #D7EBF9;
-	font-size: 1em;
-	padding: 0.4em;
-	text-indent: 0.5em;
+.playerList table td {
+	padding: 0;
+	width: 0%;
 	vertical-align: middle;
-	min-width: 15em;
-	max-width: 15em;
 }
-#playerList tbody tr:hover td {
-	color: #2779AA;
+.playerList table tfoot {
+	text-align: left;
+}
+.playerList table th input {
 	font-style: italic;
+	padding: 0.3em 0.5em;
 }
-#playerList  th {
-	border-bottom: 3px solid #2779AA;
-	color: #2779AA;
+.playerList table tfoot .firstColumn {
+	text-align: center;
+}
+.playerList table tfoot .firstRow th {
+	padding-top: 1.5em;
+}
+.playerList table tfoot .secondColumn button {
+	width: 100%;
+}
+.playerList .firstColumn {
+	width: 62%;
+	padding-right: 2%;
+	text-align: center
+}
+.playerList .secondColumn {
+	width: 14%;
+}
+.playerList .secondColumn button {
+	width: 100%;
+}
+.playerList .thirdColumn {
+	width: 18%;
+	text-align: center;
+}
+.playerList .emptyRow {
+	text-align: center;
 	font-size: 1em;
+	font-style: italic;
 	font-weight: bold;
-	padding: 0.2em 0.5em;
-	min-width: 15em;
-	max-width: 15em;
 }
-#playerList tfoot button {
-	width: 60%;
+.playerList .emptyRow td {
+	padding: 1ex 0;
+	vertical-align: middle;
 }
-#playerList .emptyTable  td {
-	font-weight: bold;
-	padding: 2em 0 2em 35%;
+.ui-icon-add {
+	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
+	background-position: 0px -192px;
 }
-#playerList td.hiddenColumn {
+.ui-icon-remove {
+	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
+	background-position: -32px -192px;
+}
+.icon-button span {
+	float: left;
+	margin: 0.3em 0.3em;
+}
+.icon-button .small-button-text {
+	padding: 0.15em 0.2em;
+}
+.icon-button .small-button-text {
+	width: 50%;
+}	
+.small-button-text {
+	padding: 0.15em 1.5em;
+	text-align: center;
+	font-size: 0.9em;
+	line-height: 0.9em;	
+}
+.wedgesList {
 	display: none;
-	border: 0;
-	width: 5%;
-	min-width: 0em;
+	margin-left: 119px;
+	margin-top: -32px;
+	position: absolute;
+	text-align: left;
+	z-index: 1;
+}
+.wedgesList h3 {
+	background: none repeat scroll 0 0 #D7EBF9;
+	border: 1px solid #AED0EA;
+	margin: 0;
+	padding: 0.4em 1.5em;
+	font-size: 0.9em;
+	font-weight: bold;
+	color: #2779AA;
 }

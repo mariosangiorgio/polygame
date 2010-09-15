@@ -37,8 +37,7 @@
 				$parameters['wedgesSelected'] = $_POST['wedgesSelected'];
 				for( $index = 0; $index < $_POST['wedgesSelected']; $index++ )
 					if( $_POST['wedge'.$index] )
-						$parameters['wedge'.$_POST['wedge'.$index]] = $_POST['wedge'.$index];
-				
+						$parameters['wedges']['wedge'.$_POST['wedge'.$index]] = $_POST['wedge'.$index];
 				$_SESSION['phase2'] = $parameters;
 			}
 			else
