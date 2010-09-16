@@ -7,7 +7,7 @@
 		method="POST"
 	>
 		<input type="hidden" name="usingAjax" value="false" />
-		<input type="hidden" name="phase" value="<? echo ( $phaseNumber + 1 ); ?>" />
+		<input type="hidden" name="phase" value="<? echo ( $_SESSION['phaseNumber'] + 1 ); ?>" />
 	<table class="phaseTable">
 	<tbody>
 		<tr>
@@ -221,12 +221,8 @@
 			var formName = $this.attr('name');
 			var dataToSend = $this.serialize();
 			var typeOfDataToReceive = 'html';
-			var callback = function( response )
-			{
+			var callback = function( response ) {
 				$("#wrapper").html( response );
-				$('#organizerBar label[for="phase<? echo $phaseNumber; ?>"]').removeClass('ui-state-active');
-				$('#organizerBar label[for="phase<? echo ( $phaseNumber + 1 ); ?>"]').addClass('ui-state-active');
-				$('#organizerBar label[for="phase<? echo ( $phaseNumber + 1 ); ?>"]').toggleClass('unreachable reachable');
 			};
 			
 			$.post( url, dataToSend, callback, typeOfDataToReceive );	

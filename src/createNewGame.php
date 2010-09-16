@@ -4,13 +4,13 @@
 	include_once("./inc/db_connect.php");
 	include_once("./backend/utils.php");
 	
-	if( isset( $_POST['phase'] ))
+	if( isSet( $_POST['phase'] ))
 		// TODO: check if( $_POST['phase'] < 0 || $_POST['phase'] > 4 )
-		$phaseNumber = $_POST['phase'];
-	else
-		$phaseNumber = 1;
+		$_SESSION['phaseNumber'] = $_POST['phase'];
+	else if( !$_SESSION['phaseNumber'] )
+		$_SESSION['phaseNumber'] = 1;
 	
-	if( $phaseNumber == 2 )
+	if( $_SESSION['phaseNumber'] == 2 )
 	{	
 		if( isSet( $_POST['time1'] ))
 			$parameters['time1'] = $_POST['time1'];
@@ -28,7 +28,7 @@
 		if( $parameters )
 			$_SESSION['phase1'] = $parameters;
 	}
-	if( $phaseNumber == 3 )
+	if( $_SESSION['phaseNumber'] == 3 )
 	{
 		if( isSet( $_POST['wedgesSelected'] ))
 		{
@@ -44,8 +44,26 @@
 				unSet( $_SESSION['phase2'] );
 		}
 	}
+	if( $_SESSION['phaseNumber'] == 4 )
+	{
+		if( isSet( $_POST['numberOfUsers'] ))
+		{
+			if( $_POST['numberOfUsers'] != 0 )
+			{
+				$parameters['numberOfUsers'] = $_POST['numberOfUsers'];
+				for( $index = 0; $index < $_POST['numberOfUsers']; $index++ )
+				{
+					$parameters['user'][$index]['username'] = $_POST['user'.$index];
+					$parameters['user'][$index]['wedgeId'] = $_POST['wedge'.$index];
+				}
+				$_SESSION['phase3'] = $parameters;
+			}
+			else
+				unSet( $_SESSION['phase3'] );
+		}
+	}
 	if(( isSet( $_POST['usingAjax'] ) && $_POST['usingAjax'] == 'true' ))
-		include "newGamePhase".$phaseNumber.".php";
+		include "newGamePhase".$_SESSION['phaseNumber'].".php";
 	else
 	{
 ?>
@@ -63,7 +81,7 @@
 <body>
 	<? include "header.php"; ?>
 	<div id="wrapper">
-		<? include "newGamePhase".$phaseNumber.".php"; ?>
+		<? include "newGamePhase".$_SESSION['phaseNumber'].".php"; ?>
 	</div>
 </body>
 </html>
