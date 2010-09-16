@@ -1,7 +1,12 @@
 <div id="organizerBar" class="organizeBar">
 	<span class="ui-buttonset">
 <?
-	$numberOfPhases = 5;
+	$numberOfPhases = 4;
+	if( $_SESSION['phaseNumber'] == 4 )
+	{
+		$_SESSION['phaseNumber']--;
+		$phase4 = true;
+	}
 	for( $index = 1; $index <= $numberOfPhases; $index++ )
 	{
 ?>
@@ -10,10 +15,10 @@
 			for="phase<? echo $index; ?>"
 <? 		
 		$class = "ui-button ui-widget ui-state-default ui-button-text-only ";
-		if( $phaseNumber >= $index )
+		if( $_SESSION['phaseNumber'] >= $index )
 		{
 			$class = $class."reachable ";
-			if( $phaseNumber == $index ) 
+			if( $_SESSION['phaseNumber'] == $index ) 
 				$class = $class."ui-state-active "; 
 		}
 		else 
@@ -29,6 +34,8 @@
 		</label>
 <?
 	}
+	if( $phase4 )
+		$_SESSION['phaseNumber']++;
 ?>
 	</span>
 </div>

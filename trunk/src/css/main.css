@@ -218,7 +218,7 @@ a {
 	line-height: 1.6em;
 }
 .organizeBar .ui-buttonset .ui-button {
-	width: 18%;
+	width: 22%;
 }
 .organizeBar .unreachable {
 	cursor: default;
@@ -344,7 +344,7 @@ a {
 .playerList p {
 	margin: 1em;
 	padding-bottom: 0.2ex;
-	border-bottom: 3px solid #3BAAE3;
+	border-bottom: 1px solid #3BAAE3;
 	font-size: 1.2em;
 	font-weight: bold;
 	text-indent: 1ex;
@@ -403,44 +403,35 @@ a {
 	padding: 1ex 0;
 	vertical-align: middle;
 }
-.ui-icon-add {
+.addPlayer .ui-icon {
 	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
 	background-position: 0px -192px;
 }
-.ui-icon-remove {
+.removePlayer .ui-icon {
 	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
 	background-position: -32px -192px;
 }
-.icon-button span {
-	float: left;
-	margin: 0.3em 0.3em;
-}
-.icon-button .small-button-text {
-	padding: 0.15em 0.2em;
-}
-.icon-button .small-button-text {
-	width: 50%;
-}	
-.small-button-text {
-	padding: 0.15em 1.5em;
-	text-align: center;
+.addPlayer span.ui-button-text, .removePlayer span.ui-button-text , .movePlayer span.ui-button-text  {
+	padding: 0.5em 1.5em;
 	font-size: 0.9em;
-	line-height: 0.9em;	
+	line-height: 0.9em;
+}
+.movePlayer .ui-state-over {
+	background:url("images/ui-bg_glass_80_d7ebf9_1x400.png") repeat-x scroll 50% 50% #D7EBF9;
+	border:1px solid #AED0EA;
+	color:#2779AA;
+	font-weight:bold;
 }
 .wedgesList {
 	display: none;
-	margin-left: 119px;
-	margin-top: -32px;
+	margin-left: 124px;
+	margin-top: -28px;
 	position: absolute;
 	text-align: left;
-	z-index: 1;
+	width: 14%;
 }
-.wedgesList h3 {
-	background: none repeat scroll 0 0 #D7EBF9;
-	border: 1px solid #AED0EA;
+.wedgesList button {
+	width: 100%;
+	padding: 0;
 	margin: 0;
-	padding: 0.4em 1.5em;
-	font-size: 0.9em;
-	font-weight: bold;
-	color: #2779AA;
 }

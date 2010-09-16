@@ -1,7 +1,7 @@
 <? include "newGameBar.php"; ?>
 <div id="divPhase3" class="phases">
 	<form
-		name="phase3Form"
+		name="loadPlayers"
 		action="./createNewGame.php"
 		method="POST"
 		enctype="multipart/form-data"
@@ -9,21 +9,23 @@
 		<p>You can load a list of names from a file:
 			<input type="file" name="playersList" size="28" id="playersList" />
 		</p>
-		<input type="hidden" name="usingAjax" value="false" />
-		<input type="hidden" name="phase" value="<? echo ( $phaseNumber + 1 ); ?>" />
+	</form>
 <?
 	if( isSet( $_SESSION['phase2'] ))
 	{
 		foreach( $_SESSION['phase2']['wedges'] as $key_value => $wedgeId )
 		{
-			$query = "SELECT `Wedge ID` as id, Title ". 
+			$query = "SELECT `Wedge ID` as Id, Title ". 
 				 "FROM Wedges ".
 				 "WHERE Language='$lang' AND `Wedge ID`=".$wedgeId;
 			$data = mysql_query( $query, $connection );
 			$wedge = mysql_fetch_array( $data )
 ?>
 	<div class="playerList ui-corner-all">
-		<p><? echo $wedge['Title']?></p>
+		<p>
+			<? echo $wedge['Title']?>
+			<input type="hidden" name="wedgeId" value="<? echo $wedge['Id']?>" />
+		</p>
 		<table class="playerTable">
 		<tfoot>
 			<tr class="firstRow">
@@ -31,10 +33,7 @@
 					<input type="text" size="40" value="Insert the new player username here..." name="username"/>
 				</th>
 				<th class="secondColumn" rowspan="2">
-					<button type="button" class="addPlayer icon-button ui-button ui-corner-all ui-widget ui-state-default" >
-						<span class="ui-icon ui-icon-add"></span>
-						<span class="small-button-text">Add</span>
-					</button>
+					<button type="button" class="addPlayer" >Add</button>
 				</th>
 				<th class="thirdColumn"></th>
 			</tr>
@@ -46,9 +45,30 @@
 			</tr>			
 		</tfoot>
 		<tbody>
-			<tr class="emptyRow">
-				<td colspan="3">No players!</td>
+<?
+			if( isSet( $_SESSION['phase3'] ))
+			{
+				$emptyTable = true;
+				foreach( $_SESSION['phase3']['user'] as $user )
+				{
+					if( $user['wedgeId'] == $wedge['Id'] )
+					{
+						$emptyTable = false;
+?>
+			<tr>
+				<td class="firstColumn"><? echo $user['username']; ?></td>
+				<td class="secondColumn"><button type="button" class="removePlayer" >Delete</button></td>
+				<td class="thirdColumn"><button type="button" class="movePlayer" >Move to...</button></td>
 			</tr>
+<?						
+					}
+				}
+				if( $emptyTable )
+					echo "<tr class=\"emptyRow\"><td colspan=\"3\">No players!</td></tr>";
+			}
+			else
+				echo "<tr class=\"emptyRow\"><td colspan=\"3\">No players!</td></tr>";
+?>
 		</tbody>
 		</table>
 	</div>
@@ -57,11 +77,8 @@
 	}
 ?>
 	<div id="nextPhaseButton">
-		<button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
-			<span class="ui-button-text">I'm done with players!</span>
-		</button>
+		<button type="submit">I'm done with players!</button>
 	</div>
-	</form>
 </div>
 <script type="text/javascript">
 	(function($) {
@@ -69,48 +86,84 @@
 		{
 			var usernameDefaultValue = "Insert the new player username here...";
 			var emailDefaultValue = "Insert the new player email here...";
+			var deleteButton = "<button type=\"button\" class=\"removePlayer\" >Delete</button>";
+			var moveButton = "<button type=\"button\" class=\"movePlayer\" >Move to...</button>";
+			var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\">No players!</td></tr>";
 			
-			$('#divPhase3 form').submit( function( event )
+			var generateWedgesList = function( row ) 
 			{
-				event.preventDefault();
-				var data = "usingAjax=true&phase=<? echo ( $phaseNumber + 1 ); ?>";
-				var table = $('#playerList tbody');
-				var rowVector = $('tr:not(.emptyRow)', $(table));
-				for( var index = 0; index < rowVector.length; index++ )
-					data +=  '&username' + index + '=' + $('tr:eq(' + index + ') td.firstColumn', $(table)).text() +
-							 '&password' + index + '=' + $('tr:eq(' + index + ') td.secondColumn', $(table)).text();
-				var $this = $(this);
-				var url = $this.attr('action');
-				var formName = $this.attr('name');
-				var dataToSend = data;
-				var typeOfDataToReceive = 'html';
-				var callback = function( response )
-				{
-					$("#wrapper").html( response );
-					$('#organizerBar label[for="phase<? echo $phaseNumber; ?>"]').removeClass('ui-state-active');
-					$('#organizerBar label[for="phase<? echo ( $phaseNumber + 1 ); ?>"]').addClass('ui-state-active');
-					$('#organizerBar label[for="phase<? echo ( $phaseNumber + 1 ); ?>"]').toggleClass('unreachable reachable');
-				};
+				var currentWedge = $(row).parents('div.playerList').find('p').text();
+				var wedges = $('div.playerList p');
+				var wedgesDiv = "<div class=\"wedgesList\">";
+				$(wedges).each( function() {
+					if( $(this).text() != currentWedge )
+						wedgesDiv += "<button type=\"button\" class=\"movePlayer\">" + $(this).text() + "</button>";
+				})
+				wedgesDiv += "</div>";
+				$('td.thirdColumn', $(row)).append( wedgesDiv );
+				$('td.thirdColumn div.wedgesList button', $(row)).button();			
+			}
+			
+			var movePlayer = function( buttonElement ) 
+			{					
+				var originTable = $(buttonElement).parents('tbody');
+				var originWedge = $(originTable).parents('div.playerList').find('p').text();
+				var destinationWedge = $(buttonElement).find('span').text();
+				//alert(destinationWedge);
+				var destinationTable = $('div.playerList p:contains("' + destinationWedge + '")').parent().find('tbody');
+				$(buttonElement).parents('div.wedgesList').hide();
+				$(buttonElement).find('span').text( originWedge );
 				
-				$.post( url, dataToSend, callback, typeOfDataToReceive );	
+				$(buttonElement).parents('tr').remove();
+				if( !$('tr:not(.emptyRow)', $(originTable)).length )
+					$(originTable).append( emptyRow );
+				
+				var username = $(buttonElement).parents('tr').find('td.firstColumn').text();
+				var row = "<tr><td class=\"firstColumn\">" + username +
+							"</td><td class=\"secondColumn\">" + deleteButton + "</td>" + 
+							"<td class=\"thirdColumn\">" + moveButton + "</td></tr>";
+							
+				if( !$('tr:not(.emptyRow)', $(destinationTable)).length )
+					$(destinationTable).html('');
+				$(destinationTable).append(row);
+				
+				generateWedgesList($('tr:last', $(destinationTable)));
+				
+				$('button.removePlayer').button( {
+					icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
+				});
+				$('button.movePlayer').button();		
+			};
+			
+			$('button.movePlayer').each( function() 
+			{
+				var table = $(this).parents('table');
+				var tbody = $('tbody', $(table));
+				var row = $(this).parents('tr');
+				var currentWedge = $(table).parents('div.playerList').find('p').text();
+				var wedges = $('div.playerList p');
+				var wedgesDiv = "<div class=\"wedgesList\">";
+				$(wedges).each( function() {
+					if( $(this).text() != currentWedge )
+						wedgesDiv += "<button type=\"button\" class=\"movePlayer\">" + $(this).text() + "</button>";
+				})
+				wedgesDiv += "</div>";
+				$('td.thirdColumn', $(row)).append( wedgesDiv );
+				$('td.thirdColumn div.wedgesList button', $(row)).button().click( function() {
+					movePlayer( this );
+				});
 			});
+			
 			$('button.addPlayer').click( function()
 			{
 				var table = $(this).parents('table');
 				var tbody = $('tbody', $(table));
-				var tfoot = $(this).parents('tfoot');
+				var tfoot = $('tfoot', $(table));
 				
 				if( true )
 				{
-					var rowVector = $('tr:not(.emptyRow)', $(tbody));
-					var index = rowVector.length - 1;
 					var username = $('input[name="username"]', $(tfoot)).val();
 					var email = $('input[name="email"]', $(tfoot)).val();
-					var deleteButton = "<button type=\"button\" class=\"icon-button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only\" >" +
-										"<span class=\"ui-icon ui-icon-remove\"></span>" + 
-										"<span class=\"small-button-text\">Delete</span></button>";
-					var moveButton = "<button type=\"button\" class=\"ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only\" >" +
-										"<span class=\"small-button-text ui-button-text\">Move to...</span></button>";
 					var row = "<tr><td class=\"firstColumn\">";
 					
 					if( username != usernameDefaultValue )
@@ -123,63 +176,95 @@
 					
 					row += "</td><td class=\"secondColumn\">" + deleteButton + "</td>" + 
 							"<td class=\"thirdColumn\">" + moveButton + "</td></tr>";
-					if( index < 0 )
+					if( !$('tr:not(.emptyRow)', $(tbody)).length )
 						$(tbody).html('');
 					$(tbody).append( row );
-					index++;
 					
-					$('tr:last td.secondColumn', $(tbody)).click( function() {
-						$(this).parent().remove();
-						var rowVector = $('tr', $(tbody));
-						if( !rowVector.length )
-							$(table).append("<tr class=\"emptyRow\"><td colspan=\"3\">No players!</td></tr>");
+					$('button.removePlayer').button( {
+						icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 					});
-					$('tr:last td.thirdColumn', $(tbody)).mouseover( function() 
-					{
-						var wedgeList = $('div.wedgesList', $(this));
-						if( !wedgeList.length )
-						{
-							var currentWedge = $(table).parent().find('p').text();
-							var wedges = $('div.playerList p');
-							var wedgesDiv = "<div class=\"wedgesList\">";
-							for( var index = 0; index < wedges.length; index++ )
-								if( $(wedges).eq(index).text() != currentWedge )
-									wedgesDiv += "<h3 class=\"ui-corner-all\">" + $(wedges).eq(index).text() + "</h3>";
-							wedgesDiv += "</div>";
-							$(this).append( wedgesDiv );
-							$('div.wedgesList h3', $(this)).click( function()
-							{
-								var user = $(this).parents('tr').find('td.firstColumn').text();
-								var wedgeSelected = $(this).text();
-								var destinationTable = $('div.playerList p:contains("' + wedgeSelected + '")').parent().find('tbody');
-								alert(destinationTable);
-								$(destinationTable).append( $(this).parents('tr') );
-								$(this).parents('tr').remove();
-							});
-						}
-						$(wedgeList).show();
+					$('button.movePlayer').button();	
 					
-					});
-					$('tr:last td.thirdColumn', $(tbody)).mouseout( function() {
-						$('div.wedgesList', $(this)).hide();
-					});
+					generateWedgesList($('tr:last', $(tbody)));
+					
+					$('input[name="username"]', $(tfoot)).attr('value', usernameDefaultValue );
+					$('input[name="email"]', $(tfoot)).attr('value', emailDefaultValue );
 				}
-			});	
+			});
+			$('table.playerTable tbody td.secondColumn button').live('click', function()
+			{
+				var table = $(this).parents('table');
+				var tbody = $(this).parents('tbody');
+				var row = $(this).parents('tr');
+				$(row).remove();
+				if( !$('tr', $(tbody)).length )
+					$(table).append( emptyRow );
+			});
+			$('table.playerTable tbody td.thirdColumn').live('mouseover', function() {
+				$(this).find('div.wedgesList:hidden').show();
+				return false;
+			});
+			$('table.playerTable tbody td.thirdColumn').live('mouseout', function() {
+				$(this).find('div.wedgesList:visible').hide();
+				return false;
+			});
+			$('table.playerTable tbody td.thirdColumn div.wedgesList button').live('click', function( event ) {
+				movePlayer( this );
+				return false;
+			});
+			
+			$('button[type="submit"]').button();
+			$('button.addPlayer').button( {
+				icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
+			});
+			$('button.removePlayer').button( {
+				icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
+			});
+			$('button.movePlayer').button();
+			
 			$('input[type="text"]').focus( function() {
 				$(this).removeAttr('value');
 			});
 			$('input[name="username"]').blur( function() {
 				if( !$(this).attr('value'))
-					$(this).attr('value', 'Insert the new player username here...');
+					$(this).attr('value', usernameDefaultValue );
 			});
 			$('input[name="email"]').blur( function() {
 				if( !$(this).attr('value'))
-					$(this).attr('value', 'Insert the new player email here...');
+					$(this).attr('value', emailDefaultValue);
 			});
-			$('#resetPlayer').click( function() {
-				resetForm();
-			});		
+			
+			$('#nextPhaseButton button[type="submit"]').click( function()
+			{
+				var tables = $('table.playerTable');
+				var dataString = "usingAjax=true&phase=4";
+				var index = 0;
+				$(tables).each( function() 
+				{
+					var wedgeId = $(this).parents('div.playerList').find('input[name="wedgeId"]').val();
+					var rows = $('tbody tr:not(.emptyRow)', $(this));
+					$(rows).each( function()
+					{
+						var username = $('td.firstColumn', $(this)).text();
+						dataString += "&user" + index + "=" + username + "&wedge" + index + "=" + wedgeId;
+						index++;
+					});
+				});
+				dataString += "&numberOfUsers=" + index;
+				var $this = $(this);
+				var url = $this.attr('action');
+				var formName = $this.attr('name');
+				var dataToSend = dataString;
+				var typeOfDataToReceive = 'html';
+				var callback = function( response ) {
+					$("#wrapper").html( response );
+				};
+				
+				$.post( url, dataToSend, callback, typeOfDataToReceive );	
+			});
+			
 		});
+		
 		function checkForm( tfoot ) 
 		{
 			var username_re = /^[a-z0-9]{6,12}$/i;
@@ -215,14 +300,6 @@
 				return false;
 			}
 			return true;
-		}
-		function resetForm()
-		{
-			$('#insertUser div.errorClass:visible').hide('blind', function() {
-				$('#insertUser div.errorClass strong').html('');
-			});
-			$('#insertUser input').removeAttr('value');
-			$('#insertUser input:first').focus();
 		}
 	})(jQuery);
 </script>
