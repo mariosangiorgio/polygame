@@ -131,6 +131,9 @@
 				}
 				return false;
 			});
+			$('#largeButton').click( function() {
+				window.location.href = $('a', $(this)).attr('href');
+			})
 		});
 	})(jQuery);
 	

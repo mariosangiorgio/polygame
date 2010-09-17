@@ -108,9 +108,9 @@
 	
 	$TEXT['newGameBar-phase_1'] = "Choose game duration";
 	$TEXT['newGameBar-phase_2'] = "Choose wedges";
-	$TEXT['newGameBar-phase_3'] = "Make groups";
-	$TEXT['newGameBar-phase_4'] = "Choose voters";
-	$TEXT['newGameBar-phase_6'] = "";
+	$TEXT['newGameBar-phase_3'] = "Groups: Phase 1";
+	$TEXT['newGameBar-phase_4'] = "Groups: Phase 2";
+	$TEXT['newGameBar-phase_5'] = "Choose voters";
 	
 	
 ?>

@@ -1,5 +1,5 @@
 <? include "newGameBar.php"; ?>
-<div id="divPhase3" class="phases">
+<div id="divPhase3" class="phase3 phases">
 	<form
 		name="loadPlayers"
 		action="./createNewGame.php"
@@ -77,7 +77,7 @@
 	}
 ?>
 	<div id="nextPhaseButton">
-		<button type="submit">I'm done with players!</button>
+		<button type="button">I'm done with first phase!</button>
 	</div>
 </div>
 <script type="text/javascript">
@@ -98,7 +98,7 @@
 				$(wedges).each( function() {
 					if( $(this).text() != currentWedge )
 						wedgesDiv += "<button type=\"button\" class=\"movePlayer\">" + $(this).text() + "</button>";
-				})
+				});
 				wedgesDiv += "</div>";
 				$('td.thirdColumn', $(row)).append( wedgesDiv );
 				$('td.thirdColumn button.movePlayer', $(row)).button();
@@ -176,7 +176,7 @@
 					$('input[name="email"]', $(tfoot)).attr('value', emailDefaultValue );
 				}
 			});
-			$('table.playerTable tbody td.secondColumn button').live('click', function()
+			$('table.playerTable tbody td.secondColumn button.removePlayer').live('click', function()
 			{
 				var table = $(this).parents('table');
 				var tbody = $(this).parents('tbody');
@@ -186,15 +186,15 @@
 					$(table).append( emptyRow );
 			});
 			$('table.playerTable tbody td.thirdColumn').live('mouseover', function() {
+				$('button.movePlayer:first', $(this)).addClass('ui-state-hover');
 				$(this).find('div.wedgesList:hidden').show();
 				return false;
 			});
 			$('table.playerTable tbody td.thirdColumn').live('mouseout', function() {
+				$('button.movePlayer:first', $(this)).removeClass('ui-state-hover');
 				$(this).find('div.wedgesList:visible').hide();
 				return false;
 			});
-			
-			$('button[type="submit"]').button();
 			$('button.addPlayer').button( {
 				icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 			});
@@ -214,9 +214,9 @@
 				if( !$(this).attr('value'))
 					$(this).attr('value', emailDefaultValue);
 			});
-			
-			$('#nextPhaseButton button[type="submit"]').click( function()
+			$('#nextPhaseButton button').button().click( function( event )
 			{
+				event.preventDefault();
 				var tables = $('table.playerTable');
 				var dataString = "usingAjax=true&phase=4";
 				var index = 0;
@@ -232,18 +232,14 @@
 					});
 				});
 				dataString += "&numberOfUsers=" + index;
-				var $this = $(this);
-				var url = $this.attr('action');
-				var formName = $this.attr('name');
+				var url = "./createNewGame.php";
 				var dataToSend = dataString;
 				var typeOfDataToReceive = 'html';
 				var callback = function( response ) {
 					$("#wrapper").html( response );
 				};
-				
 				$.post( url, dataToSend, callback, typeOfDataToReceive );	
 			});
-			
 		});
 		
 		function checkForm( tfoot ) 
