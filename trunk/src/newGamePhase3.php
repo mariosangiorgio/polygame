@@ -101,7 +101,10 @@
 				})
 				wedgesDiv += "</div>";
 				$('td.thirdColumn', $(row)).append( wedgesDiv );
-				$('td.thirdColumn div.wedgesList button', $(row)).button();			
+				$('td.thirdColumn button.movePlayer', $(row)).button();
+				$('td.thirdColumn div.wedgesList button', $(row)).button().click( function() {
+					movePlayer( this );
+				});
 			}
 			
 			var movePlayer = function( buttonElement ) 
@@ -109,7 +112,6 @@
 				var originTable = $(buttonElement).parents('tbody');
 				var originWedge = $(originTable).parents('div.playerList').find('p').text();
 				var destinationWedge = $(buttonElement).find('span').text();
-				//alert(destinationWedge);
 				var destinationTable = $('div.playerList p:contains("' + destinationWedge + '")').parent().find('tbody');
 				$(buttonElement).parents('div.wedgesList').hide();
 				$(buttonElement).find('span').text( originWedge );
@@ -127,31 +129,14 @@
 					$(destinationTable).html('');
 				$(destinationTable).append(row);
 				
-				generateWedgesList($('tr:last', $(destinationTable)));
-				
 				$('button.removePlayer').button( {
 					icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 				});
-				$('button.movePlayer').button();		
+				generateWedgesList($('tr:last', $(destinationTable)));
 			};
 			
-			$('button.movePlayer').each( function() 
-			{
-				var table = $(this).parents('table');
-				var tbody = $('tbody', $(table));
-				var row = $(this).parents('tr');
-				var currentWedge = $(table).parents('div.playerList').find('p').text();
-				var wedges = $('div.playerList p');
-				var wedgesDiv = "<div class=\"wedgesList\">";
-				$(wedges).each( function() {
-					if( $(this).text() != currentWedge )
-						wedgesDiv += "<button type=\"button\" class=\"movePlayer\">" + $(this).text() + "</button>";
-				})
-				wedgesDiv += "</div>";
-				$('td.thirdColumn', $(row)).append( wedgesDiv );
-				$('td.thirdColumn div.wedgesList button', $(row)).button().click( function() {
-					movePlayer( this );
-				});
+			$('button.movePlayer').each( function() {
+				generateWedgesList( $(this).parents('tr'));
 			});
 			
 			$('button.addPlayer').click( function()
@@ -206,10 +191,6 @@
 			});
 			$('table.playerTable tbody td.thirdColumn').live('mouseout', function() {
 				$(this).find('div.wedgesList:visible').hide();
-				return false;
-			});
-			$('table.playerTable tbody td.thirdColumn div.wedgesList button').live('click', function( event ) {
-				movePlayer( this );
 				return false;
 			});
 			
