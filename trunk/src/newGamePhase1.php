@@ -1,5 +1,5 @@
 <? include "newGameBar.php"; ?>
-<div id="divPhase1" class="phases">
+<div id="divPhase1" class="phase1 phases">
 	<p>As a first thing you should decide the timing for the three phases of the game</p>
 	<form
 		name="phase1Form"

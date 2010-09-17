@@ -218,10 +218,20 @@ a {
 	line-height: 1.6em;
 }
 .organizeBar .ui-buttonset .ui-button {
-	width: 22%;
+	min-width: 18%;
 }
 .organizeBar .unreachable {
 	cursor: default;
+}
+.organizeBar .firstButtonBar {
+	-moz-border-radius: 6px 0 0 6px;
+	-webkit-border-radius: 6px 0 0 6px; 
+	border-radius: 6px 0 0 6px;
+}
+.organizeBar .lastButtonBar {
+	-moz-border-radius:  0 6px 6px 0;
+	-webkit-border-radius: 0 6px 6px 0; 
+	border-radius: 0 6px 6px 0;
 }
 .phases {
 	margin: 3% 8%;
@@ -231,6 +241,21 @@ a {
 }
 .phases .ui-slider-horizontal {
 	height:0.5em;
+}
+.phases .ui-slider .ui-slider-handle {
+	cursor: pointer;
+	height: 0.8em;
+	width: 0.7em;
+	margin-top: 0.1em;
+}
+.phases .ui-slider {
+	text-align: right;
+}
+.phases .ui-widget-header {
+	background: url("./ui-lightness/images/ui-bg_glass_50_3baae3_1x400.png") repeat-x scroll 50% 50% #3BAAE3;
+	border: 1px solid #AED0EA;
+	color: #222222;
+	font-weight: bold;
 }
 .phaseTable {
 	width: 80%;
@@ -277,21 +302,6 @@ a {
 	margin: 0 7% 2em;
 	width: 86%;
 	text-align: justify;
-}
-.phases .ui-slider .ui-slider-handle {
-	cursor: pointer;
-	height: 0.8em;
-	width: 0.7em;
-	margin-top: 0.1em;
-}
-.phases .ui-slider {
-	text-align: right;
-}
-.phases .ui-widget-header {
-	background: url("./ui-lightness/images/ui-bg_glass_50_3baae3_1x400.png") repeat-x scroll 50% 50% #3BAAE3;
-	border: 1px solid #AED0EA;
-	color: #222222;
-	font-weight: bold;
 }
 #nextPhaseButton {
 	clear: both;
@@ -341,6 +351,12 @@ a {
 	width: 70%;
 	border: 1px solid #AED0EA;
 }
+.phase4 .playerList, .addGroup {
+	background: none;
+	margin: 5% 25%;
+	width: 50%;
+	border: 1px solid #AED0EA;
+}
 .playerList p {
 	margin: 1em;
 	padding-bottom: 0.2ex;
@@ -381,13 +397,25 @@ a {
 .playerList .firstColumn {
 	width: 62%;
 	padding-right: 2%;
-	text-align: center
+	text-align: center;
+}
+.phase4 .playerList .firstColumn {
+	width: 60%;
+	padding: 0 2% 0 5%;
+	text-align: left;
 }
 .playerList .secondColumn {
 	width: 14%;
 }
+.phase4 .playerList .secondColumn {
+	width: 40%;
+	text-align: center;
+}
 .playerList .secondColumn button {
 	width: 100%;
+}
+.phase4 .playerList .secondColumn button {
+	width: 75%;
 }
 .playerList .thirdColumn {
 	width: 18%;
@@ -422,7 +450,7 @@ a {
 	color:#2779AA;
 	font-weight:bold;
 }
-.wedgesList, .groupsList {
+.wedgesList {
 	display: none;
 	margin-left: 124px;
 	margin-top: -28px;
@@ -430,8 +458,38 @@ a {
 	text-align: left;
 	width: 14%;
 }
+.groupsList  {
+	display: none;
+	margin-left: 178px;
+	margin-top: -28px;
+	position: absolute;
+	text-align: left;
+	width: 15.5%;
+}
 .wedgesList button, .groupsList button {
 	width: 100%;
 	padding: 0;
 	margin: 0;
+}
+.addGroup table {
+	width: 96%;
+	margin: 0 1.5% 0 2.5%;
+	border-collapse: separate;
+}
+.addGroup .firstColumn {
+	padding: 0 2% 0 5%;
+	width: 60%;
+	text-align: left;
+}
+.addGroup .secondColumn  {
+	width: 40%;
+	text-align: center;
+ }
+.addGroup .secondColumn  button {
+	width: 75%;
+}
+.addGroup input {
+	margin: 0.2em 0;
+	font-style: italic;
+	padding: 0.4em;
 }

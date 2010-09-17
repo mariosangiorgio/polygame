@@ -1,5 +1,5 @@
 <? include "newGameBar.php"; ?>
-<div id="divPhase2" class="phases">
+<div id="divPhase2" class="phase2 phases">
 	<p>Now choose the wedge that will be part of the game: in this part of the game every group of player is assigned a wedge, has to solve a problem linked to the wedge, and has to summarize in a poster the pros and cons of the wedge</p>
 	<form
 		name="phase2Form"
@@ -100,16 +100,14 @@
 					counter++;
 				}
 			}
-			var $this = $(this);
-			var url = $this.attr('action');
-			var formName = $this.attr('name');
-			var dataToSend = $this.serialize();
+			var url = $(this).attr('action');
+			var formName = $(this).attr('name');
+			var dataToSend = $(this).serialize();
 			var typeOfDataToReceive = 'html';
 			var callback = function( response ) {
 				$("#wrapper").html( response );
 			};
-			
-			$.post( url, dataToSend, callback, typeOfDataToReceive );	
+			$.post( url, dataToSend, callback, typeOfDataToReceive );
 		});
 		
 		$('#selectable li').click( function() 
