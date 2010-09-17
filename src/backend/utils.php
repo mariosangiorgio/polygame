@@ -23,7 +23,7 @@
 	
 	function generateRandomSequence( $init, $end )
 	{
-		$shuffleTime = 10;
+		$shuffleTime = $end - $init;
 		$vector = array();
 		srand((double) microtime() * 1000000);
 		
@@ -37,8 +37,7 @@
 			$tmp = $vector[$index1];
 			$vector[$index1] = $vector[$index2];
 			$vector[$index2] = $tmp;	
-		}
-		
+		}	
 		return $vector;
 	}
 	
