@@ -7,7 +7,8 @@
 		method="POST"
 	>
 		<input type="hidden" name="usingAjax" value="false" />
-		<input type="hidden" name="phase" value="<? echo ( $_SESSION['phaseNumber'] + 1 ); ?>" />
+		<input type="hidden" name="destinationPhase" value="<? echo ( $_SESSION['phaseNumber'] + 1 ); ?>" />
+		<input type="hidden" name="comingPhase" value="<? echo $_SESSION['phaseNumber']; ?>" />
 	<table class="phaseTable">
 	<tbody>
 		<tr>

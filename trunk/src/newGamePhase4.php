@@ -1,12 +1,5 @@
 <? include "newGameBar.php"; ?>
 <div id="divPhase4" class="phase4 phases">
-	<form
-		name="phase4Form"
-		action="./createNewGame.php"
-		method="POST"
-	>
-		<input type="hidden" name="usingAjax" value="false" />
-		<input type="hidden" name="phase" value="<? echo ( $_SESSION['phaseNumber'] + 1 ); ?>" />
 <?
 	if( isSet( $_SESSION['phase3'] ))
 	{
@@ -27,7 +20,7 @@
 			{
 ?>
 			<tr>
-				<td class="firstColumn"><? echo $_SESSION['phase3']['user'][$vector[$userIndex]]['username']; ?></td>
+				<td class="firstColumn"><? echo $_SESSION['phase3']['users'][$vector[$userIndex]]['userId']; ?></td>
 				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
 			</tr>
 <?
@@ -37,7 +30,7 @@
 			{
 ?>			
 			<tr>
-				<td class="firstColumn"><? echo $_SESSION['phase3']['user'][$vector[$userIndex]]['username']; ?></td>
+				<td class="firstColumn"><? echo $_SESSION['phase3']['users'][$vector[$userIndex]]['userId']; ?></td>
 				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
 			</tr>
 <?
@@ -64,13 +57,20 @@
 					<button type="button" class="addPlayer" >Add</button>
 				</td>
 			</tr>
+			<tr>
+				<td colspan="2">
+					<div class="errorClass ui-corner-all">
+						<span class="ui-icon ui-icon-info"></span>
+						<strong></strong>
+					</div>
+				</td>
+			</tr>
 		</tbody>
 		</table>
 	</div>
 	<div id="nextPhaseButton">
 		<button type="submit">I'm done with second phase!</button>
 	</div>
-	</form>
 </div>
 <script type="text/javascript">
 	(function($) {
@@ -105,8 +105,8 @@
 				$(buttonElement).parents('div.groupsList').hide();
 				$(buttonElement).find('span').text( originGroup );
 
-				var username = $(buttonElement).parents('tr').find('td.firstColumn').text();
-				var row = "<tr><td class=\"firstColumn\">" + username +
+				var userId = $(buttonElement).parents('tr').find('td.firstColumn').text();
+				var row = "<tr><td class=\"firstColumn\">" + userId +
 							"</td><td class=\"secondColumn\">" + moveButton + "</td></tr>";
 				
 				$(buttonElement).parents('tr').remove();
@@ -119,18 +119,35 @@
 				generateGroupsList($('tr:last', $(destinationTable)));		
 			};
 			
-			$('div.playerList p').click( function()
+			var changeGroupName = function( pElement )
 			{
-				var pElement = $(this);
-				var groupName = $(this).text();
-				$(this).html('<input type="text" name="groupName" value="' + groupName + '" />');
+				var groupName;
+				if( $('input[name="groupName"]', $(pElement)).length )
+					groupName = $('input[name="groupName"]', $(pElement)).val();
+				else
+					groupName = $(pElement).text();
+				var groupDiv = $(pElement).parents('div.playerList')
+				$(pElement).html('<input type="text" name="groupName" value="' + groupName + '" />');
 				
-				$('input[name="groupName"]', $(this)).focus().blur( function()
+				$('input[name="groupName"]', $(pElement)).focus().select().blur( function()
 				{
 					var newGroupName = $(this).val();
-					$(pElement).html( newGroupName );
-					$('td.secondColumn div.groupsList button span:contains("' + groupName + '")').text( newGroupName );
+					if( checkGroupName( newGroupName, groupDiv ))
+					{
+						$(pElement).html( newGroupName );
+						$('td.secondColumn div.groupsList button span:contains("' + groupName + '")').text( newGroupName );
+					}
+					else
+					{
+						if( !$('span', $(pElement)).length )
+							$(this).after("<span>Group name must be unique!</span>");
+						$(this).focus().select();
+					}
 				});
+			}
+			
+			$('div.playerList p').click( function() {
+				changeGroupName( $(this));
 			});
 			
 			$('button.movePlayer').each( function() {
@@ -152,18 +169,28 @@
 			$('div.addGroup button.addPlayer').click( function()
 			{
 				var newGroupName = $('div.addGroup input[name="newGroupName"]').val();
-				var newGroupDiv = "<div class=\"playerList ui-corner-all\">" + "<p>" + newGroupName + 
-								"</p><table class=\"playerTable\"><tbody></tbody></table></div>";
-								
-				$('div.addGroup').before( newGroupDiv );
-				
-				var groupsList = $('div.playerList table.playerTable tbody td.secondColumn div.groupsList');
-				$(groupsList).each( function() {
-					$(this).append('<button type="button" class="movePlayer">' + newGroupName + '</button>');
-					$('button.movePlayer:last', $(this)).button().click( function() {
-						movePlayer( this );
+				if( checkGroupName( newGroupName, $('div.addGroup')))
+				{
+					$('div.addGroup div.errorClass strong').html('');
+					$('div.addGroup div.errorClass:visible').slideUp();
+					var newGroupDiv = "<div class=\"playerList ui-corner-all\">" + "<p>" + newGroupName + 
+									"</p><table class=\"playerTable\"><tbody></tbody></table></div>";
+									
+					$('div.addGroup').before( newGroupDiv );
+					
+					var groupsList = $('div.playerList table.playerTable tbody td.secondColumn div.groupsList');
+					$(groupsList).each( function() {
+						$(this).append('<button type="button" class="movePlayer">' + newGroupName + '</button>');
+						$('button.movePlayer:last', $(this)).button().click( function() {
+							movePlayer( this );
+						});
 					});
-				});
+				}
+				else
+				{
+					$('div.addGroup div.errorClass strong').html('Group name must be unique!');
+					$('div.addGroup div.errorClass').slideDown();
+				}
 			});
 			$('div.addGroup input[name="newGroupName"]').focus( function() {
 				$(this).removeAttr('value');
@@ -176,7 +203,7 @@
 			{
 				event.preventDefault();
 				var groups = $('div.playerList');
-				var dataString = "usingAjax=true&phase=5";
+				var dataString = "usingAjax=true&comingPhase=4&destinationPhase=5";
 				var index = 0;
 				var numberOfGroups = 0;
 				$(groups).each( function() 
@@ -185,17 +212,15 @@
 					var rows = $('tbody', $(this));
 					$(rows).each( function()
 					{
-						var username = $('td.firstColumn', $(this)).text();
-						dataString += "&user" + index + "=" + username + "&group" + index + "=" + groupName;
+						var userId = $('td.firstColumn', $(this)).text();
+						dataString += "&user" + index + "=" + userId + "&group" + index + "=" + groupName;
 						index++;
 					});
 					if( rows.length )
 						numberOfGroups++;
 				});
 				dataString += "&numberOfGroups=" + numberOfGroups;
-				var form = $('form[name="phase4Form"]');
-				var url = $(form).attr('action');
-				var formName = $(form).attr('name');
+				var url = "./createNewGame.php";
 				var dataToSend = dataString;
 				var typeOfDataToReceive = 'html';
 				var callback = function( response ) {
@@ -203,6 +228,22 @@
 				};
 				$.post( url, dataToSend, callback, typeOfDataToReceive );
 			});
+			
+			function checkGroupName( currentGroupName, currentDiv )
+			{
+				var result = true;
+				var groups = $('div.playerList').not( currentDiv );
+				$(groups).each( function() 
+				{
+					var groupName = $('p', $(this)).text();
+					if( groupName == currentGroupName )
+					{
+						result = false;
+						return ;
+					}
+				});
+				return result;
+			}
 		});
 	})(jQuery);
 </script>

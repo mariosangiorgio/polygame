@@ -49,7 +49,7 @@
 			$.ajax({
 				type: 'POST',
 				url: './createNewGame.php',
-				data: { phase: phaseNumber,
+				data: { destinationPhase: phaseNumber,
 						usingAjax: 'true' },
 				dataType: 'html',
 				success: function( response ) 

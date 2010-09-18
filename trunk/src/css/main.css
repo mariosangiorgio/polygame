@@ -280,6 +280,11 @@ a {
 .phaseTable .firstCol {
 	background: none repeat scroll 0 0 #D7EBF9;
 }
+.phase3_1 .phaseTable .firstCol {
+	padding: 2em 3em;
+	text-align: center;
+	vertical-align: middle;
+}
 .phaseTable .secondCol h1 {
 	background: none repeat scroll 0 0 #D7EBF9;
 	font-size: 16px;
@@ -287,6 +292,10 @@ a {
 	margin-left: -15%;
 	text-align: left;
 	text-indent: 15%;
+}
+.phaseTable .secondCol p {
+	padding-right: 2em;
+	text-align: justify;
 }
 #advancedButton {
 	text-align: right;
@@ -347,8 +356,8 @@ a {
 }
 .playerList {
 	background: #D7EBF9;
-	margin: 5% 15%;
-	width: 70%;
+	margin: 5% 20%;
+	width: 60%;
 	border: 1px solid #AED0EA;
 }
 .phase4 .playerList, .addGroup {
@@ -364,6 +373,12 @@ a {
 	font-size: 1.2em;
 	font-weight: bold;
 	text-indent: 1ex;
+}
+.playerList p span {
+	color:red;
+	font-size: 0.8em;
+	font-weight: normal;
+	padding-left: 4em;
 }
 .playerList  table {
 	width: 96%;
@@ -395,9 +410,9 @@ a {
 	width: 100%;
 }
 .playerList .firstColumn {
-	width: 62%;
-	padding-right: 2%;
-	text-align: center;
+	width: 40%;
+	padding: 0 2%;
+	text-align: left;
 }
 .phase4 .playerList .firstColumn {
 	width: 60%;
@@ -492,4 +507,23 @@ a {
 	margin: 0.2em 0;
 	font-style: italic;
 	padding: 0.4em;
+}
+#changeDataType {
+	text-align: right;
+}
+.phase2 .errorClass {
+	margin: 0 25% 2%;
+	padding: 1.5% 0;
+	width: 50%;
+}
+.phase3 .errorClass, .phase4 .errorClass {
+	margin: 0 15% 2% 15%;
+	padding: 1% 0;
+	width: 70%;
+}
+.phase2 .errorClass span, .phase3 .errorClass span, .phase4 .errorClass span {
+	margin-left: 10%;
+}
+.phase4 .errorClass {
+	margin-top: 2%;
 }
