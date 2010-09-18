@@ -4,13 +4,13 @@
 	include_once("./inc/db_connect.php");
 	include_once("./backend/utils.php");
 	
-	if( isSet( $_POST['phase'] ))
-		// TODO: check if( $_POST['phase'] < 0 || $_POST['phase'] > 4 )
-		$_SESSION['phaseNumber'] = $_POST['phase'];
+	if( isSet( $_POST['destinationPhase'] ))
+		// TODO: check if( $_POST['comingPhase'] < 0 || $_POST['comingPhase'] > 4 )
+		$_SESSION['phaseNumber'] = $_POST['destinationPhase'];
 	else if( !$_SESSION['phaseNumber'] )
 		$_SESSION['phaseNumber'] = 1;
 	
-	if( $_SESSION['phaseNumber'] == 2 )
+	if( $_POST['comingPhase'] == 1 )
 	{	
 		if( isSet( $_POST['time1'] ))
 			$parameters['time1'] = $_POST['time1'];
@@ -28,7 +28,7 @@
 		if( $parameters )
 			$_SESSION['phase1'] = $parameters;
 	}
-	if( $_SESSION['phaseNumber'] == 3 )
+	if( $_POST['comingPhase'] == 2 )
 	{
 		if( isSet( $_POST['wedgesSelected'] ))
 		{
@@ -44,22 +44,42 @@
 				unSet( $_SESSION['phase2'] );
 		}
 	}
-	if( $_SESSION['phaseNumber'] == 4 )
+	if( $_POST['comingPhase'] == 3 )
 	{
+		if( isSet( $_POST['dataType'] ))
+			$_SESSION['phase3']['dataType'] = $_POST['dataType'];
 		if( isSet( $_POST['numberOfUsers'] ))
 		{
 			if( $_POST['numberOfUsers'] != 0 )
 			{
-				$parameters['numberOfUsers'] = $_POST['numberOfUsers'];
+				$_SESSION['phase3']['numberOfUsers'] = $_POST['numberOfUsers'];
 				for( $index = 0; $index < $_POST['numberOfUsers']; $index++ )
 				{
-					$parameters['user'][$index]['username'] = $_POST['user'.$index];
-					$parameters['user'][$index]['wedgeId'] = $_POST['wedge'.$index];
+					$users[$index]['userId'] = $_POST['user'.$index];
+					$users[$index]['wedgeId'] = $_POST['wedge'.$index];
 				}
-				$_SESSION['phase3'] = $parameters;
+				$_SESSION['phase3']['users'] = $users;
 			}
 			else
 				unSet( $_SESSION['phase3'] );
+		}
+	}
+	if( $_POST['comingPhase'] == 4 )
+	{
+		if( isSet( $_POST['numberOfGroups'] ))
+		{
+			if( $_POST['numberOfGroups'] != 0 )
+			{
+				$parameters['numberOfGroups'] = $_POST['numberOfGroups'];
+				for( $index = 0; $index < $_POST['numberOfGroups']; $index++ )
+				{
+					$parameters['user'][$index]['username'] = $_POST['user'.$index];
+					$parameters['user'][$index]['group'] = $_POST['group'.$index];
+				}
+				$_SESSION['phase4'] = $parameters;
+			}
+			else
+				unSet( $_SESSION['phase4'] );
 		}
 	}
 	if(( isSet( $_POST['usingAjax'] ) && $_POST['usingAjax'] == 'true' ))

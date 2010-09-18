@@ -7,7 +7,8 @@
 		method="POST"
 	>
 		<input type="hidden" name="usingAjax" value="false" />
-		<input type="hidden" name="phase" value="<? echo ( $_SESSION['phaseNumber'] + 1 ); ?>" />
+		<input type="hidden" name="destinationPhase" value="<? echo ( $_SESSION['phaseNumber'] + 1 ); ?>" />
+		<input type="hidden" name="comingPhase" value="<? echo $_SESSION['phaseNumber']; ?>" />
 		<input type="hidden" 
 			   name="wedgesSelected"
 <?
@@ -73,6 +74,14 @@
 				</ol>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<div class="errorClass ui-corner-all">
+					<span class="ui-icon ui-icon-info"></span>
+					<strong></strong>
+				</div>
+			</td>
+		</tr>
 	</tbody>									
 	</table>				
 	<div id="nextPhaseButton">
@@ -91,29 +100,39 @@
 		{
 			event.preventDefault();
 			$('input[name="usingAjax"]', this ).val('true');
-			var checkbox = $('input[type="checkbox"]');
-			for( var index = 0, counter = 0; index < checkbox.length; index++ )
+			var checkboxes = $('input[type="checkbox"]');
+			var counter = 0;
+			$(checkboxes).each( function() 
 			{
-				if( $(checkbox[index]).attr('checked'))
+				if( $(this).attr('checked'))
 				{
-					$(checkbox[index]).attr('name', 'wedge' + counter );
+					$(this).attr('name', 'wedge' + counter );
 					counter++;
 				}
+			});
+			if( counter )
+			{
+				var url = $(this).attr('action');
+				var formName = $(this).attr('name');
+				var dataToSend = $(this).serialize();
+				var typeOfDataToReceive = 'html';
+				var callback = function( response ) {
+					$("#wrapper").html( response );
+				};
+				$.post( url, dataToSend, callback, typeOfDataToReceive );
 			}
-			var url = $(this).attr('action');
-			var formName = $(this).attr('name');
-			var dataToSend = $(this).serialize();
-			var typeOfDataToReceive = 'html';
-			var callback = function( response ) {
-				$("#wrapper").html( response );
-			};
-			$.post( url, dataToSend, callback, typeOfDataToReceive );
+			else
+			{
+				$('table.phaseTable div.errorClass strong').text('No wedge selected!');
+				$('table.phaseTable div.errorClass:hidden').slideDown();
+			}			
 		});
 		
 		$('#selectable li').click( function() 
 		{
 			var wedgesSelected = $('#divPhase2 form input[name="wedgesSelected"]').val();
 			$(this).toggleClass('ui-selected ui-selectee');
+			$('table.phaseTable div.errorClass:visible').slideUp();
 			var checkbox = $('input[type="checkbox"]', this );
 			if( $(checkbox).attr('checked'))
 			{
@@ -133,6 +152,7 @@
 			$(elements).removeClass('ui-selectee');
 			$(elements).addClass('ui-selected');
 			$('input[type="checkbox"]', $(elements)).attr('checked', true );
+			$('table.phaseTable div.errorClass:visible').slideUp();
 			$('#divPhase2 form input[name="wedgesSelected"]').val( elements.length );
 		});
 		
