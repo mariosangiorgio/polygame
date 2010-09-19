@@ -360,11 +360,17 @@ a {
 	width: 60%;
 	border: 1px solid #AED0EA;
 }
-.phase4 .playerList, .addGroup {
-	background: none;
+.phase4 .playerList, .phase4 .addGroup {
+	background: none repeat scroll 0 0 #F2F275;
 	margin: 5% 25%;
 	width: 50%;
 	border: 1px solid #AED0EA;
+}
+.phase5 .playerList, .phase5 .addGroup {
+	background: none;
+	border: 1px solid #AED0EA;
+	margin: 5% 25%;
+	width: 50%;
 }
 .playerList p {
 	margin: 1em;
@@ -419,17 +425,20 @@ a {
 	padding: 0 2% 0 5%;
 	text-align: left;
 }
+.phase5 .playerList .firstColumn {
+	width: 60%;
+}
 .playerList .secondColumn {
 	width: 14%;
 }
-.phase4 .playerList .secondColumn {
+.phase4 .playerList .secondColumn, .phase5 .playerList .secondColumn {
 	width: 40%;
 	text-align: center;
 }
 .playerList .secondColumn button {
 	width: 100%;
 }
-.phase4 .playerList .secondColumn button {
+.phase4 .playerList .secondColumn button, .phase5 .playerList .secondColumn button {
 	width: 75%;
 }
 .playerList .thirdColumn {
@@ -492,7 +501,7 @@ a {
 	border-collapse: separate;
 }
 .addGroup .firstColumn {
-	padding: 0 2% 0 5%;
+	padding: 2% 5% 1%;
 	width: 60%;
 	text-align: left;
 }
@@ -516,12 +525,12 @@ a {
 	padding: 1.5% 0;
 	width: 50%;
 }
-.phase3 .errorClass, .phase4 .errorClass {
+.phases .errorClass {
 	margin: 0 15% 2% 15%;
 	padding: 1% 0;
 	width: 70%;
 }
-.phase2 .errorClass span, .phase3 .errorClass span, .phase4 .errorClass span {
+.phases .errorClass span {
 	margin-left: 10%;
 }
 .phase4 .errorClass {

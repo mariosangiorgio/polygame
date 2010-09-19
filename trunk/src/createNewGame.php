@@ -25,24 +25,15 @@
 			if( isSet( $_POST['time3'] ))
 				$parameters['time3'] = $_POST['time3'];
 		}
-		if( $parameters )
-			$_SESSION['phase1'] = $parameters;
+		$_SESSION['phase1'] = $parameters;
 	}
 	if( $_POST['comingPhase'] == 2 )
 	{
-		if( isSet( $_POST['wedgesSelected'] ))
-		{
-			if( $_POST['wedgesSelected'] != 0 )
-			{
-				$parameters['wedgesSelected'] = $_POST['wedgesSelected'];
-				for( $index = 0; $index < $_POST['wedgesSelected']; $index++ )
-					if( $_POST['wedge'.$index] )
-						$parameters['wedges']['wedge'.$_POST['wedge'.$index]] = $_POST['wedge'.$index];
-				$_SESSION['phase2'] = $parameters;
-			}
-			else
-				unSet( $_SESSION['phase2'] );
-		}
+		$parameters['wedgesSelected'] = $_POST['wedgesSelected'];
+		for( $index = 0; $index < $_POST['wedgesSelected']; $index++ )
+			if( $_POST['wedge'.$index] )
+				$parameters['wedges']['wedge'.$_POST['wedge'.$index]] = $_POST['wedge'.$index];
+		$_SESSION['phase2'] = $parameters;
 	}
 	if( $_POST['comingPhase'] == 3 )
 	{
@@ -50,37 +41,33 @@
 			$_SESSION['phase3']['dataType'] = $_POST['dataType'];
 		if( isSet( $_POST['numberOfUsers'] ))
 		{
-			if( $_POST['numberOfUsers'] != 0 )
-			{
-				$_SESSION['phase3']['numberOfUsers'] = $_POST['numberOfUsers'];
-				for( $index = 0; $index < $_POST['numberOfUsers']; $index++ )
-				{
-					$users[$index]['userId'] = $_POST['user'.$index];
-					$users[$index]['wedgeId'] = $_POST['wedge'.$index];
-				}
-				$_SESSION['phase3']['users'] = $users;
-			}
-			else
-				unSet( $_SESSION['phase3'] );
+			$_SESSION['phase3']['numberOfUsers'] = $_POST['numberOfUsers'];
+			for( $index = 0; $index < $_POST['numberOfUsers']; $index++ )
+				$users[$_POST['user'.$index]]['wedgeId'] = $_POST['wedge'.$index];
+			
+			$_SESSION['phase3']['users'] = $users;
 		}
 	}
 	if( $_POST['comingPhase'] == 4 )
 	{
-		if( isSet( $_POST['numberOfGroups'] ))
-		{
-			if( $_POST['numberOfGroups'] != 0 )
-			{
-				$parameters['numberOfGroups'] = $_POST['numberOfGroups'];
-				for( $index = 0; $index < $_POST['numberOfGroups']; $index++ )
-				{
-					$parameters['user'][$index]['username'] = $_POST['user'.$index];
-					$parameters['user'][$index]['group'] = $_POST['group'.$index];
-				}
-				$_SESSION['phase4'] = $parameters;
-			}
-			else
-				unSet( $_SESSION['phase4'] );
-		}
+		$parameters['numberOfGroups'] = $_POST['numberOfGroups'];
+		for( $index = 0; $index < $_POST['numberOfGroups']; $index++ )
+			$parameters['groups'][$index] = $_POST['groupName'.$index];
+		
+		for( $index = 0; $index < $_SESSION['phase3']['numberOfUsers']; $index++ )
+			$_SESSION['phase3']['users'][$_POST['user'.$index]]['group'] = $_POST['group'.$index];
+			
+		$_SESSION['phase4'] = $parameters;
+	}
+	if( $_POST['comingPhase'] == 5 )
+	{
+		$parameters['numberOfVoters'] = $_POST['numberOfVoters'];
+		for( $index = 0; $index < $_POST['numberOfVoters']; $index++ )
+			$parameters['voters'][$index] = $_POST['voter'.$index];
+		
+		$_SESSION['phase5'] = $parameters;
+		
+		include "./backend/saveGameData.php";
 	}
 	if(( isSet( $_POST['usingAjax'] ) && $_POST['usingAjax'] == 'true' ))
 		include "newGamePhase".$_SESSION['phaseNumber'].".php";

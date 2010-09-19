@@ -41,7 +41,7 @@
 		$counter++;
 	}
 	
-	$vector = generateRandomSequence( 0, $counter );
+	$vector = generateRandomSequence( 0, $counter - 1 );
 	$index = 0;
 	while( $counter > 0 )
 	{
@@ -85,9 +85,7 @@
 	</tbody>									
 	</table>				
 	<div id="nextPhaseButton">
-		<button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
-			<span class="ui-button-text">I'm done with wedges!</span>
-		</button>
+		<button type="button">I'm done with wedges!</button>
 	</div>
 	</form>				
 	</div>
@@ -96,10 +94,11 @@
 (function($) {
 	$(document).ready( function() 
 	{
-		$('#divPhase2 form').submit( function( event )
+		$('#nextPhaseButton button').button().click( function( event )
 		{
 			event.preventDefault();
-			$('input[name="usingAjax"]', this ).val('true');
+			var form = $('#divPhase2 form');
+			$('input[name="usingAjax"]', $(form)).val('true');
 			var checkboxes = $('input[type="checkbox"]');
 			var counter = 0;
 			$(checkboxes).each( function() 
@@ -112,9 +111,9 @@
 			});
 			if( counter )
 			{
-				var url = $(this).attr('action');
-				var formName = $(this).attr('name');
-				var dataToSend = $(this).serialize();
+				var url = $(form).attr('action');
+				var formName = $(form).attr('name');
+				var dataToSend = $(form).serialize();
 				var typeOfDataToReceive = 'html';
 				var callback = function( response ) {
 					$("#wrapper").html( response );

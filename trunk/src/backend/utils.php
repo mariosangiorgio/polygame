@@ -27,12 +27,12 @@
 		$vector = array();
 		srand((double) microtime() * 1000000);
 		
-		for( $index = 0; $init <= $end; $index++, $init++ )
-			$vector[$index] = $init;
+		for( $counter = 0; $init <= $end; $counter++, $init++ )
+			$vector[$counter] = $init;
 		for( $index = 0; $index < $shuffleTime; $index++ )
 		{
-			$index1 = rand( 0, $end - 1 );
-			$index2 = rand( 0, $end - 1 );
+			$index1 = rand( 0, $counter - 1 );
+			$index2 = rand( 0, $counter - 1 );
 			
 			$tmp = $vector[$index1];
 			$vector[$index1] = $vector[$index2];

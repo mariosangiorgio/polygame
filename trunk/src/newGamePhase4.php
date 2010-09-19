@@ -1,12 +1,67 @@
 <? include "newGameBar.php"; ?>
 <div id="divPhase4" class="phase4 phases">
 <?
-	if( isSet( $_SESSION['phase3'] ))
+	if( isSet( $_SESSION['phase4'] ))
+	{
+		$vector = generateRandomSequence( 0, $_SESSION['phase3']['numberOfUsers'] - 1 );
+		$userPerGroup = intval( $_SESSION['phase3']['numberOfUsers'] / $_SESSION['phase4']['numberOfGroups'] );
+		$remainingUsers = $_SESSION['phase3']['numberOfUsers'] % $_SESSION['phase4']['numberOfGroups'];
+		$userIndex = 0;
+		$index = 0;
+		foreach( $_SESSION['phase3']['users'] as $userId => $user )
+		{
+			$userIdVector[$index] = $userId;
+			$index++;
+		}
+		for( $index = 0; $index < $_SESSION['phase4']['numberOfGroups']; $index++ )
+		{
+			
+?>
+	<div class="playerList ui-corner-all">
+		<p><? echo $_SESSION['phase4']['groups'][$index]; ?></p>
+		<table class="playerTable">
+		<tbody>
+<?			
+			for( $counter = 0; $counter < $userPerGroup; $counter++ )
+			{
+?>
+			<tr>
+				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
+				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
+			</tr>
+<?
+				$userIndex++;
+			}
+			if( $remainingUsers > 0 )
+			{
+?>			
+			<tr>
+				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
+				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
+			</tr>
+<?
+				$remainingUsers--;
+				$userIndex++;
+			}
+?>
+		</tbody>
+		</table>
+	</div>
+<?
+		}
+	}
+	else if( isSet( $_SESSION['phase3'] ))
 	{
 		$vector = generateRandomSequence( 0, $_SESSION['phase3']['numberOfUsers'] - 1 );
 		$userPerGroup = intval( $_SESSION['phase3']['numberOfUsers'] / $_SESSION['phase2']['wedgesSelected'] );
 		$remainingUsers = $_SESSION['phase3']['numberOfUsers'] % $_SESSION['phase2']['wedgesSelected'];
 		$userIndex = 0;
+		$index = 0;
+		foreach( $_SESSION['phase3']['users'] as $userId => $user )
+		{
+			$userIdVector[$index] = $userId;
+			$index++;
+		}
 		for( $index = 0; $index < $_SESSION['phase2']['wedgesSelected']; $index++ )
 		{
 			
@@ -20,7 +75,7 @@
 			{
 ?>
 			<tr>
-				<td class="firstColumn"><? echo $_SESSION['phase3']['users'][$vector[$userIndex]]['userId']; ?></td>
+				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
 				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
 			</tr>
 <?
@@ -30,7 +85,7 @@
 			{
 ?>			
 			<tr>
-				<td class="firstColumn"><? echo $_SESSION['phase3']['users'][$vector[$userIndex]]['userId']; ?></td>
+				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
 				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
 			</tr>
 <?
@@ -45,7 +100,6 @@
 		}
 	}
 ?>
-
 	<div class="addGroup ui-corner-all">
 		<table>
 		<tbody>
@@ -132,7 +186,7 @@
 				$('input[name="groupName"]', $(pElement)).focus().select().blur( function()
 				{
 					var newGroupName = $(this).val();
-					if( checkGroupName( newGroupName, groupDiv ))
+					if( !checkGroupName( newGroupName, groupDiv ))
 					{
 						$(pElement).html( newGroupName );
 						$('td.secondColumn div.groupsList button span:contains("' + groupName + '")').text( newGroupName );
@@ -146,7 +200,7 @@
 				});
 			}
 			
-			$('div.playerList p').click( function() {
+			$('div.playerList p').live('click', function() {
 				changeGroupName( $(this));
 			});
 			
@@ -169,10 +223,12 @@
 			$('div.addGroup button.addPlayer').click( function()
 			{
 				var newGroupName = $('div.addGroup input[name="newGroupName"]').val();
-				if( checkGroupName( newGroupName, $('div.addGroup')))
+				var errorStr = checkGroupName( newGroupName, $('div.addGroup'));
+				if( !errorStr )
 				{
 					$('div.addGroup div.errorClass strong').html('');
 					$('div.addGroup div.errorClass:visible').slideUp();
+					$('div.addGroup input[name="newGroupName"]').attr('value', groupDefaultValue );
 					var newGroupDiv = "<div class=\"playerList ui-corner-all\">" + "<p>" + newGroupName + 
 									"</p><table class=\"playerTable\"><tbody></tbody></table></div>";
 									
@@ -188,7 +244,7 @@
 				}
 				else
 				{
-					$('div.addGroup div.errorClass strong').html('Group name must be unique!');
+					$('div.addGroup div.errorClass strong').html( errorStr );
 					$('div.addGroup div.errorClass').slideDown();
 				}
 			});
@@ -204,22 +260,23 @@
 				event.preventDefault();
 				var groups = $('div.playerList');
 				var dataString = "usingAjax=true&comingPhase=4&destinationPhase=5";
-				var index = 0;
-				var numberOfGroups = 0;
+				var groupIndex = 0;
+				var userIndex = 0;
 				$(groups).each( function() 
 				{
 					var groupName = $('p', $(this)).text();
-					var rows = $('tbody', $(this));
+					dataString += "&groupName" + groupIndex + "=" + groupName;
+					var rows = $('tbody tr', $(this));
 					$(rows).each( function()
 					{
 						var userId = $('td.firstColumn', $(this)).text();
-						dataString += "&user" + index + "=" + userId + "&group" + index + "=" + groupName;
-						index++;
+						dataString += "&user" + userIndex + "=" + userId + "&group" + userIndex + "=" + groupName;
+						userIndex++;
 					});
 					if( rows.length )
-						numberOfGroups++;
+						groupIndex++;
 				});
-				dataString += "&numberOfGroups=" + numberOfGroups;
+				dataString += "&numberOfGroups=" + groupIndex;
 				var url = "./createNewGame.php";
 				var dataToSend = dataString;
 				var typeOfDataToReceive = 'html';
@@ -231,14 +288,16 @@
 			
 			function checkGroupName( currentGroupName, currentDiv )
 			{
-				var result = true;
+				if( currentGroupName == groupDefaultValue )
+					return "No value inserted.";
+				var result = "";
 				var groups = $('div.playerList').not( currentDiv );
 				$(groups).each( function() 
 				{
 					var groupName = $('p', $(this)).text();
 					if( groupName == currentGroupName )
 					{
-						result = false;
+						result = "Group name must be unique!";
 						return ;
 					}
 				});

@@ -65,5 +65,6 @@
 		};
 		$('#organizerBar label.reachable').click( loadPhaseFromBar );
 	});
+	
 })(jQuery);
 </script>
