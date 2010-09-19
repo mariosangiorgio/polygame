@@ -96,9 +96,7 @@
 	</tbody>					
 	</table>					
 	<div id="nextPhaseButton">
-		<button type="submit" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
-			<span class="ui-button-text">I'm done with durations!</span>
-		</button>
+		<button type="button">I'm done with durations!</button>
 	</div>
 	</form>
 </div>
@@ -213,19 +211,18 @@
 			}
 		});
 		
-		$('#divPhase1 form').submit( function( event )
+		$('#nextPhaseButton button').button().click( function( event )
 		{
 			event.preventDefault();
-			$('input[name="usingAjax"]', this ).val('true');
-			var $this = $(this);
-			var url = $this.attr('action');
-			var formName = $this.attr('name');
-			var dataToSend = $this.serialize();
+			var form = $('#divPhase1 form');
+			$('input[name="usingAjax"]', $(form)).val('true');
+			var url = $(form).attr('action');
+			var formName = $(form).attr('name');
+			var dataToSend = $(form).serialize();
 			var typeOfDataToReceive = 'html';
 			var callback = function( response ) {
 				$("#wrapper").html( response );
 			};
-			
 			$.post( url, dataToSend, callback, typeOfDataToReceive );	
 		});
 	});

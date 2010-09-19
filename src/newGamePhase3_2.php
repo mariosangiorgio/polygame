@@ -30,9 +30,9 @@ if( isSet( $_SESSION['phase2'] ))
 		$wedge = mysql_fetch_array( $data )
 ?>
 <div class="playerList ui-corner-all">
+	<a name="<? echo $wedge['Id']?>"></a>
 	<p>
 		<? echo $wedge['Title']?>
-		<a name="<? echo $wedge['Id']?>"></a>
 	</p>
 	<table class="playerTable">
 	<tfoot>
@@ -48,18 +48,17 @@ if( isSet( $_SESSION['phase2'] ))
 	</tfoot>
 	<tbody>
 <?
-		if( isSet( $_SESSION['phase3']['numberOfUsers'] ))
+		if( isSet( $_SESSION['phase3']['users'] ))
 		{
 			$emptyTable = true;
-			for( $index = 0; $index < $_SESSION['phase3']['numberOfUsers']; $index++ )
+			foreach( $_SESSION['phase3']['users'] as $userId => $user )
 			{
-				$user = $_SESSION['phase3']['users'][$index];
 				if( $user['wedgeId'] == $wedge['Id'] )
 				{
 					$emptyTable = false;
 ?>
 		<tr>
-			<td class="firstColumn"><? echo $user['userId']; ?></td>
+			<td class="firstColumn"><? echo $userId; ?></td>
 			<td class="secondColumn"><button type="button" class="removePlayer" >Delete</button></td>
 			<td class="thirdColumn"><button type="button" class="movePlayer" >Move to...</button></td>
 		</tr>
@@ -227,14 +226,14 @@ if( isSet( $_SESSION['phase2'] ))
 			$('#nextPhaseButton button').button().click( function( event )
 			{
 				event.preventDefault();
-				if( checkWedgePlayers() )
+				if( checkWedgePlayers())
 				{
 					var tables = $('table.playerTable');
 					var dataString = "usingAjax=true&comingPhase=3&destinationPhase=4";
 					var index = 0;
 					$(tables).each( function() 
 					{
-						var wedgeId = $(this).parents('div.playerList').find('p a').attr('name');
+						var wedgeId = $(this).parents('div.playerList').find('a').attr('name');
 						var rows = $('tbody tr:not(.emptyRow)', $(this));
 						$(rows).each( function()
 						{
@@ -315,7 +314,7 @@ if( isSet( $_SESSION['phase2'] ))
 			{
 				var row = $('div.playerList table.playerTable tbody tr.emptyRow:first');
 				var errorDiv = $(row).parents('div.playerList').find('div.errorClass');
-				var anchor = $(row).parents('div.playerList').find('p a').attr('name');
+				var anchor = $(row).parents('div.playerList').find('a').attr('name');
 				$('strong', $(errorDiv)).html( "No players specified for this wedge" );
 				$(errorDiv).slideDown();
 				window.location.href = "./createNewGame.php#" + anchor;
