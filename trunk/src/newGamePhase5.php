@@ -1,8 +1,8 @@
 <? include "newGameBar.php"; ?>
-<div id="divPhase4" class="phase5 phases">
-	<p>Finally choose the voters that will examine the solutions proposed</p>
+<div id="divPhase5" class="phase5 phases">
+	<p><? echo $TEXT['newGamePhase5-p_1']; ?></p>
 	<div class="playerList ui-corner-all">
-		<p>Voters</p>
+		<p><? echo $TEXT['newGamePhase5-p_2']; ?></p>
 		<table class="playerTable">
 		<tbody>
 <?			
@@ -13,7 +13,7 @@
 ?>
 			<tr>
 				<td class="firstColumn"><? echo $_SESSION['phase5']['voters'][$counter]; ?></td>
-				<td class="secondColumn"><button type="button" class="removePlayer" >Delete</button></td>
+				<td class="secondColumn"><button type="button" class="removePlayer" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
 			</tr>
 <?
 		}
@@ -22,7 +22,7 @@
 	{
 ?>
 			<tr class="emptyRow">
-				<td colspan="2">No voters!</td>
+				<td colspan="2"><? echo $TEXT['newGamePhase5-noVoters_1']; ?></td>
 			</tr>
 <?
 	}
@@ -39,10 +39,10 @@
 		<tbody>
 			<tr>
 				<td class="firstColumn">
-					<input type="text"  size="40" value="Insert the new voter here..." name="newVoter" />
+					<input type="text"  size="40" value="<? echo $TEXT['newGamePhase5-input_1']; ?>" name="newVoter" />
 				</td>			
 				<td class="secondColumn">
-					<button type="button" class="addPlayer" >Add</button>
+					<button type="button" class="addPlayer" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
 				</td>
 			</tr>
 			<tr>
@@ -57,7 +57,7 @@
 		</table>
 	</div>
 	<div id="nextPhaseButton">
-		<button type="submit">I'm done with voters!</button>
+		<button type="submit"><? echo $TEXT['newGamePhase5-button_1']; ?></button>
 	</div>		
 	</div>
 </div>
@@ -65,9 +65,9 @@
 (function($) {
 	$(document).ready( function() 
 	{
-		var voterDefaultValue = "Insert the new voter here...";
-		var deleteButton = "<button type=\"button\" class=\"removePlayer\" >Delete</button>";
-		var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\">No voters!</td></tr>";
+		var voterDefaultValue = "<? echo $TEXT['newGamePhase5-input_1']; ?>";
+		var deleteButton = "<button type=\"button\" class=\"removePlayer\" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button>";
+		var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\"><? echo $TEXT['newGamePhase5-noVoters_1']; ?></td></tr>";
 		
 		$('div.addGroup button.addPlayer').click( function()
 		{
@@ -124,7 +124,7 @@
 			if( !$(rows).length )
 			{
 				var errorDiv = $('div.playerList').find('div.errorClass');
-				$('strong', $(errorDiv)).html( "No voters specified for this game" );
+				$('strong', $(errorDiv)).html("<? echo $TEXT['newGamePhase5-noVoters_2']; ?>");
 				$(errorDiv).slideDown();
 			}
 			else
@@ -151,7 +151,7 @@
 		function checkVoterName( currentVoter )
 		{
 			if( currentVoter == voterDefaultValue )
-				return "No value inserted.";
+				return "<? echo $TEXT['newGamePhase5-error_1']; ?>";
 			var result = "";
 			var rows = $('div.playerList tbody tr:not(.emptyRow)');
 			$(rows).each( function() 
@@ -159,7 +159,7 @@
 				var voter = $('td.firstColumn', $(this)).text();
 				if( voter == currentVoter )
 				{
-					result = "Voter name must be unique!";
+					result = "<? echo $TEXT['newGamePhase5-error_2']; ?>";
 					return ;
 				}
 			});

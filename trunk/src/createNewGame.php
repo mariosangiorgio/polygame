@@ -41,11 +41,16 @@
 			$_SESSION['phase3']['dataType'] = $_POST['dataType'];
 		if( isSet( $_POST['numberOfUsers'] ))
 		{
-			$_SESSION['phase3']['numberOfUsers'] = $_POST['numberOfUsers'];
-			for( $index = 0; $index < $_POST['numberOfUsers']; $index++ )
-				$users[$_POST['user'.$index]]['wedgeId'] = $_POST['wedge'.$index];
-			
-			$_SESSION['phase3']['users'] = $users;
+			if( $_POST['numberOfUsers'])
+			{
+				$_SESSION['phase3']['numberOfUsers'] = $_POST['numberOfUsers'];
+				for( $index = 0; $index < $_POST['numberOfUsers']; $index++ )
+					$users[$_POST['user'.$index]]['wedgeId'] = $_POST['wedge'.$index];
+				
+				$_SESSION['phase3']['users'] = $users;
+			}
+			else
+				unset( $_SESSION['phase3']);
 		}
 	}
 	if( $_POST['comingPhase'] == 4 )
@@ -80,7 +85,9 @@
 <head>
 	<title><? echo $TEXT['organization-page_title']; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="css/main.css" type="text/css" rel="stylesheet" />
+	<link type="text/css" href="./css/main.css" rel="stylesheet" />
+	<link type="text/css" href="./css/createNewGame.css" rel="stylesheet" />
+	<link type="text/css" href="./css/orizontalBar.css" rel="stylesheet" />
 	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.4.custom.css" rel="stylesheet" />	
 	<script type="text/JavaScript" src="lib/jquery-1.4.1.min.js"></script>
 	<script type="text/JavaScript" src="lib/jquery-ui-1.8.4.custom.min.js"></script>

@@ -1,0 +1,330 @@
+/*
+	Style Sheet releted to the game's organization page
+*/
+#createNewGameBar .ui-buttonset .ui-button {
+	min-width: 18%;
+}
+.phases {
+	margin: 3% 8%;
+}
+.phase1 h1 {
+	margin: 0.5em 0;
+	text-align: center;
+}
+.slider  p {
+	margin-top: 1.5em;
+	text-align: right;
+}
+.phase1 .ui-slider-horizontal {
+	height: 0.5em;
+}
+.phase1 .ui-slider .ui-slider-handle {
+	cursor: pointer;
+	height: 0.8em;
+	width: 0.7em;
+	margin-top: 0.1em;
+}
+.phase1 .ui-slider {
+	text-align: right;
+	margin-bottom: 1em;
+}
+.phase1 .ui-widget-header {
+	background: url("./ui-lightness/images/ui-bg_glass_50_3baae3_1x400.png") repeat-x scroll 50% 50% #3BAAE3;
+	border: 1px solid #AED0EA;
+	color: #222222;
+	font-weight: bold;
+}
+.tablePhase1_2 {
+	width: 80%;
+	margin: 2em 10%;
+	border-collapse: collapse;
+}
+.tablePhase1_2 tr {
+	border: 10px solid white;
+}
+.tablePhase1_2 td {
+	padding: 0.5em 3em 2em 3em;
+	width: 50%;
+	vertical-align: top;
+}
+.tablePhase1_2 .firstCol {
+	background: none repeat scroll 0 0 #D7EBF9;
+}
+.phase3_1 .tablePhase1_2 .firstCol {
+	padding: 2em 3em;
+	text-align: center;
+	vertical-align: middle;
+}
+.tablePhase1_2 .firstCol p {
+	margin: 1em 0;
+}
+.tablePhase1_2 .secondCol h1 {
+	background: none repeat scroll 0 0 #D7EBF9;
+	font-size: 16px;
+	line-height: 1.8em;
+	margin-left: -15%;
+	text-align: left;
+	text-indent: 15%;
+}
+.tablePhase1_2 .secondCol p {
+	padding-right: 2em;
+	text-align: justify;
+}
+#advancedButton {
+	margin-top: 5%;
+	text-align: right;
+}
+#advancedOptions {
+	display: none;
+	margin: 0 7% 2em;
+	width: 86%;
+	text-align: justify;
+}
+#nextPhaseButton {
+	clear: both;
+	width: 100%;
+	text-align: center;
+	padding: 2% 0;
+}
+#nextPhaseButton button {
+	width: 30%;
+}
+#selectable { 
+	list-style-type: none; 
+	margin: 0 15%; 
+	width: 70%;
+	text-align: center;
+	padding: 0; 
+}
+#selectable li { 
+	cursor: pointer;
+	margin: 0.1em; 
+	padding: 0.4em; 
+	font-size: 1.1em; 
+	height: 1.6em;
+	line-height: 1.6em;
+	font-weight: bold;
+}
+#selectable .ui-selectee { 
+	background: url("./ui-lightness/images/ui-bg_glass_80_d7ebf9_1x400.png") repeat-x scroll 50% 50% #D7EBF9;
+	border: 1px solid #AED0EA;
+	color: #2779AA;
+}
+#selectable .ui-selected { 
+	background: url("./ui-lightness/images/ui-bg_glass_50_3baae3_1x400.png") repeat-x scroll 50% 50% #3BAAE3; 
+	color: white; 
+}
+#selectingButton {
+	margin: 0 15% 2% 15%; 
+	width: 70%;
+	text-align: left;
+}
+#selectingButton a {
+	margin-right: 2%;
+}
+.tablePhase3 {
+	width: 80%;
+	margin: 2% 10%;
+}
+.tablePhase3 td {
+	padding: 0.5em 2em;
+	width: 50%;
+	vertical-align: middle;
+}
+.tablePhase3 h1{
+	padding: 0.5em;
+	background: none repeat scroll 0 0 #D7EBF9;
+	text-align: center;
+	font-size: 1.2em;
+}
+.tablePhase3 p {
+	padding: 0 1em;
+}
+.tablePhase3 button {
+	margin: 5% 12%;
+	width: 75%;
+	text-align: center;
+}
+.playerList {
+	background: #D7EBF9;
+	margin: 5% 20%;
+	width: 60%;
+	border: 1px solid #AED0EA;
+}
+.phase4 .playerList, .phase4 .addGroup {
+	background: none repeat scroll 0 0 #F2F275;
+	margin: 5% 25%;
+	width: 50%;
+	border: 1px solid #AED0EA;
+}
+.phase5 .playerList, .phase5 .addGroup {
+	background: none;
+	border: 1px solid #AED0EA;
+	margin: 5% 25%;
+	width: 50%;
+}
+.playerList p {
+	margin: 1em;
+	padding-bottom: 0.2ex;
+	border-bottom: 1px solid #3BAAE3;
+	font-size: 1.2em;
+	font-weight: bold;
+	text-indent: 1ex;
+}
+.playerList p span {
+	color:red;
+	font-size: 0.8em;
+	font-weight: normal;
+	padding-left: 4em;
+}
+.playerList  table {
+	width: 96%;
+	margin: 0 1.5% 2% 2.5%;
+	border-collapse: separate;
+}
+.playerList  table tr {
+	border: 0;
+}
+.playerList table td {
+	padding: 0;
+	width: 0%;
+	vertical-align: middle;
+}
+.playerList table tfoot {
+	text-align: left;
+}
+.playerList table th input {
+	font-style: italic;
+	padding: 0.3em 0.5em;
+}
+.playerList table tfoot .firstColumn {
+	text-align: center;
+}
+.playerList table tfoot .firstRow th {
+	padding-top: 1.5em;
+}
+.playerList table tfoot .secondColumn button {
+	width: 100%;
+}
+.playerList .firstColumn {
+	width: 40%;
+	padding: 0 2%;
+	text-align: left;
+}
+.phase4 .playerList .firstColumn {
+	width: 60%;
+	padding: 0 2% 0 5%;
+	text-align: left;
+}
+.phase5 .playerList .firstColumn {
+	width: 60%;
+}
+.playerList .secondColumn {
+	width: 14%;
+}
+.phase4 .playerList .secondColumn, .phase5 .playerList .secondColumn {
+	width: 40%;
+	text-align: center;
+}
+.playerList .secondColumn button {
+	width: 100%;
+}
+.phase4 .playerList .secondColumn button, .phase5 .playerList .secondColumn button {
+	width: 75%;
+}
+.playerList .thirdColumn {
+	width: 18%;
+	text-align: center;
+}
+.playerList .emptyRow {
+	text-align: center;
+	font-size: 1em;
+	font-style: italic;
+	font-weight: bold;
+}
+.playerList .emptyRow td {
+	padding: 1ex 0;
+	vertical-align: middle;
+}
+.addPlayer .ui-icon {
+	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
+	background-position: 0px -192px;
+}
+.removePlayer .ui-icon {
+	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
+	background-position: -32px -192px;
+}
+.addPlayer span.ui-button-text, .removePlayer span.ui-button-text , .movePlayer span.ui-button-text  {
+	font-size: 0.9em;
+	line-height: 0.9em;
+}
+.movePlayer .ui-state-over {
+	background:url("images/ui-bg_glass_80_d7ebf9_1x400.png") repeat-x scroll 50% 50% #D7EBF9;
+	border:1px solid #AED0EA;
+	color:#2779AA;
+	font-weight:bold;
+}
+.wedgesList {
+	display: none;
+	margin-left: 124px;
+	margin-top: -28px;
+	position: absolute;
+	text-align: left;
+	width: 14%;
+}
+.groupsList  {
+	display: none;
+	margin-left: 178px;
+	margin-top: -28px;
+	position: absolute;
+	text-align: left;
+	width: 15.5%;
+}
+.wedgesList button, .groupsList button {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+.addGroup table {
+	width: 96%;
+	margin: 0 1.5% 0 2.5%;
+	border-collapse: separate;
+}
+.addGroup .firstColumn {
+	padding: 2% 5% 1%;
+	width: 60%;
+	text-align: left;
+}
+.addGroup .secondColumn  {
+	width: 40%;
+	text-align: center;
+ }
+.addGroup .secondColumn  button {
+	width: 75%;
+}
+.addGroup input {
+	margin: 0.2em 0;
+	font-style: italic;
+	padding: 0.4em;
+}
+#changeDataType {
+	text-align: right;
+}
+.phase2 .errorClass {
+	margin: 0 25% 2%;
+	padding: 1.5% 0;
+	width: 50%;
+}
+.phase3 .errorClass, .phase4 .errorClass {
+	margin: 2% 15% 2% 15%;
+	padding: 1% 0;
+	width: 70%;
+}
+.phase5 .errorClass {
+	margin: 0 15% 2% 15%;
+	padding: 1% 0;
+	width: 70%;
+}
+.phases .errorClass span {
+	margin-left: 5%;
+}

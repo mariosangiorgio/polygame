@@ -1,6 +1,6 @@
 <? include "newGameBar.php"; ?>
 <div id="divPhase2" class="phase2 phases">
-	<p>Now choose the wedge that will be part of the game: in this part of the game every group of player is assigned a wedge, has to solve a problem linked to the wedge, and has to summarize in a poster the pros and cons of the wedge</p>
+	<p><? echo $TEXT['newGamePhase2-p_1']; ?></p>
 	<form
 		name="phase2Form"
 		action="./createNewGame.php"
@@ -18,13 +18,13 @@
 		echo "value=\"0\""
 ?> 		
 		/>
-	<table class="phaseTable">
+	<table class="tablePhase1_2">
 	<tbody>
 		<tr>
 			<td>
 				<div id="selectingButton">
-					<a id="selectAll" class="link">Select all</a>
-					<a id="deselectAll" class="link">Deselect all</a>
+					<a id="selectAll" class="link"><? echo $TEXT['newGamePhase2-a_1']; ?></a>
+					<a id="deselectAll" class="link"><? echo $TEXT['newGamePhase2-a_2']; ?></a>
 				</div>
 				<ol id="selectable">
 <? 
@@ -85,7 +85,7 @@
 	</tbody>									
 	</table>				
 	<div id="nextPhaseButton">
-		<button type="button">I'm done with wedges!</button>
+		<button type="button"><? echo $TEXT['newGamePhase2-button_1']; ?></button>
 	</div>
 	</form>				
 	</div>
@@ -122,8 +122,8 @@
 			}
 			else
 			{
-				$('table.phaseTable div.errorClass strong').text('No wedge selected!');
-				$('table.phaseTable div.errorClass:hidden').slideDown();
+				$('table.tablePhase1_2 div.errorClass strong').text("<? echo $TEXT['newGamePhase2-error_1']; ?>");
+				$('table.tablePhase1_2 div.errorClass:hidden').slideDown();
 			}			
 		});
 		
@@ -131,7 +131,7 @@
 		{
 			var wedgesSelected = $('#divPhase2 form input[name="wedgesSelected"]').val();
 			$(this).toggleClass('ui-selected ui-selectee');
-			$('table.phaseTable div.errorClass:visible').slideUp();
+			$('table.tablePhase1_2 div.errorClass:visible').slideUp();
 			var checkbox = $('input[type="checkbox"]', this );
 			if( $(checkbox).attr('checked'))
 			{
@@ -151,7 +151,7 @@
 			$(elements).removeClass('ui-selectee');
 			$(elements).addClass('ui-selected');
 			$('input[type="checkbox"]', $(elements)).attr('checked', true );
-			$('table.phaseTable div.errorClass:visible').slideUp();
+			$('table.tablePhase1_2 div.errorClass:visible').slideUp();
 			$('#divPhase2 form input[name="wedgesSelected"]').val( elements.length );
 		});
 		
