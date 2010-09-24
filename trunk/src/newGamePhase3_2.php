@@ -10,18 +10,19 @@
 </div>
 <form
 	name="loadPlayers"
-	action="./createNewGame.php"
+	action="./backend/importUsers.php"
 	method="POST"
 	enctype="multipart/form-data"
 >
 	<p>You can load a list of names from a file:
 		<input type="file" name="playersList" size="28" id="playersList" />
+		<input type="submit" value="Send" />
 	</p>
 </form>
 <?
 if( isSet( $_SESSION['phase2'] ))
 {
-	foreach( $_SESSION['phase2']['wedges'] as $key_value => $wedgeId )
+	foreach( $_SESSION['phase2']['wedges'] as $keyValue => $wedgeId )
 	{
 		$query = "SELECT `Wedge ID` as Id, Title ". 
 			 "FROM Wedges ".
