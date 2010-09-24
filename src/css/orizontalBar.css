@@ -1,0 +1,23 @@
+/*
+	Style Sheet releted to the orizontal bar
+*/
+.orizontalBar {
+	text-align: center;
+}
+.orizontalBar .ui-button-text-only .ui-button-text {
+	height: 1.5em;
+	line-height: 1.5em;
+}
+.orizontalBar .unreachable {
+	cursor: default;
+}
+.orizontalBar .firstButtonBar {
+	-moz-border-radius: 6px 0 0 6px;
+	-webkit-border-radius: 6px 0 0 6px; 
+	border-radius: 6px 0 0 6px;
+}
+.orizontalBar .lastButtonBar {
+	-moz-border-radius:  0 6px 6px 0;
+	-webkit-border-radius: 0 6px 6px 0; 
+	border-radius: 0 6px 6px 0;
+}

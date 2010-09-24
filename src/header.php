@@ -26,8 +26,8 @@
 			<img src="<? echo $stripeImageUrl; ?>" height="<? echo $height; ?>" />
 		</div>
 		<div id="languages-head"> 
-			<a href="index.php?lang=en"><img src="images/en.png" /></a> 
-			<a href="index.php?lang=it"><img src="images/it.png" /></a> 
+			<a href="<? echo $_SERVER['PHP_SELF'];?>?lang=en"><img src="images/en.png" /></a> 
+			<a href="<? echo $_SERVER['PHP_SELF'];?>?lang=it"><img src="images/it.png" /></a> 
 		</div>
 <?
 	if( $_SESSION['loggedIn'] == "yes" )

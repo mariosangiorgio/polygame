@@ -1,5 +1,6 @@
 <? include "newGameBar.php"; ?>
 <div id="divPhase4" class="phase4 phases">
+<p><? echo $TEXT['newGamePhase4-p_1']; ?></p>
 <?
 	if( isSet( $_SESSION['phase4'] ))
 	{
@@ -27,7 +28,7 @@
 ?>
 			<tr>
 				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
-				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
+				<td class="secondColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
 				$userIndex++;
@@ -37,7 +38,7 @@
 ?>			
 			<tr>
 				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
-				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
+				<td class="secondColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
 				$remainingUsers--;
@@ -67,7 +68,7 @@
 			
 ?>
 	<div class="playerList ui-corner-all">
-		<p>Group<? echo ( $index + 1 ); ?></p>
+		<p><? echo $TEXT['newGamePhase4-p_2']; ?><? echo ( $index + 1 ); ?></p>
 		<table class="playerTable">
 		<tbody>
 <?			
@@ -76,7 +77,7 @@
 ?>
 			<tr>
 				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
-				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
+				<td class="secondColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
 				$userIndex++;
@@ -86,7 +87,7 @@
 ?>			
 			<tr>
 				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
-				<td class="secondColumn"><button type="button" class="movePlayer" >Move to...</button></td>
+				<td class="secondColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
 				$remainingUsers--;
@@ -105,10 +106,10 @@
 		<tbody>
 			<tr>
 				<td class="firstColumn">
-					<input type="text"  size="40" value="Insert the new group here..." name="newGroupName" />
+					<input type="text"  size="40" value="<? echo $TEXT['newGamePhase4-input_1']; ?>" name="newGroupName" />
 				</td>			
 				<td class="secondColumn">
-					<button type="button" class="addPlayer" >Add</button>
+					<button type="button" class="addPlayer" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
 				</td>
 			</tr>
 			<tr>
@@ -123,15 +124,15 @@
 		</table>
 	</div>
 	<div id="nextPhaseButton">
-		<button type="submit">I'm done with second phase!</button>
+		<button type="submit"><? echo $TEXT['newGamePhase4-button_1']; ?></button>
 	</div>
 </div>
 <script type="text/javascript">
 	(function($) {
 		$(document).ready( function() 
 		{
-			var moveButton = "<button type=\"button\" class=\"movePlayer\" >Move to...</button>";
-			var groupDefaultValue = "Insert the new group here...";
+			var moveButton = "<button type=\"button\" class=\"movePlayer\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
+			var groupDefaultValue = "<? echo $TEXT['newGamePhase4-input_1']; ?>";
 			
 			var generateGroupsList = function( row ) 
 			{
@@ -194,7 +195,7 @@
 					else
 					{
 						if( !$('span', $(pElement)).length )
-							$(this).after("<span>Group name must be unique!</span>");
+							$(this).after("<span><? echo $TEXT['newGamePhase4-span_1']; ?></span>");
 						$(this).focus().select();
 					}
 				});
@@ -297,7 +298,7 @@
 					var groupName = $('p', $(this)).text();
 					if( groupName == currentGroupName )
 					{
-						result = "Group name must be unique!";
+						result = "<? echo $TEXT['newGamePhase4-span_1']; ?>";
 						return ;
 					}
 				});

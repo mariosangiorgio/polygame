@@ -1,4 +1,4 @@
-<div id="organizerBar" class="organizeBar">
+<div id="createNewGameBar" class="orizontalBar">
 	<span class="ui-buttonset">
 <?
 	$numberOfPhases = 5;
@@ -43,27 +43,18 @@
 	{
 		var loadPhaseFromBar = function() 
 		{
-			var $this = $(this);
 			var phase = $(this).attr('for'); 
-			var phaseNumber = phase.charAt( phase.length - 1 ); 
-			$.ajax({
-				type: 'POST',
-				url: './createNewGame.php',
-				data: { destinationPhase: phaseNumber,
-						usingAjax: 'true' },
-				dataType: 'html',
-				success: function( response ) 
-				{
-					$("#wrapper").html( response );
-				},
-				error: function( xhr, textStatus, errorThrown ) 
-				{
-					// TODO: catch error states
-				}
-			});
-		
+			var phaseNumber = phase.charAt( phase.length - 1 );
+			var url = "./createNewGame.php";
+			var dataToSend = { destinationPhase: phaseNumber,
+							   usingAjax: 'true' };
+			var typeOfDataToReceive = 'html';
+			var callback = function( response ) {
+				$("#wrapper").html( response );
+			};
+			$.post( url, dataToSend, callback, typeOfDataToReceive );
 		};
-		$('#organizerBar label.reachable').click( loadPhaseFromBar );
+		$('#createNewGameBar label.reachable').click( loadPhaseFromBar );
 	});
 	
 })(jQuery);

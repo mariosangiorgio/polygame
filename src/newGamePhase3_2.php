@@ -1,10 +1,11 @@
+<p><? echo $TEXT['newGamePhase3_2-p_1']; ?></p>
 <div id="changeDataType">
-	<a class="link">I want to specify just the
+	<a class="link">
 <?
 	if( $_SESSION['phase3']['dataType'] == "username" )
-		echo "email!";
+		echo $TEXT['newGamePhase3_2-a_1'];
 	else if( $_SESSION['phase3']['dataType'] == "email" )
-		echo "username!";
+		echo $TEXT['newGamePhase3_2-a_2'];
 ?>
 	</a>
 </div>
@@ -14,7 +15,7 @@
 	method="POST"
 	enctype="multipart/form-data"
 >
-	<p>You can load a list of names from a file:
+	<p><? echo $TEXT['newGamePhase3_2-p_2']; ?>
 		<input type="file" name="playersList" size="28" id="playersList" />
 		<input type="submit" value="Send" />
 	</p>
@@ -32,17 +33,15 @@ if( isSet( $_SESSION['phase2'] ))
 ?>
 <div class="playerList ui-corner-all">
 	<a name="<? echo $wedge['Id']?>"></a>
-	<p>
-		<? echo $wedge['Title']?>
-	</p>
+	<p><? echo $wedge['Title']?></p>
 	<table class="playerTable">
 	<tfoot>
 		<tr class="firstRow">
 			<th class="firstColumn">
-				<input type="text" size="40" value="Insert the new player <? echo $_SESSION['phase3']['dataType']; ?> here..." name="userId"/>
+				<input type="text" size="40" value="<? echo $TEXT['newGamePhase3_2-input_1_1']." ".$_SESSION['phase3']['dataType']." ".$TEXT['newGamePhase3_2-input_1_2']; ?>" name="userId"/>
 			</th>
 			<th class="secondColumn">
-				<button type="button" class="addPlayer" >Add</button>
+				<button type="button" class="addPlayer" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
 			</th>
 			<th class="thirdColumn"></th>
 		</tr>
@@ -60,17 +59,17 @@ if( isSet( $_SESSION['phase2'] ))
 ?>
 		<tr>
 			<td class="firstColumn"><? echo $userId; ?></td>
-			<td class="secondColumn"><button type="button" class="removePlayer" >Delete</button></td>
-			<td class="thirdColumn"><button type="button" class="movePlayer" >Move to...</button></td>
+			<td class="secondColumn"><button type="button" class="removePlayer" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
+			<td class="thirdColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 		</tr>
 <?						
 				}
 			}
 			if( $emptyTable )
-				echo "<tr class=\"emptyRow\"><td colspan=\"3\">No players!</td></tr>";
+				echo "<tr class=\"emptyRow\"><td colspan=\"3\">".$TEXT['newGamePhase3_2-noPlayers_1']."</td></tr>";
 		}
 		else
-			echo "<tr class=\"emptyRow\"><td colspan=\"3\">No players!</td></tr>";
+			echo "<tr class=\"emptyRow\"><td colspan=\"3\">".$TEXT['newGamePhase3_2-noPlayers_1']."</td></tr>";
 ?>
 	</tbody>
 	</table>
@@ -84,16 +83,16 @@ if( isSet( $_SESSION['phase2'] ))
 }
 ?>
 <div id="nextPhaseButton">
-	<button type="button">I'm done with first phase!</button>
+	<button type="button"><? echo $TEXT['newGamePhase3_2-button_1']; ?></button>
 </div>
 <script type="text/javascript">
 	(function($) {
-		var userIdDefaultValue = "Insert the new player <? echo $_SESSION['phase3']['dataType']; ?> here...";
+		var userIdDefaultValue = "<? echo $TEXT['newGamePhase3_2-input_1_1']." ".$_SESSION['phase3']['dataType']." ".$TEXT['newGamePhase3_2-input_1_2']; ?>";
 		$(document).ready( function() 
 		{
-			var deleteButton = "<button type=\"button\" class=\"removePlayer\" >Delete</button>";
-			var moveButton = "<button type=\"button\" class=\"movePlayer\" >Move to...</button>";
-			var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\">No players!</td></tr>";
+			var deleteButton = "<button type=\"button\" class=\"removePlayer\" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button>";
+			var moveButton = "<button type=\"button\" class=\"movePlayer\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
+			var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\"><? echo $TEXT['newGamePhase3_2-noPlayers_1']; ?></td></tr>";
 			
 			var generateWedgesList = function( row ) 
 			{
@@ -212,7 +211,7 @@ if( isSet( $_SESSION['phase2'] ))
 			});
 			$('#changeDataType a').click( function()
 			{
-				if( confirm('If you continue, all data inserted about users will be lost. Are you sure?'))
+				if( confirm('<? echo $TEXT['newGamePhase3_2-confirm_1']; ?>'))
 				{
 					var dataString = "usingAjax=true&comingPhase=3&destinationPhase=3&numberOfUsers=0";
 					var url = "./createNewGame.php";
@@ -268,21 +267,31 @@ if( isSet( $_SESSION['phase2'] ))
 				userId = "";
 			var errorStr = "";
 			if( !userId )
-				errorStr += " User identifier missing.";
+			{
+				if( dataType == "username" )
+					errorStr += " <? echo $TEXT['newGamePhase3_2-username_1']; ?>";
+				else
+					errorStr += " <? echo $TEXT['newGamePhase3_2-mail_1']; ?>";
+			}
 			else
 			{
 				if( dataType == "username" )
 				{
 					if( userId.length < 6 || userId.length > 12 )
-						errorStr += " <? echo $TEXT['main-username_2']; ?>";
+						errorStr += " <? echo $TEXT['newGamePhase3_2-username_2']; ?>";
 					else if( !userId_re.test( userId ))
-						errorStr += " <? echo $TEXT['main-username_3']; ?>";
+						errorStr += " <? echo $TEXT['newGamePhase3_2-username_3']; ?>";
 				}
 				else 
 					if( !userId_re.test( userId ))
-						errorStr += " <? echo $TEXT['main-mail_2']; ?>";
+						errorStr += " <? echo $TEXT['newGamePhase3_2-mail_2']; ?>";
 				if( isUnique( userId ))
-					errorStr += " User identifier already used";
+				{
+					if( dataType == "username" )
+						errorStr += " <? echo $TEXT['newGamePhase3_2-username_4']; ?>";
+					else
+						errorStr += " <? echo $TEXT['newGamePhase3_2-mail_3']; ?>";
+				}
 			}
 			
 			if( errorStr )
@@ -316,7 +325,7 @@ if( isSet( $_SESSION['phase2'] ))
 				var row = $('div.playerList table.playerTable tbody tr.emptyRow:first');
 				var errorDiv = $(row).parents('div.playerList').find('div.errorClass');
 				var anchor = $(row).parents('div.playerList').find('a').attr('name');
-				$('strong', $(errorDiv)).html( "No players specified for this wedge" );
+				$('strong', $(errorDiv)).html("<? echo $TEXT['newGamePhase3_2-noPlayers_2']; ?>");
 				$(errorDiv).slideDown();
 				window.location.href = "./createNewGame.php#" + anchor;
 				return false;

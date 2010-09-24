@@ -1,6 +1,6 @@
 <? include "newGameBar.php"; ?>
 <div id="divPhase1" class="phase1 phases">
-	<p>As a first thing you should decide the timing for the three phases of the game</p>
+	<p><? echo $TEXT['newGamePhase1-p_1']; ?></p>
 	<form
 		name="phase1Form"
 		action="./createNewGame.php"
@@ -9,14 +9,14 @@
 		<input type="hidden" name="usingAjax" value="false" />
 		<input type="hidden" name="destinationPhase" value="<? echo ( $_SESSION['phaseNumber'] + 1 ); ?>" />
 		<input type="hidden" name="comingPhase" value="<? echo $_SESSION['phaseNumber']; ?>" />
-	<table class="phaseTable">
+	<table class="tablePhase1_2">
 	<tbody>
 		<tr>
 			<td class="firstCol">
-				<h1>First phase: learn about a wedge</h1>
+				<h1><? echo $TEXT['newGamePhase1-h_1']; ?></h1>
 				<p></p>
 				<br />
-				<div id="slider1">
+				<div id="slider1" class="slider">
 					<p><strong></strong></p>
 					<input type="hidden" name="time1" value="" />
 				</div>
@@ -26,7 +26,7 @@
 	{			
 ?>
 				<div id="advancedButton">
-					<a class="link">Basic options</a>
+					<a class="link"><? echo $TEXT['newGamePhase1-a_1']; ?></a>
 					<input type="hidden" name="advanced" value="true" />
 				</div>
 <?	
@@ -34,7 +34,7 @@
 	else {
 ?>
 				<div id="advancedButton">
-					<a class="link">Advanced options</a>
+					<a class="link"><? echo $TEXT['newGamePhase1-a_2']; ?></a>
 					<input type="hidden" name="advanced" value="false" />
 				</div>
 <?
@@ -46,57 +46,57 @@
 		echo "style=\"display:block\" ";
 ?>				
 				>
-					<p>Time before complete wedge information is shown to players</p>
-					<div id="slider2">
+					<p><? echo $TEXT['newGamePhase1-p_2']; ?></p>
+					<div id="slider2" class="slider">
 						<p><strong></strong></p>
 						<input type="hidden" name="time2" value="" />
 					</div>
 					<br />
-					<p>Time before it is possible to submit a solution to the problem players have to solve</p>
-					<div id="slider3">
+					<p><? echo $TEXT['newGamePhase1-p_3']; ?></p>
+					<div id="slider3" class="slider">
 						<p><strong></strong></p>
 						<input type="hidden" name="time3" value="" />
 					</div>
 				</div>
 			</td>
 			<td class="secondCol">
-				<h1>What happens during this phase?</h1>
-				<p>In this part of the game every group of player is assigned a wedge, has to solve a problem linked to the wedge, and has to summarize in a poster the pros and cons of the wedge</p>
+				<h1><? echo $TEXT['newGamePhase1-h_2']; ?></h1>
+				<p><? echo $TEXT['newGamePhase1-p_4']; ?></p>
 			</td>
 		</tr>
 		<tr>
 			<td class="firstCol">
-				<h1>Show and tell</h1>
-				<p>Pick the time for a single presentation</p>
-				<div id="slider4">
+				<h1><? echo $TEXT['newGamePhase1-h_3']; ?></h1>
+				<p><? echo $TEXT['newGamePhase1-p_5']; ?></p>
+				<div id="slider4" class="slider">
 					<p><strong></strong></p>
 					<input type="hidden" name="time4" value="" />
 				</div>
 			</td>
 			<td class="secondCol">
-				<h1>What happens during this phase?</h1>
-				<p>In this part of the game every group presents the poster prepared in the previous phase</p>
+				<h1><? echo $TEXT['newGamePhase1-h_2']; ?></h1>
+				<p><? echo $TEXT['newGamePhase1-p_6']; ?></p>
 			</td>
 		</tr>
 		<tr>
 			<td class="firstCol">
-				<h1>Discuss and plan</h1>
+				<h1><? echo $TEXT['newGamePhase1-h_5']; ?></h1>
 				<p></p>
 				<br />
-				<div id="slider5">
+				<div id="slider5" class="slider">
 					<p><strong></strong></p>
 					<input type="hidden" name="time5" value="" />
 				</div>
 			</td>
 			<td class="secondCol">
-				<h1>What happens during this phase?</h1>
-				<p>In this part new groups are created and they have to come up with a plan including the studied wedges Votations will follow</p>
+				<h1><? echo $TEXT['newGamePhase1-h_2']; ?></h1>
+				<p><? echo $TEXT['newGamePhase1-p_7']; ?></p>
 			</td>
 		</tr>
 	</tbody>					
 	</table>					
 	<div id="nextPhaseButton">
-		<button type="button">I'm done with durations!</button>
+		<button type="button"><? echo $TEXT['newGamePhase1-button_1']; ?></button>
 	</div>
 	</form>
 </div>
@@ -104,98 +104,87 @@
 (function($) {
 	$(document).ready( function() 
 	{
-		$("#slider1").slider({
-			range: "min",
-			value: 
+
+		var slider = $('div.slider');
+		$(slider).each( function()
+		{
+			switch( $(this).attr('id'))
+			{
+				case "slider1":
+					minValue = 10;
+					maxValue = 100;
+					sliderValue =
 <?	
 	if( isSet( $_SESSION['phase1'] ))
-		echo $_SESSION['phase1']['time1'].", ";
+		echo $_SESSION['phase1']['time1']."; ";
 	else
-		echo "55, ";
-?>
-			min: 10,
-			max: 100,
-			slide: function(event, ui) {
-				$('#slider1 p strong').text( ui.value + ' min');
-				$('#slider1 input[type="hidden"]').attr("value", ui.value );
-			}
-		});
-		$("#slider2").slider({
-			range: "min",
-			value: 
+		echo "55; ";
+?>			
+					break;
+				case "slider2":
+					minValue = 5;
+					maxValue = 50;
+					sliderValue =
 <?	
 	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
-		echo $_SESSION['phase1']['time2'].", ";
+		echo $_SESSION['phase1']['time2']."; ";
 	else
-		echo "25, ";
-?>
-			min: 5,
-			max: 50,
-			slide: function(event, ui) {
-				$('#slider2 p strong').text( ui.value + ' min');
-				$('#slider2 input[type="hidden"]').attr("value", ui.value );
-			}
-		});
-		$("#slider3").slider({
-			range: "min",
-			value: 
+		echo "25; ";
+?>				
+					break;
+				case "slider3":
+					minValue = 5;
+					maxValue = 50;
+					sliderValue =
 <?	
 	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
-		echo $_SESSION['phase1']['time3'].", ";
+		echo $_SESSION['phase1']['time3']."; ";
 	else
-		echo "25, ";
-?>
-			min: 5,
-			max: 50,
-			slide: function(event, ui) {
-				$('#slider3 p strong').text( ui.value + ' min');
-				$('#slider3 input[type="hidden"]').attr("value", ui.value );
-			}
-		});
-		$("#slider4").slider({
-			range: "min",
-			value: 
+		echo "25; ";
+?>			
+					break;
+				case "slider4":
+					minValue = 1;
+					maxValue = 10;
+					sliderValue =
 <?	
 	if( isSet( $_SESSION['phase1'] ))
-		echo $_SESSION['phase1']['time4'].", ";
+		echo $_SESSION['phase1']['time4']."; ";
 	else
-		echo "5, ";
-?>			
-			min: 1,
-			max: 10,
-			slide: function(event, ui) {
-				$('#slider4 p strong').text( ui.value + ' min');
-				$('#slider4 input[type="hidden"]').attr("value", ui.value );
-			}
-		});
-		$("#slider5").slider({
-			range: "min",
-			value:
+		echo "5; ";
+?>				
+					break;
+				case "slider5":
+					minValue = 10;
+					maxValue = 300;
+					sliderValue =
 <?	
 	if( isSet( $_SESSION['phase1'] ))
-		echo $_SESSION['phase1']['time5'].", ";
+		echo $_SESSION['phase1']['time5']."; ";
 	else
-		echo "150, ";
-?>			
-			min: 10,
-			max: 300,
-			slide: function(event, ui) {
-				$('#slider5 p strong').text( ui.value + ' min');
-				$('#slider5 input[type="hidden"]').attr("value", ui.value );
+		echo "150; ";
+?>					
+					break;
 			}
+			$(this).slider({
+				range: "min",
+				value: sliderValue,
+				min: minValue,
+				max: maxValue,
+				slide: function( event, ui ) {
+					$('p strong', $(this)).text( ui.value + ' min');
+					$('input[type="hidden"]', $(this)).attr("value", ui.value );
+				}
+			});
 		});
 		
-		$('#slider1 p strong').text( $('#slider1').slider("value") + ' min' );
-		$('#slider1 input[type="hidden"]').attr("value", $('#slider1').slider("value"));
-		$('#slider2 p strong').text( $('#slider2').slider("value") + ' min' );
-		$('#slider2 input[type="hidden"]').attr("value", $('#slider2').slider("value"));
-		$('#slider3 p strong').text( $('#slider3').slider("value") + ' min' );
-		$('#slider3 input[type="hidden"]').attr("value", $('#slider3').slider("value"));
-		$('#slider4 p strong').text( $('#slider4').slider("value") + ' min' );
-		$('#slider4 input[type="hidden"]').attr("value", $('#slider4').slider("value"));
-		$('#slider5 p strong').text( $('#slider5').slider("value") + ' min' );
-		$('#slider5 input[type="hidden"]').attr("value", $('#slider5').slider("value"));
-
+		$('p strong', $(slider)).each( function() {
+			$(this).text( $(this).parents('div.slider').slider("value") + ' min' );
+		});
+		$('input[type="hidden"]', $(slider)).each( function(){
+			$(this).attr("value", $(this).parents('div.slider').slider("value"));
+		});
+		
 		$('#advancedButton a').click( function() {
 			if( $('#advancedOptions').css('display') == 'none' )
 			{
