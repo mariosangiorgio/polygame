@@ -21,15 +21,15 @@
 	</p>
 </form>
 <?
-if( isSet( $_SESSION['phase2'] ))
-{
-	foreach( $_SESSION['phase2']['wedges'] as $keyValue => $wedgeId )
+	if( isSet( $_SESSION['phase2'] ))
 	{
-		$query = "SELECT `Wedge ID` as Id, Title ". 
-			 "FROM Wedges ".
-			 "WHERE Language='$lang' AND `Wedge ID`=".$wedgeId;
-		$data = mysql_query( $query, $connection );
-		$wedge = mysql_fetch_array( $data )
+		foreach( $_SESSION['phase2']['wedges'] as $keyValue => $wedgeId )
+		{
+			$query = "SELECT `Wedge ID` as Id, Title ". 
+				 "FROM Wedges ".
+				 "WHERE Language='$lang' AND `Wedge ID`=".$wedgeId;
+			$data = mysql_query( $query, $connection );
+			$wedge = mysql_fetch_array( $data )
 ?>
 <div class="playerList ui-corner-all">
 	<a name="<? echo $wedge['Id']?>"></a>
@@ -41,35 +41,35 @@ if( isSet( $_SESSION['phase2'] ))
 				<input type="text" size="40" value="<? echo $TEXT['newGamePhase3_2-input_1_1']." ".$_SESSION['phase3']['dataType']." ".$TEXT['newGamePhase3_2-input_1_2']; ?>" name="userId"/>
 			</th>
 			<th class="secondColumn">
-				<button type="button" class="addPlayer" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
+				<button type="button" class="addButton" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
 			</th>
 			<th class="thirdColumn"></th>
 		</tr>
 	</tfoot>
 	<tbody>
 <?
-		if( isSet( $_SESSION['phase3']['users'] ))
-		{
-			$emptyTable = true;
-			foreach( $_SESSION['phase3']['users'] as $userId => $user )
+			if( isSet( $_SESSION['phase3']['users'] ))
 			{
-				if( $user['wedgeId'] == $wedge['Id'] )
+				$emptyTable = true;
+				foreach( $_SESSION['phase3']['users'] as $userId => $user )
 				{
-					$emptyTable = false;
+					if( $user['wedgeId'] == $wedge['Id'] )
+					{
+						$emptyTable = false;
 ?>
 		<tr>
 			<td class="firstColumn"><? echo $userId; ?></td>
-			<td class="secondColumn"><button type="button" class="removePlayer" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
-			<td class="thirdColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
+			<td class="secondColumn"><button type="button" class="removeButton" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
+			<td class="thirdColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 		</tr>
 <?						
+					}
 				}
+				if( $emptyTable )
+					echo "<tr class=\"emptyRow\"><td colspan=\"3\">".$TEXT['newGamePhase3_2-noPlayers_1']."</td></tr>";
 			}
-			if( $emptyTable )
+			else
 				echo "<tr class=\"emptyRow\"><td colspan=\"3\">".$TEXT['newGamePhase3_2-noPlayers_1']."</td></tr>";
-		}
-		else
-			echo "<tr class=\"emptyRow\"><td colspan=\"3\">".$TEXT['newGamePhase3_2-noPlayers_1']."</td></tr>";
 ?>
 	</tbody>
 	</table>
@@ -79,8 +79,8 @@ if( isSet( $_SESSION['phase2'] ))
 	</div>
 </div>
 <?
+		}
 	}
-}
 ?>
 <div id="nextPhaseButton">
 	<button type="button"><? echo $TEXT['newGamePhase3_2-button_1']; ?></button>
@@ -90,8 +90,8 @@ if( isSet( $_SESSION['phase2'] ))
 		var userIdDefaultValue = "<? echo $TEXT['newGamePhase3_2-input_1_1']." ".$_SESSION['phase3']['dataType']." ".$TEXT['newGamePhase3_2-input_1_2']; ?>";
 		$(document).ready( function() 
 		{
-			var deleteButton = "<button type=\"button\" class=\"removePlayer\" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button>";
-			var moveButton = "<button type=\"button\" class=\"movePlayer\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
+			var deleteButton = "<button type=\"button\" class=\"removeButton\" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button>";
+			var moveButton = "<button type=\"button\" class=\"moveButton\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
 			var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\"><? echo $TEXT['newGamePhase3_2-noPlayers_1']; ?></td></tr>";
 			
 			var generateWedgesList = function( row ) 
@@ -101,11 +101,11 @@ if( isSet( $_SESSION['phase2'] ))
 				var wedgesDiv = "<div class=\"wedgesList\">";
 				$(wedges).each( function() {
 					if( $(this).text() != currentWedge )
-						wedgesDiv += "<button type=\"button\" class=\"movePlayer\">" + $(this).text() + "</button>";
+						wedgesDiv += "<button type=\"button\" class=\"moveButton\">" + $(this).text() + "</button>";
 				});
 				wedgesDiv += "</div>";
 				$('td.thirdColumn', $(row)).append( wedgesDiv );
-				$('td.thirdColumn button.movePlayer', $(row)).button();
+				$('td.thirdColumn button.moveButton', $(row)).button();
 				$('td.thirdColumn div.wedgesList button', $(row)).button().click( function() {
 					movePlayer( this );
 				});
@@ -133,17 +133,17 @@ if( isSet( $_SESSION['phase2'] ))
 					$(destinationTable).html('');
 				$(destinationTable).append(row);
 				
-				$('button.removePlayer').button( {
+				$('button.removeButton').button( {
 					icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 				});
 				generateWedgesList($('tr:last', $(destinationTable)));
 			};
 			
-			$('button.movePlayer').each( function() {
+			$('button.moveButton').each( function() {
 				generateWedgesList( $(this).parents('tr'));
 			});
 			
-			$('button.addPlayer').click( function()
+			$('button.addButton').click( function()
 			{
 				var table = $(this).parents('table');
 				var tbody = $('tbody', $(table));
@@ -160,17 +160,17 @@ if( isSet( $_SESSION['phase2'] ))
 						$(tbody).html('');
 					$(tbody).append( row );
 					
-					$('button.removePlayer').button( {
+					$('button.removeButton').button( {
 						icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 					});
-					$('button.movePlayer').button();	
+					$('button.moveButton').button();	
 					
 					generateWedgesList($('tr:last', $(tbody)));
 					
 					$('input[name="userId"]', $(tfoot)).attr('value', userIdDefaultValue );
 				}
 			});
-			$('table.playerTable tbody td.secondColumn button.removePlayer').live('click', function()
+			$('table.playerTable tbody td.secondColumn button.removeButton').live('click', function()
 			{
 				var table = $(this).parents('table');
 				var tbody = $(this).parents('tbody');
@@ -180,22 +180,22 @@ if( isSet( $_SESSION['phase2'] ))
 					$(table).append( emptyRow );
 			});
 			$('table.playerTable tbody td.thirdColumn').live('mouseover', function() {
-				$('button.movePlayer:first', $(this)).addClass('ui-state-hover');
+				$('button.moveButton:first', $(this)).addClass('ui-state-hover');
 				$(this).find('div.wedgesList:hidden').show();
 				return false;
 			});
 			$('table.playerTable tbody td.thirdColumn').live('mouseout', function() {
-				$('button.movePlayer:first', $(this)).removeClass('ui-state-hover');
+				$('button.moveButton:first', $(this)).removeClass('ui-state-hover');
 				$(this).find('div.wedgesList:visible').hide();
 				return false;
 			});
-			$('button.addPlayer').button( {
+			$('button.addButton').button( {
 				icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 			});
-			$('button.removePlayer').button( {
+			$('button.removeButton').button( {
 				icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 			});
-			$('button.movePlayer').button();
+			$('button.moveButton').button();
 			
 			$('input[name="userId"]').click( function() {
 				if( $(this).attr('value') == userIdDefaultValue )
