@@ -246,24 +246,6 @@
 	padding: 1ex 0;
 	vertical-align: middle;
 }
-.addPlayer .ui-icon {
-	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
-	background-position: 0px -192px;
-}
-.removePlayer .ui-icon {
-	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
-	background-position: -32px -192px;
-}
-.addPlayer span.ui-button-text, .removePlayer span.ui-button-text , .movePlayer span.ui-button-text  {
-	font-size: 0.9em;
-	line-height: 0.9em;
-}
-.movePlayer .ui-state-over {
-	background:url("images/ui-bg_glass_80_d7ebf9_1x400.png") repeat-x scroll 50% 50% #D7EBF9;
-	border:1px solid #AED0EA;
-	color:#2779AA;
-	font-weight:bold;
-}
 .wedgesList {
 	display: none;
 	margin-left: 124px;

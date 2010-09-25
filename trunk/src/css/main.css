@@ -10,7 +10,6 @@ body {
 	text-align: left;
 	background: #fff;
 	min-width: 1024px;
-	min-height: 768px;
 }
 h1 {
 	font-size: 18px;
@@ -225,4 +224,47 @@ a {
 	font-style: italic;
 	cursor: pointer;
 	text-decoration: underline;
+}
+.addButton .ui-icon {
+	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
+	background-position: 0px -192px;
+}
+.modifyButton .ui-icon {
+	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
+	background-position: -64px -112px;
+}
+.removeButton .ui-icon {
+	background-image: url("./ui-lightness/images/ui-icons_2e83ff_256x240.png");
+	background-position: -32px -192px;
+}
+.addButton span.ui-button-text, 
+.modifyButton span.ui-button-text , 
+.moveButton span.ui-button-text ,
+.removeButton span.ui-button-text {
+	font-size: 0.9em;
+	line-height: 0.9em;
+}
+.moveButton .ui-state-over {
+	background:url("images/ui-bg_glass_80_d7ebf9_1x400.png") repeat-x scroll 50% 50% #D7EBF9;
+	border:1px solid #AED0EA;
+	color:#2779AA;
+	font-weight:bold;
+}
+.summaryTable {
+	width: 80%;
+	margin: 2% 10%;
+	border-collapse: collapse;
+}
+.summaryTable th {
+	border-bottom: 2px solid white;
+	padding: 1em;
+	font-size: 1.1em;
+	font-weight: normal;
+	font-style: italic;
+	text-align: center;
+}
+.summaryTable td {
+	border-bottom: 2px solid white;
+	text-align: let;
+	text-indent: 2em;
 }

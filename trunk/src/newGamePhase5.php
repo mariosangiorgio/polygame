@@ -13,7 +13,7 @@
 ?>
 			<tr>
 				<td class="firstColumn"><? echo $_SESSION['phase5']['voters'][$counter]; ?></td>
-				<td class="secondColumn"><button type="button" class="removePlayer" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
+				<td class="secondColumn"><button type="button" class="removeButton" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
 			</tr>
 <?
 		}
@@ -42,7 +42,7 @@
 					<input type="text"  size="40" value="<? echo $TEXT['newGamePhase5-input_1']; ?>" name="newVoter" />
 				</td>			
 				<td class="secondColumn">
-					<button type="button" class="addPlayer" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
+					<button type="button" class="addButton" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
 				</td>
 			</tr>
 			<tr>
@@ -66,10 +66,10 @@
 	$(document).ready( function() 
 	{
 		var voterDefaultValue = "<? echo $TEXT['newGamePhase5-input_1']; ?>";
-		var deleteButton = "<button type=\"button\" class=\"removePlayer\" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button>";
+		var deleteButton = "<button type=\"button\" class=\"removeButton\" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button>";
 		var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\"><? echo $TEXT['newGamePhase5-noVoters_1']; ?></td></tr>";
 		
-		$('div.addGroup button.addPlayer').click( function()
+		$('div.addGroup button.addButton').click( function()
 		{
 			var newVoterName = $('div.addGroup input[name="newVoter"]').val();
 			var errorStr = checkVoterName( newVoterName );
@@ -84,7 +84,7 @@
 					$('div.playerList tbody').html('');
 				$('div.playerList tbody').append( row );
 				
-				$('button.removePlayer').button( {
+				$('button.removeButton').button( {
 					icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 				});
 			}
@@ -94,7 +94,7 @@
 				$('div.addGroup div.errorClass').slideDown();
 			}
 		});
-		$('table.playerTable tbody td.secondColumn button.removePlayer').live('click', function()
+		$('table.playerTable tbody td.secondColumn button.removeButton').live('click', function()
 		{
 			var table = $(this).parents('table');
 			var tbody = $(this).parents('tbody');
@@ -103,10 +103,10 @@
 			if( !$('tr', $(tbody)).length )
 				$(table).append( emptyRow );
 		});
-		$('button.addPlayer').button( {
+		$('button.addButton').button( {
 			icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 		});
-		$('button.removePlayer').button( {
+		$('button.removeButton').button( {
 			icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 		});
 		$('div.addGroup input[name="newVoter"]').focus( function() {
@@ -129,7 +129,7 @@
 			}
 			else
 			{
-				var dataString = "usingAjax=true&comingPhase=5&destinationPhase=5";
+				var dataString = "usingAjax=true&comingPhase=5&destinationPhase=6";
 				var voterIndex = 0;
 				$(rows).each( function() 
 				{
@@ -142,7 +142,7 @@
 				var dataToSend = dataString;
 				var typeOfDataToReceive = 'html';
 				var callback = function( response ) {
-					$("#wrapper").html( response );
+					window.location.href = "./summary.php";
 				};
 				$.post( url, dataToSend, callback, typeOfDataToReceive );
 			}

@@ -28,7 +28,7 @@
 ?>
 			<tr>
 				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
-				<td class="secondColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
+				<td class="secondColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
 				$userIndex++;
@@ -38,7 +38,7 @@
 ?>			
 			<tr>
 				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
-				<td class="secondColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
+				<td class="secondColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
 				$remainingUsers--;
@@ -77,7 +77,7 @@
 ?>
 			<tr>
 				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
-				<td class="secondColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
+				<td class="secondColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
 				$userIndex++;
@@ -87,7 +87,7 @@
 ?>			
 			<tr>
 				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
-				<td class="secondColumn"><button type="button" class="movePlayer" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
+				<td class="secondColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
 				$remainingUsers--;
@@ -109,7 +109,7 @@
 					<input type="text"  size="40" value="<? echo $TEXT['newGamePhase4-input_1']; ?>" name="newGroupName" />
 				</td>			
 				<td class="secondColumn">
-					<button type="button" class="addPlayer" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
+					<button type="button" class="addButton" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
 				</td>
 			</tr>
 			<tr>
@@ -131,7 +131,7 @@
 	(function($) {
 		$(document).ready( function() 
 		{
-			var moveButton = "<button type=\"button\" class=\"movePlayer\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
+			var moveButton = "<button type=\"button\" class=\"moveButton\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
 			var groupDefaultValue = "<? echo $TEXT['newGamePhase4-input_1']; ?>";
 			
 			var generateGroupsList = function( row ) 
@@ -141,17 +141,17 @@
 				var groupsDiv = "<div class=\"groupsList\">";
 				$(groups).each( function() {
 					if( $(this).text() != currentGroup )
-						groupsDiv += "<button type=\"button\" class=\"movePlayer\">" + $(this).text() + "</button>";
+						groupsDiv += "<button type=\"button\" class=\"moveButton\">" + $(this).text() + "</button>";
 				});
 				groupsDiv += "</div>";
 				$('td.secondColumn', $(row)).append( groupsDiv );
-				$('td.secondColumn button.movePlayer', $(row)).button();
+				$('td.secondColumn button.moveButton', $(row)).button();
 				$('td.secondColumn div.groupsList button', $(row)).button().click( function() {
-					movePlayer( this );
+					moveButton( this );
 				});
 			}
 			
-			var movePlayer = function( buttonElement ) 
+			var moveButton = function( buttonElement ) 
 			{
 				var originTable = $(buttonElement).parents('tbody');
 				var originGroup = $(originTable).parents('div.playerList').find('p').text();
@@ -205,23 +205,23 @@
 				changeGroupName( $(this));
 			});
 			
-			$('button.movePlayer').each( function() {
+			$('button.moveButton').each( function() {
 				generateGroupsList( $(this).parents('tr'));
 			});
 			$('table.playerTable tbody td.secondColumn').live('mouseover', function() {
-				$('button.movePlayer:first', $(this)).addClass('ui-state-hover');
+				$('button.moveButton:first', $(this)).addClass('ui-state-hover');
 				$(this).find('div.groupsList:hidden').show();
 				return false;
 			});
 			$('table.playerTable tbody td.secondColumn').live('mouseout', function() {
-				$('button.movePlayer:first', $(this)).removeClass('ui-state-hover ui-state-focus');	
+				$('button.moveButton:first', $(this)).removeClass('ui-state-hover ui-state-focus');	
 				$(this).find('div.groupsList:visible').hide();
 				return false;
 			});
-			$('div.addGroup button.addPlayer').button( {
+			$('div.addGroup button.addButton').button( {
 				icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 			});
-			$('div.addGroup button.addPlayer').click( function()
+			$('div.addGroup button.addButton').click( function()
 			{
 				var newGroupName = $('div.addGroup input[name="newGroupName"]').val();
 				var errorStr = checkGroupName( newGroupName, $('div.addGroup'));
@@ -237,9 +237,9 @@
 					
 					var groupsList = $('div.playerList table.playerTable tbody td.secondColumn div.groupsList');
 					$(groupsList).each( function() {
-						$(this).append('<button type="button" class="movePlayer">' + newGroupName + '</button>');
-						$('button.movePlayer:last', $(this)).button().click( function() {
-							movePlayer( this );
+						$(this).append('<button type="button" class="moveButton">' + newGroupName + '</button>');
+						$('button.moveButton:last', $(this)).button().click( function() {
+							moveButton( this );
 						});
 					});
 				}

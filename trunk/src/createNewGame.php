@@ -74,6 +74,11 @@
 		
 		include "./backend/saveGameData.php";
 	}
+	if( $_SESSION['phaseNumber'] == 6 )
+	{
+		$_SESSION['phaseNumber']--;
+		exit();
+	}
 	if(( isSet( $_POST['usingAjax'] ) && $_POST['usingAjax'] == 'true' ))
 		include "newGamePhase".$_SESSION['phaseNumber'].".php";
 	else

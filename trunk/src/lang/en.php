@@ -172,6 +172,7 @@
 	$TEXT['newGamePhase3_2-input_1_2'] = "here...";
 	$TEXT['newGamePhase3_2-button_add'] = "Add";
 	$TEXT['newGamePhase3_2-button_move'] = "Move to...";
+	$TEXT['newGamePhase3_2-button_modify'] = "Modify";
 	$TEXT['newGamePhase3_2-button_delete'] = "Delete";
 	$TEXT['newGamePhase3_2-button_1'] = "I'm done with first phase!";
 	$TEXT['newGamePhase3_2-noPlayers_1'] = "No players!";
