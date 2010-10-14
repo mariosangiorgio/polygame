@@ -122,25 +122,25 @@
 ?>			
 					break;
 				case "slider2":
-					minValue = 5;
+					minValue = 0;
 					maxValue = 50;
 					sliderValue =
 <?	
 	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
 		echo $_SESSION['phase1']['time2']."; ";
 	else
-		echo "25; ";
+		echo "0; ";
 ?>				
 					break;
 				case "slider3":
-					minValue = 5;
+					minValue = 0;
 					maxValue = 50;
 					sliderValue =
 <?	
 	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
 		echo $_SESSION['phase1']['time3']."; ";
 	else
-		echo "25; ";
+		echo "0; ";
 ?>			
 					break;
 				case "slider4":

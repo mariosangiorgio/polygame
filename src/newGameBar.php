@@ -10,14 +10,14 @@
 			for="phase<? echo $index; ?>"
 <? 		
 		$class = "ui-button ui-widget ui-state-default ui-button-text-only ";
-		if( $_SESSION['phaseNumber'] >= $index )
-		{
+		if( $_SESSION['phaseNumber'] > $index )
 			$class = $class."reachable ";
+		else 
+		{
 			if( $_SESSION['phaseNumber'] == $index ) 
 				$class = $class."ui-state-active "; 
-		}
-		else 
 			$class = $class."unreachable ";
+		}
 		
 		if( $index == 1 )
 			$class = $class."firstButtonBar ";

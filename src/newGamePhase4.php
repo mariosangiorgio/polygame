@@ -134,6 +134,35 @@
 			var moveButton = "<button type=\"button\" class=\"moveButton\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
 			var groupDefaultValue = "<? echo $TEXT['newGamePhase4-input_1']; ?>";
 			
+			var addGroup = function()
+			{
+				var newGroupName = $('div.addGroup input[name="newGroupName"]').val();
+				var errorStr = checkGroupName( newGroupName, $('div.addGroup'));
+				if( !errorStr )
+				{
+					$('div.addGroup div.errorClass strong').html('');
+					$('div.addGroup div.errorClass:visible').slideUp();
+					$('div.addGroup input[name="newGroupName"]').attr('value', groupDefaultValue );
+					var newGroupDiv = "<div class=\"playerList ui-corner-all\">" + "<p>" + newGroupName + 
+									"</p><table class=\"playerTable\"><tbody></tbody></table></div>";
+									
+					$('div.addGroup').before( newGroupDiv );
+					
+					var groupsList = $('div.playerList table.playerTable tbody td.secondColumn div.groupsList');
+					$(groupsList).each( function() {
+						$(this).append('<button type="button" class="moveButton">' + newGroupName + '</button>');
+						$('button.moveButton:last', $(this)).button().click( function() {
+							movePlayer( this );
+						});
+					});
+				}
+				else
+				{
+					$('div.addGroup div.errorClass strong').html( errorStr );
+					$('div.addGroup div.errorClass').slideDown();
+				}
+			};
+			
 			var generateGroupsList = function( row ) 
 			{
 				var currentGroup = $(row).parents('div.playerList').find('p').text();
@@ -147,11 +176,11 @@
 				$('td.secondColumn', $(row)).append( groupsDiv );
 				$('td.secondColumn button.moveButton', $(row)).button();
 				$('td.secondColumn div.groupsList button', $(row)).button().click( function() {
-					moveButton( this );
+					movePlayer( this );
 				});
-			}
+			};
 			
-			var moveButton = function( buttonElement ) 
+			var movePlayer = function( buttonElement ) 
 			{
 				var originTable = $(buttonElement).parents('tbody');
 				var originGroup = $(originTable).parents('div.playerList').find('p').text();
@@ -221,33 +250,8 @@
 			$('div.addGroup button.addButton').button( {
 				icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
 			});
-			$('div.addGroup button.addButton').click( function()
-			{
-				var newGroupName = $('div.addGroup input[name="newGroupName"]').val();
-				var errorStr = checkGroupName( newGroupName, $('div.addGroup'));
-				if( !errorStr )
-				{
-					$('div.addGroup div.errorClass strong').html('');
-					$('div.addGroup div.errorClass:visible').slideUp();
-					$('div.addGroup input[name="newGroupName"]').attr('value', groupDefaultValue );
-					var newGroupDiv = "<div class=\"playerList ui-corner-all\">" + "<p>" + newGroupName + 
-									"</p><table class=\"playerTable\"><tbody></tbody></table></div>";
-									
-					$('div.addGroup').before( newGroupDiv );
-					
-					var groupsList = $('div.playerList table.playerTable tbody td.secondColumn div.groupsList');
-					$(groupsList).each( function() {
-						$(this).append('<button type="button" class="moveButton">' + newGroupName + '</button>');
-						$('button.moveButton:last', $(this)).button().click( function() {
-							moveButton( this );
-						});
-					});
-				}
-				else
-				{
-					$('div.addGroup div.errorClass strong').html( errorStr );
-					$('div.addGroup div.errorClass').slideDown();
-				}
+			$('div.addGroup button.addButton').click( function() {
+				addGroup();
 			});
 			$('div.addGroup input[name="newGroupName"]').focus( function() {
 				$(this).removeAttr('value');
@@ -255,6 +259,14 @@
 			$('div.addGroup input[name="newGroupName"]').blur( function() {
 				if( !$(this).attr('value'))
 					$(this).attr('value', groupDefaultValue );
+			});
+			$('div.addGroup input[name="newGroupName"]').keypress( function( event )
+			{
+				if( event.which == '13' )
+				{
+					addGroup();
+					$(this).val('');
+				}
 			});
 			$('#nextPhaseButton button[type="submit"]').button().click( function( event )
 			{

@@ -94,6 +94,33 @@
 			var moveButton = "<button type=\"button\" class=\"moveButton\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
 			var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\"><? echo $TEXT['newGamePhase3_2-noPlayers_1']; ?></td></tr>";
 			
+			var addPlayer = function( table )
+			{
+				var tbody = $('tbody', $(table));
+				var tfoot = $('tfoot', $(table));
+				
+				if( checkForm( tfoot ))
+				{
+					$(tfoot).parents('div.playerList').find('div.errorClass strong').html('');
+					$(tfoot).parents('div.playerList').find('div.errorClass:visible').slideUp();
+					var userId = $('input[name="userId"]', $(tfoot)).val();
+					var row = "<tr><td class=\"firstColumn\">" + userId + "</td><td class=\"secondColumn\">" + 
+							deleteButton + "</td>" + "<td class=\"thirdColumn\">" + moveButton + "</td></tr>";
+					if( !$('tr:not(.emptyRow)', $(tbody)).length )
+						$(tbody).html('');
+					$(tbody).append( row );
+					
+					$('button.removeButton').button( {
+						icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
+					});
+					$('button.moveButton').button();	
+					
+					generateWedgesList($('tr:last', $(tbody)));
+					
+					$('input[name="userId"]', $(tfoot)).attr('value', userIdDefaultValue );
+				}
+			
+			}
 			var generateWedgesList = function( row ) 
 			{
 				var currentWedge = $(row).parents('div.playerList').find('p').text();
@@ -143,33 +170,20 @@
 				generateWedgesList( $(this).parents('tr'));
 			});
 			
-			$('button.addButton').click( function()
+			$('button.addButton').click( function() {
+				addPlayer( $(this).parents('table'));
+			});
+			
+			
+			$('input[name="userId"]').keypress( function( event )
 			{
-				var table = $(this).parents('table');
-				var tbody = $('tbody', $(table));
-				var tfoot = $('tfoot', $(table));
-				
-				if( checkForm( tfoot ))
+				if( event.which == '13' )
 				{
-					$(tfoot).parents('div.playerList').find('div.errorClass strong').html('');
-					$(tfoot).parents('div.playerList').find('div.errorClass:visible').slideUp();
-					var userId = $('input[name="userId"]', $(tfoot)).val();
-					var row = "<tr><td class=\"firstColumn\">" + userId + "</td><td class=\"secondColumn\">" + 
-							deleteButton + "</td>" + "<td class=\"thirdColumn\">" + moveButton + "</td></tr>";
-					if( !$('tr:not(.emptyRow)', $(tbody)).length )
-						$(tbody).html('');
-					$(tbody).append( row );
-					
-					$('button.removeButton').button( {
-						icons: { primary: './ui-lightness/images/ui-icons_2e83ff_256x240.png'}
-					});
-					$('button.moveButton').button();	
-					
-					generateWedgesList($('tr:last', $(tbody)));
-					
-					$('input[name="userId"]', $(tfoot)).attr('value', userIdDefaultValue );
+					addPlayer( $(this).parents('table'));
+					$(this).val('');
 				}
 			});
+			
 			$('table.playerTable tbody td.secondColumn button.removeButton').live('click', function()
 			{
 				var table = $(this).parents('table');
