@@ -1,0 +1,57 @@
+/* Home page layout */
+#wrapper {
+	margin-top: 175px;
+	margin-bottom: 5%;
+	position: relative; 
+}
+#columnLeft {
+	float: left;
+	width: 60%;
+	margin: 0 5%;
+}
+#accordion {
+	margin: 4% 15%;
+	width: 70%;
+}
+#update {
+	margin-right: 15%;
+	text-align: right;
+}
+#columnRight {
+ 	float: left; 
+	width: 25%;
+	margin-top: 5%;
+}
+#login, #newAccount {
+	padding: 2% 2% 4% 2%;
+	background: #D7EBF9;
+	text-align: center;
+}
+.formTable {
+	margin: 5% 5%;
+	text-align: center;
+}
+.formTable  div {
+	margin: 2.5%;
+}
+.formTable  label {
+	float: left;
+}
+.formTable  input {
+	float: right;
+}
+.formTable  div.formButton {
+	text-align: center;
+	margin: 7%;
+}
+.formTable  div.formButton span {
+	line-height: 1em;
+}
+.roleButton {
+	text-align: center;
+}
+.roleButton button{
+	width: 75%;
+	height: 3em;
+	font-size: 1.2em;
+}
