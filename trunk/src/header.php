@@ -13,11 +13,11 @@
 		$height = "75px";
 	}
 	
-	if( $_SESSION['loggedIn'] == "yes" ) 
+	if( $gData['logged'] ) 
 	{
 ?>
 		<div id="name">
-			<? echo $TEXT['header-div_1'].", ".$_SESSION['username']."!" ?>
+			<? echo $TEXT['header-div_1'].", ".$gData['username']."!" ?>
 		</div>
 <?
 	}
@@ -30,7 +30,7 @@
 			<a href="<? echo $_SERVER['PHP_SELF'];?>?lang=it"><img src="images/it.png" /></a> 
 		</div>
 <?
-	if( $_SESSION['loggedIn'] == "yes" )
+	if( $gData['logged'] )
 	{
 ?>
 		<div id="logout">

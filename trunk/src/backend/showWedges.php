@@ -1,16 +1,9 @@
 <?php 
-	session_start();
 	include_once("../inc/db_connect.php");
-	include_once("utils.php");
+	include_once("../inc/init.php");
+	include_once("./utils.php");
 	
-	$query = "SELECT min(`Wedge ID`) as min, max(`Wedge ID`) as max FROM `Wedges`";
-	$result = mysql_query( $query, $connection );
-	$wedgeIdLimit = mysql_fetch_array( $result );
-	
-	$vector = generateRandomSequence( $wedgeIdLimit['min'], $wedgeIdLimit['max'] );
-	$lang = $_SESSION['lang'];	
-	
-	$query = "SELECT `Wedge ID` as id, Title, Summary, Image FROM Wedges WHERE Language='$lang'";
+	$query = "SELECT `Wedge ID` as id, Title, Summary, Image FROM Wedges WHERE Language='".$gData['lang']."';";
 	$result = mysql_query( $query, $connection );
 	
 	$counter = 0;
@@ -23,11 +16,13 @@
 		$counter++;
 	}
 	
+	$vector = generateRandomSequence( 0, $counter - 1 );
+	
 	$index = 0;
 	$result = array();
 	while( $counter > 0 )
 	{
-		$result['wedge'.$index] = $wedges[$vector[$index]-1];
+		$result['wedge'.$index] = $wedges[$vector[$index]];
 		$index++;
 		$counter--;
 	}

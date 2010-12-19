@@ -1,8 +1,6 @@
 <?php
-	include_once("../inc/common.php");
-	include_once '../lang/'.$lang_file;
 	include_once("../inc/db_connect.php");
-	include_once("./utils.php");
+	include_once("./inc/init.php");
 	
 	//Sanitizing inputs
 	$username = mysql_real_escape_string( $_POST['username']);
@@ -28,10 +26,7 @@
 			$response = array( 'code' => "402", 'form' => "newAccountForm", 'message' => $TEXT['main-mail_2'] );
 	}
 	if( $response )
-	{
-		$_SESSION['response'] = $response;
 		header("Location: ../index.php");
-	}
 	else
 	{
 		$query = "SELECT `username` FROM `Users` WHERE `username`='$username'";
@@ -53,9 +48,9 @@
 			if( $mailsend )
 			{
 				// Email correctly sended
-				$password = sha1( "polygame".$password );
+				$password = sha1( $gData['salt'].sha1( $gData['salt'].$password ));
 				$query = "INSERT INTO `Users` ( `username`, `role`, `password` )".
-						 "VALUES ( '$username', 'player', '".sha1( "polygame".$password )."' )";
+						 "VALUES ( '$username', 'player', '".$password."' )";
 				$result = mysql_query( $query, $connection );
 				if( !$result )
 					$response = array( 
@@ -75,15 +70,8 @@
 					'form' => "newAccountForm",
 					'message' => $TEXT['newUser-message_5'].' <i>'.$mail.'</i>' );
 		}
-		if( $_POST['usingAjax'] == "false" )
-		{
-			$_SESSION['response'] = $response;
-			header("Location: ../index.php ");
-		}
-		else if( $_POST['usingAjax'] == "true" )
-		{
-			$response = json_encode( $response );
-			echo $response;
-		}
+		
+		$response = json_encode( $response );
+		echo $response;
 	}
 ?>

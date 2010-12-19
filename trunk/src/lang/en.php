@@ -32,6 +32,8 @@
 	$TEXT['main-button_1'] = "Login";
 	$TEXT['main-button_2'] = "Cancel";
 	$TEXT['main-button_3'] = "Confirm";
+	$TEXT['main-button_4'] = "Create new game";
+	$TEXT['main-button_5'] = "Start to play";
 	$TEXT['main-js_1'] = "more info";
 	$TEXT['main-js_2'] = "An error occurred!";
 	$TEXT['main-username_1'] = "Username missing.";
@@ -118,12 +120,13 @@
 	*/
 	
 	$TEXT['newGamePhase1-p_1'] = "As a first thing you should decide the timing for the three phases of the game";
-	$TEXT['newGamePhase1-p_2'] = "Time before complete wedge information is shown to players";
-	$TEXT['newGamePhase1-p_3'] = "Time before it is possible to submit a solution to the problem players have to solve";
+	$TEXT['newGamePhase1-p_2'] = "Time to think about the wedge with very few hints";
+	$TEXT['newGamePhase1-p_3'] = "Time to make research about the wedge and make preliminary calculations";
 	$TEXT['newGamePhase1-p_4'] = "In this part of the game every group of player is assigned a wedge, has to solve a problem linked to the wedge, and has to summarize in a poster the pros and cons of the wedge";
 	$TEXT['newGamePhase1-p_5'] = "Pick the time for a single presentation";
 	$TEXT['newGamePhase1-p_6'] = "In this part of the game every group presents the poster prepared in the previous phase";
 	$TEXT['newGamePhase1-p_7'] = "In this part new groups are created and they have to come up with a plan including the studied wedges Votations will follow";
+	$TEXT['newGamePhase1-p_8'] = "Time to insert the numeric solution";
 	$TEXT['newGamePhase1-h_1'] = "First phase: learn about a wedge";
 	$TEXT['newGamePhase1-h_2'] = "What happens during this phase?";
 	$TEXT['newGamePhase1-h_3'] = "Show and tell";

@@ -1,7 +1,7 @@
 <?php 
-	include_once("./inc/common.php");
-	include_once 'lang/'.$lang_file;
 	include_once("./inc/db_connect.php");
+	include_once("./inc/init.php");
+	include_once("./lang/".$gData['langFile']);
 	include_once("./backend/utils.php");
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -11,7 +11,8 @@
 	<title><? echo $TEXT['main-page_title']; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="css/main.css" type="text/css" rel="stylesheet" />
-	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.4.custom.css" rel="stylesheet" />	
+	<link href="css/index.css" type="text/css" rel="stylesheet" />
+	<link href="css/ui-lightness/jquery-ui-1.8.4.custom.css" type="text/css" rel="stylesheet" />	
 	<script type="text/JavaScript" src="lib/jquery-1.4.1.min.js"></script>
 	<script type="text/Javascript" src="lib/jquery-ui-1.8.4.custom.min.js"></script> 
 	<script type="text/javascript"> 
@@ -23,7 +24,9 @@
 									autoHeight: false, 
 									animated: 'bounceslide' };
 			
-			$("#accordion").accordion( accordionOption );
+			$('#accordion').accordion( accordionOption );
+			
+			$('button').button();
 			
 			$('#update').click( function() 
 			{
@@ -59,21 +62,20 @@
 			
 			$('#login').find('form input:first').focus();
 			
-			$('#login').find('a').click( function() 
+			$('#login a.link').click( function() 
 			{
-				$('#login div').hide();
+				$('#login div.errorClass').hide();
 				$('#login').hide('blind');
-				$('#newAccount').show('blind', function() {
+				$('#newAccount').show('blind', function(){
 					$('#newAccount form').find('input:first').focus();
 				});
 			});
 			
-			$('#newAccount').find('a').click( function() 
+			$('#newAccount a.link').click( function() 
 			{
-				$('#newAccount div').hide();
+				$('#newAccount div.errorClass').hide();
 				$('#newAccount').hide('blind');
-				$('#login').show('blind', function() 
-				{
+				$('#login').show('blind', function(){
 					$('#login form').find('input:first').focus();
 				});
 			});
@@ -84,7 +86,6 @@
 				
 				if( checkForm( this ))
 				{
-					$('input[name="usingAjax"]', this ).val('true');
 					var $this = $(this);
 					var url = $this.attr('action');
 					var formName = $this.attr('name');
@@ -131,9 +132,6 @@
 				}
 				return false;
 			});
-			$('#largeButton').click( function() {
-				window.location.href = $('a', $(this)).attr('href');
-			})
 		});
 	})(jQuery);
 	
@@ -225,69 +223,63 @@
 		include "header.php"; 
 	?>
 	<div id="wrapper">
-		<div class="columnLeft">
-			<div class="top">
+		<div id="columnLeft">
+			<div>
 				<h1><? echo $TEXT['main-h1_1']; ?></h1>
 				<p><? echo $TEXT['main-p_1']; ?></p>
 			</div>
-			<div class="middle">
+			<div>
 				<h1><? echo $TEXT['main-h1_2']; ?></h1>
 				<div id="accordion" class="accordion">
 <? 
-	$wedgeLimit = 2;
-	$numberOfWedges = 0;
-	
-	$query = "SELECT min(`Wedge ID`) as min, max(`Wedge ID`) as max FROM `Wedges`";
-	$result = mysql_query( $query, $connection );
-	$wedgeIdLimit = mysql_fetch_array( $result );
-	
 	$counter = 0;
-	$vector = generateRandomSequence( $wedgeIdLimit['min'], $wedgeIdLimit['max'] );
+	$index = 0;
+	$wedgeLimit = 3;
 	
-	$query = "SELECT `Wedge ID` as id, Title, Summary, Image ". 
-			 "FROM Wedges ".
-			 "WHERE Language='$lang' AND ( ";
-	while( $counter < $wedgeLimit )
+	$query = "SELECT `Wedge ID` as id, Title, Summary, Image FROM Wedges WHERE Language='".$gData['lang']."';";
+	$result = mysql_query( $query, $connection );
+	
+	while( $row = mysql_fetch_array( $result ))
 	{
-		$query = $query."`Wedge ID`=".$vector[$counter];
+		$wedges[$counter] = array(  'id' 		=> $row['id'],
+									'title' 	=> $row['Title'],
+									'summary' 	=> $row['Summary'],
+									'image' 	=> $row['Image'] );
 		$counter++;
-		if( $counter == $wedgeLimit )
-			$query = $query." )";
-		else
-			$query = $query." OR ";
 	}
 	
-	$data = mysql_query( $query, $connection );
-	while(( $wedge = mysql_fetch_array( $data )) && 
-			( $numberOfWedges < $wedgeLimit ))
+	$vector = generateRandomSequence( 0, $counter - 1 );
+	while( $wedgeLimit > 0 && $counter > 0 )
 	{
 ?>
-					<h3><a><? echo $wedge['Title']; ?></a></h3>
+					<h3><a><? echo $wedges[$vector[$index]]['title']; ?></a></h3>
 					<div>
-						<img src="<? echo $wedge['Image']; ?>" width="66px" height="84px" />
+						<img src="<? echo $wedges[$vector[$index]]['image']; ?>" width="66px" height="84px" />
 						<p class="accordionText">
-							<? echo $wedge['Summary']; ?>
+							<? echo $wedges[$vector[$index]]['summary']; ?>
 						</p>
 						<p class="accordionLink">
-							<a href="wedgeInfo.php?id=<? echo $wedge['id']; ?>"><? echo $TEXT['main-a_1']; ?></a>
+							<a href="wedgeInfo.php?id=<? echo $wedges[$vector[$index]]['id']; ?>"><? echo $TEXT['main-a_1']; ?></a>
 						</p>
 					</div>
 <?		
-		$numberOfWedges++;
+		$wedgeLimit--;
+		$counter--;
+		$index++;
 	}
 ?>
 				</div>
-			</div>
-			<div id="update">
-				<a href="#"><? echo $TEXT['main-a_2']; ?></a>
+				<div id="update">
+					<a class="link"><? echo $TEXT['main-a_2']; ?></a>
+				</div>
 			</div>
 		</div>
-		<div class="columnRight">
+		<div id="columnRight">
 <?
-	if( !( $_SESSION['loggedIn'] == "yes" )) 
+	if( !$gData['logged'] )
 	{
 ?>
-			<div id="login">
+			<div id="login" class="ui-corner-all">
 				<h2><? echo $TEXT['main-legend_1']; ?></h2>
 				<form 
 					name="loginForm"
@@ -295,47 +287,39 @@
 					action="./backend/authentication.php"
 					onreset="resetForm(this)"
 				>
-					<div 
-						class="errorClass ui-corner-all"
-<?
-		if( isSet( $_SESSION['response'] ))
-			if( $_SESSION['response']['form'] == 'loginForm' )
-				echo "style=\"display:block;\"";
-?>							
-						>
+					<div class="errorClass ui-corner-all">
 						<p>
 							<span class="ui-icon ui-icon-info"></span>
-							<strong>
-<?
-		if( isSet( $_SESSION['response'] ))
-			if( $_SESSION['response']['form'] == 'loginForm' )
-			{
-				echo $_SESSION['response']['message'];
-				unset( $_SESSION['response'] );
-			}
-?>							
-							</strong>
+							<strong></strong>
 						</p>
 					</div>
-					<table class="loginTable">
-					<tbody>
-						<tr>
-							<td><? echo $TEXT['main-td_1']; ?></td>
-							<td><input type="text" name="username"></td>
-						</tr>
-						<tr>
-							<td><? echo $TEXT['main-td_2']; ?></td>
-							<td><input type="password" name="password"></td>
-						</tr>
-					</tbody>
-					</table>
-					<input type="submit" value="<? echo $TEXT['main-button_1']; ?>" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
-					<input type="reset" value="<? echo $TEXT['main-button_2']; ?>" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
-					<input type="hidden" name="usingAjax" value="false" />
-					<p><? echo $TEXT['main-p_2']; ?><a href="#"><? echo $TEXT['main-a_3']; ?></a></p>
+					<div class="formTable">
+						<div>
+							<label for="username"><? echo $TEXT['main-td_1']; ?></label>
+							<input type="text" name="username" />
+							<br style="clear:both" />
+						</div>
+						<div>
+							<label for="password"><? echo $TEXT['main-td_2']; ?></label>
+							<input type="password" name="password" />
+							<br style="clear:both" />
+						</div>
+						<div class="formButton">
+							<button type="submit">
+								<? echo $TEXT['main-button_1']; ?>
+							</button>
+							<button type="reset">
+								<? echo $TEXT['main-button_2']; ?>
+							</button>
+							<br style="clear:both" />
+						</div>
+					</div>
+					<div>
+						<? echo $TEXT['main-p_2']; ?><a class="link"><? echo $TEXT['main-a_3']; ?></a>
+					</div>
 				</form>
 			</div>
-			<div id="newAccount">
+			<div id="newAccount" class="ui-corner-all" style="display:none">
 				<h2><? echo $TEXT['main-legend_2']; ?></h2>
 				<form
 					name="newAccountForm" 
@@ -343,66 +327,59 @@
 					action="./backend/newUser.php"
 					onreset="resetForm(this)"
 				>
-					<div 
-						class="errorClass ui-corner-all"
-<?
-		if( isSet( $_SESSION['response'] ))
-			if( $_SESSION['response']['form'] == 'newAccountForm' )
-				echo "style=\"display:block;\"";
-?>						
-						>
+					<div class="errorClass ui-corner-all">
 						<p>
 							<span class="ui-icon ui-icon-info"></span>
-							<strong>
-<?
-		if( isSet( $_SESSION['response'] ))
-			if( $_SESSION['response']['form'] == 'newAccountForm' )
-			{
-				echo $_SESSION['response']['message'];
-				unset( $_SESSION['response'] );
-			}
-?>							
-							</strong>
+							<strong></strong>
 						</p>
 					</div>
-					<table class="loginTable">
-					<tbody>
-						<tr>
-							<td><? echo $TEXT['main-td_3']; ?></td>
-							<td><input type="text" name="username"></td>
-						</tr>
-						<tr>
-							<td><? echo $TEXT['main-td_4']; ?></td>
-							<td><input type="text" name="mail"></td>
-						</tr>
-					</tbody>
-					</table>
-					<input type="submit" value="<? echo $TEXT['main-button_3']; ?>" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
-					<input type="reset" value="<? echo $TEXT['main-button_2']; ?>" class="button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" />
-					<input type="hidden" name="usingAjax" value="false" />
-					<p><? echo $TEXT['main-p_3']; ?><a href="#"><? echo $TEXT['main-a_4']; ?></a></p>
+					<div class="formTable">
+						<div>
+							<label for="username"><? echo $TEXT['main-td_3']; ?></label>
+							<input type="text" name="username" />
+							<br style="clear:both" />
+						</div>
+						<div>
+							<label for="email"><? echo $TEXT['main-td_4']; ?></label>
+							<input type="email" name="email" />
+							<br style="clear:both" />
+						</div>
+						<div class="formButton">
+							<button type="submit">
+								<? echo $TEXT['main-button_3']; ?>
+							</button>
+							<button type="reset">
+								<? echo $TEXT['main-button_2']; ?>
+							</button>
+							<br style="clear:both" />
+						</div>
+					</div>
+					<div>
+						<? echo $TEXT['main-p_3']; ?><a class="link"><? echo $TEXT['main-a_4']; ?></a>
+					</div>
 				</form>
 			</div>
 <?
 	}
-	else if( $_SESSION['role'] == "organizer" )
+	else if( $gData['role'] == "organizer" )
 	{
 ?>
-			<button id="largeButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
-				<a href="./organize.php" class="ui-button-text">Create a new game</a>
-			</button>
+			<div class="roleButton">
+				<button type="button"><? echo $TEXT['main-button_4']; ?></button>
+			</div>
 <?
 	}
-	else if( $_SESSION['role'] == "player" )
+	else if( $gData['role'] == "player" )
 	{
 ?>
-			<button id="largeButton" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" >
-				<a href="./play.php" class="ui-button-text">Start to play</a>
-			</button>
+			<div class="roleButton">
+				<button type="button"><? echo $TEXT['main-button_5']; ?></button>
+			</div>			
 <?
 	}
 ?>
 		</div>
+		<br style="clear:both" />
 	</div>
 </body>
 </html>
