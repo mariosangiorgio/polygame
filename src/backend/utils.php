@@ -1,26 +1,4 @@
 <?
-	function checkAuthorization($requestedRole)
-	{		
-		$loggedIn = null;
-		$role	  = null;
-		
-		
-		if(isSet($_SESSION['loggedIn'])){
-			$loggedIn = $_SESSION['loggedIn'];
-		}
-		
-		if(isSet($_SESSION['role'])){
-			$role = $_SESSION['role'];
-		}
-			
-		if($loggedIn == "yes" && $role == $requestedRole){
-			return true;
-		}
-		else{
-			return false;
-		}
-	}
-	
 	function generateRandomSequence( $init, $end )
 	{
 		$shuffleTime = ( $end - $init ) * 5;

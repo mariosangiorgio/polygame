@@ -47,13 +47,14 @@
 	{
 		$wedge = $wedges[$vector[$index]];
 ?>
-					<li class="ui-corner-all 
+					<li
 <?
 		if( isSet( $_SESSION['phase2'] )&& $_SESSION['phase2']['wedges']['wedge'.$wedge['id']] )
-			echo "ui-selected \">";
+			echo "class=\"ui-corner-all ui-selected\"";
 		else
-			echo "ui-selectee \">";
+			echo "class=\"ui-corner-all ui-selectee\"";
 ?>					
+					>
 						<input 
 							type="checkbox"
 							name="wedge<? echo $index; ?>"

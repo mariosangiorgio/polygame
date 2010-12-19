@@ -34,6 +34,8 @@
 	$TEXT['main-button_1'] = "accedi";
 	$TEXT['main-button_2'] = "cancella";
 	$TEXT['main-button_3'] = "conferma";
+	$TEXT['main-button_4'] = "Crea un nuovo gioco";
+	$TEXT['main-button_5'] = "Inizia a giocare";
 	$TEXT['main-js_1'] = "ulteriori informazioni";
 	$TEXT['main-js_2'] = "An error occurred!";
 	$TEXT['main-js_3'] = "Nome utente";
@@ -101,6 +103,7 @@
 	$TEXT['newGamePhase1-p_5'] = "Seleziona la durata di una singola presentazione";
 	$TEXT['newGamePhase1-p_6'] = "In questa fase del gioco ciascun gruppo presenta alla platea il poster realizzato nella precedente fase";
 	$TEXT['newGamePhase1-p_7'] = "In questa fase del gioco vengono creati nuovi gruppi, i quali devono realizzare una proposta comprendente i vari wedges analizzati. Tale fase si conclude con la votazione delle varie proposte.";
+	$TEXT['newGamePhase1-p_8'] = "Tempo a disposizione per sottomettere la soluzione al problema";
 	$TEXT['newGamePhase1-h_1'] = "Prima fase: analizza il wedge";
 	$TEXT['newGamePhase1-h_2'] = "Cosa succede durante questa fase?";
 	$TEXT['newGamePhase1-h_3'] = "Mostra e racconta";

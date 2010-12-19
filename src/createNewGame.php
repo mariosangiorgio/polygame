@@ -6,34 +6,32 @@
 	
 	if( isSet( $_POST['destinationPhase'] ))
 		// TODO: check if( $_POST['comingPhase'] < 0 || $_POST['comingPhase'] > 4 )
-		$_SESSION['phaseNumber'] = $_POST['destinationPhase'];
-	else if( !$_SESSION['phaseNumber'] )
-		$_SESSION['phaseNumber'] = 1;
+		$_COOKIE['phaseNumber'] = $_POST['destinationPhase'];
+	else if( !$_COOKIE['phaseNumber'] )
+		$_COOKIE['phaseNumber'] = 1;
 	
 	if( $_POST['comingPhase'] == 1 )
-	{	
-		if( isSet( $_POST['time1'] ))
-			$parameters['time1'] = $_POST['time1'];
-		if( isSet( $_POST['time4'] ))
-			$parameters['time4'] = $_POST['time4'];
-		if( isSet( $_POST['time5'] ))
-			$parameters['time5'] = $_POST['time5'];
-		if( isSet( $_POST['advanced'] ) && $_POST['advanced'] == "true" )
-		{
-			if( isSet( $_POST['time2'] ))
-				$parameters['time2'] = $_POST['time2'];
-			if( isSet( $_POST['time3'] ))
-				$parameters['time3'] = $_POST['time3'];
-		}
-		$_SESSION['phase1'] = $parameters;
+	{
+		$query = "INSERT INTO `Game`(`Game ID`, `Organizer ID`, ".
+						"`Starting time`, `Started`, ".
+						"`Starting time Phase 2`, `Started Phase 2`, ". 
+						"`Length 1a`, Length 1b`, `Length 1c`, `Length 2` ) ". 
+				"VALUES( NULL, $organizerID, 0, 0, 0, 0, 
+						$_POST['time1'],
+						$_POST['time2'],
+						$_POST['time3'],
+						$_POST['time5'] )";
+		
+		$data = mysql_query( $query, $connection );
 	}
 	if( $_POST['comingPhase'] == 2 )
 	{
-		$parameters['wedgesSelected'] = $_POST['wedgesSelected'];
 		for( $index = 0; $index < $_POST['wedgesSelected']; $index++ )
-			if( $_POST['wedge'.$index] )
-				$parameters['wedges']['wedge'.$_POST['wedge'.$index]] = $_POST['wedge'.$index];
-		$_SESSION['phase2'] = $parameters;
+		{
+			$query = "INSERT INTO `Game wedges`(`Game ID`, `Wedge ID`) ".
+					"VALUES ( $organizerID, $_POST['wedge'.$index] )";
+			$data = mysql_query( $query, $connection );
+		}
 	}
 	if( $_POST['comingPhase'] == 3 )
 	{

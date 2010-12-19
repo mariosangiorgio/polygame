@@ -39,7 +39,7 @@
 ?>				">
 					<form
 						action="./createNewGame.php"
-						method="POST"
+						method="post"
 					>
 						<button type="submit" class="modifyButton" ><? echo $TEXT['newGamePhase3_2-button_modify']; ?></button>
 						<input type="hidden" name="destinationPhase" value="1" />
@@ -78,7 +78,7 @@
 				<td>
 					<form
 						action="./createNewGame.php"
-						method="POST"
+						method="post"
 					>
 						<button type="submit" class="modifyButton" ><? echo $TEXT['newGamePhase3_2-button_modify']; ?></button>
 						<input type="hidden" name="destinationPhase" value="2" />
@@ -94,7 +94,7 @@
 				<td>
 					<form
 						action="./createNewGame.php"
-						method="POST"
+						method="post"
 					>
 						<button type="submit" class="modifyButton" ><? echo $TEXT['newGamePhase3_2-button_modify']; ?></button>
 						<input type="hidden" name="destinationPhase" value="3" />
@@ -110,7 +110,7 @@
 				<td>
 					<form
 						action="./createNewGame.php"
-						method="POST"
+						method="post"
 					>
 						<button type="submit" class="modifyButton" ><? echo $TEXT['newGamePhase3_2-button_modify']; ?></button>
 						<input type="hidden" name="destinationPhase" value="4" />
@@ -126,7 +126,7 @@
 				<td>
 					<form
 						action="./createNewGame.php"
-						method="POST"
+						method="post"
 					>
 						<button type="submit" class="modifyButton" ><? echo $TEXT['newGamePhase3_2-button_modify']; ?></button>
 						<input type="hidden" name="destinationPhase" value="5" />
