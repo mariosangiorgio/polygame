@@ -13,12 +13,12 @@ body {
 }
 h1 {
 	font-size: 18px;
-	margin: 0;
+	margin: 1em 0 1em 0;
 	padding: 0;
 }
 h2 {
 	font-size: 16px;
-	margin: 0;
+	margin: 0.5em 0 0.5em 0;
 	padding: 0;	
 }
 p {
@@ -34,27 +34,6 @@ a {
 	font-weight: bold;
 }
 
-/* Home page layout */
-#wrapper {
-	margin: 135px 0 5% 0;
-}
-.columnLeft {
-	float: left;
-	width: 64%;
-	margin: 0 1.5%;
-}
-.columnRight {
- 	float:left; 
-	width: 30%;
-	margin: 0 1.5%;
-}
-
-.singleColumn {
-	float:			none;
-	text-align: 	left;
-	width:			 40%;
-	margin:			auto;
-}
 /* Header Section */
 #stripe {
 	width:100%;
@@ -106,6 +85,13 @@ a {
 	top: 3px;	
 }
 
+.link {
+	text-decoration: underline;
+	font-style: italic;
+	font-weight: bold;
+	color: black;
+	cursor: pointer;
+}
 
 /* Paragraphs */
 .top {
@@ -114,26 +100,7 @@ a {
  	margin-top: 2%;
  	margin-bottom: 5%;
 }
-.middle {
-	margin-left: 2%;
-	margin-right: 2%;
-	margin-bottom: 2%;
-}
-.bottom {
-	margin-left: 2%;
-	margin-right: 2%;
-	margin-bottom: 5%;
-}
-.title {
-	text-align: center;
-}
 
-/* JQuery */
-#accordion {
-	margin: 4% 15%;
-/* 	padding: 0 0 10% 0; */
-	width: 70%;
-}
 .accordion img {
 	float: left;
 	margin-right: 1em;
@@ -145,27 +112,6 @@ a {
 .accordion p {
 	font-size: 0.9em;
 }
-#update {
-	margin-right: 17%;
-	text-align: right;
-}
-#update a {
-	font-style: italic;
-	font-weight: bold;
-	color: black;
-}
-#login {
-	padding: 1% 5%;
-	background: #D7EBF9;
-	text-align: center;
-}
-
-#newAccount {
-	display: none;
-	padding: 1% 5%;
-	background: #D7EBF9;
-	text-align: center;
-}
 .accordionText {
 	text-align: justify;
 }
@@ -174,18 +120,7 @@ a {
 	font-size: 0.9em;
 	font-style: italic;
 }
-.loginTable {
-	margin: 5% 10%;
-	width: 80%;
-	text-align: center;
-}
-.loginTable  tfoot input{
-	height: 3em;
-	width: 5em;
-	font-size: 0.9em;
-	font-weight: bold;
-	color: #736F6E;
-}
+
 .errorClass {
 	display: none;
 	margin: 3% 7%;
@@ -216,9 +151,6 @@ a {
 	height:3em;
 	margin:30% 15%;
 	width:70%;
-}
-.button  {
-	margin: 2% 5%;
 }
 .link {
 	font-style: italic;
