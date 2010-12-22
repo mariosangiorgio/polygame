@@ -1,39 +1,75 @@
 <?php
-	include_once("./inc/common.php");
-	include_once './lang/'.$lang_file;
 	include_once("./inc/db_connect.php");
+	include_once("./inc/init.php");
+	include_once("./lang/".$gData['langFile']);
 	include_once("./backend/utils.php");
 	
-	if( isSet( $_POST['destinationPhase'] ))
-		// TODO: check if( $_POST['comingPhase'] < 0 || $_POST['comingPhase'] > 4 )
-		$_COOKIE['phaseNumber'] = $_POST['destinationPhase'];
-	else if( !$_COOKIE['phaseNumber'] )
-		$_COOKIE['phaseNumber'] = 1;
-	
-	if( $_POST['comingPhase'] == 1 )
+	if( $gData['logged'] && $gData['role'] == "organizer" )
 	{
-		$query = "INSERT INTO `Game`(`Game ID`, `Organizer ID`, ".
-						"`Starting time`, `Started`, ".
-						"`Starting time Phase 2`, `Started Phase 2`, ". 
-						"`Length 1a`, Length 1b`, `Length 1c`, `Length 2` ) ". 
-				"VALUES( NULL, $organizerID, 0, 0, 0, 0, 
-						$_POST['time1'],
-						$_POST['time2'],
-						$_POST['time3'],
-						$_POST['time5'] )";
+		$query = "SELECT `Game ID` as id, Defined, Started FROM `game` WHERE `Organizer ID`='".$gData['username']."';";
+		$result = mysql_query( $query, $connection );
 		
-		$data = mysql_query( $query, $connection );
-	}
-	if( $_POST['comingPhase'] == 2 )
-	{
-		for( $index = 0; $index < $_POST['wedgesSelected']; $index++ )
+		if(( $row = mysql_fetch_array( $result )))
 		{
-			$query = "INSERT INTO `Game wedges`(`Game ID`, `Wedge ID`) ".
-					"VALUES ( $organizerID, $_POST['wedge'.$index] )";
-			$data = mysql_query( $query, $connection );
+			$gData['gameID'] = $row['id']; 
+			if( $row['Defined'] )
+				;// TODO: Redirect to an error page (current organizer has a game already defined)
+		}
+		else
+		{
+			$query = "INSERT INTO `game`(`Game ID`, `Organizer ID`, ".
+					"`Length 1a`, `Length 1b`, `Length 1c`, `Length 2`) ".
+					"VALUES( NULL, ".$gData['username'].", '55', '10', '150', '0' );";
+			$result = mysql_query( $query, $connection );
+			
+			$query = "SELECT `Game ID` as id FROM `Game` WHERE `Organizer ID`='".$gData['username']."';";
+			$result = mysql_query( $query, $connection );
+		
+			if(( $row = mysql_fetch_array( $result )))
+				$gData['gameID'] = $row['id']; 
 		}
 	}
-	if( $_POST['comingPhase'] == 3 )
+	else
+		;// TODO: Redirect to an error page (unauthorized)
+	
+	if( isSet( $_GET['phase'] ))
+		$currentPhase = $_GET['Phase'];
+	else
+		$currentPhase = 1;
+	
+	if( $_POST['phase'] == 1 )
+	{
+		$query = "UPDATE `Game` SET ";
+		if( isSet( $_POST['time1'] ))
+			if( is_numeric( $_POST['time1'] ))
+				$query = $query." `Length 1a`='".$_POST['time1']."'";
+		if( isSet( $_POST['time2'] ))
+			if( is_numeric( $_POST['time2'] ))
+				$query = $query.", `Length 2`='".$_POST['time2']."'";
+		
+		$query = $query."WHERE `Game ID`='".$gData['gameID']."';";
+		mysql_query( $query, $connection );
+	}
+	if( $_POST['phase'] == 2 )
+	{
+		if( !isSet( $_POST['wedgesSelected'] ) || 
+			!is_numeric( $_POST['wedgesSelected'] ))
+			;// TODO: invalid data
+		for( $index = 0; $index < $_POST['wedgesSelected']; $index++ )
+		{
+			if( !isSet( $_POST['wedge'.$index] ) || !is_numeric( $_POST['wedge'.$index]))
+				;// TODO: invalid data
+			
+			$wedgeIndex = mysql_real_escape_string( $_POST['wedge'.$index] );
+			
+			$query = "INSERT INTO `Game wedges`(`Game ID`, `Wedge ID`) ".
+					"VALUES ('".$gData['gameID']."', '$wedgeIndex' )";
+			$result = mysql_query( $query, $connection );
+			if( !$result )
+				;// TODO: invalid data
+		}
+	}
+	if( $_POST['phase'] == 3 )
 	{
 		if( isSet( $_POST['dataType'] ))
 			$_SESSION['phase3']['dataType'] = $_POST['dataType'];
@@ -72,13 +108,8 @@
 		
 		include "./backend/saveGameData.php";
 	}
-	if( $_SESSION['phaseNumber'] == 6 )
-	{
-		$_SESSION['phaseNumber']--;
-		exit();
-	}
-	if(( isSet( $_POST['usingAjax'] ) && $_POST['usingAjax'] == 'true' ))
-		include "newGamePhase".$_SESSION['phaseNumber'].".php";
+	if( isSet( $_GET['phase'] ))
+		include "newGamePhase".$currentPhase.".php";
 	else
 	{
 ?>
@@ -98,7 +129,7 @@
 <body>
 	<? include "header.php"; ?>
 	<div id="wrapper">
-		<? include "newGamePhase".$_SESSION['phaseNumber'].".php"; ?>
+		<? include "newGamePhase".$currentPhase.".php"; ?>
 	</div>
 </body>
 </html>

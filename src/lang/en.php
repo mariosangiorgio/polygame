@@ -32,8 +32,9 @@
 	$TEXT['main-button_1'] = "Login";
 	$TEXT['main-button_2'] = "Cancel";
 	$TEXT['main-button_3'] = "Confirm";
-	$TEXT['main-button_4'] = "Create new game";
-	$TEXT['main-button_5'] = "Start to play";
+	$TEXT['main-button_4'] = "Continue the game";
+	$TEXT['main-button_5'] = "Start the game";
+	$TEXT['main-button_6'] = "Create a new game";
 	$TEXT['main-js_1'] = "more info";
 	$TEXT['main-js_2'] = "An error occurred!";
 	$TEXT['main-username_1'] = "Username missing.";

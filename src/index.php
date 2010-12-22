@@ -28,6 +28,10 @@
 			
 			$('button').button();
 			
+			$('.roleButton button').click( function() {
+				location.href = $('a', $(this)).attr('href');
+			});
+			
 			$('#update').click( function() 
 			{
 				$.ajax({
@@ -363,9 +367,26 @@
 	}
 	else if( $gData['role'] == "organizer" )
 	{
-?>
+		$organizerAction = $TEXT['main-button_6'];
+		$link = "./createNewGame.php";
+		
+		$query = "SELECT Defined, Started FROM `game` WHERE `Organizer ID`='".$gData['username']."';";
+		$result = mysql_query( $query, $connection );
+		
+		if(( $row = mysql_fetch_array( $result )))
+		{
+			if( $row['Defined'] )
+			{
+				$link = "./play.php";
+				if( $row['Started'] )
+					$organizerAction = $TEXT['main-button_4'];
+				else
+					$organizerAction = $TEXT['main-button_5'];
+			}
+		}
+?>		
 			<div class="roleButton">
-				<button type="button"><? echo $TEXT['main-button_4']; ?></button>
+				<button type="button"><a href="<? echo $link; ?>"><? echo $organizerAction; ?></a></button>
 			</div>
 <?
 	}
@@ -373,7 +394,7 @@
 	{
 ?>
 			<div class="roleButton">
-				<button type="button"><? echo $TEXT['main-button_5']; ?></button>
+				<button type="button"><a href="./playerPlay.php"><? echo $TEXT['main-button_7']; ?></a></button>
 			</div>			
 <?
 	}

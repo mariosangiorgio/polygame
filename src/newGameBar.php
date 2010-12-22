@@ -10,11 +10,11 @@
 			for="phase<? echo $index; ?>"
 <? 		
 		$class = "ui-button ui-widget ui-state-default ui-button-text-only ";
-		if( $_SESSION['phaseNumber'] > $index )
+		if( $currentPhase > $index )
 			$class = $class."reachable ";
 		else 
 		{
-			if( $_SESSION['phaseNumber'] == $index ) 
+			if( $currentPhase == $index ) 
 				$class = $class."ui-state-active "; 
 			$class = $class."unreachable ";
 		}
@@ -46,13 +46,12 @@
 			var phase = $(this).attr('for'); 
 			var phaseNumber = phase.charAt( phase.length - 1 );
 			var url = "./createNewGame.php";
-			var dataToSend = { destinationPhase: phaseNumber,
-							   usingAjax: 'true' };
+			var dataToSend = { phase: phaseNumber };
 			var typeOfDataToReceive = 'html';
 			var callback = function( response ) {
 				$("#wrapper").html( response );
 			};
-			$.post( url, dataToSend, callback, typeOfDataToReceive );
+			$.get( url, dataToSend, callback, typeOfDataToReceive );
 		};
 		$('#createNewGameBar label.reachable').click( loadPhaseFromBar );
 	});
