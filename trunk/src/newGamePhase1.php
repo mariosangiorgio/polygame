@@ -1,4 +1,22 @@
-<? include "newGameBar.php"; ?>
+<? 
+	include "newGameBar.php";
+	$query = "SELECT `Length 1` as l1, `Length 1a` as l1a, ".
+					"`Length 1b` as l1b, `Length 1c` as l1c, ".
+					"`Length 2` as l2, `Length 3` as l3, Advanced ".
+			"FROM `Game` WHERE `Game ID`='".$gData['gameID']."';";
+	$result = mysql_query( $query, $connection );
+		
+	if(( $row = mysql_fetch_array( $result )))
+	{
+		$time1 = $row['l1'];
+		$time2 = $row['l1a'];
+		$time3 = $row['l1b'];
+		$time4 = $row['l1c'];
+		$time5 = $row['l2'];
+		$time6 = $row['l3'];
+		$advanced = $row['Advanced'];
+	}
+?>
 <div id="divPhase1" class="phase1 phases">
 	<p><? echo $TEXT['newGamePhase1-p_1']; ?></p>
 	<form
@@ -6,9 +24,6 @@
 		action="./createNewGame.php"
 		method="POST"
 	>
-		<input type="hidden" name="usingAjax" value="false" />
-		<input type="hidden" name="destinationPhase" value="<? echo ( $_SESSION['phaseNumber'] + 1 ); ?>" />
-		<input type="hidden" name="comingPhase" value="<? echo $_SESSION['phaseNumber']; ?>" />
 	<table class="tablePhase1_2">
 	<tbody>
 		<tr>
@@ -22,7 +37,7 @@
 				</div>
 				<br />
 <?
-	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
+	if( $advanced )
 	{			
 ?>
 				<div id="advancedButton">
@@ -42,7 +57,7 @@
 ?>				
 				<div id="advancedOptions" 
 <?
-	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
+	if( $advanced )
 		echo "style=\"display:block\" ";
 ?>				
 				>
@@ -118,68 +133,32 @@
 				case "slider1":
 					minValue = 10;
 					maxValue = 180;
-					sliderValue =
-<?	
-	if( isSet( $_SESSION['phase1'] ))
-		echo $_SESSION['phase1']['time1']."; ";
-	else
-		echo "55; ";
-?>			
+					sliderValue = <? echo $time1.";"; ?>
 					break;
 				case "slider2":
 					minValue = 0;
 					maxValue = 30;
-					sliderValue =
-<?	
-	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time2'] )
-		echo $_SESSION['phase1']['time2']."; ";
-	else
-		echo "0; ";
-?>				
+					sliderValue = <? echo $time2.";"; ?>
 					break;
 				case "slider3":
 					minValue = 0;
 					maxValue = 30;
-					sliderValue =
-<?	
-	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time3'] )
-		echo $_SESSION['phase1']['time3']."; ";
-	else
-		echo "0; ";
-?>			
+					sliderValue = <? echo $time3.";"; ?>
 					break;
 				case "slider4":
 					minValue = 0;
 					maxValue = 30;
-					sliderValue =
-<?	
-	if( isSet( $_SESSION['phase1'] ) && $_SESSION['phase1']['time4'] )
-		echo $_SESSION['phase1']['time4']."; ";
-	else
-		echo "0; ";
-?>				
+					sliderValue = <? echo $time4.";"; ?>
 					break;
 				case "slider5":
 					minValue = 1;
 					maxValue = 20;
-					sliderValue =
-<?	
-	if( isSet( $_SESSION['phase1'] ))
-		echo $_SESSION['phase1']['time5']."; ";
-	else
-		echo "10; ";
-?>					
+					sliderValue = <? echo $time5.";"; ?>
 					break;
 				case "slider6":
 					minValue = 10;
 					maxValue = 300;
-					sliderValue =
-<?	
-	if( isSet( $_SESSION['phase1'] ))
-		echo $_SESSION['phase1']['time6']."; ";
-	else
-		echo "150; ";
-?>					
+					sliderValue = <? echo $time6.";"; ?>
 					break;
 			}
 			$(this).slider({
@@ -265,7 +244,6 @@
 		{
 			event.preventDefault();
 			var form = $('#divPhase1 form');
-			$('input[name="usingAjax"]', $(form)).val('true');
 			var url = $(form).attr('action');
 			var formName = $(form).attr('name');
 			var dataToSend = $(form).serialize();

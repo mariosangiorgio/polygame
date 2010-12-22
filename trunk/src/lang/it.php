@@ -34,8 +34,9 @@
 	$TEXT['main-button_1'] = "accedi";
 	$TEXT['main-button_2'] = "cancella";
 	$TEXT['main-button_3'] = "conferma";
-	$TEXT['main-button_4'] = "Crea un nuovo gioco";
-	$TEXT['main-button_5'] = "Inizia a giocare";
+	$TEXT['main-button_4'] = "Continua la partita";
+	$TEXT['main-button_5'] = "Inizia la partita";
+	$TEXT['main-button_6'] = "Crea una nuova partita";
 	$TEXT['main-js_1'] = "ulteriori informazioni";
 	$TEXT['main-js_2'] = "An error occurred!";
 	$TEXT['main-js_3'] = "Nome utente";

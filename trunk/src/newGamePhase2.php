@@ -1,4 +1,22 @@
-<? include "newGameBar.php"; ?>
+<? 
+	include "newGameBar.php"; 
+	
+	$query = "SELECT count(*) as counter ".
+			"FROM `Game wedges` WHERE `Game ID`='".$gData['gameID']."';";
+	$result = mysql_query( $query, $connection );
+		
+	if(( $row = mysql_fetch_array( $result )))
+		$numberOfWedges = $row['counter'];
+	
+	$query = "SELECT `Wedge ID` as id ".
+			"FROM `Game wedges` ".
+			"WHERE `Game ID`='".$gData['gameID']."';";
+	$result = mysql_query( $query, $connection );
+	
+	$counter = 0;
+	while(( $row = mysql_fetch_array( $result )))
+		$wedgesSelected[$counter++] = $row['id'];
+?>
 <div id="divPhase2" class="phase2 phases">
 	<p><? echo $TEXT['newGamePhase2-p_1']; ?></p>
 	<form
@@ -6,18 +24,7 @@
 		action="./createNewGame.php"
 		method="POST"
 	>
-		<input type="hidden" name="usingAjax" value="false" />
-		<input type="hidden" name="destinationPhase" value="<? echo ( $_SESSION['phaseNumber'] + 1 ); ?>" />
-		<input type="hidden" name="comingPhase" value="<? echo $_SESSION['phaseNumber']; ?>" />
-		<input type="hidden" 
-			   name="wedgesSelected"
-<?
-	if( isSet( $_SESSION['phase2'] ))
-		echo "value=\"".$_SESSION['phase2']['wedgesSelected']."\" ";
-	else
-		echo "value=\"0\""
-?> 		
-		/>
+		<input type="hidden" name="wedgesSelected" value="<? echo $numberOfWedges; ?>" />
 	<table class="tablePhase1_2">
 	<tbody>
 		<tr>
@@ -30,7 +37,7 @@
 <? 
 	$query = "SELECT `Wedge ID` as id, Title ". 
 			 "FROM Wedges ".
-			 "WHERE Language='$lang'";
+			 "WHERE Language='".$gData['lang']."';";
 	$data = mysql_query( $query, $connection );
 	
 	$counter = 0;
@@ -49,10 +56,15 @@
 ?>
 					<li
 <?
-		if( isSet( $_SESSION['phase2'] )&& $_SESSION['phase2']['wedges']['wedge'.$wedge['id']] )
+		$isSelected = false;
+		for( $i = 0; $i < $numberOfWedges && !$isSelected; $i++ )
+			if( $wedgesSelected[$i] == $wedge['id'] )
+				$isSelected = true;
+		
+		if( $isSelected )
 			echo "class=\"ui-corner-all ui-selected\"";
 		else
-			echo "class=\"ui-corner-all ui-selectee\"";
+			echo "class=\"ui-corner-all ui-selectee\"";;
 ?>					
 					>
 						<input 
@@ -61,7 +73,7 @@
 							value="<? echo $wedge['id']; ?>" 
 							class="ui-helper-hidden-accessible" 
 <?
-		if( isSet( $_SESSION['phase2'] )&& $_SESSION['phase2']['wedges']['wedge'.$wedge['id']] )
+		if( $isSelected )
 			echo "checked";
 ?>			
 						/>
@@ -99,7 +111,6 @@
 		{
 			event.preventDefault();
 			var form = $('#divPhase2 form');
-			$('input[name="usingAjax"]', $(form)).val('true');
 			var checkboxes = $('input[type="checkbox"]');
 			var counter = 0;
 			$(checkboxes).each( function() 

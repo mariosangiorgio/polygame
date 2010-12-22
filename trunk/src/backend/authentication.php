@@ -1,6 +1,6 @@
 <?php
 	include_once("../inc/db_connect.php");
-	include_once("./inc/init.php");
+	include_once("../inc/init.php");
 	
 	//Sanitizing inputs
 	$username = mysql_real_escape_string( $_POST['username']);
@@ -34,30 +34,31 @@
 		header("Location: ../index.php");
 	else
 	{
-		$query = "SELECT `username`,`role`,`password` FROM `Users` WHERE `username`='$username'";
+		$query = "SELECT `username`,`role`,`password` FROM `users` WHERE `username`='$username'";
 		$result = mysql_query( $query, $connection );
 		if( mysql_num_rows( $result ))	
 		{
 			// User exists, check if password is correct
-			$user = mysql_fetch_array( $result );
 			$realPassword = sha1( $gData['salt'].sha1( $gData['salt'].$password ));
-			if( $realPassword == $user['password'] )
+			// Assuming that password isn't correct
+			$response = array( 'code' => "403", 'form' => "loginForm", 'message' => 'Invalid Password' );
+			while(( $user = mysql_fetch_array( $result )))
 			{
-				// Password is correct
-				$nonce = uniqid();
-				$query = "UPDATE `users` SET `nonce`='$nonce' WHERE `username`='$username';";
-				mysql_query( $query, $connection );
-				$token = sha1( $nonce.$user['password'] );
-				// TODO: setcookie( 'at', $username.":".$token, time() + 3600 * 24, '/', 'localhost' );
-				setcookie( 'at', $username.":".$token, 0, '/' );
-				$response = array( 'code' => "200", 'form' => "loginForm", 'message' => 'OK' );
+				if( $realPassword == $user['password'] )
+				{
+					// Password is correct
+					$nonce = uniqid();
+					$query = "UPDATE `users` SET `nonce`='$nonce' WHERE `username`='$username' AND `password`='$realPassword';";
+					mysql_query( $query, $connection );
+					$token = sha1( $nonce.$user['password'] );
+					// TODO: setcookie( 'at', $username.":".$token, time() + 3600 * 24, '/', 'localhost' );
+					setcookie( 'at', $username.":".$token, 0, '/' );
+					$response = array( 'code' => "200", 'form' => "loginForm", 'message' => 'OK' );
+					break;
+				}
 			}
-			else
-				// Password isn't correct
-				$response = array( 'code' => "403", 'form' => "loginForm", 'message' => 'Invalid Password' );
 		}
-		else		
-			// User not exists
+		else	// User not exists
 			$response = array( 'code' => "404", 'form' => "loginForm", 'message' => 'User not exists' );
 
 		$response = json_encode( $response );
