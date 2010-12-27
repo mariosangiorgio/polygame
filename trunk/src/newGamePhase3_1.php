@@ -29,11 +29,11 @@
 		<tr>
 			<td>
 				<button type="button"><? echo $TEXT['newGamePhase3_1-button_1']; ?></button>
-				<input type="hidden" name="dataType" value="username" />
+				<input type="hidden" name="useEmail" value="false" />
 			</td>
 			<td>
 				<button type="button"><? echo $TEXT['newGamePhase3_1-button_2']; ?></button>
-				<input type="hidden" name="dataType" value="email" />
+				<input type="hidden" name="useEmail" value="true" />
 			</td>
 		</tr>
 	</tbody>
@@ -48,10 +48,8 @@
 			event.preventDefault();
 			var url = "./createNewGame.php";
 			var dataType = $(this).next().val();
-			var dataToSend = { destinationPhase: 3,
-								comingPhase: 3,
-								usingAjax: 'true',
-								dataType: dataType };
+			var dataToSend = { phase: 3,
+							useEmail: dataType };
 			var typeOfDataToReceive = 'html';
 			var callback = function( response ) {
 				$("#wrapper").html( response );

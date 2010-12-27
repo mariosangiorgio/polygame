@@ -34,6 +34,11 @@ a {
 	font-weight: bold;
 }
 
+#wrapper {
+	margin-top: 125px;
+	margin-bottom: 5%;
+	position: relative; 
+}
 /* Header Section */
 #stripe {
 	width:100%;

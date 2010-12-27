@@ -2,10 +2,10 @@
 <div id="changeDataType">
 	<a class="link">
 <?
-	if( $_SESSION['phase3']['dataType'] == "username" )
-		echo $TEXT['newGamePhase3_2-a_1'];
-	else if( $_SESSION['phase3']['dataType'] == "email" )
+	if( $dataType['useEmail'] )
 		echo $TEXT['newGamePhase3_2-a_2'];
+	else
+		echo $TEXT['newGamePhase3_2-a_1'];
 ?>
 	</a>
 </div>
@@ -21,24 +21,32 @@
 	</p>
 </form>
 <?
-	if( isSet( $_SESSION['phase2'] ))
+	$query = "SELECT g.`Wedge ID` as wedgeID, w.`Title`, `Group name` as groupName ".
+			"FROM `wedge groups` g, `wedges` w ".
+			"WHERE w.`Wedge ID`=g.`Wedge ID` ".
+			"AND g.`Game ID`='".$gData['gameID']."';";
+	$result = mysql_query( $query, $connection );
+	
+	$counter = 0;
+	while( $group = mysql_fetch_array( $result ))
 	{
-		foreach( $_SESSION['phase2']['wedges'] as $keyValue => $wedgeId )
-		{
-			$query = "SELECT `Wedge ID` as Id, Title ". 
-				 "FROM Wedges ".
-				 "WHERE Language='$lang' AND `Wedge ID`=".$wedgeId;
-			$data = mysql_query( $query, $connection );
-			$wedge = mysql_fetch_array( $data )
+		if( $group['groupName'] )
+			$groupName = $group['groupName'];
+		else
+			$groupName = $group['Title'];
 ?>
 <div class="playerList ui-corner-all">
-	<a name="<? echo $wedge['Id']?>"></a>
-	<p><? echo $wedge['Title']?></p>
+	<a name="<? echo $group['wedgeID']?>"></a>
+	<p><? echo $groupName; ?></p>
 	<table class="playerTable">
 	<tfoot>
 		<tr class="firstRow">
 			<th class="firstColumn">
-				<input type="text" size="40" value="<? echo $TEXT['newGamePhase3_2-input_1_1']." ".$_SESSION['phase3']['dataType']." ".$TEXT['newGamePhase3_2-input_1_2']; ?>" name="userId"/>
+				<input type="text" size="40" value="
+<? 		if( !$dataType['useEmail'] )
+			echo $TEXT['newGamePhase3_2-input_1_1'];
+		else
+			echo $TEXT['newGamePhase3_2-input_1_2']; ?>" name="userId" />
 			</th>
 			<th class="secondColumn">
 				<button type="button" class="addButton" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
@@ -48,28 +56,27 @@
 	</tfoot>
 	<tbody>
 <?
-			if( isSet( $_SESSION['phase3']['users'] ))
-			{
-				$emptyTable = true;
-				foreach( $_SESSION['phase3']['users'] as $userId => $user )
-				{
-					if( $user['wedgeId'] == $wedge['Id'] )
-					{
-						$emptyTable = false;
+		$query = "SELECT u.username ".
+				"FROM `players` p, `users` u ".
+				"WHERE p.`Game ID`='".$gData['gameID']."' ".
+				"AND p.`Player ID`=u.`User ID` ".
+				"AND p.`Wedge ID`='".$group['wedgeID']."';";
+		$innerResult = mysql_query( $query, $connection );
+		
+		$emptyTable = true;
+		while(( $player = mysql_fetch_array( $innerResult )))
+		{
+			$emptyTable = false;
 ?>
 		<tr>
-			<td class="firstColumn"><? echo $userId; ?></td>
+			<td class="firstColumn"><? echo $player['username']; ?></td>
 			<td class="secondColumn"><button type="button" class="removeButton" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
 			<td class="thirdColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 		</tr>
 <?						
-					}
-				}
-				if( $emptyTable )
-					echo "<tr class=\"emptyRow\"><td colspan=\"3\">".$TEXT['newGamePhase3_2-noPlayers_1']."</td></tr>";
-			}
-			else
-				echo "<tr class=\"emptyRow\"><td colspan=\"3\">".$TEXT['newGamePhase3_2-noPlayers_1']."</td></tr>";
+		}
+		if( $emptyTable )
+			echo "<tr class=\"emptyRow\"><td colspan=\"3\">".$TEXT['newGamePhase3_2-noPlayers_1']."</td></tr>";
 ?>
 	</tbody>
 	</table>
@@ -79,7 +86,6 @@
 	</div>
 </div>
 <?
-		}
 	}
 ?>
 <div id="nextPhaseButton">
@@ -87,9 +93,14 @@
 </div>
 <script type="text/javascript">
 	(function($) {
-		var userIdDefaultValue = "<? echo $TEXT['newGamePhase3_2-input_1_1']." ".$_SESSION['phase3']['dataType']." ".$TEXT['newGamePhase3_2-input_1_2']; ?>";
+		var userIdDefaultValue = "<? 
+			if( !$dataType['useEmail'] )
+				echo $TEXT['newGamePhase3_2-input_1_1'];
+			else
+				echo $TEXT['newGamePhase3_2-input_1_2']; ?>";
 		$(document).ready( function() 
 		{
+			var alreadyPosted = false;
 			var deleteButton = "<button type=\"button\" class=\"removeButton\" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button>";
 			var moveButton = "<button type=\"button\" class=\"moveButton\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
 			var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\"><? echo $TEXT['newGamePhase3_2-noPlayers_1']; ?></td></tr>";
@@ -227,7 +238,7 @@
 			{
 				if( confirm('<? echo $TEXT['newGamePhase3_2-confirm_1']; ?>'))
 				{
-					var dataString = "usingAjax=true&comingPhase=3&destinationPhase=3&numberOfUsers=0";
+					var dataString = "phase=3&numberOfUsers=0";
 					var url = "./createNewGame.php";
 					var dataToSend = dataString;
 					var typeOfDataToReceive = 'html';
@@ -240,37 +251,46 @@
 			$('#nextPhaseButton button').button().click( function( event )
 			{
 				event.preventDefault();
-				if( checkWedgePlayers())
+				if( !alreadyPosted )
 				{
-					var tables = $('table.playerTable');
-					var dataString = "usingAjax=true&comingPhase=3&destinationPhase=4";
-					var index = 0;
-					$(tables).each( function() 
+					alreadyPosted = true;
+					if( checkWedgePlayers())
 					{
-						var wedgeId = $(this).parents('div.playerList').find('a').attr('name');
-						var rows = $('tbody tr:not(.emptyRow)', $(this));
-						$(rows).each( function()
+						var tables = $('table.playerTable');
+						var dataString = "phase=3";
+						var index = 0;
+						$(tables).each( function() 
 						{
-							var userId = $('td.firstColumn', $(this)).text();
-							dataString += "&user" + index + "=" + userId + "&wedge" + index + "=" + wedgeId;
-							index++;
+							var wedgeId = $(this).parents('div.playerList').find('a').attr('name');
+							var rows = $('tbody tr:not(.emptyRow)', $(this));
+							$(rows).each( function()
+							{
+								var userId = $('td.firstColumn', $(this)).text();
+								dataString += "&user" + index + "=" + userId + "&wedge" + index + "=" + wedgeId;
+								index++;
+							});
 						});
-					});
-					dataString += "&numberOfUsers=" + index;
-					var url = "./createNewGame.php";
-					var dataToSend = dataString;
-					var typeOfDataToReceive = 'html';
-					var callback = function( response ) {
-						$("#wrapper").html( response );
-					};
-					$.post( url, dataToSend, callback, typeOfDataToReceive );
+						dataString += "&numberOfUsers=" + index;
+						var url = "./createNewGame.php";
+						var dataToSend = dataString;
+						var typeOfDataToReceive = 'html';
+						var callback = function( response ) {
+							$("#wrapper").html( response );
+						};
+						$.post( url, dataToSend, callback, typeOfDataToReceive );
+					}
 				}
 			});
 		});
 		
 		function checkForm( tfoot ) 
 		{
-			<? 	echo "var dataType = \"".$_SESSION['phase3']['dataType']."\";"; ?>
+			<? 	
+				if( $dataType['useEmail'] )
+					echo "var dataType = \"email\";"; 
+				else
+					echo "var dataType = \"username\";"; 
+			?>
 			var userId_re;
 			if( dataType == "username" )
 				userId_re = /^[a-z0-9]{6,12}$/i;

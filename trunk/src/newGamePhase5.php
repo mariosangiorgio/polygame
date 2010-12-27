@@ -5,14 +5,21 @@
 		<p><? echo $TEXT['newGamePhase5-p_2']; ?></p>
 		<table class="playerTable">
 		<tbody>
-<?			
-	if( isSet( $_SESSION['phase5'] ))
+<?	
+	$query = "SELECT u.username ".
+			"FROM `voters` v, `users` u ".
+			"WHERE v.`Game ID`='".$gData['gameID']."' ".
+			"AND v.`Voter ID`=u.`User ID`;";
+	$result = mysql_query( $query, $connection );
+	$numberOfVoters = mysql_num_rows( $result );
+	
+	if( $numberOfVoters )
 	{
-		for( $counter = 0; $counter < $_SESSION['phase5']['numberOfVoters']; $counter++ )
+		while(( $voter = mysql_fetch_array( $result )))
 		{
 ?>
 			<tr>
-				<td class="firstColumn"><? echo $_SESSION['phase5']['voters'][$counter]; ?></td>
+				<td class="firstColumn"><? echo $voter['username']; ?></td>
 				<td class="secondColumn"><button type="button" class="removeButton" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
 			</tr>
 <?
@@ -69,7 +76,7 @@
 		var deleteButton = "<button type=\"button\" class=\"removeButton\" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button>";
 		var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\"><? echo $TEXT['newGamePhase5-noVoters_1']; ?></td></tr>";
 		
-		$('div.addGroup button.addButton').click( function()
+		var addVoter = function()
 		{
 			var newVoterName = $('div.addGroup input[name="newVoter"]').val();
 			var errorStr = checkVoterName( newVoterName );
@@ -93,6 +100,10 @@
 				$('div.addGroup div.errorClass strong').html( errorStr );
 				$('div.addGroup div.errorClass').slideDown();
 			}
+		}
+		
+		$('div.addGroup button.addButton').click( function() {
+			addVoter();
 		});
 		$('table.playerTable tbody td.secondColumn button.removeButton').live('click', function()
 		{
@@ -116,6 +127,14 @@
 			if( !$(this).attr('value'))
 				$(this).attr('value', voterDefaultValue );
 		});
+		$('div.addGroup input[name="newVoter"]').keypress( function( event )
+			{
+				if( event.which == '13' )
+				{
+					addVoter();
+					$(this).val('');
+				}
+			});
 		$('#nextPhaseButton button[type="submit"]').button().click( function( event )
 		{
 			event.preventDefault();
@@ -123,13 +142,12 @@
 			
 			if( !$(rows).length )
 			{
-				var errorDiv = $('div.playerList').find('div.errorClass');
-				$('strong', $(errorDiv)).html("<? echo $TEXT['newGamePhase5-noVoters_2']; ?>");
-				$(errorDiv).slideDown();
+				$('div.addGroup div.errorClass strong').html("<? echo $TEXT['newGamePhase5-noVoters_2']; ?>");
+				$('div.addGroup div.errorClass').slideDown();
 			}
 			else
 			{
-				var dataString = "usingAjax=true&comingPhase=5&destinationPhase=6";
+				var dataString = "phase=5";
 				var voterIndex = 0;
 				$(rows).each( function() 
 				{

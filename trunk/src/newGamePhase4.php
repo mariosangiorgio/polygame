@@ -2,47 +2,35 @@
 <div id="divPhase4" class="phase4 phases">
 <p><? echo $TEXT['newGamePhase4-p_1']; ?></p>
 <?
-	if( isSet( $_SESSION['phase4'] ))
+	$query = "SELECT `Plan ID` as planID, `Group name` as groupName ".
+			"FROM `plan groups` WHERE `Game ID`='".$gData['gameID']."';";
+	$result = mysql_query( $query, $connection );
+	$numberOfPlans = mysql_num_rows( $result );
+		
+	if( $numberOfPlans )
 	{
-		$vector = generateRandomSequence( 0, $_SESSION['phase3']['numberOfUsers'] - 1 );
-		$userPerGroup = intval( $_SESSION['phase3']['numberOfUsers'] / $_SESSION['phase4']['numberOfGroups'] );
-		$remainingUsers = $_SESSION['phase3']['numberOfUsers'] % $_SESSION['phase4']['numberOfGroups'];
-		$userIndex = 0;
-		$index = 0;
-		foreach( $_SESSION['phase3']['users'] as $userId => $user )
-		{
-			$userIdVector[$index] = $userId;
-			$index++;
-		}
-		for( $index = 0; $index < $_SESSION['phase4']['numberOfGroups']; $index++ )
-		{
-			
+		while(( $plan = mysql_fetch_array( $result )))
+		{		
 ?>
 	<div class="playerList ui-corner-all">
-		<p><? echo $_SESSION['phase4']['groups'][$index]; ?></p>
+		<p><? echo $plan['groupName']; ?></p>
 		<table class="playerTable">
 		<tbody>
 <?			
-			for( $counter = 0; $counter < $userPerGroup; $counter++ )
+			$query = "SELECT u.username ".
+				"FROM `players` p, `users` u ".
+				"WHERE p.`Game ID`='".$gData['gameID']."' ".
+				"AND p.`Player ID`=u.`User ID` ".
+				"AND p.`Plan ID`='".$plan['planID']."';";
+			$innerResult = mysql_query( $query, $connection );
+			while(( $user = mysql_fetch_array( $innerResult )))
 			{
 ?>
 			<tr>
-				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
+				<td class="firstColumn"><? echo $user['username']; ?></td>
 				<td class="secondColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
-				$userIndex++;
-			}
-			if( $remainingUsers > 0 )
-			{
-?>			
-			<tr>
-				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
-				<td class="secondColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
-			</tr>
-<?
-				$remainingUsers--;
-				$userIndex++;
 			}
 ?>
 		</tbody>
@@ -51,19 +39,32 @@
 <?
 		}
 	}
-	else if( isSet( $_SESSION['phase3'] ))
+	else
 	{
-		$vector = generateRandomSequence( 0, $_SESSION['phase3']['numberOfUsers'] - 1 );
-		$userPerGroup = intval( $_SESSION['phase3']['numberOfUsers'] / $_SESSION['phase2']['wedgesSelected'] );
-		$remainingUsers = $_SESSION['phase3']['numberOfUsers'] % $_SESSION['phase2']['wedgesSelected'];
+		$query = "SELECT count(*) as counter ".
+			"FROM `wedge groups` WHERE `Game ID`='".$gData['gameID']."';";
+		$result = mysql_query( $query, $connection );
+		$row = mysql_fetch_array( $result );
+		$numberOfWedges = $row['counter'];
+		
+		$query = "SELECT u.username ".
+				"FROM `players` p, `users` u ".
+				"WHERE p.`Game ID`='".$gData['gameID']."' ".
+				"AND p.`Player ID`=u.`User ID`;";
+		$userRow = mysql_query( $query, $connection );
+		$numberOfUsers = mysql_num_rows( $userRow );
+		
+		$vector = generateRandomSequence( 0, $numberOfUsers - 1 );
+		$userPerGroup = intval( $numberOfUsers / $numberOfWedges );
+		$remainingUsers = $numberOfUsers % $numberOfWedges;
 		$userIndex = 0;
 		$index = 0;
-		foreach( $_SESSION['phase3']['users'] as $userId => $user )
+		while(( $user = mysql_fetch_array( $userRow )))
 		{
-			$userIdVector[$index] = $userId;
+			$userVector[$index] = $user['username'];
 			$index++;
 		}
-		for( $index = 0; $index < $_SESSION['phase2']['wedgesSelected']; $index++ )
+		for( $index = 0; $index < $numberOfWedges; $index++ )
 		{
 			
 ?>
@@ -76,7 +77,7 @@
 			{
 ?>
 			<tr>
-				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
+				<td class="firstColumn"><? echo $userVector[$vector[$userIndex]]; ?></td>
 				<td class="secondColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
@@ -86,7 +87,7 @@
 			{
 ?>			
 			<tr>
-				<td class="firstColumn"><? echo $userIdVector[$vector[$userIndex]]; ?></td>
+				<td class="firstColumn"><? echo $userVector[$vector[$userIndex]]; ?></td>
 				<td class="secondColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 			</tr>
 <?
@@ -131,6 +132,7 @@
 	(function($) {
 		$(document).ready( function() 
 		{
+			var alreadyPosted = false;
 			var moveButton = "<button type=\"button\" class=\"moveButton\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
 			var groupDefaultValue = "<? echo $TEXT['newGamePhase4-input_1']; ?>";
 			
@@ -271,32 +273,36 @@
 			$('#nextPhaseButton button[type="submit"]').button().click( function( event )
 			{
 				event.preventDefault();
-				var groups = $('div.playerList');
-				var dataString = "usingAjax=true&comingPhase=4&destinationPhase=5";
-				var groupIndex = 0;
-				var userIndex = 0;
-				$(groups).each( function() 
+				if( !alreadyPosted )
 				{
-					var groupName = $('p', $(this)).text();
-					dataString += "&groupName" + groupIndex + "=" + groupName;
-					var rows = $('tbody tr', $(this));
-					$(rows).each( function()
+					alreadyPosted = true;
+					var groups = $('div.playerList');
+					var dataString = "phase=4";
+					var groupIndex = 0;
+					var userIndex = 0;
+					$(groups).each( function() 
 					{
-						var userId = $('td.firstColumn', $(this)).text();
-						dataString += "&user" + userIndex + "=" + userId + "&group" + userIndex + "=" + groupName;
-						userIndex++;
+						var groupName = $('p', $(this)).text();
+						dataString += "&groupName" + groupIndex + "=" + groupName;
+						var rows = $('tbody tr', $(this));
+						$(rows).each( function()
+						{
+							var userId = $('td.firstColumn', $(this)).text();
+							dataString += "&" + userId + "=" + groupName;
+							userIndex++;
+						});
+						if( rows.length )
+							groupIndex++;
 					});
-					if( rows.length )
-						groupIndex++;
-				});
-				dataString += "&numberOfGroups=" + groupIndex;
-				var url = "./createNewGame.php";
-				var dataToSend = dataString;
-				var typeOfDataToReceive = 'html';
-				var callback = function( response ) {
-					$("#wrapper").html( response );
-				};
-				$.post( url, dataToSend, callback, typeOfDataToReceive );
+					dataString += "&numberOfGroups=" + groupIndex;
+					var url = "./createNewGame.php";
+					var dataToSend = dataString;
+					var typeOfDataToReceive = 'html';
+					var callback = function( response ) {
+						$("#wrapper").html( response );
+					};
+					$.post( url, dataToSend, callback, typeOfDataToReceive );
+				}
 			});
 			
 			function checkGroupName( currentGroupName, currentDiv )

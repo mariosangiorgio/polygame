@@ -13,14 +13,14 @@
 	{
 		list( $username, $token ) = explode( ':', $_COOKIE['at'] );
 		$username = mysql_real_escape_string( $username );
-		$query = "SELECT `Player ID`,`username`,`password`,`role`,`nonce` FROM `users` WHERE `username`='$username'";
+		$query = "SELECT `User ID`,`username`,`password`,`role`,`nonce` FROM `users` WHERE `username`='$username'";
 		$result = mysql_query( $query, $connection );
 		while(( $row = mysql_fetch_array( $result )))
 		{
 			if( $token == sha1( $row['nonce'].$row['password'] ))
 			{
 				$gData['logged'] = true;
-				$gData['userID'] = $row['Player ID'];
+				$gData['userID'] = $row['User ID'];
 				$gData['username'] = $row['username'];
 				$gData['password'] = $row['password'];
 				$gData['role'] = $row['role'];
