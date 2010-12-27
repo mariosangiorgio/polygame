@@ -3,6 +3,9 @@
 	include_once("./inc/init.php");
 	include_once("./lang/".$gData['langFile']);
 	include_once("./backend/utils.php");
+	
+	if( $gData['logged'] && $gData['role'] == "organizer" )
+		header('Location: ./organize.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -10,11 +13,11 @@
 <head>
 	<title><? echo $TEXT['main-page_title']; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link href="css/main.css" type="text/css" rel="stylesheet" />
-	<link href="css/index.css" type="text/css" rel="stylesheet" />
-	<link href="css/ui-lightness/jquery-ui-1.8.4.custom.css" type="text/css" rel="stylesheet" />	
-	<script type="text/JavaScript" src="lib/jquery-1.4.1.min.js"></script>
-	<script type="text/Javascript" src="lib/jquery-ui-1.8.4.custom.min.js"></script> 
+	<link href="./css/main.css" type="text/css" rel="stylesheet" />
+	<link href="./css/index.css" type="text/css" rel="stylesheet" />
+	<link href="./css/ui-lightness/jquery-ui-1.8.4.custom.css" type="text/css" rel="stylesheet" />	
+	<script type="text/JavaScript" src="./lib/jquery-1.4.1.min.js"></script>
+	<script type="text/Javascript" src="./lib/jquery-ui-1.8.4.custom.min.js"></script> 
 	<script type="text/javascript"> 
 	( function($) {
 		$(document).ready( function() 
@@ -362,31 +365,6 @@
 						<? echo $TEXT['main-p_3']; ?><a class="link"><? echo $TEXT['main-a_4']; ?></a>
 					</div>
 				</form>
-			</div>
-<?
-	}
-	else if( $gData['role'] == "organizer" )
-	{
-		$organizerAction = $TEXT['main-button_6'];
-		$link = "./createNewGame.php";
-		
-		$query = "SELECT Defined, Started FROM `game` WHERE `Organizer ID`='".$gData['username']."';";
-		$result = mysql_query( $query, $connection );
-		
-		if(( $row = mysql_fetch_array( $result )))
-		{
-			if( $row['Defined'] )
-			{
-				$link = "./play.php";
-				if( $row['Started'] )
-					$organizerAction = $TEXT['main-button_4'];
-				else
-					$organizerAction = $TEXT['main-button_5'];
-			}
-		}
-?>		
-			<div class="roleButton">
-				<button type="button"><a href="<? echo $link; ?>"><? echo $organizerAction; ?></a></button>
 			</div>
 <?
 	}
