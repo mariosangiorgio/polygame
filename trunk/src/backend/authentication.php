@@ -34,7 +34,7 @@
 		header("Location: ../index.php");
 	else
 	{
-		$query = "SELECT `username`,`role`,`password` FROM `users` WHERE `username`='$username'";
+		$query = "SELECT `Username`,`Role`,`Password` FROM `users` WHERE `Username`='$username'";
 		$result = mysql_query( $query, $connection );
 		if( mysql_num_rows( $result ))	
 		{
@@ -44,13 +44,13 @@
 			$response = array( 'code' => "403", 'form' => "loginForm", 'message' => 'Invalid Password' );
 			while(( $user = mysql_fetch_array( $result )))
 			{
-				if( $realPassword == $user['password'] )
+				if( $realPassword == $user['Password'] )
 				{
 					// Password is correct
 					$nonce = uniqid();
-					$query = "UPDATE `users` SET `nonce`='$nonce' WHERE `username`='$username' AND `password`='$realPassword';";
+					$query = "UPDATE `users` SET `Nonce`='$nonce' WHERE `Username`='$username' AND `Password`='$realPassword';";
 					mysql_query( $query, $connection );
-					$token = sha1( $nonce.$user['password'] );
+					$token = sha1( $nonce.$user['Password'] );
 					// TODO: setcookie( 'at', $username.":".$token, time() + 3600 * 24, '/', 'localhost' );
 					setcookie( 'at', $username.":".$token, 0, '/' );
 					$response = array( 'code' => "200", 'form' => "loginForm", 'message' => 'OK' );
