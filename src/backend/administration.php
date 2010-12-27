@@ -28,14 +28,14 @@
 
 function getAllOrganizers(){
 	global $connection;
-	$query = "SELECT `username` FROM `Users` WHERE `role`='organizer'";
+	$query = "SELECT `Username` FROM `users` WHERE `Role`='organizer'";
 	
 	$result = mysql_query( $query, $connection );
 	
 	$counter = 0;
 	while( $row = mysql_fetch_array( $result ))
 	{
-		$organizers[$counter] = array('name' => $row['username']);
+		$organizers[$counter] = array('name' => $row['Username']);
 		$counter++;
 	}
 	
@@ -55,7 +55,7 @@ function deleteOrganizer($username){
 	global $connection;
 	$username = mysql_real_escape_string($username);
 	
-	$query = "DELETE FROM `Users` WHERE `username`='$username'";
+	$query = "DELETE FROM `users` WHERE `Username`='$username'";
 	$result = mysql_query( $query, $connection );
 }
 
