@@ -148,7 +148,7 @@
 	$TEXT['newGamePhase3_2-a_2'] = "Voglio inserire gli username!";
 	$TEXT['newGamePhase3_2-p_1'] = htmlentities("È possibile caricare i giocatori a partire da un elenco di nomi o indirizzi email:");
 	$TEXT['newGamePhase3_2-p_2'] = "Definisci i gruppi validi per la prima fase";
-	$TEXT['newGamePhase3_2-input_1_1'] = "Inserisci un nuovo";
+	$TEXT['newGamePhase3_2-input_1_1'] = "Inserisci un nuovo ";
 	$TEXT['newGamePhase3_2-input_1_2'] = "qui...";
 	$TEXT['newGamePhase3_2-button_add'] = "Aggiungi";
 	$TEXT['newGamePhase3_2-button_move'] = "Sposta...";
@@ -191,5 +191,15 @@
 	$TEXT['newGamePhase5-noVoters_2'] = "Nessun giudice specificato per questo gioco.";
 	$TEXT['newGamePhase5-error_1'] = "Nessun valore inserito.";
 	$TEXT['newGamePhase5-error_2'] = "I nomi dei giudici devono essere unici.";
+	
+	/* 
+	------------------
+	Error page: errorPage.php
+	------------------
+	*/
+	
+	$TEXT['error-page_title'] = "Errore";
+	$TEXT['errorPage-p_1_401'] = "Non disponi dei diritti necessari per accedere a questa pagina!";
+	$TEXT['errorPage-p_2'] = "Ritorna alla home page...";
 	
 ?>

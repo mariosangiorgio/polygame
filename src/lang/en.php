@@ -172,8 +172,8 @@
 	$TEXT['newGamePhase3_2-a_2'] = "I want to specify just the username!";
 	$TEXT['newGamePhase3_2-p_1'] = "You can load a list of names from a file:";
 	$TEXT['newGamePhase3_2-p_2'] = "Make groups for the first phase";
-	$TEXT['newGamePhase3_2-input_1_1'] = "Insert the new player";
-	$TEXT['newGamePhase3_2-input_1_2'] = "here...";
+	$TEXT['newGamePhase3_2-input_1_1'] = "Insert the new player username here...";
+	$TEXT['newGamePhase3_2-input_1_2'] = "Insert the new player email here...";
 	$TEXT['newGamePhase3_2-button_add'] = "Add";
 	$TEXT['newGamePhase3_2-button_move'] = "Move to...";
 	$TEXT['newGamePhase3_2-button_modify'] = "Modify";
@@ -217,6 +217,16 @@
 	$TEXT['newGamePhase5-error_1'] = "No value inserted.";
 	$TEXT['newGamePhase5-error_2'] = "Voter name must be unique!";
 
+	/* 
+	------------------
+	Error page: errorPage.php
+	------------------
+	*/
+	
+	$TEXT['error-page_title'] = "Error";
+	$TEXT['errorPage-p_1_401'] = "You seem not to be authorized to access this page!";
+	$TEXT['errorPage-p_2'] = "Go back to the home page...";
+	
 	
 	
 	

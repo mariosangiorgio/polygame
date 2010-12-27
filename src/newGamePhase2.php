@@ -1,21 +1,19 @@
 <? 
 	include "newGameBar.php"; 
 	
-	$query = "SELECT count(*) as counter ".
-			"FROM `Game wedges` WHERE `Game ID`='".$gData['gameID']."';";
-	$result = mysql_query( $query, $connection );
-		
-	if(( $row = mysql_fetch_array( $result )))
-		$numberOfWedges = $row['counter'];
-	
 	$query = "SELECT `Wedge ID` as id ".
-			"FROM `Game wedges` ".
+			"FROM `wedge groups` ".
 			"WHERE `Game ID`='".$gData['gameID']."';";
 	$result = mysql_query( $query, $connection );
+	$numberOfWedges = mysql_num_rows( $result );
 	
+	$wedgesSelected = array();
 	$counter = 0;
 	while(( $row = mysql_fetch_array( $result )))
-		$wedgesSelected[$counter++] = $row['id'];
+	{
+		$wedgesSelected[$counter] = $row['id'];
+		$counter++;
+	}
 ?>
 <div id="divPhase2" class="phase2 phases">
 	<p><? echo $TEXT['newGamePhase2-p_1']; ?></p>
@@ -24,7 +22,6 @@
 		action="./createNewGame.php"
 		method="POST"
 	>
-		<input type="hidden" name="wedgesSelected" value="<? echo $numberOfWedges; ?>" />
 	<table class="tablePhase1_2">
 	<tbody>
 		<tr>
@@ -36,15 +33,15 @@
 				<ol id="selectable">
 <? 
 	$query = "SELECT `Wedge ID` as id, Title ". 
-			 "FROM Wedges ".
+			 "FROM `wedges` ".
 			 "WHERE Language='".$gData['lang']."';";
 	$data = mysql_query( $query, $connection );
 	
 	$counter = 0;
 	while( $wedge = mysql_fetch_array( $data )) 
 	{
-		$wedges[$counter] = array(  'id' 		=> $wedge['id'],
-									'Title' 	=> $wedge['Title'] );
+		$wedges[$counter] = array(  'id' 	=> $wedge['id'],
+									'Title' => $wedge['Title'] );
 		$counter++;
 	}
 	
@@ -67,16 +64,7 @@
 			echo "class=\"ui-corner-all ui-selectee\"";;
 ?>					
 					>
-						<input 
-							type="checkbox"
-							name="wedge<? echo $index; ?>"
-							value="<? echo $wedge['id']; ?>" 
-							class="ui-helper-hidden-accessible" 
-<?
-		if( $isSelected )
-			echo "checked";
-?>			
-						/>
+						<input type="hidden" name="wedge<? echo $index; ?>"	value="<? echo $wedge['id']; ?>" />
 						<? echo $wedge['Title']; ?>
 					</li>
 <?
@@ -111,21 +99,22 @@
 		{
 			event.preventDefault();
 			var form = $('#divPhase2 form');
-			var checkboxes = $('input[type="checkbox"]');
 			var counter = 0;
-			$(checkboxes).each( function() 
+			var dataToSend = "";
+			$('#selectable li').each( function() 
 			{
-				if( $(this).attr('checked'))
+				if( $(this).attr('class') == "ui-corner-all ui-selected" )
 				{
-					$(this).attr('name', 'wedge' + counter );
+					dataToSend += "wedge" + counter + "=" +
+						$('input[type="hidden"]', $(this)).attr('value') + "&";
 					counter++;
 				}
 			});
 			if( counter )
 			{
+				dataToSend += "wedgesSelected=" + counter + "&phase=<? echo $currentPhase; ?>";
 				var url = $(form).attr('action');
 				var formName = $(form).attr('name');
-				var dataToSend = $(form).serialize();
 				var typeOfDataToReceive = 'html';
 				var callback = function( response ) {
 					$("#wrapper").html( response );
@@ -141,20 +130,8 @@
 		
 		$('#selectable li').click( function() 
 		{
-			var wedgesSelected = $('#divPhase2 form input[name="wedgesSelected"]').val();
 			$(this).toggleClass('ui-selected ui-selectee');
 			$('table.tablePhase1_2 div.errorClass:visible').slideUp();
-			var checkbox = $('input[type="checkbox"]', this );
-			if( $(checkbox).attr('checked'))
-			{
-				$(checkbox).removeAttr('checked');
-				$('#divPhase2 form input[name="wedgesSelected"]').val( --wedgesSelected );
-			}
-			else
-			{
-				$(checkbox).attr('checked', true );
-				$('#divPhase2 form input[name="wedgesSelected"]').val( ++wedgesSelected );
-			}
 		});
 		
 		$('#selectAll').click( function() 
@@ -162,9 +139,7 @@
 			var elements = $('#selectable li');
 			$(elements).removeClass('ui-selectee');
 			$(elements).addClass('ui-selected');
-			$('input[type="checkbox"]', $(elements)).attr('checked', true );
 			$('table.tablePhase1_2 div.errorClass:visible').slideUp();
-			$('#divPhase2 form input[name="wedgesSelected"]').val( elements.length );
 		});
 		
 		$('#deselectAll').click( function() 
@@ -172,8 +147,6 @@
 			var elements = $('#selectable li');
 			$(elements).removeClass('ui-selected');
 			$(elements).addClass('ui-selectee');
-			$('input[type="checkbox"]', $(elements)).removeAttr('checked');
-			$('#divPhase2 form input[name="wedgesSelected"]').val('0');
 		});
 	});
 })(jQuery);
