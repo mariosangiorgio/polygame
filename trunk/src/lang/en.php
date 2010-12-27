@@ -69,18 +69,30 @@
 	$TEXT['organization-page_title']			= 'Organization page';
 	$TEXT['organizer-page_login-error-message'] = 'Please log in as an organizer to access this page';
 
-	$TEXT['organizer-page_intro-title']			= 'Are you ready to start a new game?';
-	$TEXT['organizer-page_intro-content']		= 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.';
-	$TEXT['organizer-page_rule-link']			= 'Review the rules of the Polygame';
+	$TEXT['organizer-page_intro-title_1']		= 'Ready to start a new game?';
+	$TEXT['organizer-page_intro-title_2']		= 'Ready to play?';
+	$TEXT['organizer-page_intro-title_3']		= 'Ready to start a new game?';
+	$TEXT['organizer-page_intro-title_4']		= 'Ready to play?';
+	$TEXT['organizer-page_intro-content_1']		= 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.';
+	$TEXT['organizer-page_intro-content_2']		= 'It looks like you have started to prepare a new game. Continue just pressing the button.';
+	$TEXT['organizer-page_intro-content_3']		= 'It looks like you have prepared a new game. When you are ready just press the button.';
+	$TEXT['organizer-page_intro-content_4']		= 'It looks like you have a game already started. When you are ready just press the button.';
+	$TEXT['organizer-page_rule-link']			= 'If you have doubts, review the rules of the Polygame';
 
 	$TEXT['organizer-page_suggestions-title']			= 'Do you want to improve future games?';
 	$TEXT['organizer-page_suggestions-feedback']		= 'Leave feedback or ';
 	$TEXT['organizer-page_suggestions-propose-wedge']	= 'propose a new wedge';
-	$TEXT['organizer-page_default-feedback']			= 'Enter your feedback here';
-	$TEXT['organizer-page_new-game-button']				= 'Create a new game';
+	$TEXT['organizer-page_default-feedback_1']			= 'Enter your feedback here';
+	$TEXT['organizer-page_default-feedback_2']			= 'Please insert your feedback before submitting';
+	$TEXT['organizer-page_button_1']					= 'Create a new game';
+	$TEXT['organizer-page_button_2']					= 'Continue to create';
+	$TEXT['organizer-page_button_3']					= 'Start to play';
+	$TEXT['organizer-page_button_4']					= 'Continue to play';
 	$TEXT['organizer-page_send-your-feedback']			= 'Send your feedback';
-	$TEXT['organizer-page_confirmation-dialog-title']	= 'Submission successful';
-	$TEXT['organizer-page_confirmation-dialog-message']	= 'The administrators will soon take care of your submission';
+	$TEXT['organizer-page_confirmation-dialog-title-ok']	= 'Submission successful';
+	$TEXT['organizer-page_confirmation-dialog-message-ok']	= 'The administrators will soon take care of your submission';
+	$TEXT['organizer-page_confirmation-dialog-title-no']	= 'Error';
+	$TEXT['organizer-page_confirmation-dialog-message-no']	= 'An error occurred while delivering your submission';
 	
 	/* 
 	------------------
