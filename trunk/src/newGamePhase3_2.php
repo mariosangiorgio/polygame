@@ -42,22 +42,33 @@
 	<tfoot>
 		<tr class="firstRow">
 			<th class="firstColumn">
-				<input type="text" size="40" value="
-<? 		if( !$dataType['useEmail'] )
-			echo $TEXT['newGamePhase3_2-input_1_1'];
-		else
-			echo $TEXT['newGamePhase3_2-input_1_2']; ?>" name="userId" />
+				<input type="text" size="40" value="<? echo $TEXT['newGamePhase3_2-input_1_1']; ?>" name="username" />
 			</th>
 			<th class="secondColumn">
 				<button type="button" class="addButton" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
 			</th>
 			<th class="thirdColumn"></th>
 		</tr>
+<?
+	if( $dataType['useEmail'] )
+	{
+?>
+		<tr class="secondRow">
+			<th class="firstColumn">
+				<input type="text" size="40" value=" <? echo $TEXT['newGamePhase3_2-input_1_1']; ?>" name="email" />
+			</th>
+			<th class="secondColumn"></th>
+			<th class="thirdColumn"></th>
+		</tr>
+	}
+?>
 	</tfoot>
 	<tbody>
 <?
-		$query = "SELECT u.username ".
-				"FROM `players` p, `users` u ".
+		$query = "SELECT u.username ";
+		if( $dataType['useEmail'] )
+			$query = $query.", p.email ";
+		$query = $query."FROM `players` p, `users` u ".
 				"WHERE p.`Game ID`='".$gData['gameID']."' ".
 				"AND p.`Player ID`=u.`User ID` ".
 				"AND p.`Wedge ID`='".$group['wedgeID']."';";
@@ -69,7 +80,13 @@
 			$emptyTable = false;
 ?>
 		<tr>
-			<td class="firstColumn"><? echo $player['username']; ?></td>
+			<td class="firstColumn">
+<?
+			echo $player['username'];
+			if( $dataType['useEmail'] )
+				echo " - ".$player['email'];
+?>
+			</td>
 			<td class="secondColumn"><button type="button" class="removeButton" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
 			<td class="thirdColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
 		</tr>
@@ -93,11 +110,15 @@
 </div>
 <script type="text/javascript">
 	(function($) {
-		var userIdDefaultValue = "<? 
-			if( !$dataType['useEmail'] )
-				echo $TEXT['newGamePhase3_2-input_1_1'];
-			else
-				echo $TEXT['newGamePhase3_2-input_1_2']; ?>";
+<?
+	if( $dataType['useEmail'] )
+		echo "var dataType = \"email\";"; 
+	else
+		echo "var dataType = \"username\";"; 
+?>
+		var usernameDefaultValue = "<? echo $TEXT['newGamePhase3_2-input_1_1']; ";
+		var emailDefaultValue = "<? echo $TEXT['newGamePhase3_2-input_1_2']; ";		
+		
 		$(document).ready( function() 
 		{
 			var alreadyPosted = false;
@@ -114,7 +135,12 @@
 				{
 					$(tfoot).parents('div.playerList').find('div.errorClass strong').html('');
 					$(tfoot).parents('div.playerList').find('div.errorClass:visible').slideUp();
-					var userId = $('input[name="userId"]', $(tfoot)).val();
+					var userId;
+					if( dataType = "username" )
+						userID = $('input[name="username"]', $(tfoot)).val();
+					else
+						userID = $('input[name="username"]', $(tfoot)).val() + " - " +
+								$('input[name="email"]', $(tfoot)).val();
 					var row = "<tr><td class=\"firstColumn\">" + userId + "</td><td class=\"secondColumn\">" + 
 							deleteButton + "</td>" + "<td class=\"thirdColumn\">" + moveButton + "</td></tr>";
 					if( !$('tr:not(.emptyRow)', $(tbody)).length )
@@ -186,7 +212,7 @@
 			});
 			
 			
-			$('input[name="userId"]').keypress( function( event )
+			$('input[name="username"]').keypress( function( event )
 			{
 				if( event.which == '13' )
 				{
@@ -222,14 +248,14 @@
 			});
 			$('button.moveButton').button();
 			
-			$('input[name="userId"]').click( function() {
-				if( $(this).attr('value') == userIdDefaultValue )
+			$('input[name="username"]').click( function() {
+				if( $(this).attr('value') == usernameDefaultValue )
 					$(this).removeAttr('value');
 			});
-			$('input[name="userId"]').blur( function() {
+			$('input[name="username"]').blur( function() {
 				if( !$(this).attr('value'))
 				{
-					$(this).attr('value', userIdDefaultValue );
+					$(this).attr('value', usernameDefaultValue );
 					$(this).parents('div.playerList').find('div.errorClass strong').html('');
 					$(this).parents('div.playerList').find('div.errorClass:visible').slideUp();
 				}
@@ -285,12 +311,6 @@
 		
 		function checkForm( tfoot ) 
 		{
-			<? 	
-				if( $dataType['useEmail'] )
-					echo "var dataType = \"email\";"; 
-				else
-					echo "var dataType = \"username\";"; 
-			?>
 			var userId_re;
 			if( dataType == "username" )
 				userId_re = /^[a-z0-9]{6,12}$/i;

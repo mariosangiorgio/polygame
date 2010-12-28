@@ -189,9 +189,9 @@
 			}
 			if( !firstInput )
 			{
-				if( !form.mail.value )
+				if( !form.email.value )
 					secondInput += " <? echo $TEXT['main-mail_1']; ?>";
-				else if( !mail_re.test( form.mail.value ))
+				else if( !mail_re.test( form.email.value ))
 					secondInput += " <? echo $TEXT['main-mail_2']; ?>";
 			}
 		}
@@ -243,7 +243,8 @@
 	$index = 0;
 	$wedgeLimit = 3;
 	
-	$query = "SELECT `Wedge ID` as id, Title, Summary, Image FROM Wedges WHERE Language='".$gData['lang']."';";
+	$query = "SELECT `Wedge ID` as id, Title, Summary, Image ".
+			"FROM `wedges` WHERE `Language`='".$gData['lang']."';";
 	$result = mysql_query( $query, $connection );
 	
 	while( $row = mysql_fetch_array( $result ))
