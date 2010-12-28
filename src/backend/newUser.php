@@ -1,10 +1,11 @@
 <?php
 	include_once("../inc/db_connect.php");
 	include_once("../inc/init.php");
+	include_once("./utils.php");
 	
 	//Sanitizing inputs
 	$username = mysql_real_escape_string( $_POST['username']);
-	$mail = mysql_real_escape_string( $_POST['mail']);
+	$mail = mysql_real_escape_string( $_POST['email']);
 
 	$username_re = '^[a-zA-Z0-9]{6,12}$';
 	$mail_re = '^.+@.+\..+$';
@@ -42,7 +43,7 @@
 		} while( $alreadyExist );
 		
 		$subject = "Polygame Login data";
-		$body = "\r\nHere are your login data:\r\n\r\n\t\tUsername: ".$username."\r\n\t\tPassword: ".$password."\r\n";
+		$body = "\r\nHere are your login data:\r\n\r\n\t\tUsername: ".$username."\r\n\t\tPassword: ".$token."\r\n";
 
 		$mailsend = mail( $mail, $subject, $body );
 		if( $mailsend )
