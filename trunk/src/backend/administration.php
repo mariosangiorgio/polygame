@@ -21,6 +21,7 @@
 					deleteOrganizer($username);
 				}
 				break;
+			//TODO: approveProposedWedge
 		}
 	}
 

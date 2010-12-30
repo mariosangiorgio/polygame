@@ -229,18 +229,30 @@
 	$TEXT['newGamePhase5-error_1'] = "No value inserted.";
 	$TEXT['newGamePhase5-error_2'] = "Voter name must be unique!";
 
+<<<<<<< .mine
+	/* 
+	------------------
+	Player page: player.php
+	------------------
+	*/
+=======
 	/* 
 	------------------
 	Error page: errorPage.php
 	------------------
 	*/
+>>>>>>> .r401
 	
+<<<<<<< .mine
+	$TEXT['player-page_login-error-message'] = "Please log-in as a player to access to this page";
+=======
 	$TEXT['error-page_title'] = "Error";
 	$TEXT['errorPage-p_1_401'] = "You seem not to be authorized to access this page!";
 	$TEXT['errorPage-p_2'] = "Go back to the home page...";
 	
 	
 	
+>>>>>>> .r401
 	
 	
 ?>
