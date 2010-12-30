@@ -47,7 +47,33 @@ if( $edit ){
 ?>
 	<script type="text/javascript">
 		$(function() {
-			$('.wymeditor').wymeditor();
+			$('.wymeditor').wymeditor(
+				{
+				  boxHtml:   "<div class='wym_box'>"
+				  			+ "<div class='wym_area_top'>"
+				  			+ WYMeditor.TOOLS
+				  			+ "<button class='insert_image_button'>insert image</button>"
+				  			+ "</div>"
+				  			+ "<div class='wym_area_left'></div>"
+				  			+ "<div class='wym_area_right'>"
+				  			+ "</div>"
+				  			+ "<div class='wym_area_main'>"
+				  			//+ WYMeditor.HTML
+				  			+ WYMeditor.IFRAME
+				  			//+ WYMeditor.STATUS
+				  			+ "</div>"
+				  			+ "<div class='wym_area_bottom'>"
+				  			+ "</div>"
+				  			+ "</div>",
+				  	postInit:
+				  		function(wym){
+				  			$(".insert_image_button").click(
+				  				function(){
+				  					$("#dialog").dialog("open");
+				  				});
+				  		}
+              }
+			);
 		});
 	</script>
 <?
@@ -130,9 +156,6 @@ if( $edit ){
 <?
 			$index++;
 		}
-?>
-		<button id="insert_image_button">insert image</button>
-<?
 	}
 	else
 	{
@@ -251,9 +274,6 @@ submitButton.click(
 </body>
 <script type="text/javascript">
 $("#dialog").dialog({autoOpen: false});
-$("#insert_image_button").click(
-	function(){$("#dialog").dialog("open")}
-);
 $("#upload_button").click(
 	function(){
 		$.ajaxFileUpload({
@@ -266,7 +286,8 @@ $("#upload_button").click(
     									if(data.error != ''){alert(data.error);}
     									else{
     										var image_url =  data.msg;
-    										var wym = $.wymeditors(0);
+    										var current_tab = $("#tabs").tabs('option', 'selected');
+    										var wym = $.wymeditors(current_tab);
     										wym.insert('<img src="'+image_url+'" />');
     										wym.update();
     									}
