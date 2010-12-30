@@ -1,6 +1,6 @@
 <?php
-	include_once("./inc/common.php");
-	include_once 'lang/'.$lang_file;
+	include_once("./inc/init.php");
+	include_once("./lang/".$gData['langFile']);
 	include_once("./inc/db_connect.php");
 	include_once("./backend/utils.php");
 	
@@ -8,14 +8,14 @@
 	$wedgeId = null;
 	
 	$edit = false;
-	if(isSet($_GET['edit']) && checkAuthorization("organizer")){
+	if(isSet($_GET['edit']) /*&& checkAuthorization("organizer") */ ){ //TODO uncomment!
 		$edit = true;
 	}
 	
 	if( isSet( $_GET['id']) && !$edit )
 	{
 		$wedgeId = $_GET['id'];
-		$lang = $_SESSION['lang'];
+		$lang	 = $gData['lang'];
 		$query = "SELECT `Title`, `Image`, `Introduction`, `Summary`, `History`, `Present use`,".
 				 "`National situation`, `Emission reduction`, `References`". 
 				 "FROM `Wedges` WHERE Language='$lang' AND `Wedge ID`=$wedgeId";
@@ -36,11 +36,23 @@
 	<? if($edit){ ?>Propose your wedge!<? } else{echo $wedgeInfo['Title'];} ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="css/main.css" type="text/css" rel="stylesheet" />
+	<link href="css/wedgeInfo.css" type="text/css" rel="stylesheet" />
 	<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.4.custom.css" rel="stylesheet" />	
 	<script type="text/JavaScript" src="lib/jquery-1.4.1.min.js"></script>
 	<script type="text/Javascript" src="lib/jquery-ui-1.8.4.custom.min.js"></script>
+	<script type='text/javascript' src="lib/ajaxfileupload.js"></script>
 	<script type="text/javascript" src="wymeditor/jquery.wymeditor.min.js"></script>
-	<script type="text/javascript">$(function() {$('.wymeditor').wymeditor();});</script>
+<?
+if( $edit ){
+?>
+	<script type="text/javascript">
+		$(function() {
+			$('.wymeditor').wymeditor();
+		});
+	</script>
+<?
+}
+?>
 	<script type="text/Javascript"> 
 	
 	( function($) {
@@ -52,6 +64,7 @@
 									animated: 'bounceslide' };
 			
 			$("#wedgeList").accordion( accordionOption );
+			<? if( $edit ){?>$("#tabs").tabs();<? } ?>
 		});
 	})(jQuery);
 	</script> 
@@ -60,9 +73,9 @@
 	<?
 		include "header.php"; 
 	?>
-	<div id="wrapper">
+	<div id="wedgeInfo-wrapper">
 		<div class="title">
-			<div class="columnLeft">
+			<div class="wedgeInfo-columnLeft">
 				<h1><?
 				if($edit){
 					?>
@@ -76,7 +89,7 @@
 				}
 				?></h1>
 			</div>
-			<div class="columnRight">
+			<div class="wedgeInfo-columnRight">
 				<h1>
 				<?
 				if(!$edit){
@@ -89,7 +102,7 @@
 				</h1>
 			</div>
 		</div>
-		<div class="columnLeft">
+		<div class="wedgeInfo-columnLeft">
 <?	
 	if( $edit )
 	{
@@ -112,11 +125,14 @@
 		{
 ?>
 				<div id="tabs-<? echo $index; ?>">
-					<p><textarea class='wymeditor' id='editor-<? echo str_replace(' ','-',$tab); ?>' /></p>
+					<p><textarea class='wymeditor' id='editor-<? echo str_replace(' ','-',$tab); ?>'></textarea></p>
 				</div>				
 <?
 			$index++;
 		}
+?>
+		<button id="insert_image_button">insert image</button>
+<?
 	}
 	else
 	{
@@ -150,7 +166,7 @@
 		}
 		else{
 			?>
-			<div class="columnRight">
+			<div class="wedgeInfo-columnRight">
 			<div id="wedgeList" class="accordion">
 			<? 
 			$query = "SELECT `Wedge ID` as id, Title, Summary, Image ". 
@@ -224,4 +240,44 @@ submitButton.click(
 	}
 );
 </script>
+
+<!-- this enables the upload of images -->
+<div id="dialog" title="Basic dialog">
+	<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+	<input	id="uploaded_image" type="file" name="uploaded_image" />
+	<button id="upload_button">upload</button>
+</div>
+
+</body>
+<script type="text/javascript">
+$("#dialog").dialog({autoOpen: false});
+$("#insert_image_button").click(
+	function(){$("#dialog").dialog("open")}
+);
+$("#upload_button").click(
+	function(){
+		$.ajaxFileUpload({
+			url:			'./storeImage.php',
+    		secureuri:		false,
+    		fileElementId:	'uploaded_image',
+    		dataType:		'json',
+    		success:	function (data, status){
+    								if(typeof(data.error) != 'undefined'){
+    									if(data.error != ''){alert(data.error);}
+    									else{
+    										var image_url =  data.msg;
+    										var wym = $.wymeditors(0);
+    										wym.insert('<img src="'+image_url+'" />');
+    										wym.update();
+    									}
+    								}
+    						},
+    		error: function (data, status, e){
+    								alert(e);
+    						}
+    	})
+	}
+);
+</script>
+<!-- this enables the upload of images -->
 </html>

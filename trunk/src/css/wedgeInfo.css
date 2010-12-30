@@ -1,0 +1,22 @@
+#wedgeInfo-wrapper {		
+	margin: 135px 0 5% 0;		
+}
+
+.wedgeInfo-columnLeft {
+	float: left;
+	width: 64%;
+	margin: 0 1.5%;
+}
+
+.wedgeInfo-columnRight {
+	float:left;
+	width: 30%;
+	margin: 0 1.5%;
+}
+
+.wedgeInfo-singleColumn {
+	float:			none;
+	text-align: 	left;
+	width:			 40%;
+	margin:			auto;
+}
