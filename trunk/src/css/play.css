@@ -1,0 +1,199 @@
+.title {
+	width: 60%;
+	margin: 0 5%;
+	text-align: center;
+}
+.title h1 {
+	font-size: 1.8em;
+}
+.columnLeft {
+	width: 60%;
+	margin: 0 5% 5% 5%;
+}
+#wedgeDetails {
+	text-align: justify;
+}
+#wedgeDetails  h2 {
+	border-bottom:1px solid #AAAAAA;
+}
+#wedgeDetails div {
+	margin: 2em 0;
+}
+#stateBar {
+	width: 35ex;
+	background: none repeat scroll 0 0 #D7EBF9;
+	position: absolute;
+	left: 72%;
+	top: 8%;
+}
+#stateBar h1 {
+	margin: 1em;
+	font-size: 1em;
+}
+#stateBar p {
+	margin: 1.5em 1.5em;
+}
+#stateBar form {
+	text-align: center;
+	padding-bottom: 1em; 
+}
+#stateBar input {
+    display: block;
+    font-size: 1.2em;
+    font-style: italic;
+    margin: 1em 0 1em 35%;
+    text-align: center;
+    width: 30%;
+}
+#stateBar.responseRight {
+	background: none repeat scroll 0 0 rgb(57,166,82);
+	padding-bottom: 1em;
+}
+#stateBar.responseWrong {
+	background: none repeat scroll 0 0 rgb(234,135,104);
+	padding-bottom: 1em;
+}
+.poster .columnLeft {
+	width: 50%;
+	margin: 0 5% 5% 5%;
+	float: left;
+}
+.poster .columnRight {
+	width: 35%;
+	margin: 0 5% 5% 0;
+	float: left;
+}
+#rightHeader {
+	text-align: center;
+}
+#rightHeader h1 {
+	font-size: 1em;
+}
+#pros {
+	width: 100%;
+	margin-top: 10%;
+	background: none repeat scroll 0 0 #D7EBF9;
+}
+#pros div {
+	width: 90%;
+	padding: 0 5% 5% 5%;
+}
+#pros div textarea {
+	width: 100%;
+}
+#pros h1 {
+	padding: 0.5em;
+	margin: 0;
+}
+#cons {
+	width: 100%;
+	margin-top: 10%;
+	background: none repeat scroll 0 0 #D7EBF9;
+}
+#cons div {
+	width: 90%;
+	padding: 0 5% 5% 5%;
+}
+#cons div textarea {
+	width: 100%;
+}
+#cons h1 {
+	padding: 0.5em;
+	margin: 0;
+}
+#notes {
+	width: 100%;
+	margin-top: 10%;
+	background: none repeat scroll 0 0 #D7EBF9;
+}
+#notes div {
+	width: 90%;
+	padding: 0 5% 5% 5%;
+}
+#notes div textarea {
+	width: 100%;
+}
+#notes h1 {
+	padding: 0.5em;
+	margin: 0;
+}
+#planDiv {
+	margin: 5% 5% 2% 5%;
+}
+#planDiv h1 {
+	text-align: center;
+}
+#wedgePoster .title {
+	width: 100%;
+	margin: 0;
+	text-align: center;
+}
+#wedgePoster .title h1 {
+	margin: 0;
+}
+#planTable {
+	width: 100%;
+	padding: 3% 5% 2% 5%;
+	background: none repeat scroll 0 0 #D7EBF9;
+}
+#planTable th {
+	padding-bottom: 0.5em;
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+#planTable tbody td {
+	padding: 0.5em 0;
+}
+#planTable td.wedgeID {
+	display: none;
+}
+#planTable td.wedgeTitle {
+	width: 20%;
+}
+#planTable td.shortTerm {
+	width: 35%;
+}
+#planTable td.longTerm {
+	width: 35%;
+}
+#planTable td.shortTermWeight, #planTable td.longTermWeight {
+	padding: 0 0.5em;
+	width: 5ex;
+	font-weight: bold;
+}
+#planTable .ui-slider-horizontal {
+	height: 0.5em;
+}
+#planTable .ui-slider .ui-slider-handle {
+	cursor: pointer;
+	height: 0.8em;
+	width: 0.7em;
+	margin-top: 0.1em;
+}
+#planTable .ui-widget-header {
+	background: url("./ui-lightness/images/ui-bg_glass_50_3baae3_1x400.png") repeat-x scroll 50% 50% #3BAAE3;
+	border: 1px solid #AED0EA;
+	color: #222222;
+	font-weight: bold;
+}
+#planTable tfoot td {
+	font-size: 1.1em;
+	font-weight: bold;
+	padding-top: 1em;
+	text-align: center;
+}
+#planTable tfoot td.wedgeTitle {
+	text-align: left;
+}
+#planTable .submitButton {
+	padding-top: 3em;
+}
+#planTable .submitButton button {
+	width: 30ex;
+}
+#showDetails {
+	margin: 2%;
+	text-align: center;
+	font-style: italic;
+}
