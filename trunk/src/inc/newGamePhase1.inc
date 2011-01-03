@@ -1,10 +1,8 @@
 <? 
-	include "newGameBar.php";
-	
 	$query = "SELECT `Length 1` as l1, `Length 1a` as l1a, ".
 					"`Length 1b` as l1b, `Length 1c` as l1c, ".
 					"`Length 2` as l2, `Length 3` as l3, Advanced ".
-			"FROM `game` WHERE `Game ID`='".$gData['gameID']."';";
+			"FROM `game` WHERE `Game ID`='".$game['gameID']."';";
 	$result = mysql_query( $query, $connection );
 	$row = mysql_fetch_array( $result );
 ?>
@@ -12,7 +10,7 @@
 	<p><? echo $TEXT['newGamePhase1-p_1']; ?></p>
 	<form
 		name="phase1Form"
-		action="./createNewGame.php"
+		action="./backend/saveTimings.php"
 		method="POST"
 	>
 		<input type="hidden" name="phase" value="<? echo $currentPhase; ?>" />
@@ -236,7 +234,7 @@
 			var form = $('#divPhase1 form');
 			var url = $(form).attr('action');
 			var formName = $(form).attr('name');
-			var dataToSend = $(form).serialize();
+			var dataToSend = $(form).serialize() + "&usingAjax=true";
 			var typeOfDataToReceive = 'html';
 			var callback = function( response ) {
 				$("#wrapper").html( response );

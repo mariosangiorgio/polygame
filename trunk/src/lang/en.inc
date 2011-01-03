@@ -73,11 +73,14 @@
 	$TEXT['organizer-page_intro-title_2']		= 'Ready to play?';
 	$TEXT['organizer-page_intro-title_3']		= 'Ready to start a new game?';
 	$TEXT['organizer-page_intro-title_4']		= 'Ready to play?';
-	$TEXT['organizer-page_intro-content_1']		= 'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.';
+	$TEXT['organizer-page_intro-content_1']		= 'Press the button and start to create a new game';
 	$TEXT['organizer-page_intro-content_2']		= 'It looks like you have started to prepare a new game. Continue just pressing the button.';
-	$TEXT['organizer-page_intro-content_3']		= 'It looks like you have prepared a new game. When you are ready just press the button.';
+	$TEXT['organizer-page_intro-content_3']		= 'It looks like you have prepared a new game. When you are ready to play just press the button.';
 	$TEXT['organizer-page_intro-content_4']		= 'It looks like you have a game already started. When you are ready just press the button.';
 	$TEXT['organizer-page_rule-link']			= 'If you have doubts, review the rules of the Polygame';
+	$TEXT['organizer-page_delete-link_1']		= 'Click here to delete the game you have created';
+	$TEXT['organizer-page_delete-link_2']		= ' and start over';
+	
 
 	$TEXT['organizer-page_suggestions-title']			= 'Do you want to improve future games?';
 	$TEXT['organizer-page_suggestions-feedback']		= 'Leave feedback or ';
@@ -88,6 +91,13 @@
 	$TEXT['organizer-page_button_2']					= 'Continue to create';
 	$TEXT['organizer-page_button_3']					= 'Start to play';
 	$TEXT['organizer-page_button_4']					= 'Continue to play';
+	$TEXT['organizer-page_li_1_1']						= 'You can ';
+	$TEXT['organizer-page_li_1_2']						= 'click here to review and edit timings, wedges, and groups';
+	$TEXT['organizer-page_li_2_1']						= 'You can also ';
+	$TEXT['organizer-page_li_2_2']						= 'print all the passwords';
+	$TEXT['organizer-page_li_2_3']						= ' (players and voters)';
+	$TEXT['organizer-page_li_3_1']						= 'If you have doubts, ';
+	$TEXT['organizer-page_li_3_2']						= 'review the rules of the game';
 	$TEXT['organizer-page_send-your-feedback']			= 'Send your feedback';
 	$TEXT['organizer-page_confirmation-dialog-title-ok']	= 'Submission successful';
 	$TEXT['organizer-page_confirmation-dialog-message-ok']	= 'The administrators will soon take care of your submission';
@@ -171,19 +181,19 @@
 	$TEXT['newGamePhase3_1-p_4'] = "If you specify the email address, the password will be sent automatically to the users by the system";
 	$TEXT['newGamePhase3_1-p_5'] = "Be sure that you have a valid email address for each user.";
 	$TEXT['newGamePhase3_1-h_1'] = "Specify just the username!";
-	$TEXT['newGamePhase3_1-h_2'] = "Specify just the email address!";
+	$TEXT['newGamePhase3_1-h_2'] = "Specify also the email address!";
 	$TEXT['newGamePhase3_1-button_1'] = htmlentities("just the username »");
-	$TEXT['newGamePhase3_1-button_2'] = htmlentities("just the email »");
+	$TEXT['newGamePhase3_1-button_2'] = htmlentities("also the email »");
 	
 	/* 
 	------------------
 	Create New Game: newGamePhase3_2.php
 	------------------
 	*/
-	$TEXT['newGamePhase3_2-a_1'] = "I want to specify just the email!";
+	$TEXT['newGamePhase3_2-a_1'] = "I want to specify also the email!";
 	$TEXT['newGamePhase3_2-a_2'] = "I want to specify just the username!";
-	$TEXT['newGamePhase3_2-p_1'] = "You can load a list of names from a file:";
-	$TEXT['newGamePhase3_2-p_2'] = "Make groups for the first phase";
+	$TEXT['newGamePhase3_2-p_1'] = "Make groups for the first phase";
+	$TEXT['newGamePhase3_2-p_2'] = "You can load a list of names from a file:";
 	$TEXT['newGamePhase3_2-input_1_1'] = "Insert the new player username here...";
 	$TEXT['newGamePhase3_2-input_1_2'] = "Insert the new player email here...";
 	$TEXT['newGamePhase3_2-button_add'] = "Add";
@@ -231,18 +241,79 @@
 
 	/* 
 	------------------
-	Player page: player.php
+	Unauthorized page: unauthorizedPage.php
 	------------------
 	*/
+	
+	$TEXT['unauthorizedPage-title'] = "Unauthorized";
+	$TEXT['unauthorizedPage-p_1'] = "You seem not to be authorized to access this page!";
+	$TEXT['unauthorizedPage-p_2'] = "Go back to the home page...";
 	
 	/* 
 	------------------
 	Error page: errorPage.php
 	------------------
 	*/
-
-	$TEXT['player-page_login-error-message'] = "Please log-in as a player to access to this page";
-	$TEXT['error-page_title'] = "Error";
-	$TEXT['errorPage-p_1_401'] = "You seem not to be authorized to access this page!";
-	$TEXT['errorPage-p_2'] = "Go back to the home page...";		
+	
+	$TEXT['errorPage-title'] = "Error";
+	$TEXT['errorPage-p_1'] = "Ooops. An error occurred!";
+	$TEXT['errorPage-p_2'] = "Please go back to the home page...";	
+	
+	/* 
+	------------------
+	Player play: play.php
+	------------------
+	*/
+	
+	$TEXT['play_stateBar-h1_1_1'] = "Hi ";
+	$TEXT['play_stateBar-h1_1_2'] = "!";
+	$TEXT['play_stateBar-p_1_1'] = "As a first task you should familiarize with your wedge, ";
+	$TEXT['play_stateBar-p_1_2'] = ". Feel free to use the references and the internet!";
+	$TEXT['play_stateBar-p_2'] = "Then, using the data provided in this file, come up with a solution. You will be prompted to enter it shortly.";
+	$TEXT['play_stateBar-p_3'] = "If you still haven't familiarized with your wedge, please do so!";
+	$TEXT['play_stateBar-p_4_1'] = "Then, using the data provided in this ";
+	$TEXT['play_stateBar-p_4_2'] = "document";
+	$TEXT['play_stateBar-p_4_3'] = ", calculate a solution.";
+	$TEXT['play_stateBar-p_5'] = "Congratulations!";
+	$TEXT['play_stateBar-p_6'] = "You have entered the correct solution. Whenever you are ready start the creation of a summary poster, with all the pros and cons of your wedge.";
+	$TEXT['play_stateBar-p_7'] = "Sorry, your answer is wrong!<br />Please try again.";
+	$TEXT['play_stateBar-p_8_1'] = "Remember to use the data provided in this ";
+	$TEXT['play_stateBar-p_8_2'] = "document";
+	$TEXT['play_stateBar-p_8_3'] = ", to calculate a solution.";
+	$TEXT['play_stateBar-button_1'] = "Submit solution";
+	$TEXT['play_stateBar-button_2'] = "Create poster";
+	
+	$TEXT['play_poster-h1_1'] = "Pros";
+	$TEXT['play_poster-h1_2'] = "Cons";
+	$TEXT['play_poster-h1_3'] = "Notes";
+	
+	
+	$TEXT['play_phase2-th_1'] = "Short term plan";
+	$TEXT['play_phase2-th_2'] = "Long term plan";
+	$TEXT['play_phase2-tfoot_1'] = "TOTAL";
+	$TEXT['play_phase2-button_1'] = "Submit both plan";
+	$TEXT['play_phase2-p_1'] = "Click on the name of a wedge in the table above to review the information about it and the poster";
+	$TEXT['play_phase2-_'] = "";
+	
+	$TEXT['play-sections'] = array('Introduction', 'History', 'Present use', 'National situation', 'Emission reduction', 'References');
+	
+	/* 
+	------------------
+	Player play: gameNotStarted.php
+	------------------
+	*/
+	
+	$TEXT['gameNotStarted-title'] = "Game has not started yet!";
+	$TEXT['gameNotStarted-h1_1'] = "The game has not started yet!";
+	$TEXT['gameNotStarted-p_1'] = "You will be automatically redirected when the game starts.<br />If this doesn't happen feel free to press the button below.";
+	$TEXT['gameNotStarted-button_1'] = "Refresh status";	$TEXT['gameNotStarted-title'] = "Game has not started yet!";
+	
+	$TEXT['phas2NotStarted-title'] = "The second phase has not started yet!";
+	$TEXT['phas2NotStarted-h1_1'] = "The second phase has not started yet!";
+	
+	$TEXT['gameFinished-title'] = "Game has finished!";
+	$TEXT['gameFinished-h1_1'] = "The game is over, thanks for playing!";
+	$TEXT['gameFinished-p_1'] = "Winning teams will be announced by the game organizer.";
+	
+	
 ?>

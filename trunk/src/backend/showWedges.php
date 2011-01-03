@@ -1,9 +1,11 @@
 <?php 
-	include_once("../inc/db_connect.php");
-	include_once("../inc/init.php");
-	include_once("./utils.php");
+	include_once("../inc/db_connect.inc");
+	include_once("../inc/init.inc");
+	include_once("../inc/utils.inc");
 	
-	$query = "SELECT `Wedge ID` as id, Title, Summary, Image FROM Wedges WHERE Language='".$gData['lang']."';";
+	$query = "SELECT `Wedge ID` as wedgeID, `Title`, `Summary`, `Image` ".
+			"FROM `wedges` ".
+			"WHERE `Language`='".$gData['lang']."';";
 	$result = mysql_query( $query, $connection );
 	
 	$counter = 0;

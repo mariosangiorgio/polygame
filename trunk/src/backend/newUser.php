@@ -1,7 +1,11 @@
 <?php
-	include_once("../inc/db_connect.php");
-	include_once("../inc/init.php");
-	include_once("./utils.php");
+	include_once("../inc/db_connect.inc");
+	include_once("../inc/init.inc");
+	include_once("../inc/utils.inc");
+	
+	if( !isSet( $_POST['username'] ) || 
+			!isSet( $_POST['email'] ))
+		redirectTo('../errorPage.php');
 	
 	//Sanitizing inputs
 	$username = mysql_real_escape_string( $_POST['username']);

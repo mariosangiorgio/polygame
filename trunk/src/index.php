@@ -1,11 +1,19 @@
 <?php 
-	include_once("./inc/db_connect.php");
-	include_once("./inc/init.php");
+	include_once("./inc/db_connect.inc");
+	include_once("./inc/utils.inc");
+	include_once("./inc/init.inc");
 	include_once("./lang/".$gData['langFile']);
-	include_once("./backend/utils.php");
 	
-	if( $gData['logged'] && $gData['role'] == "organizer" )
-		header('Location: ./organize.php');
+	if( $gData['logged'] )
+	{
+		if( $gData['role'] == "organizer" )
+			header('Location: ./organize.php');
+		else if( $gData['role'] == "player" )
+			header('Location: ./play.php');
+		else if( $gData['role'] == "voter" )
+			header('Location: ./vote.php');
+			
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -227,7 +235,7 @@
 <body>
 	<? 
 		$stripeImageUrl = "./images/welcome-new.png";
-		include "header.php"; 
+		include "./inc/header.inc"; 
 	?>
 	<div id="wrapper">
 		<div id="columnLeft">
@@ -367,14 +375,6 @@
 					</div>
 				</form>
 			</div>
-<?
-	}
-	else if( $gData['role'] == "player" )
-	{
-?>
-			<div class="roleButton">
-				<button type="button"><a href="./playerPlay.php"><? echo $TEXT['main-button_7']; ?></a></button>
-			</div>			
 <?
 	}
 ?>

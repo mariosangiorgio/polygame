@@ -1,9 +1,7 @@
 <? 
-	include "newGameBar.php"; 
-	
-	$query = "SELECT `Wedge ID` as id ".
+	$query = "SELECT `Wedge ID` as wedgeID ".
 			"FROM `wedge groups` ".
-			"WHERE `Game ID`='".$gData['gameID']."';";
+			"WHERE `Game ID`='".$game['gameID']."';";
 	$result = mysql_query( $query, $connection );
 	$numberOfWedges = mysql_num_rows( $result );
 	
@@ -11,7 +9,7 @@
 	$counter = 0;
 	while(( $row = mysql_fetch_array( $result )))
 	{
-		$wedgesSelected[$counter] = $row['id'];
+		$wedgesSelected[$counter] = $row['wedgeID'];
 		$counter++;
 	}
 ?>
@@ -19,7 +17,7 @@
 	<p><? echo $TEXT['newGamePhase2-p_1']; ?></p>
 	<form
 		name="phase2Form"
-		action="./createNewGame.php"
+		action="./backend/saveGameWedges.php"
 		method="POST"
 	>
 	<table class="tablePhase1_2">
@@ -32,30 +30,31 @@
 				</div>
 				<ol id="selectable">
 <? 
-	$query = "SELECT `Wedge ID` as id, Title ". 
+	$query = "SELECT `Wedge ID` as wedgeID, `Title` ".
 			 "FROM `wedges` ".
-			 "WHERE Language='".$gData['lang']."';";
+			 "WHERE `Language`='".$gData['lang']."';";
 	$data = mysql_query( $query, $connection );
 	
+	$wedges = array();
 	$counter = 0;
-	while( $wedge = mysql_fetch_array( $data )) 
+	while(( $wedge = mysql_fetch_array( $data )))
 	{
-		$wedges[$counter] = array(  'id' 	=> $wedge['id'],
-									'Title' => $wedge['Title'] );
+		$wedges[$counter] = $wedge;
 		$counter++;
 	}
 	
-	$vector = generateRandomSequence( 0, $counter - 1 );
-	$index = 0;
+	srand((double) microtime() * 1000000);
+	shuffle( $wedges );
+	
 	while( $counter > 0 )
 	{
-		$wedge = $wedges[$vector[$index]];
+		$counter--;
 ?>
 					<li
 <?
 		$isSelected = false;
-		for( $i = 0; $i < $numberOfWedges && !$isSelected; $i++ )
-			if( $wedgesSelected[$i] == $wedge['id'] )
+		for( $index = 0; $index < $numberOfWedges && !$isSelected; $index++ )
+			if( $wedgesSelected[$index] == $wedges[$counter]['wedgeID'] )
 				$isSelected = true;
 		
 		if( $isSelected )
@@ -64,12 +63,10 @@
 			echo "class=\"ui-corner-all ui-selectee\"";;
 ?>					
 					>
-						<input type="hidden" name="wedge<? echo $index; ?>"	value="<? echo $wedge['id']; ?>" />
-						<? echo $wedge['Title']; ?>
+						<input type="hidden" name="wedge<? echo $index; ?>"	value="<? echo $wedges[$counter]['wedgeID'] ?>" />
+						<? echo $wedges[$counter]['Title']; ?>
 					</li>
 <?
-		$counter--;
-		$index++;
 	}
 ?>
 				</ol>
@@ -112,7 +109,8 @@
 			});
 			if( counter )
 			{
-				dataToSend += "wedgesSelected=" + counter + "&phase=<? echo $currentPhase; ?>";
+				dataToSend += "wedgesSelected=" + counter + 
+							"&phase=<? echo $currentPhase; ?>" + "&usingAjax=true";
 				var url = $(form).attr('action');
 				var formName = $(form).attr('name');
 				var typeOfDataToReceive = 'html';

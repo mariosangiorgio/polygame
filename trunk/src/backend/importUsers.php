@@ -1,32 +1,24 @@
 <?php
-	include_once("../inc/db_connect.php");
-	include_once("../inc/init.php");
-	include_once("../lang/".$gData['langFile']);
-	include_once("../backend/utils.php");
+	include_once("../inc/db_connect.inc");
+	include_once("../inc/utils.inc");
+	include_once("../inc/init.inc");
 	
-	if( $gData['logged'] && $gData['role'] == "organizer" )
+	checkAuthentication('organizer', 1 );
+	
+	$query = "SELECT `Game ID` as id, Defined, Started FROM `game` ".
+			"WHERE `Organizer ID`='".$gData['userID']."';";
+	$result = mysql_query( $query, $connection );
+	
+	if(( $row = mysql_fetch_array( $result )))
 	{
-		$query = "SELECT `Game ID` as id, Defined, Started FROM `game` ".
-				"WHERE `Organizer ID`='".$gData['userID']."';";
-		$result = mysql_query( $query, $connection );
-		
-		if(( $row = mysql_fetch_array( $result )))
-		{
-			$gData['gameID'] = $row['id']; 
-			if( $row['Defined'] )
-				;// TODO: Redirect to an error page (current organizer has a game already defined)
-		}
-		else
-			;// TODO: Redirect to an error page (current organizer hasn't an existing game)
+		$gData['gameID'] = $row['id']; 
+		if( $row['Defined'] )
+			redirectTo('../errorPage.php');
 	}
 	else
-	{
-		$errorCode = 401;	// Unauthorized
-		include "errorPage.php";
-		exit();
-	}
+		redirectTo('../errorPage.php');
 	
-	$query = "DELETE FROM users ".
+	$query = "DELETE FROM `users` ".
 			"WHERE `User ID` IN ( ".
 			"SELECT `Player ID` ".
 			"FROM players ".
@@ -77,7 +69,7 @@
 		$result = mysql_query( $query, $connection );
 		
 		if( !$result )
-			;// TODO: invalid data
+			redirectTo('../errorPage.php');
 		
 		$numberOfPlayer++;
 	}
@@ -98,5 +90,5 @@
 		mysql_query( $query, $connection );
 	}
 	
-	header("Location: ../createNewGame.php ");
+	redirectTo('../createNewGame.php');
 ?>

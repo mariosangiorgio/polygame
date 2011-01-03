@@ -13,17 +13,19 @@
 	{
 		list( $username, $token ) = explode( ':', $_COOKIE['at'] );
 		$username = mysql_real_escape_string( $username );
-		$query = "SELECT `User ID`,`username`,`password`,`role`,`nonce` FROM `users` WHERE `username`='$username'";
+		$query = "SELECT `User ID` as userID, `Username`, `Password`, `Role`, `Nonce` ".
+				"FROM `users` ".
+				"WHERE `Username`='$username'";
 		$result = mysql_query( $query, $connection );
 		while(( $row = mysql_fetch_array( $result )))
 		{
-			if( $token == sha1( $row['nonce'].$row['password'] ))
+			if( $token == sha1( $row['Nonce'].$row['Password'] ))
 			{
 				$gData['logged'] = true;
-				$gData['userID'] = $row['User ID'];
-				$gData['username'] = $row['username'];
-				$gData['password'] = $row['password'];
-				$gData['role'] = $row['role'];
+				$gData['userID'] = $row['userID'];
+				$gData['username'] = $row['Username'];
+				$gData['password'] = $row['Password'];
+				$gData['role'] = $row['Role'];
 				break;
 			}
 		}
@@ -43,15 +45,15 @@
 	switch( $gData['lang'] ) 
 	{
 		case 'en':
-			$gData['langFile'] = 'en.php';
+			$gData['langFile'] = 'en.inc';
 		break;
 		case 'de':
-			$gData['langFile'] = 'de.php';
+			$gData['langFile'] = 'de.inc';
 		break;
 		case 'it':
-			$gData['langFile'] = 'it.php';
+			$gData['langFile'] = 'it.inc';
 		break;
 		default:
-			$gData['langFile'] = 'en.php';
+			$gData['langFile'] = 'en.inc';
 	}
 ?>
