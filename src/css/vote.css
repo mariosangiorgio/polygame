@@ -1,0 +1,40 @@
+#wrapper h1, #wrapper p {
+	margin-left: 30%;
+}
+#accordion {
+	width: 40%;
+	margin-top: 2%;
+	margin-left: 30%;
+}
+#accordion table {
+	width: 80%;
+	margin-left: 10%;
+}
+#accordion table td.wedgeID {
+	display: none;
+}
+#accordion table .wedgeWeight {
+	width: 50%;
+}
+#accordion table .wedgeWeight {
+	width: 25%;
+	min-width: 12ex;
+	text-align: center;
+}
+#accordion div.comment {
+	margin-top: 1em;
+	margin-left: 10%;
+	width: 80%;
+	text-align: center;
+}
+#accordion div.comment textarea {
+	width: 90%;
+	font-weight: 0.9em;
+	font-style: italic;
+} 
+#accordion div.submit {
+	margin-top: 1em;
+	margin-left: 10%;
+	width: 80%;
+	text-align: center;
+} 

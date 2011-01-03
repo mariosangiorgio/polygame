@@ -1,0 +1,48 @@
+#firstRow {
+	margin: 0 5%;
+	width: 60%;
+	position: relative;
+}
+#firstRow p {
+	margin-top: 1em;
+}
+#firstRow li {
+	list-style-type: circle;
+	margin-top: 0.2em;
+}
+#newGameButton {
+    position: absolute;
+    top: 22%;
+    left: 110%;
+    width: 30%;
+}
+#newGameButton button {
+	width: 100%;
+	height: 3em;
+}
+#secondRow {
+	margin: 5%;
+	width: 60%;
+	position: relative;
+}
+#feedback {
+	margin: 0.8em;
+	padding: 0.4em;
+	width: 100%;
+	font-size: 0.9em;
+	font-style: italic;
+}
+#feedbackButton {
+	position: absolute;
+    bottom: 5%;
+    left: 110%;
+    width: 30%;
+}
+#feedbackButton button {
+	width: 100%;
+	height: 2.5em;
+}
+#response p {
+	font-size: 0.8em;
+	text-align: center;
+}
