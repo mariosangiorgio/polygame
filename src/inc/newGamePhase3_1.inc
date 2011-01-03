@@ -46,10 +46,11 @@
 		$('div.phase3_1 button').button().click( function( event )
 		{
 			event.preventDefault();
-			var url = "./createNewGame.php";
+			var url = "./backend/saveUseEmail.php";
 			var dataType = $(this).next().val();
 			var dataToSend = { phase: 3,
-							useEmail: dataType };
+							useEmail: dataType,
+							usingAjax: 'true' };
 			var typeOfDataToReceive = 'html';
 			var callback = function( response ) {
 				$("#wrapper").html( response );

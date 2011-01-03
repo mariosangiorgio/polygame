@@ -1,4 +1,3 @@
-<? include "newGameBar.php"; ?>
 <div id="divPhase5" class="phase5 phases">
 	<p><? echo $TEXT['newGamePhase5-p_1']; ?></p>
 	<div class="playerList ui-corner-all">
@@ -8,7 +7,7 @@
 <?	
 	$query = "SELECT u.username ".
 			"FROM `voters` v, `users` u ".
-			"WHERE v.`Game ID`='".$gData['gameID']."' ".
+			"WHERE v.`Game ID`='".$game['gameID']."' ".
 			"AND v.`Voter ID`=u.`User ID`;";
 	$result = mysql_query( $query, $connection );
 	$numberOfVoters = mysql_num_rows( $result );
@@ -155,12 +154,12 @@
 					dataString += "&voter" + voterIndex + "=" + voterId;
 					voterIndex++;
 				});
-				dataString += "&numberOfVoters=" + voterIndex;
-				var url = "./createNewGame.php";
+				dataString += "&numberOfVoters=" + voterIndex + "&usingAjax=true";
+				var url = "./backend/saveVoters.php";
 				var dataToSend = dataString;
 				var typeOfDataToReceive = 'html';
 				var callback = function( response ) {
-					window.location.href = "./summary.php";
+					window.location.href = "./organize.php";
 				};
 				$.post( url, dataToSend, callback, typeOfDataToReceive );
 			}
@@ -168,7 +167,8 @@
 		
 		function checkVoterName( currentVoter )
 		{
-			if( currentVoter == voterDefaultValue )
+			if( !currentVoter ||
+				currentVoter == voterDefaultValue )
 				return "<? echo $TEXT['newGamePhase5-error_1']; ?>";
 			var result = "";
 			var rows = $('div.playerList tbody tr:not(.emptyRow)');

@@ -46,7 +46,7 @@
 			var phase = $(this).attr('for'); 
 			var phaseNumber = phase.charAt( phase.length - 1 );
 			var url = "./createNewGame.php";
-			var dataToSend = { phase: phaseNumber };
+			var dataToSend = "phase=" + phaseNumber + "&usingAjax=true";
 			var typeOfDataToReceive = 'html';
 			var callback = function( response ) {
 				$("#wrapper").html( response );

@@ -34,7 +34,7 @@
 	{
 ?>
 		<div id="logout">
-			<a href="logout.php"><? echo $TEXT['header-a_1']; ?></a> 
+			<a href="./backend/logout.php"><? echo $TEXT['header-a_1']; ?></a> 
 		</div>
 <?
 	}

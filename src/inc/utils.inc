@@ -1,4 +1,23 @@
 <?
+	function checkAuthentication( $role, $backend = 0 )
+	{
+		global $gData;
+		
+		if( !$gData['logged'] || $gData['role'] != $role )
+		{
+			$destinationPage = "";
+			if( $backend )
+				$destinationPage = ".";
+			$destinationPage = $destinationPage.'./unauthorizedPage.php';
+			redirectTo( $destinationPage );
+		}
+	}
+	
+	function redirectTo( $destinationPage ) {
+		header( 'Location: '.$destinationPage );
+		exit();
+	}
+	
 	function generateRandomSequence( $init, $end )
 	{
 		$shuffleTime = ( $end - $init ) * 5;

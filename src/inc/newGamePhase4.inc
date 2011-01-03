@@ -1,9 +1,8 @@
-<? include "newGameBar.php"; ?>
 <div id="divPhase4" class="phase4 phases">
 <p><? echo $TEXT['newGamePhase4-p_1']; ?></p>
 <?
 	$query = "SELECT `Plan ID` as planID, `Group name` as groupName ".
-			"FROM `plan groups` WHERE `Game ID`='".$gData['gameID']."';";
+			"FROM `plan groups` WHERE `Game ID`='".$game['gameID']."';";
 	$result = mysql_query( $query, $connection );
 	$numberOfPlans = mysql_num_rows( $result );
 		
@@ -19,7 +18,7 @@
 <?			
 			$query = "SELECT u.username ".
 				"FROM `players` p, `users` u ".
-				"WHERE p.`Game ID`='".$gData['gameID']."' ".
+				"WHERE p.`Game ID`='".$game['gameID']."' ".
 				"AND p.`Player ID`=u.`User ID` ".
 				"AND p.`Plan ID`='".$plan['planID']."';";
 			$innerResult = mysql_query( $query, $connection );
@@ -42,14 +41,14 @@
 	else
 	{
 		$query = "SELECT count(*) as counter ".
-			"FROM `wedge groups` WHERE `Game ID`='".$gData['gameID']."';";
+			"FROM `wedge groups` WHERE `Game ID`='".$game['gameID']."';";
 		$result = mysql_query( $query, $connection );
 		$row = mysql_fetch_array( $result );
 		$numberOfWedges = $row['counter'];
 		
 		$query = "SELECT u.username ".
 				"FROM `players` p, `users` u ".
-				"WHERE p.`Game ID`='".$gData['gameID']."' ".
+				"WHERE p.`Game ID`='".$game['gameID']."' ".
 				"AND p.`Player ID`=u.`User ID`;";
 		$userRow = mysql_query( $query, $connection );
 		$numberOfUsers = mysql_num_rows( $userRow );
@@ -287,15 +286,15 @@
 						var rows = $('tbody tr', $(this));
 						$(rows).each( function()
 						{
-							var userId = $('td.firstColumn', $(this)).text();
-							dataString += "&" + userId + "=" + groupName;
+							var username = $('td.firstColumn', $(this)).text();
+							dataString += "&" + username + "=" + groupName;
 							userIndex++;
 						});
 						if( rows.length )
 							groupIndex++;
 					});
-					dataString += "&numberOfGroups=" + groupIndex;
-					var url = "./createNewGame.php";
+					dataString += "&numberOfGroups=" + groupIndex + "&usingAjax=true";
+					var url = "./backend/savePlanGroups.php";
 					var dataToSend = dataString;
 					var typeOfDataToReceive = 'html';
 					var callback = function( response ) {

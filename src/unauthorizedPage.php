@@ -7,7 +7,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<title><? echo $TEXT['errorPage_title']; ?></title>
+	<title><? echo $TEXT['unauthorizedPage_title']; ?></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link href="css/main.css" type="text/css" rel="stylesheet" />
 	<link href="css/ui-lightness/jquery-ui-1.8.4.custom.css" type="text/css" rel="stylesheet" />	
@@ -29,8 +29,8 @@
 	<? include "./inc/header.inc"; ?>
 	<div id="wrapper">
 		<div class="error">
-			<p><? echo $TEXT['errorPage-p_1']; ?></p>
-			<p><a class="link" href="./index.php"><? echo $TEXT['errorPage-p_2']; ?></a></p>
+			<p><? echo $TEXT['unauthorizedPage-p_1']; ?></p>
+			<p><a class="link" href="./index.php"><? echo $TEXT['unauthorizedPage-p_2']; ?></a></p>
 		</div>
 	</div>
 </body>

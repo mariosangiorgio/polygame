@@ -1,13 +1,6 @@
 <p><? echo $TEXT['newGamePhase3_2-p_1']; ?></p>
 <div id="changeDataType">
-	<a class="link">
-<?
-	if( $dataType['useEmail'] )
-		echo $TEXT['newGamePhase3_2-a_2'];
-	else
-		echo $TEXT['newGamePhase3_2-a_1'];
-?>
-	</a>
+	<a class="link"><? echo $TEXT['newGamePhase3_2-a_2']; ?></a>
 </div>
 <form
 	name="loadPlayers"
@@ -24,7 +17,7 @@
 	$query = "SELECT g.`Wedge ID` as wedgeID, w.`Title`, `Group name` as groupName ".
 			"FROM `wedge groups` g, `wedges` w ".
 			"WHERE w.`Wedge ID`=g.`Wedge ID` ".
-			"AND g.`Game ID`='".$gData['gameID']."';";
+			"AND g.`Game ID`='".$game['gameID']."';";
 	$result = mysql_query( $query, $connection );
 	
 	$counter = 0;
@@ -36,40 +29,31 @@
 			$groupName = $group['Title'];
 ?>
 <div class="playerList ui-corner-all">
-	<a name="<? echo $group['wedgeID']?>"></a>
+	<a name="<? echo $group['wedgeID']; ?>"></a>
 	<p><? echo $groupName; ?></p>
 	<table class="playerTable">
 	<tfoot>
 		<tr class="firstRow">
-			<th class="firstColumn">
+			<th class="firstColumn" colspan="2">
 				<input type="text" size="40" value="<? echo $TEXT['newGamePhase3_2-input_1_1']; ?>" name="username" />
 			</th>
-			<th class="secondColumn">
+			<th class="secondColumn" rowspan="2">
 				<button type="button" class="addButton" ><? echo $TEXT['newGamePhase3_2-button_add']; ?></button>
 			</th>
 			<th class="thirdColumn"></th>
 		</tr>
-<?
-	if( $dataType['useEmail'] )
-	{
-?>
 		<tr class="secondRow">
-			<th class="firstColumn">
-				<input type="text" size="40" value=" <? echo $TEXT['newGamePhase3_2-input_1_1']; ?>" name="email" />
+			<th class="firstColumn" colspan="2">
+				<input type="text" size="40" value="<? echo $TEXT['newGamePhase3_2-input_1_2']; ?>" name="email" />
 			</th>
-			<th class="secondColumn"></th>
 			<th class="thirdColumn"></th>
 		</tr>
-	}
-?>
 	</tfoot>
 	<tbody>
 <?
-		$query = "SELECT u.username ";
-		if( $dataType['useEmail'] )
-			$query = $query.", p.email ";
-		$query = $query."FROM `players` p, `users` u ".
-				"WHERE p.`Game ID`='".$gData['gameID']."' ".
+		$query = "SELECT u.Username, p.Email ".
+				"FROM `players` p, `users` u ".
+				"WHERE p.`Game ID`='".$game['gameID']."' ".
 				"AND p.`Player ID`=u.`User ID` ".
 				"AND p.`Wedge ID`='".$group['wedgeID']."';";
 		$innerResult = mysql_query( $query, $connection );
@@ -80,17 +64,20 @@
 			$emptyTable = false;
 ?>
 		<tr>
-			<td class="firstColumn">
-<?
-			echo $player['username'];
-			if( $dataType['useEmail'] )
-				echo " - ".$player['email'];
-?>
+			<td class="usernameColumn"><? echo $player['Username']; ?></td>
+			<td class="emailColumn"><? echo $player['Email']; ?></td>
+			<td class="secondColumn">
+				<button type="button" class="removeButton">
+					<? echo $TEXT['newGamePhase3_2-button_delete']; ?>
+				</button>
 			</td>
-			<td class="secondColumn"><button type="button" class="removeButton" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button></td>
-			<td class="thirdColumn"><button type="button" class="moveButton" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button></td>
+			<td class="thirdColumn">
+				<button type="button" class="moveButton">
+					<? echo $TEXT['newGamePhase3_2-button_move']; ?>
+				</button>
+			</td>
 		</tr>
-<?						
+<?	
 		}
 		if( $emptyTable )
 			echo "<tr class=\"emptyRow\"><td colspan=\"3\">".$TEXT['newGamePhase3_2-noPlayers_1']."</td></tr>";
@@ -108,23 +95,17 @@
 <div id="nextPhaseButton">
 	<button type="button"><? echo $TEXT['newGamePhase3_2-button_1']; ?></button>
 </div>
-<script type="text/javascript">
+<script type="text/Javascript">
 	(function($) {
-<?
-	if( $dataType['useEmail'] )
-		echo "var dataType = \"email\";"; 
-	else
-		echo "var dataType = \"username\";"; 
-?>
-		var usernameDefaultValue = "<? echo $TEXT['newGamePhase3_2-input_1_1']; ";
-		var emailDefaultValue = "<? echo $TEXT['newGamePhase3_2-input_1_2']; ";		
+		var usernameDefaultValue = "<? echo $TEXT['newGamePhase3_2-input_1_1']; ?>";
+		var emailDefaultValue = "<? echo $TEXT['newGamePhase3_2-input_1_2']; ?>";
 		
 		$(document).ready( function() 
 		{
 			var alreadyPosted = false;
 			var deleteButton = "<button type=\"button\" class=\"removeButton\" ><? echo $TEXT['newGamePhase3_2-button_delete']; ?></button>";
 			var moveButton = "<button type=\"button\" class=\"moveButton\" ><? echo $TEXT['newGamePhase3_2-button_move']; ?></button>";
-			var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"3\"><? echo $TEXT['newGamePhase3_2-noPlayers_1']; ?></td></tr>";
+			var emptyRow = "<tr class=\"emptyRow\"><td colspan=\"4\"><? echo $TEXT['newGamePhase3_2-noPlayers_1']; ?></td></tr>";
 			
 			var addPlayer = function( table )
 			{
@@ -135,14 +116,13 @@
 				{
 					$(tfoot).parents('div.playerList').find('div.errorClass strong').html('');
 					$(tfoot).parents('div.playerList').find('div.errorClass:visible').slideUp();
-					var userId;
-					if( dataType = "username" )
-						userID = $('input[name="username"]', $(tfoot)).val();
-					else
-						userID = $('input[name="username"]', $(tfoot)).val() + " - " +
-								$('input[name="email"]', $(tfoot)).val();
-					var row = "<tr><td class=\"firstColumn\">" + userId + "</td><td class=\"secondColumn\">" + 
-							deleteButton + "</td>" + "<td class=\"thirdColumn\">" + moveButton + "</td></tr>";
+
+					var username = $('input[name="username"]', $(tfoot)).val();
+					var email = $('input[name="email"]', $(tfoot)).val();
+					var row = "<tr><td class=\"usernameColumn\">" + username + "</td>" +
+							"<td class=\"emailColumn\">" + email + "</td>" +
+							"<td class=\"secondColumn\">" + deleteButton + "</td>" + 
+							"<td class=\"thirdColumn\">" + moveButton + "</td></tr>";
 					if( !$('tr:not(.emptyRow)', $(tbody)).length )
 						$(tbody).html('');
 					$(tbody).append( row );
@@ -152,9 +132,10 @@
 					});
 					$('button.moveButton').button();	
 					
-					generateWedgesList($('tr:last', $(tbody)));
-					
-					$('input[name="userId"]', $(tfoot)).attr('value', userIdDefaultValue );
+					generateWedgesList($('tr:last', $(tbody)));					
+					$('input[name="username"]', $(tfoot)).attr('value', usernameDefaultValue );
+					$('input[name="email"]', $(tfoot)).attr('value', emailDefaultValue );
+					$('input[name="username"]', $(tfoot)).focus().select();
 				}
 			
 			}
@@ -188,9 +169,11 @@
 				if( !$('tr:not(.emptyRow)', $(originTable)).length )
 					$(originTable).append( emptyRow );
 				
-				var username = $(buttonElement).parents('tr').find('td.firstColumn').text();
-				var row = "<tr><td class=\"firstColumn\">" + username +
-							"</td><td class=\"secondColumn\">" + deleteButton + "</td>" + 
+				var username = $(buttonElement).parents('tr').find('td.usernameColumn').text();
+				var email = $(buttonElement).parents('tr').find('td.emailColumn').text();
+				var row = "<tr><td class=\"usernameColumn\">" + username + "</td>" +
+							"<td class=\"emailColumn\">" + email + "</td>" +
+							"<td class=\"secondColumn\">" + deleteButton + "</td>" + 
 							"<td class=\"thirdColumn\">" + moveButton + "</td></tr>";
 							
 				if( !$('tr:not(.emptyRow)', $(destinationTable)).length )
@@ -202,25 +185,12 @@
 				});
 				generateWedgesList($('tr:last', $(destinationTable)));
 			};
-			
 			$('button.moveButton').each( function() {
 				generateWedgesList( $(this).parents('tr'));
 			});
-			
 			$('button.addButton').click( function() {
 				addPlayer( $(this).parents('table'));
 			});
-			
-			
-			$('input[name="username"]').keypress( function( event )
-			{
-				if( event.which == '13' )
-				{
-					addPlayer( $(this).parents('table'));
-					$(this).val('');
-				}
-			});
-			
 			$('table.playerTable tbody td.secondColumn button.removeButton').live('click', function()
 			{
 				var table = $(this).parents('table');
@@ -260,12 +230,36 @@
 					$(this).parents('div.playerList').find('div.errorClass:visible').slideUp();
 				}
 			});
+			$('input[name="username"]').keypress( function( event ) {
+				if( event.which == '13' )
+				{
+					addPlayer( $(this).parents('table'));
+				}
+			});
+			$('input[name="email"]').click( function() {
+				if( $(this).attr('value') == emailDefaultValue )
+					$(this).removeAttr('value');
+			});
+			$('input[name="email"]').blur( function() {
+				if( !$(this).attr('value'))
+				{
+					$(this).attr('value', emailDefaultValue );
+					$(this).parents('div.playerList').find('div.errorClass strong').html('');
+					$(this).parents('div.playerList').find('div.errorClass:visible').slideUp();
+				}
+			});
+			$('input[name="email"]').keypress( function( event ) {
+				if( event.which == '13' )
+				{
+					addPlayer( $(this).parents('table'));
+				}
+			});
 			$('#changeDataType a').click( function()
 			{
 				if( confirm('<? echo $TEXT['newGamePhase3_2-confirm_1']; ?>'))
 				{
-					var dataString = "phase=3&numberOfUsers=0";
-					var url = "./createNewGame.php";
+					var dataString = "phase=3&useEmail=false&usingAjax=true";
+					var url = "./backend/saveUseEmail.php";
 					var dataToSend = dataString;
 					var typeOfDataToReceive = 'html';
 					var callback = function( response ) {
@@ -279,9 +273,9 @@
 				event.preventDefault();
 				if( !alreadyPosted )
 				{
-					alreadyPosted = true;
 					if( checkWedgePlayers())
 					{
+						alreadyPosted = true;
 						var tables = $('table.playerTable');
 						var dataString = "phase=3";
 						var index = 0;
@@ -291,13 +285,16 @@
 							var rows = $('tbody tr:not(.emptyRow)', $(this));
 							$(rows).each( function()
 							{
-								var userId = $('td.firstColumn', $(this)).text();
-								dataString += "&user" + index + "=" + userId + "&wedge" + index + "=" + wedgeId;
+								var username = $('td.usernameColumn', $(this)).text();
+								var email = $('td.emailColumn', $(this)).text();
+								dataString += "&user" + index + "=" + username + 
+											"&email" + index + "=" + email + 
+											"&wedge" + index + "=" + wedgeId;
 								index++;
 							});
 						});
-						dataString += "&numberOfUsers=" + index;
-						var url = "./createNewGame.php";
+						dataString += "&numberOfUsers=" + index + "&usingAjax=true";
+						var url = "./backend/saveWedgeGroups.php";
 						var dataToSend = dataString;
 						var typeOfDataToReceive = 'html';
 						var callback = function( response ) {
@@ -311,62 +308,60 @@
 		
 		function checkForm( tfoot ) 
 		{
-			var userId_re;
-			if( dataType == "username" )
-				userId_re = /^[a-z0-9]{6,12}$/i;
-			else
-				userId_re = /^.+@.+\..+$/i
-			var userId = $('input[name="userId"]', $(tfoot)).val();
-			if( userId == userIdDefaultValue )
-				userId = "";
+			var username_re = /^[a-z0-9]{6,12}$/i;
+			
+			var username = $('input[name="username"]', $(tfoot)).val();
+			if( username == usernameDefaultValue )
+				username = "";
 			var errorStr = "";
-			if( !userId )
-			{
-				if( dataType == "username" )
-					errorStr += " <? echo $TEXT['newGamePhase3_2-username_1']; ?>";
-				else
-					errorStr += " <? echo $TEXT['newGamePhase3_2-mail_1']; ?>";
-			}
+			if( !username )
+				errorStr += " <? echo $TEXT['newGamePhase3_2-username_1']; ?>";
 			else
 			{
-				if( dataType == "username" )
-				{
-					if( userId.length < 6 || userId.length > 12 )
-						errorStr += " <? echo $TEXT['newGamePhase3_2-username_2']; ?>";
-					else if( !userId_re.test( userId ))
-						errorStr += " <? echo $TEXT['newGamePhase3_2-username_3']; ?>";
-				}
-				else 
-					if( !userId_re.test( userId ))
-						errorStr += " <? echo $TEXT['newGamePhase3_2-mail_2']; ?>";
-				if( isUnique( userId ))
-				{
-					if( dataType == "username" )
-						errorStr += " <? echo $TEXT['newGamePhase3_2-username_4']; ?>";
-					else
-						errorStr += " <? echo $TEXT['newGamePhase3_2-mail_3']; ?>";
-				}
+				if( username.length < 6 || username.length > 12 )
+					errorStr += " <? echo $TEXT['newGamePhase3_2-username_2']; ?>";
+				else if( !username_re.test( username ))
+					errorStr += " <? echo $TEXT['newGamePhase3_2-username_3']; ?>";
 			}
+			if( !errorStr && !isUnique( username ))
+				errorStr += " <? echo $TEXT['newGamePhase3_2-username_4']; ?>";
 			
 			if( errorStr )
 			{
 				$(tfoot).parents('div.playerList').find('div.errorClass strong').html( errorStr );
-				$(tfoot).parents('div.playerList').find('div.errorClass:hidden').slideDown( function() {
-					$('input[name="userId"]', $(tfoot)).focus().select();
-				});
+				$(tfoot).parents('div.playerList').find('div.errorClass:hidden').slideDown();
+				$('input[name="username"]', $(tfoot)).focus().select();
+				return false;
+			}
+
+			var email_re = /^.+@.+\..+$/i;
+			var email = $('input[name="email"]', $(tfoot)).val();
+			if( email == emailDefaultValue )
+				email = "";
+			var errorStr = "";
+			if( !email )
+				errorStr += " <? echo $TEXT['newGamePhase3_2-mail_1']; ?>";
+			else if( !email_re.test( email ))
+				errorStr += " <? echo $TEXT['newGamePhase3_2-mail_2']; ?>";
+			
+			if( errorStr )
+			{
+				$(tfoot).parents('div.playerList').find('div.errorClass strong').html( errorStr );
+				$(tfoot).parents('div.playerList').find('div.errorClass:hidden').slideDown();
+				$('input[name="email"]', $(tfoot)).focus().select();
 				return false;
 			}
 			return true;
 		}
-		function isUnique( userId )
+		function isUnique( username )
 		{
-			var result = false;
+			var result = true;
 			var rows = $('div.playerList table.playerTable tbody tr:not(emptyRow)');
 			$(rows).each( function()
 			{
-				if( userId == $('td.firstColumn', $(this)).text())
+				if( username == $('td.usernameColumn', $(this)).text())
 				{
-					result = true;
+					result = false;
 					return ;
 				}
 			});

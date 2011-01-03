@@ -135,7 +135,7 @@
 	$TEXT['newGamePhase3_1-p_4'] = "Specificando l'indirizzo email, la password viene automaticamente comunicata ai giocatori dal sistema stesso.";
 	$TEXT['newGamePhase3_1-p_5'] = htmlentities("È necessario disporre di un indirizzo email valido per ciascun giocatore.");
 	$TEXT['newGamePhase3_1-h_1'] = "Specifica lo username!";
-	$TEXT['newGamePhase3_1-h_2'] = "Specifica l'indirizzo email!";
+	$TEXT['newGamePhase3_1-h_2'] = "Specifica anche l'indirizzo email!";
 	$TEXT['newGamePhase3_1-button_1'] = htmlentities("username »");
 	$TEXT['newGamePhase3_1-button_2'] = htmlentities("indirizzo email »");
 	
