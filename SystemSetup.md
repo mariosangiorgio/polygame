@@ -1,0 +1,1 @@
+Since PolyGame is a web based application you will need a configured web-server with support for PHP and a database.
